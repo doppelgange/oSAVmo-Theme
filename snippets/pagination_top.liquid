@@ -1,12 +1,11 @@
 {% if paginate.pages > 1 %}
-  <div class="{% if pagination %}twelve{% else %}sixteen{% endif %} columns">
-  <div class="section clearfix">
-  <div class="pagination">
+  <div class="twelve columns section clearfix">
+  <div class="paginate paginate_top">
   
     {% if paginate.previous %}
-    <span class="prev">{{ paginate.previous.title | link_to: paginate.previous.url }}</span>
+    <span class="prev">{{ '<' | link_to: paginate.previous.url }}</span>
     {% else %}
-      <span class="prev disabled"><a href="#" onclick="return false;">{{ 'layout.pagination.previous_html' | t }}</a></span>
+      <span class="prev disabled"><a href="#" onclick="return false;">{{ '<'}}</a></span>
     {% endif %}
     
     {% for part in paginate.parts %}
@@ -14,25 +13,22 @@
         <span>{{ part.title | link_to: part.url }}</span>
       {% else %}
         {% if part.title == '&hellip;' %}
-        <span class="ellipsis disabled"><a href="#" onclick="return false;">{{ part.title }}</a></span>
+        <span class="ellipsis"><a href="#" onclick="return false;">{{ part.title }}</a></span>
         {% else %}
-        <span class="active">{{ part.title | link_to: part.url }}</span>
+        <span class="current">{{ part.title | link_to: part.url }}</span>
         {% endif %}
       {% endif %}
     {% endfor %}     
 
     {% if paginate.next %}
-      <span class="next">{{ paginate.next.title | link_to: paginate.next.url }}</span>
+      <span class="next">{{ '>' | link_to: paginate.next.url }}</span>
     {% else %}
-      <span class="next disabled"><a href="#" onclick="return false;">{{ 'layout.pagination.next_html' | t }}</a></span>
+      <span class="next disabled"><a href="#" onclick="return false;">{{ '>'}}</a></span>
     {% endif %}    
   
-
-
-  <p class="pagination-num-showing">
-  {{ 'layout.pagination.numbering' | t }} {{ paginate.current_offset | plus: 1 }}-{% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} {{ 'layout.pagination.numbering_of' | t }} {{ paginate.items }}
+  <p class="paginate_num_showing paginate_num_showing_top">
+  {{ 'layout.pagination.numbering' | t }} {{ paginate.current_offset | plus: 1 }} - {% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} {{ 'layout.pagination.numbering_of' | t }} {{ paginate.items }}
   </p>
-  </div>
   </div>
   </div>
 {% endif %}

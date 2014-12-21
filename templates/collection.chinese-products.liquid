@@ -41,11 +41,13 @@
   		</div>
 	{% endif%}
      <!--collection Page Slide Ends-->
-          
-      <div class="four columns breadcrumb_text alpha">
+     
+     {% include 'pagination_top' with settings.collection_sidebar %}
+  
+     <div class="four columns breadcrumb_text alpha">
         <!-- do not put anything here -->
-      </div>
-      
+     </div> 
+    
      {% if collection.handle != blank and collection.products_count > 0 %}
       {% if settings.collection_tags %}        
         <div class="four columns section_select filter_margin {% unless settings.collection_sort %}offset-by-four omega{% endunless %}">
@@ -93,9 +95,7 @@
         </div>
       {% endif %}
     {% endif %}
-      
-      
-      
+           
     {% if settings.display_collection_title %}
       <h1>{{ collection.title }}</h1>
     {% endif %}      
@@ -116,6 +116,6 @@
       {% include 'product-loop' with settings.collection_sidebar %}
     {% endif %}
 
-    {% include 'pagination_top' with settings.collection_sidebar %}
+    {% include 'pagination' with settings.collection_sidebar %}
   </div>
 {% endpaginate %}
