@@ -4587,27 +4587,40 @@ form.quick_buy::before{
 /*Footer Back to top Starts*/
 
 /* Product Classification Starts */
-ul.product-classification{
+ul.product-category{
   margin:0px;
   padding:0px;
 }
-.product-classification li{
+.product-category li{
   list-style:none;
   margin:0px;
   height:30px;
   line-height:30px;
   font-size:15px;
 }
-.product-classification a{
+.product-category a{
   display:block;
   padding:0px 0px 0px 10px;
   background-color:#fafafa;
 }
-.product-classification a:hover{
-  display:block;
+.product-category a:hover{
   color:#e50112;
   background-color:#fff;
 }
+.product-category .hover .product-sub-category{
+  display:block;
+}
+
+.product-sub-category{
+  display:none;
+  position:absolute;
+  left:200px;
+  z-index: 1000;
+}
+.product-sub-category li a{
+  background-color:#FFF;
+}
+
 
 /*Sidebar fix setting*/
 .sidebar-fix-right {

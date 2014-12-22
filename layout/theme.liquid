@@ -184,20 +184,19 @@
 
           <div class="columns nav mobile_hidden">
             <ul class="menu">
+            <! header search bar Starts -->
               {% if settings.search_enabled %}
                 <li>
-                <!--
-                  <a href="/search" title="{{ 'general.search.title' | t }}" class="icon-search" id="search-toggle"></a>
-                  -->
                   <form action="/search" class="header-search-bar">
                   {% if settings.search_option != 'everything' %}
                     <input type="hidden" name="type" value="product" />
                   {% endif %}
                   <span class="icon-search search-submit"></span>
-                  <input type="text" name="q" placeholder="{{ 'general.search.placeholder_with_shop_name' | t: shop_name: shop.name }}" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
+                  <input type="text" name="q" placeholder="What are you looking for?" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
                 </form>
                 </li>
               {% endif %}
+            <! header search bar Ends -->
               {% for link in linklists[settings.main_linklist].links %}
                 {% if linklists[link.handle] == empty %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a></li>
@@ -387,7 +386,7 @@
         <div class="container">
           <div class="ten columns">
             <p class="credits">
-              &copy; {{ "now" | date: "%Y" }} {{ shop.name }}.
+              &copy;2001-{{ "now" | date: "%Y" }} oSAVmo.com
               {% if settings.display_designed_by == true %}
                 {{ 'layout.general.designer_credits_html' | t }}
               {% endif %}

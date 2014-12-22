@@ -17,6 +17,28 @@ $(function() {
   }
 
 //Bob Add
+  $('.product-category .top-link').hover(function(){
+    $(this).parent().addClass('hover');
+    $(this).siblings('li').addClass('hover');
+    $(this).siblings('li').removeClass('hover');
+    var menuItem = $(this);
+    var submenu = $(this).next('ul');
+    var menuItemPos = menuItem.position();
+    submenu.css({
+      top: menuItemPos.top,
+      left: menuItemPos.left + Math.round(menuItem.outerWidth() * 0.8)
+    });
+    console.log('menuItem'+menuItem);
+    console.log('menuItemPos.top is'+menuItemPos.top+' and the menuItemPos.left is'+menuItemPos.left + Math.round(menuItem.outerWidth() * 0.75));
+
+  });
+$('.product-category .product-sub-category').hover(function(){},function(){
+    $(this).parent().removeClass('hover');
+  });
+
+  
+
+
 
 
   $(".thumbnail img, .product_slider img, .cart_page_image img").unveil(200);

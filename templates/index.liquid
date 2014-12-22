@@ -50,9 +50,18 @@
       <h4 class="panel-header">
         <a class="title" href="#">Supper Market</a>
       </h4>
-      <ul class="product-classification">
+      <ul class="product-category">
       {% for link in linklists[settings.home_category_linklist].links limit: 5 %}
-        <li><a href="{{ link.url }}" title="{{ link.title }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a></li>
+        <li>
+          <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>
+          <!-- *********************************************************************-->
+          <ul class="product-sub-category columns three">
+            {% for link in linklists[link.handle].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor%}
+          </ul>
+          <!-- *********************************************************************-->
+        </li>
       {% endfor %}
       </ul>
       </div>
