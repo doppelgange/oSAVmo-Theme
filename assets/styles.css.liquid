@@ -572,6 +572,11 @@ select#currencies {
   padding-left: 25px;
 }
 
+.sidebar{
+  position:fixed;
+}
+
+
 .sidebar a, .sidebar a:visited {
   display: block;
   color: {{ settings.sidebar_nav_color }};
@@ -1416,7 +1421,7 @@ div.hidden { display: none; }
     color: {{ settings.link_hover_color }};
   }
   .paginate .current {
-    background-color: {{ settings.cart_button_background }};
+    background-color: #cdcdcd;
   }
   .paginate .deco {
     border: none;
@@ -4491,10 +4496,12 @@ you can use the generic selector below, but it's slower:
   height: {{settings.collection_header_slide_height}}px; 
 }
 
-.filter_margin {
+.filter_margin_bottom {
   margin-bottom:5px;
 }
-
+.filter_margin_top {
+  margin-top:5px;
+}
 
 input[type="submit"].quick_buy_cart {
   width:45px;
@@ -4534,6 +4541,10 @@ form.quick_buy::before{
 
 
 
+/*Sidebar fix setting*/
+.sidebar-fix-right {
+  margin-left:300px;
+}
 
 
 

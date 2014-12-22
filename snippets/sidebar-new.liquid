@@ -1,0 +1,58 @@
+<script>
+$(function(){
+$(window).scroll(function(){
+    if($(window).scrollTop()<100 && $(".sidebar").css("position")=="fixed"){
+        $(".sidebar").css({"position":"absolute","top":"100px"});
+    }
+    if($(window).scrollTop()>=($(".header").height()+$(".content").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="fixed"){     
+        $(".sidebar").css({"position":"absolute","top":$(".content").height()-$(".sidebar").height()+"px"});
+    }
+    if($(window).scrollTop()<($(".header").height()+$(".content").height()-$(".sidebar").height())&&$(window).scrollTop()>=40&&$(".sidebar").css("position")=="absolute"){    
+        $(".sidebar").css({"position":"fixed","top":"100px"});
+    }
+});
+});
+</script>
+
+
+<div class="sidebar four columns">
+
+  	<h4 class="toggle">{{ collection.title }}</h4>
+    <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
+             
+  {% assign handle = collection.title %}
+
+  {% case handle %}
+  {% when 'Chinese Products' %}
+     {% for link in linklists.chinese-products-sidebar.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+     {% endfor %}
+  {% when 'Taiwan Products' %}
+     {% for link in linklists.taiwan-products-sidebar.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+     {% endfor %}
+  {% when 'Korea Products' %}
+      {% for link in linklists.korea-products-sidebar.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+     {% endfor %}
+  {% when 'Japanese Products' %}
+      {% for link in linklists.japanese-products-sidebar.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+     {% endfor %}
+  {% when 'European Products' %}
+      {% for link in linklists.european-products-sidebar.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+     {% endfor %}
+      
+   {% when 'Southeast Asian Products' %}
+      {% for link in linklists.southeast-asian-products.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+     {% endfor %}
+  {% else %}
+     {{ No products in this collection }}
+  {% endcase %}
+      
+
+    </ul>
+  
+</div>
