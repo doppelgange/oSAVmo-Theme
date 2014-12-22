@@ -54,7 +54,8 @@
 <form action="/cart/add" method="post" class="clearfix product_form quick_buy" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
   <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
   <input type="hidden" name="return_to" value="back" />
-  <input type="number" min="1" size="2" class="quick_buy_quantity" name="quantity"  value="1" /><input type="submit" name="add" value="Buy!" class="quick_buy_cart" /> 
+  <input type="hidden" name="quantity"  value="1" />
+  <input type="submit" name="add" value="Add to Cart" class="quick_buy_cart" /> 
 </form>
 <!--Quick Add to Cart Ends -->
       </span>

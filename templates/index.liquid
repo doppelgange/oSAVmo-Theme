@@ -25,8 +25,44 @@
     {% endif %}
   {% endcapture %}
 
+{% comment%}
+<!-- News Starts-->
+  {% if settings.news_widget %}
+    <div class="one-third column news">
+      <h4 class="panel-header">
+        <a class="title" href="{{ blogs[settings.news_widget_select].url }}">{{ blogs[settings.news_widget_select].title| capitalize }}</a>
+      </h4>
+      <ul>
+      {% for article in blogs[settings.news_widget_select].articles limit: settings.news_widget_articles %}
+        <li class="section clearfix article">
+            <a href="{{ article.url }}" title="{{ article.title | escape }}" class="sub_title">{{ article.title }}</a>
+          <span class="label">{{ article.published_at | date: format: "month_day_year" }}</span>
+        </li>
+      {% endfor %}
+      </ul>
+      </div>
+  {% endif %}
+<!-- News Ends -->
+{% endcomment%}
+<!-- Category Starts-->
+  {% if settings.news_widget %}
+    <div class="three columns news">
+      <h4 class="panel-header">
+        <a class="title" href="#">Supper Market</a>
+      </h4>
+      <ul class="product-classification">
+      {% for link in linklists[settings.home_category_linklist].links limit: 5 %}
+        <li><a href="{{ link.url }}" title="{{ link.title }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a></li>
+      {% endfor %}
+      </ul>
+      </div>
+  {% endif %}
+<!-- Category Ends -->
+
+
+
 <!-- Header Slides Starts-->
-<div class="flexslider two-thirds column homepage_slider home-header-slide">
+<div class="flexslider thirteen columns homepage_slider home-header-slide">
     <ul class="slides">
     {% for i in (1..6)%}
     {%capture sld_enable%}slideshow_{{i}}_enabled{%endcapture%}
@@ -73,23 +109,6 @@
   {% endif %}
 {% endif %}      
 
-<!-- News Starts-->
-  {% if settings.news_widget %}
-    <div class="one-third column news">
-      <h4 class="panel-header">
-        <a class="title" href="{{ blogs[settings.news_widget_select].url }}">{{ blogs[settings.news_widget_select].title| capitalize }}</a>
-      </h4>
-      <ul>
-      {% for article in blogs[settings.news_widget_select].articles limit: settings.news_widget_articles %}
-        <li class="section clearfix article">
-            <a href="{{ article.url }}" title="{{ article.title | escape }}" class="sub_title">{{ article.title }}</a>
-          <span class="label">{{ article.published_at | date: format: "month_day_year" }}</span>
-        </li>
-      {% endfor %}
-      </ul>
-      </div>
-  {% endif %}
-<!-- News Ends -->
 
   </div>  
 
@@ -165,7 +184,9 @@
       {% if settings[sld_enabled] %}
       {{sld_img}}
         <li>
-          <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings.[sld_alt] | escape }}" /></a>
+          <a href="{{ settings[sld_link] }}">
+            <img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}"/>
+          </a>
         </li>
       {% endif %}
     {% endfor%}
