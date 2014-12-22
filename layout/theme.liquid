@@ -165,10 +165,7 @@
       <div class="header mm-fixed-top {% unless template contains "index" %}header_bar{% endunless %}">
         <div class="header-top-nav">
           <div class="container"> 
-            <ul>
-              <li> <a href="/account/register">Start from Here</a> </li>
-              <li> | </li>
-              <li> <a href="/account/login">Log In</a> </li>
+          <a href="/account/register">Sign Up</a> | <a href="/account/login">Log In</a>
           </div>
         </div>
         <div class="container nav-container"> 
@@ -266,7 +263,7 @@
 
 
       {% unless template contains "index" and settings.slideshow_enabled %}
-        <div class="container main content"> 
+        <div class="container main content col_border"> 
       {% endunless %}
 
       {% unless settings.featured_content_page == blank or template contains "index" %}
@@ -288,10 +285,10 @@
         <div class="container">
 
           <div class="four columns">
-            {% if settings.footer_linklist_1 != blank %}
-              <h6 class="title">{{ linklists[settings.footer_linklist_1].title }}</h6>
+            {% if settings.support_linklist != blank %}
+              <h6 class="title">{{ linklists[settings.support_linklist].title }}</h6>
               <ul class="footer_menu">
-                {% for link in linklists[settings.footer_linklist_1].links %}
+                {% for link in linklists[settings.support_linklist].links %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
                 {% endfor %}
               </ul>
@@ -299,10 +296,10 @@
           </div>
 
           <div class="four columns">
-            {% if settings.footer_linklist_2 != blank %}
-              <h6 class="title">{{ linklists[settings.footer_linklist_2].title }}</h6>
+            {% if settings.company_linklist != blank %}
+              <h6 class="title">{{ linklists[settings.company_linklist].title }}</h6>
               <ul class="footer_menu">
-                {% for link in linklists[settings.footer_linklist_2].links %}
+                {% for link in linklists[settings.company_linklist].links %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
                 {% endfor %}
               </ul>
@@ -412,8 +409,8 @@
         </div>
       </div>
       <div class="backpanel-inner">
-        <div class=" bp-item bp-item-backtop">
-          <a href="#" class="backtop" target="_self">Top</a>
+        <div class="bp-item bp-item-backtop" data-top="0">
+        <a href="#none" class="backtop" target="_self">Top</a>
         </div>
       </div>
 <!--

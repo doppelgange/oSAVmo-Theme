@@ -498,7 +498,7 @@ input[type="submit"].guest_button:hover {
   display: none;
   position: absolute;
   left: 4px;
-  top: 40px;
+  top: 45px;
   z-index: 1005;
   min-width: 200px;
 }
@@ -1420,6 +1420,12 @@ div.hidden { display: none; }
   .paginate span:hover, a.tag:hover {
     color: {{ settings.link_hover_color }};
   }
+
+  .paginate a{
+    color: #fff;
+  }
+
+
   .paginate .current {
     background-color: #cdcdcd;
   }
@@ -3306,7 +3312,7 @@ html[xmlns] .slides {display: block;}
 
 /* FlexSlider Default Theme
 *********************************/
-.flexslider {position: relative; zoom: 1; clear:none; overflow: hidden,}
+.flexslider {position: relative; zoom: 1; clear:both; overflow: hidden,}
 .flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; }
 .loading .flex-viewport {max-height: 300px;}
 .flexslider .slides {zoom: 1;}
@@ -4404,10 +4410,6 @@ you can use the generic selector below, but it's slower:
   box-shadow: 0 0px 10px 0 #CCC;
 }
 
-.nav-container .nav{
-  float:right;
-}
-
 .index .header .nav a{
   padding-top: 15px;
 }
@@ -4436,7 +4438,6 @@ you can use the generic selector below, but it's slower:
 .news h4,.promotion-list h2{
   background-color: #E50112;
   padding: 0px 5px 0px 10px;
-  margin:0px;
 }
 .promotion-list-header{
   padding:0px;
@@ -4444,8 +4445,6 @@ you can use the generic selector below, but it's slower:
 .news h4 a, .promotion-list h2{
   color: #fff;
 }
-
-/* Promotion List Starts*/
 .promotion-list-header-item{
   padding:5px 10px;
   font-weight:bold;
@@ -4463,7 +4462,6 @@ you can use the generic selector below, but it's slower:
 .promotion-list .thumbnail .price{
   color:#E50112;
 }
-/* Promotion List Ends*/
 
 .thumbnail .badge{
   position: absolute;
@@ -4476,7 +4474,7 @@ you can use the generic selector below, but it's slower:
 }
 .header-search-bar input{
   margin:0px;
-  width:300px;
+  width:200px;
   border-color:#E50112;
 }
 .header-search-bar input:hover{
@@ -4512,17 +4510,20 @@ you can use the generic selector below, but it's slower:
 }
 
 input[type="submit"].quick_buy_cart {
+  width:45px;
   padding: 5px;
   margin: 0px;
   height:30px;
-  box-shadow: none;
-  color: #e50112;
-  background-color: #fff;
-  text-transform: none;
+  border-radius: 0px 20px 20px 0px;
 }
-input[type="submit"].quick_buy_cart:hover {
-  color: #fff;
-  background-color: #e50112;
+input[type="number"].quick_buy_quantity {
+  width:40px;
+  display:inline;
+  padding: 5px;
+  margin: 0px 0px 0px 5px;
+  height:30px;
+  border-color:{{ settings.btn_color }};
+  border-radius: 20px 0px 0px 20px ;
 }
 form.quick_buy{
   display: inline;
@@ -4533,81 +4534,18 @@ form.quick_buy::before{
   display: none;
 }
 
-/* Page Header Nav Bar Start*/
 .header-top-nav{
   background:#E50112;
   color: #FFF;
   height: 30px
 }
-.header-top-nav ul{
-  margin:0px;
-  padding: 0px;
-}
-.header-top-nav li{
-  display: inline-block;
-  padding:0px 5px 0px 5px;
-  margin:0px;
-  float: right;
-  line-height: 30px;
-  font-weight: bold;
-}
-.header-top-nav li a{
-  line-height: 30px;
+.header-top-nav a{
   color:#fff;
   font-size: 1.2em;
   font-weight: bold;
 }
-/* Page Header Nav Bar End*/
 
-/* Product Review Start*/
-#shopify-product-reviews .spr-icon-star{
-  color:#ffc60b;
-}
-/*Product Review Ends*/
-/*Footer Back to top Starts*/
-.backpanel-inner{
-  position:fixed;
-  bottom:0px;
-  right:0px;
-}
-.backpanel-inner .bp-item{
-  height:30px;
-  width:30px;
-  line-height:30px;
-  background-color:#e50112;
-  color:#FFF;
-  text-align:center;
-  /*opacity:0.85;*/
-  margin:5px 0px 0px 0px;
-}
-.backpanel-inner .bp-item a{
-  color:#FFF;
-  font-weight:bold;
-}
-/*Footer Back to top Starts*/
 
-/* Product Classification Starts */
-ul.product-classification{
-  margin:0px;
-  padding:0px;
-}
-.product-classification li{
-  list-style:none;
-  margin:0px;
-  height:30px;
-  line-height:30px;
-  font-size:15px;
-}
-.product-classification a{
-  display:block;
-  padding:0px 0px 0px 10px;
-  background-color:#fafafa;
-}
-.product-classification a:hover{
-  display:block;
-  color:#e50112;
-  background-color:#fff;
-}
 
 /*Sidebar fix setting*/
 .sidebar-fix-right {
@@ -4616,6 +4554,11 @@ ul.product-classification{
 
 
 
-
+.col_border{ 
+  margin-top;100px;
+  background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0 0px 10px 0 #CCC;
+}
 
 
