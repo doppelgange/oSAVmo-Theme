@@ -19,8 +19,7 @@ $(function() {
 //Bob Add
   $('.product-category .top-link').hover(function(){
     $(this).parent().addClass('hover');
-    $(this).siblings('li').addClass('hover');
-    $(this).siblings('li').removeClass('hover');
+    $(this).parent().siblings('li').removeClass('hover');
     var menuItem = $(this);
     var submenu = $(this).next('ul');
     var menuItemPos = menuItem.position();
