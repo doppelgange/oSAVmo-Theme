@@ -165,7 +165,10 @@
       <div class="header mm-fixed-top {% unless template contains "index" %}header_bar{% endunless %}">
         <div class="header-top-nav">
           <div class="container"> 
-          <a href="/account/register">Sign Up</a> | <a href="/account/login">Log In</a>
+            <ul>
+              <li> <a href="/account/register">Start from Here</a> </li>
+              <li> | </li>
+              <li> <a href="/account/login">Log In</a> </li>
           </div>
         </div>
         <div class="container nav-container"> 
@@ -181,19 +184,20 @@
 
           <div class="columns nav mobile_hidden">
             <ul class="menu">
-            <! header search bar Starts -->
               {% if settings.search_enabled %}
                 <li>
+                <!--
+                  <a href="/search" title="{{ 'general.search.title' | t }}" class="icon-search" id="search-toggle"></a>
+                  -->
                   <form action="/search" class="header-search-bar">
                   {% if settings.search_option != 'everything' %}
                     <input type="hidden" name="type" value="product" />
                   {% endif %}
                   <span class="icon-search search-submit"></span>
-                  <input type="text" name="q" placeholder="What are you looking for?" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
+                  <input type="text" name="q" placeholder="{{ 'general.search.placeholder_with_shop_name' | t: shop_name: shop.name }}" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
                 </form>
                 </li>
               {% endif %}
-            <! header search bar Ends -->
               {% for link in linklists[settings.main_linklist].links %}
                 {% if linklists[link.handle] == empty %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a></li>
@@ -262,7 +266,7 @@
 
 
       {% unless template contains "index" and settings.slideshow_enabled %}
-        <div class="container main content col_border"> 
+        <div class="container main content"> 
       {% endunless %}
 
       {% unless settings.featured_content_page == blank or template contains "index" %}
@@ -284,10 +288,10 @@
         <div class="container">
 
           <div class="four columns">
-            {% if settings.support_linklist != blank %}
-              <h6 class="title">{{ linklists[settings.support_linklist].title }}</h6>
+            {% if settings.footer_linklist_1 != blank %}
+              <h6 class="title">{{ linklists[settings.footer_linklist_1].title }}</h6>
               <ul class="footer_menu">
-                {% for link in linklists[settings.support_linklist].links %}
+                {% for link in linklists[settings.footer_linklist_1].links %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
                 {% endfor %}
               </ul>
@@ -295,10 +299,10 @@
           </div>
 
           <div class="four columns">
-            {% if settings.company_linklist != blank %}
-              <h6 class="title">{{ linklists[settings.company_linklist].title }}</h6>
+            {% if settings.footer_linklist_2 != blank %}
+              <h6 class="title">{{ linklists[settings.footer_linklist_2].title }}</h6>
               <ul class="footer_menu">
-                {% for link in linklists[settings.company_linklist].links %}
+                {% for link in linklists[settings.footer_linklist_2].links %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
                 {% endfor %}
               </ul>
@@ -383,7 +387,7 @@
         <div class="container">
           <div class="ten columns">
             <p class="credits">
-              &copy;2001-{{ "now" | date: "%Y" }} oSAVmo.com
+              &copy; {{ "now" | date: "%Y" }} {{ shop.name }}.
               {% if settings.display_designed_by == true %}
                 {{ 'layout.general.designer_credits_html' | t }}
               {% endif %}
@@ -408,8 +412,8 @@
         </div>
       </div>
       <div class="backpanel-inner">
-        <div class="bp-item bp-item-backtop" data-top="0">
-        <a href="#none" class="backtop" target="_self">Top</a>
+        <div class=" bp-item bp-item-backtop">
+          <a href="#" class="backtop" target="_self">Top</a>
         </div>
       </div>
 <!--
