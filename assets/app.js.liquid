@@ -25,8 +25,13 @@ $(function() {
     var menuItemPos = menuItem.position();
     submenu.css({
       top: menuItemPos.top,
-      left: menuItemPos.left + menuItem.innerWidth()
+      left: menuItem.innerWidth()
     });
+    /*
+    console.log('menuItem innerWidth is'+menuItem.innerWidth());
+    console.log('menuItem outerWidth is'+menuItem.outerWidth());
+    console.log('menuItem width is'+menuItem.width()+'and menuItemPos.left is'+ menuItemPos.left);
+    */
   });
 $('.product-category .product-sub-category').hover(function(){},function(){
     $(this).parent().removeClass('hover');

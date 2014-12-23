@@ -4606,8 +4606,28 @@ ul.product-category{
 }
 .product-category a{
   display:block;
-  padding:0px 0px 0px 10px;
+  padding:0px 10px 0px 10px;
 }
+
+.product-has-sub-category > a:after {
+  display: block;
+  float: right;
+  width: 0;
+  height: 0;
+  margin-top: 10px;
+  margin-right: -5px;
+  border-color: transparent;
+  border-left-color: #cccccc;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  content: " ";
+}
+
+.product-has-sub-category:hover > a:after {
+  border-left-color: #efefef;
+}
+
+
 .product-category li:hover{
   background-color:#fff;
 }
