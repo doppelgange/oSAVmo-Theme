@@ -44,7 +44,7 @@ $(window).scroll(function(){
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}    
    {% when 'Southeast Asian Products' %}
-      {% for link in linklists.southeast-asian.links %}
+      {% for link in linklists.southeast-asian-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
 
@@ -53,17 +53,9 @@ $(window).scroll(function(){
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
       {% endfor %}
    {% else %}
-       {% for link in linklists.chinese-products-sidebar.links %}
+       {% for link in linklists.chinese-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
     {% endcase %}
-
-  {% else %}
-        <li></li>
-  {% endcase %}
-      
-
-
-    </ul>
-  
+    </ul>  
 </div>
