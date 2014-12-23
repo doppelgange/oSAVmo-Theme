@@ -59,7 +59,7 @@
         {% if linklists[link.handle] != empty %}
         <li class="product-has-sub-category"> 
           <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>
-          <ul class="product-sub-category columns three">
+          <ul class="product-sub-category columns">
             {% for link in linklists[link.handle].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {% endfor%}

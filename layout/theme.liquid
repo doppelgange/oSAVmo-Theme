@@ -197,7 +197,7 @@
                     <input type="hidden" name="type" value="product" />
                   {% endif %}
                   <span class="icon-search search-submit"></span>
-                  <input type="text" name="q" placeholder="{{ 'general.search.placeholder_with_shop_name' | t: shop_name: shop.name }}" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
+                  <input type="text" name="q" placeholder="What are you looking for?" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
                 </form>
                 </li>
               {% endif %}
@@ -220,7 +220,7 @@
                   {% endfor %}
                   {% assign column_threshold = settings.dropdown_column_links | minus: 0 %}
 
-                  <li><a href="{{ link.url }}" title="{{ link.title }}" class="sub-menu {% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% for l in linklists[link.handle].links %} {% if l.active %}active{% endif %}{% endfor %}{% if link.active %}active{% endif %}{% endfor %}">{{ link.title }}                     
+                  <li><a href="{{ link.url }}" title="{{ link.title }}" class="{% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% for l in linklists[link.handle].links %} {% if l.active %}active{% endif %}{% endfor %}{% if link.active %}active{% endif %}{% endfor %}">{{ link.title }}                     
                     <span class="arrow">▾</span></a> 
                     <div class="dropdown {% if count.size > column_threshold %}dropdown-wide{% endif %}">
                       <ul>

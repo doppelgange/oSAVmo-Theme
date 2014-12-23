@@ -17,39 +17,39 @@ $(window).scroll(function(){
 
 <div class="sidebar four columns">
 
-  	<h4 class="toggle">{{ collection.title }}</h4>
+    <h4 class="toggle">{{ collection.title }}</h4>
     <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
              
   {% assign handle = collection.title %}
 
   {% case handle %}
   {% when 'Chinese Products' %}
-     {% for link in linklists.chinese-products-sidebar.links %}
+     {% for link in linklists.chinese-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
   {% when 'Taiwan Products' %}
-     {% for link in linklists.taiwan-products-sidebar.links %}
+     {% for link in linklists.taiwan-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
   {% when 'Korea Products' %}
-      {% for link in linklists.korea-products-sidebar.links %}
+      {% for link in linklists.korea-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
   {% when 'Japanese Products' %}
-      {% for link in linklists.japanese-products-sidebar.links %}
+      {% for link in linklists.japanese-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
   {% when 'European Products' %}
-      {% for link in linklists.european-products-sidebar.links %}
+      {% for link in linklists.european-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
       
    {% when 'Southeast Asian Products' %}
-      {% for link in linklists.southeast-asian-products.links %}
+      {% for link in linklists.southeast-asian.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
   {% else %}
-     {{ No products in this collection }}
+        <li></li>
   {% endcase %}
       
 
