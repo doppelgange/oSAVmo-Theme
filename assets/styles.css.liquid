@@ -1791,7 +1791,6 @@ div.hidden { display: none; }
     padding-top: 15px;
   }
   .sub-footer {
-    margin-top: 2.5em;
     border-top: solid 1px {{ settings.sub_footer_border_color }};
     background-color: {{ settings.sub_footer_color }};
     color: {{ settings.sub_footer_text_color }};
@@ -4418,10 +4417,10 @@ you can use the generic selector below, but it's slower:
 }
 
 /*Add Shadow*/
-.homepage_slider img,.news{
+.homepage_slider img,.news,.sub-footer-shipping-item{
   border-radius: 10px;
   box-shadow: 0 0px 10px 0 #CCC;
-  margin-bottom:10px;
+  background-color: #fff;
 }
 .promotion-list{
   border-radius: 0px 0px 10px 10px;
@@ -4662,4 +4661,14 @@ ul.product-category{
   background-color: #fff;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0 0px 10px 0 #CCC;
+}
+
+/*Sub Footer for shipping*/
+.sub-footer-shipping .container{
+  padding:10px 0;
+}
+.sub-footer-shipping-item * {
+  margin:5px 0px 0px 10px;
+  display: inline-block;
+  float: left;
 }
