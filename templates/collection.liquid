@@ -24,24 +24,122 @@
       {% endif %}
      </div>
       <!--collection Page Slides Starts-->
-	{% if settings.collection_slide_enabled %}
-  		<div class="flexslider twelve columns homepage_slider collection-header-slide">
-    		<ul class="slides">
-    			{% for i in (1..6)%}
-    			{%capture sld_enabled%}collection_slide_{{i}}_enabled{%endcapture%}
-    			{%capture sld_img%}collection_slide_{{i}}.jpg {%endcapture%}
-    			{%capture sld_link%}collection_slide_{{i}}_link{%endcapture%}
-    			{%capture sld_alt%}collection_slide_{{i}}_alt_text{%endcapture%}
-      				{% if settings[sld_enabled] %}
-      					{{sld_img}}
-        				<li>
-          					<a hrefcollections Page="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings.[sld_alt] | escape }}" /></a>
-        				</li>
-      				{% endif %}
-    			{% endfor%}
-    		</ul>
-  		</div>
-	{% endif%}
+  {% if settings.collection_slide_enabled %}
+      <div class="flexslider twelve columns homepage_slider collection-header-slide">
+        <ul class="slides">
+              
+              {% assign handle = collection.title %}
+          {% case handle %}
+            {% when 'Chinese Products' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}ch_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}ch_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}ch_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}ch_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+          {% when 'Taiwan Products' %}
+        {% for i in (1..6)%}
+          {%capture sld_enabled%}tw_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}tw_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}tw_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}tw_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% when 'Korea Products' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}kr_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}kr_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}kr_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}kr_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% when 'Japanese Products' %}
+          {% for i in (1..6)%}
+          {%capture sld_enabled%}jp_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}jp_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}jp_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}jp_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% when 'European Products' %}
+          {% for i in (1..6)%}
+          {%capture sld_enabled%}eu_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}eu_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}eu_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}eu_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+      
+        {% when 'Southeast Asian Products' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}as_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}as_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}as_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}as_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+             {% when 'Others' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}ot_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}ot_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}ot_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}ot_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% else %}
+          {% for i in (1..6)%}
+          {%capture sld_enabled%}ch_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}ch_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}ch_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}ch_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                {{sld_img}}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% endcase %}
+
+        </ul>      
+      </div>
+  {% endif%}
      <!--collection Page Slide Ends-->
      
      {% include 'pagination_top' with settings.collection_sidebar %}
