@@ -1622,7 +1622,7 @@
     "collection_sidebar": true,
     "product_sidebar": true,
     "collection_top_sidebar_page": "",
-    "collection_sidebar_linklist": "chinese-products-sidebar",
+    "collection_sidebar_linklist": "chinese-products",
     "collection_sidebar_linklist2": "",
     "filter_by_category": false,
     "filter_by_tag": false,
