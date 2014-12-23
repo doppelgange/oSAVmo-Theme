@@ -42,16 +42,20 @@ $(window).scroll(function(){
   {% when 'European Products' %}
       {% for link in linklists.european-products-sidebar.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
-     {% endfor %}
-      
+     {% endfor %}    
    {% when 'Southeast Asian Products' %}
       {% for link in linklists.southeast-asian-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
-  {% else %}
-     {{ No products in this collection }}
-  {% endcase %}
-      
+   {% when 'Other Products' %}
+      {% for link in linklists.other-products.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+      {% endfor %}
+   {% else %}
+       {% for link in linklists.chinese-products-sidebar.links %}
+         <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+     {% endfor %}
+    {% endcase %}
 
     </ul>
   
