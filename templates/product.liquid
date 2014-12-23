@@ -1,5 +1,11 @@
 <div class="sixteen columns">
-  <div class="clearfix breadcrumb">
+
+{% if settings.product_sidebar %}
+
+{% include 'sidebar-new' %}
+  
+<div class="twelve columns fix-margin" itemscope itemtype="http://data-vocabulary.org/Product">
+   <div class="clearfix breadcrumb">
     <div class="right mobile_hidden">
       {% if collection.previous_product %}
         {% capture prev_url %}{{ collection.previous_product }}{% endcapture %}
@@ -27,11 +33,8 @@
       {{ product.title }}
     </div>
   </div>
-</div>
-
-{% if settings.product_sidebar %}
-  {% include 'sidebar' %}
-  <div class="twelve columns" itemscope itemtype="http://data-vocabulary.org/Product">
+  
+  
     <div id="product-{{ product.id }}">
 {% else %}
   <div class="sixteen columns" itemscope itemtype="http://data-vocabulary.org/Product">
@@ -39,9 +42,9 @@
 {% endif %}
 
 
-	<div class="section product_section clearfix">
-	  
-  	 {% if settings.product_images_position == 'left' %}             
+  <div class="section product_section clearfix">
+    
+     {% if settings.product_images_position == 'left' %}             
        <div class="{% if settings.product_sidebar %}seven{% else %}nine{% endif %} columns {% if product-images == blank %}{% if settings.product_images_position == 'left' %}alpha{% else %}omega{% endif %}{% endif %}">
          {% include 'product-images' %}
         </div>
@@ -197,4 +200,7 @@
       {% include 'product-loop' with settings.product_sidebar %}
     {% endif %}
   {% endif %}
+</div>
+</div>
+</div>
 </div>
