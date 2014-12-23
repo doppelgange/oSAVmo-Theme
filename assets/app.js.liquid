@@ -25,7 +25,7 @@ $(function() {
     var menuItemPos = menuItem.position();
     submenu.css({
       top: menuItemPos.top,
-      left: menuItemPos.left + Math.round(menuItem.outerWidth() * 0.8)
+      left: menuItemPos.left + menuItem.outerWidth()
     });
     console.log('menuItem'+menuItem);
     console.log('menuItemPos.top is'+menuItemPos.top+' and the menuItemPos.left is'+menuItemPos.left + Math.round(menuItem.outerWidth() * 0.75));
