@@ -72,21 +72,25 @@
         <div id="nav">
           <ul>
             {% for link in linklists[settings.main_linklist].links %}
+            <!---11111111111111-->
               {% if linklists[link.handle] == empty %}
                 <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
               {% else %}
                 <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
                   <ul>
                     {% for link in linklists[link.handle].links %}
+                    <!---2222222222-->
                       {% if linklists[link.handle] == empty %}
                         <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
                       {% else %}
                       <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a> 
                         <ul>
-                          {% for link in linklists[link.handle].links %}                        
+                          {% for link in linklists[link.handle].links %} 
+                          <!---3333333333-->                       
                             <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
                           {% endfor %}
                         </ul>
+                      
                       </li>
                       {% endif %}
                     {% endfor %}
@@ -224,17 +228,20 @@
                         {% assign count = 0 %}
                         {% assign split = false %}
                         {% for link in linklists[link.handle].links %}
+                        <!---1111-->
                           {% capture count %}{{ count }}*{% endcapture %}
                           <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                          {% comment %}
                           {% if linklists[link.handle] != empty %}
                             {% for link in linklists[link.handle].links %}
+                            <!--222-->
                               {% capture count %}{{ count }}*{% endcapture %}
                               <li>
                                 <a class="sub-link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
                               </li>
                             {% endfor %}
                           {% endif %}
-
+                          {% endcomment %}
                           {% if count.size > column_threshold and split == false %}
                             {% assign split = true %}
                             </ul>
