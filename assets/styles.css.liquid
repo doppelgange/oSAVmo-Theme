@@ -244,6 +244,7 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
   {% if settings.transparent_header %}
     opacity: 0.85;
   {% endif %}
+  min-width:1200px;
 }
 .header_bar .nav-container:hover {
   {% if settings.transparent_header %}
@@ -255,6 +256,11 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
   color: {{ settings.nav_color}};
   text-shadow: none !important;
 }
+.nav-container .menu{
+  height:60px;
+}
+
+
 .header div.container {
   padding-bottom: 0px;
   padding-top: 0px;
@@ -424,7 +430,7 @@ div#header a span {
   width:{{ settings.content_top_padding|minus:40|times:4}}px;
 }  
 .nav ul.menu li {
-  padding: 0px 4px 0px 4px;
+  padding: 5px 4px 0px 4px;
 }
 .nav ul li .cart-button, input.guest_button, input[type="button"].guest_button {
   font-size: 16px;
@@ -473,10 +479,6 @@ input[type="submit"].guest_button, input[type="submit"].guest_button:hover {
 input[type="submit"].guest_button:hover {
   color: {{ settings.link_color }};
 }
-
-{% if settings.menu_top_padding %}
-  .nav ul.menu { padding-top: {{ settings.menu_top_padding }}px; }
-{% endif %}
 
 /* sub-levels link */
 .menu ul a, .menu li:hover > ul a, .index .header .nav ul.menu ul li a  {
@@ -4488,9 +4490,9 @@ you can use the generic selector below, but it's slower:
 }
 .search-submit {
   position: absolute;
-  right: 10px;
+  right: 15px;
   float: right;
-  top: 5px;
+  top: 15px;
   font-size: 28px;
   cursor: pointer;
 }
@@ -4552,7 +4554,7 @@ form.quick_buy::before{
   padding:0px 5px 0px 5px;
   margin:0px;
   float: right;
-  line-height: 30px;
+  line-height: 25px;
   font-weight: bold;
 }
 .header-top-nav li a{

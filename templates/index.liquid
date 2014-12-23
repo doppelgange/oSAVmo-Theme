@@ -45,17 +45,13 @@
 <!-- News Ends -->
 {% endcomment%}
 <!-- Category Starts-->
-  {% if settings.news_widget %}
+  {% if settings.category_widget %}
     <div class="three columns news">
       <h4 class="panel-header">
         <a class="title" href="#">Supper Market</a>
       </h4>
       <ul class="product-category">
       {% for link in linklists[settings.home_category_linklist].links %}
-      <script>
-        console.log('link.handle is {{link.handle}}' );
-        console.log('sublist is empty? --> {{linklists[link.handle]}} ');
-        </script>
         {% if linklists[link.handle] != empty %}
         <li class="product-has-sub-category"> 
           <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>

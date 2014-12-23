@@ -220,7 +220,7 @@
                   {% endfor %}
                   {% assign column_threshold = settings.dropdown_column_links | minus: 0 %}
 
-                  <li><a href="{{ link.url }}" title="{{ link.title }}" class="{% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% for l in linklists[link.handle].links %} {% if l.active %}active{% endif %}{% endfor %}{% if link.active %}active{% endif %}{% endfor %}">{{ link.title }}                     
+                  <li><a href="{{ link.url }}" title="{{ link.title }}" class="top-link {% if link.active %}active{% endif %} {% for link in linklists[link.handle].links %}{% for l in linklists[link.handle].links %} {% if l.active %}active{% endif %}{% endfor %}{% if link.active %}active{% endif %}{% endfor %}">{{ link.title }}                     
                     <span class="arrow">▾</span></a> 
                     <div class="dropdown {% if count.size > column_threshold %}dropdown-wide{% endif %}">
                       <ul>

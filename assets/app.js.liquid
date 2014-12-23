@@ -1,11 +1,10 @@
 $(function() {
 
-//Bob Add
+//Start: Promotion List - mouse over header to show the content in main page
   for (var i=1; i < 7; i++){
     var promotionListHover = function(num){
         return function(){
           $(".promotion-list-header-"+num).hover(function(){
-            //console.log("promotion-list-header-"+num+"is hovered!!");
             if($(".promotion-list-"+num).is(':hidden')){
               $(".promotion-list:not('.promotion-list-"+i+"'):visible").hide();
               $(".promotion-list-"+num).show();
@@ -15,8 +14,10 @@ $(function() {
     };
     promotionListHover(i)();
   }
+//End: Promotion List - mouse over header to show the content in main page
 
-//Bob Add
+
+//Start: Home page category list 
   $('.product-category .top-link').hover(function(){
     $(this).parent().addClass('hover');
     $(this).parent().siblings('li').removeClass('hover');
@@ -27,17 +28,23 @@ $(function() {
       top: menuItemPos.top,
       left: menuItem.innerWidth()
     });
-    /*
-    console.log('menuItem innerWidth is'+menuItem.innerWidth());
-    console.log('menuItem outerWidth is'+menuItem.outerWidth());
-    console.log('menuItem width is'+menuItem.width()+'and menuItemPos.left is'+ menuItemPos.left);
-    */
   });
 $('.product-category .product-sub-category').hover(function(){},function(){
     $(this).parent().removeClass('hover');
   });
+//Ends: Home page category list 
 
-  
+//Start: Menu list 
+  $('.menu .top-link').hover(function(){
+    var menuItem = $(this);
+    var submenu = $(this).siblings('.dropdown');
+    var menuItemPos = menuItem.position();
+    submenu.css({
+      top: menuItem.innerHeight(),
+      left: menuItemPos.left
+    });
+  });
+//Ends: Home page category list 
 
 
 

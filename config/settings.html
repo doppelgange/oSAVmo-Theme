@@ -37,10 +37,6 @@
       <td><select name="main_linklist" class="linklist" /></td>
     </tr>
     <tr>
-      <th><label for="home_category_linklist">Home Page Category Menu Link List</label></th>
-      <td><select name="home_category_linklist" class="linklist" /></td>
-    </tr>
-    <tr>
       <th><label for="dropdown_column_links">Main Menu Dropdown Column Links (<a href="http://support.outofthesandbox.com/customer/portal/articles/942350-creating-a-dropdown-menu">?</a>)</label></th>
       <td><input id="dropdown_column_links" name="dropdown_column_links" size="2" value="10" /></td>
     </tr>
@@ -48,10 +44,6 @@
     <tr>
       <th><label for="logo_top_padding">Logo Top Padding (<a href="http://support.outofthesandbox.com/customer/portal/articles/1339268" >?</a>)</label></th>
       <td><input id="logo_top_padding" name="logo_top_padding" size="2" value="0" />px</td>
-    </tr>
-    <tr>
-      <th><label for="menu_top_padding">Main Menu Top Padding (<a href="http://support.outofthesandbox.com/customer/portal/articles/1339268" >?</a>)</label></th>
-      <td><input id="menu_top_padding" name="menu_top_padding" size="2" value="0" />px</td>
     </tr>
     <tr>
       <th><label for="content_top_padding">Content Area Top Padding (<a href="http://support.outofthesandbox.com/customer/portal/articles/1339268" >?</a>)</label></th>
@@ -891,6 +883,13 @@
       </td>
     </tr>
     <tr>
+      <th><label for="category_widget">Home Page Category</label></th>
+      <td>
+        Enable: <input type="checkbox" id="category_widget" name="category_widget" value="checked" />
+        Link List:<select name="home_category_linklist" class="linklist" />
+      </td>
+    </tr>
+    <tr>
       <td colspan="3">
         <br />
         <hr />
@@ -911,41 +910,6 @@
         </select>
       </td>
     </tr>
-<!-- To Remove
-    <tr>
-      <td colspan="3">
-        <br />
-        <hr />
-      </td>
-    </tr>
-    <tr>
-      <th><label for="frontpage_collection">Home Page Product Collection</label></th>
-      <td><select name="frontpage_collection" class="collection" /></td>
-    </tr>
-    <tr>
-      <th><label for="frontpage_collection2">Home Page Product Collection 2</label></th>
-      <td><select name="frontpage_collection2" class="collection" /></td>
-    </tr>
-        <tr>
-      <th><label for="frontpage_collection3">Home Page Product Collection 3</label></th>
-      <td><select name="frontpage_collection3" class="collection" /></td>
-    </tr>  
-    
-        <tr>
-      <th><label for="frontpage_collection3">Home Page Product Collection 4</label></th>
-      <td><select name="frontpage_collection3" class="collection" /></td>
-    </tr>  
-    <tr>
-      <th><label for="frontpage_products_per_row">Home Page Products Per Row</label></th>
-      <td>
-        <select name="frontpage_products_per_row" id="frontpage_products_per_row">
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-      </td>
-    </tr>
--->
     <!-- News Setting Starts -->
     <tr>
       <th><label for="news_widget">Home Page News Enabled</label></th>
