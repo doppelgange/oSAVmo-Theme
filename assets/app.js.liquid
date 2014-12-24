@@ -1,6 +1,27 @@
 $(function() {
 
 //Start: Promotion List - mouse over header to show the content in main page
+
+function switchPanel(name){
+  for (var i=1; i < 7; i++){
+    var listHover = function(num){
+        return function(){
+          $("."+name+"-list-header-"+num).hover(function(){
+            if($("."+name+"-list-"+num).is(':hidden')){
+              $("."+name+"-list:not('."+name+"-list-"+i+"'):visible").hide();
+              $("."+name+"-list-"+num).show();
+            }
+          });
+        };
+    };
+    listHover(i)();
+  }
+}
+switchPanel("promotion");
+switchPanel("feature");
+//End: Promotion List - mouse over header to show the content in main page
+
+/*
   for (var i=1; i < 7; i++){
     var promotionListHover = function(num){
         return function(){
@@ -14,8 +35,8 @@ $(function() {
     };
     promotionListHover(i)();
   }
-//End: Promotion List - mouse over header to show the content in main page
 
+*/
 
 //Start: Home page category list 
   $('.product-category .top-link').hover(function(){

@@ -1,0 +1,41 @@
+{% if settings[feature_group_enable] %}
+  <div class="sixteen columns feature-list {% cycle 'feature-list-class':'feature-list-1','feature-list-2 hidden','feature-list-3 hidden','feature-list-4 hidden','feature-list-5 hidden','feature-list-6 hidden' %}">
+    {% assign products_per_row = settings[feature_group_col] %} <!--settings.feature_group_per_row -->
+    {% assign product_found = false %}
+    {% assign skip = false %}
+    {% capture new_row %}
+        <br class="clear product_clear" />
+    {% endcapture %}
+    <script type="text/javascript">
+        console.log("feature_group_enable is {{settings[feature_group_enable]}}");
+
+    console.log("product.id is {{collection.products}}");
+    </script>
+    {% for product in collection.products limit: limit %}
+    <script type="text/javascript">
+    console.log("product.id is {{product.id}}");
+    </script>
+      {% if product.id == skip_product.id or skip == true %}
+        {% assign product_found = true %}
+      {% else %}
+        {% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
+          {% assign skip = true %}
+        {% else%}
+          {%if product.tags contains settings[feature_group_tag]%}
+            {% include 'product-thumbnail' %}
+            {% if products_per_row_cycle_group == "2" %}
+              {% cycle cycle_group: '', new_row %}
+            {% elsif products_per_row_cycle_group == "3" %}
+              {% cycle cycle_group:'', '', new_row %}    
+            {% elsif products_per_row_cycle_group == "4" %}  
+              {% cycle cycle_group:'', '', '', new_row %}
+            {% elsif products_per_row_cycle_group == "5" %}  
+              {% cycle cycle_group:'', '', '','', new_row %}
+            {% endif %}
+          {%endif%}
+        {% endif %}  
+      {% endif %} 
+    {% endfor %}
+    <br class="clear" />
+  </div>  
+{% endif %}

@@ -162,8 +162,30 @@
     </div>
   {% endif %}
 
-<!-- Featured Links Ends -->
-    
+<!-- Feature Links Ends -->
+<!-- Feature Products by tags Starts  -->
+{% if settings['feature_group_section_enable']%}
+<h4 class="feature-list-header sixteen columns panel-header">
+    {% for i in (1..6) %}
+  {% capture feature_group_name%}feature_group_{{i}}_name{%endcapture%}
+  {% capture feature_group_enable%}feature_group_{{i}}_enable{%endcapture%}
+  {% include 'feature-list-header' with settings[feature_group_name] %}
+  {% endfor%}
+</h4>
+  
+{% for i in (1..6) %}
+  {% capture feature_group_tag%}feature_group_{{i}}_tag{%endcapture%}
+  {% capture products_per_row_cycle_group %}products_per_row_cycle_group_{{i}}{%endcapture%}
+  {% capture feature_group_enable%}feature_group_{{i}}_enable{%endcapture%}
+  {% capture thumbnail_display_cycle_group %}thumbnail_display_cycle_group_cycle_group_{{i}}{%endcapture%}
+  {% capture feature_group_col %}feature_group_{{i}}_col{%endcapture%}
+  {% capture feature_group_content_class%}feature-group-{{i}}-content{%endcapture%}
+  {% include 'feature-list-content' with settings[feature_group] %}
+{% endfor %}
+{% endif%}
+<!-- Featured Products by tags Ends  -->
+
+
 <!-- Production Promotion Highlight Starts-->
 {% if settings['promotion_group_section_enable']%}
 <h4 class="promotion-list-header sixteen columns panel-header">
@@ -212,10 +234,6 @@
 {% for product in products %}
 {% if product.metafields.spr.reviews != blank%}
       <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
-      
-      <script>
-      console.log("product.id is {{product.id}}");
-      </script>
 {% endif %}
 {% endfor %}
 <!-- Product Reviews Ends -->

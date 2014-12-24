@@ -216,9 +216,6 @@
               {% endif %}
               {% for link in linklists[settings.main_linklist].links %}
                 {% if linklists[link.handle] == empty %}
-                <script type="text/javascript">
-                  console.log("link.handle is {{link.handle}}");
-                </script>
                   <li><a href="{{ link.url }}" title="{{ link.title }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a></li>
                 {% else %}
                   {% assign count = 0 %}
@@ -422,7 +419,7 @@
         <div class="container">
           <div class="ten columns">
             <p class="credits">
-              &copy; {{ "now" | date: "%Y" }} {{ shop.name }}.
+              &copy; 2001 - {{ "now" | date: "%Y" }} www.oSAVmo.com
               {% if settings.display_designed_by == true %}
                 {{ 'layout.general.designer_credits_html' | t }}
               {% endif %}
