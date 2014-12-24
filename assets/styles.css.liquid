@@ -1822,9 +1822,11 @@ div.hidden { display: none; }
   .sub-footer .social_icons li {
     display: inline;
     padding-right: 10px;
+    color: {{ settings.sub_footer_text_color }};
   }
   .sub-footer .social_icons a, .sub-footer .social_icons a:visited {
     color: {{ settings.sub_footer_text_color }};
+    background-color: {{ settings.sub_footer_icon_bg_color }};
     font-size: 18px;
   }
   .sub-footer .social_icons a:active, .sub-footer .social_icons a:hover {
@@ -3346,8 +3348,8 @@ html[xmlns] .slides {display: block;}
 /* Direction Nav */
 .flex-direction-nav {*height: 0;}
 .flex-direction-nav a {width: 60px; height: 60px; margin: -20px 0 0; display: block; z-index: 10; background: url({{ 'arrow_sprite.png' | asset_url }}) no-repeat 0 0; position: absolute; top: 50%; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
-.flex-direction-nav .flex-next {background-position: 0 -120px; right: -36px; }
-.flex-direction-nav .flex-prev {background-position: 0 -60px; left: -36px;}
+.flex-direction-nav .flex-next {background-position: 0 -120px; right: 5px; }
+.flex-direction-nav .flex-prev {background-position: 0 -60px; left: 5px;}
 .flexslider:hover .flex-next {opacity: 0.8; right: 15px;}
 .flexslider:hover .flex-prev {opacity: 0.8; left: 15px;}
 .flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {opacity: 1;}
@@ -4676,4 +4678,16 @@ ul.product-category{
   margin:5px 0px 0px 10px;
   display: inline-block;
   float: left;
+}
+
+
+/* Main Footer */
+.linktitle {
+color:#d1bca1;
+font-weight:bold
+}
+
+
+.footer_text {
+color:#d1bca1;
 }
