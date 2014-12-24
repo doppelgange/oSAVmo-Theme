@@ -166,6 +166,11 @@
         <div class="header-top-nav">
           <div class="container"> 
             <ul>
+              {% if settings.show_multiple_currencies %}
+                <li>
+                  {% include 'currencies-switcher' %}
+                </li>
+              {% endif %}
               {% if customer.name == blank %}
               <li>
                 <a href="/account/register">Start from Here</a> 
@@ -181,11 +186,6 @@
               {% if shop.customer_accounts_enabled %}
                 <li>
                   <a href="/account" title="{{ 'layout.customer.my_account' | t }} {% if customer %}({{ customer.email }}){% endif %}" class="icon-user"></a>
-                </li>
-              {% endif %}
-              {% if settings.show_multiple_currencies %}
-                <li>
-                  {% include 'currencies-switcher' %}
                 </li>
               {% endif %}
           </div>
@@ -266,16 +266,6 @@
                   </li>
                 {% endif %}
               {% endfor %}
-              {% if shop.customer_accounts_enabled %}
-                <li>
-                  <a href="/account" title="{{ 'layout.customer.my_account' | t }} {% if customer %}({{ customer.email }}){% endif %}" class="icon-user"></a>
-                </li>
-              {% endif %}
-              {% if settings.show_multiple_currencies %}
-                <li>
-                  {% include 'currencies-switcher' %}
-                </li>
-              {% endif %}
               <li>
                 <a href="#cart" class="icon-cart cart-button">{% if cart.item_count > 0 %}<div class="cart_count">{{ cart.item_count }}</div>{% endif %} <span>{{ 'layout.general.cart' | t }}</span></a>
               </li>
