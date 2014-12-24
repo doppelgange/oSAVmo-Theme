@@ -208,7 +208,17 @@
 {% endif%}
 <!--Footer Slides Ends-->
 
-
+<!-- Product Reviews Starts -->
+{% for product in products %}
+{% if product.metafields.spr.reviews != blank%}
+      <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+      
+      <script>
+      console.log("product.id is {{product.id}}");
+      </script>
+{% endif %}
+{% endfor %}
+<!-- Product Reviews Ends -->
 
 {% if settings.homepage2 != blank %}
 
