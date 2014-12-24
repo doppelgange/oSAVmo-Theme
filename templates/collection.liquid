@@ -4,7 +4,8 @@
   <!--side bar navigation-->
   {% if settings.collection_sidebar %}
   {% include 'sidebar-new' %}
-  <div class="twelve columns sidebar-fix-right">   
+
+  <div class="twelve columns fix-margin">   
   {% else %}
     <div class="sixteen columns">
   {% endif %}
@@ -12,12 +13,25 @@
       <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
       &nbsp; / &nbsp;
       <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url"><span itemprop="title">{{ collection.title }}</span></a></span>       
+       
+      {%comment%}
+      {% if collection.current_type %}
+          &nbsp; / &nbsp;
+          <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ collection.current_type | handleize }}" title="{{ collection.current_type | escape }}" itemprop="url"><span itemprop="title">{{ collection.current_type }}</span></a></span>
+      {% endif %}
+      {% endcomment %}
+      
+      
+   
       {% if current_tags %}
         {% for tag in current_tags %}
+        {% unless tag == "Christmas"%}
           &nbsp; / &nbsp;
           <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}" itemprop="url"><span itemprop="title">{{ tag }}</span></a></span>       
-        {% endfor %}
+       {% endunless %}  
+      {% endfor %}
       {% endif %}
+      
     
       {% if paginate.pages != 0 %}      
         &nbsp; / &nbsp; {{ 'general.breadcrumbs.page' | t: current_page: paginate.current_page, pages: paginate.pages }}
@@ -27,7 +41,7 @@
   {% if settings.collection_slide_enabled %}
       <div class="flexslider twelve columns homepage_slider collection-header-slide">
         <ul class="slides">
-              
+ 
               {% assign handle = collection.title %}
           {% case handle %}
             {% when 'Chinese Products' %}
@@ -37,9 +51,8 @@
           {%capture sld_link%}ch_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}ch_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
-                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                      <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>
               {% endif %}
           {% endfor%}
@@ -50,7 +63,6 @@
           {%capture sld_link%}tw_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}tw_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
                     <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>
@@ -63,7 +75,6 @@
           {%capture sld_link%}kr_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}kr_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
                     <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>
@@ -76,7 +87,6 @@
           {%capture sld_link%}jp_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}jp_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
                     <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>
@@ -89,7 +99,6 @@
           {%capture sld_link%}eu_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}eu_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
                     <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>
@@ -103,7 +112,6 @@
           {%capture sld_link%}as_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}as_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
                     <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>
@@ -116,7 +124,6 @@
           {%capture sld_link%}ot_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}ot_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
                     <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>
@@ -129,7 +136,6 @@
           {%capture sld_link%}ch_collection_slide_{{i}}_link{%endcapture%}
           {%capture sld_alt%}ch_collection_slide_{{i}}_alt_text{%endcapture%}
               {% if settings[sld_enabled] %}
-                {{sld_img}}
                 <li>
                     <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
                 </li>

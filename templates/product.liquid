@@ -29,7 +29,12 @@
           <a href="/collections/all" title="{{ collections.all.title }}">{{ collections.all.title }}</a>     
         {% endif %}
       </span>
-      &nbsp; / &nbsp; 
+      &nbsp; / &nbsp;
+      {% if product.type %}
+          <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+            <a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product.type| handleize }}" title="{{ product.type | escape }}" itemprop="url"><span itemprop="title">{{ product.type }}</span></a></span>       
+      {% endif %}
+       &nbsp; / &nbsp;
       {{ product.title }}
     </div>
   </div>

@@ -19,14 +19,40 @@ $(window).scroll(function(){
 
     <h4 class="toggle">{{ collection.title }}</h4>
     <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
-             
-  {% assign handle = collection.title %}
+    
+   <!-- new siderbar method read from types not complete yet-->   
+     {% comment %}    
+     {% if collection.all_types %}
+      {% for product_type in collection.all_types %}
+        {% if collection.title == product_type %}
+          <li>Sorry</li>
+          <li>{{ collection.current_type}}</li>   
+        {% else%}
+        <li>{{ product_type | link_to_type}}</li>
+         
+         {% endif %}
+      {% endfor %}
+     {% endif %}
+        {% endcomment %}  
+      
+  
 
+  <!-- new siderbar method read from tags-->            
+      {% for tag in collection.all_tags %}
+      {% unless tag == "Christmas" %}
+           <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
+      {%endunless%}
+      {% endfor %}
+
+  <!-- old siderbar -->    
+
+  {% comment %} 
+  {% assign handle = collection.title %}
   {% case handle %}
-  {% when 'Chinese Products' %}
+  {% when 'Chinese Products' %}     
      {% for link in linklists.chinese-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
-     {% endfor %}
+     {% endfor %}    
   {% when 'Taiwan Products' %}
      {% for link in linklists.taiwan-products.links %}
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
@@ -57,5 +83,6 @@ $(window).scroll(function(){
          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
      {% endfor %}
     {% endcase %}
+    {% endcomment %}
     </ul>  
 </div>
