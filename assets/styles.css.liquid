@@ -142,7 +142,7 @@ h2, .h2 { font-size: 22px; margin-bottom: 1em; line-height: 1.5em }
 h3, .h3, h1.blog_title { font-size: 20px; line-height: 35px; margin: 0 auto 15px 0; text-align: left; }
 h1.collection_title, div.collection_title { margin-bottom: 0; line-height: {{ settings.headline_font_size }}px; display: inline; }
 h1.collection_title_tags, div.collection_title_tags { padding-right: 25px; border-right: solid 1px {{ settings.border_color }}; }
-h4, .h4, h4.title a, h6.title { 
+h4, .h4, h4.title a, h5.title h6.title { 
   font-size: 18px; line-height: 32px; margin: 0 0 1em 0; padding: 0; 
 
   {% if settings.headline_border == "double" %}
@@ -158,7 +158,7 @@ h4.title a { border: 0; padding: 0; margin: 0;}
 h5, .h5 { font-size: 16px; padding-bottom: 1em; }
 h5.sub_title { padding-bottom: 5px; }
 h6, .h6, h6.title { font-size: 14px; padding: 5px 0}
-.sub-footer h6.title { color: {{ settings.headline_footer_text_color }}; }
+.sub-footer h5.title, .sub-footer h6.title { color: {{ settings.headline_footer_text_color }}; font-weight:bold;}
 .subheader { color: #777; }
 p { margin: 0 0 15px; font-style: normal; line-height: 1.8em; }
 p img { margin: 0; }
@@ -1827,7 +1827,7 @@ div.hidden { display: none; }
   }
   .sub-footer .social_icons a, .sub-footer .social_icons a:visited {
     color: {{ settings.sub_footer_text_color }};
-    background-color: {{ settings.sub_footer_icon_bg_color }};
+   
     font-size: 18px;
   }
   .sub-footer .social_icons a:active, .sub-footer .social_icons a:hover {
@@ -4355,15 +4355,20 @@ you can use the generic selector below, but it's slower:
 }
 .icon-google-plus:before {
   content: "\e00b";
+  color:#ffffff;
+  background-color:#DD503E;
 }
 .icon-facebook:before {
   content: "\e007";
+  color:#ffffff;
+  background-color:#4862A3;
 }
 .icon-instagram:before {
   content: "\e006";
 }
 .icon-twitter:before {
   content: "\e00c";
+  color:#7CACEE;
 }
 .icon-feed:before {
   content: "\e005";
