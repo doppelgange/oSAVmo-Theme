@@ -3325,7 +3325,7 @@ html[xmlns] .slides {display: block;}
 .flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; }
 .loading .flex-viewport {max-height: 300px;}
 .flexslider .slides {zoom: 1;}
-.flexslider .slides li {text-align: center; position: relative;}
+.flexslider .slides li {text-align: center; position: relative; overflow: hidden;}
 .carousel li {margin-right: 5px;border: 0}
 
 .flex-caption {margin:0; width: 100%; position: absolute; top: 25%; color: #fff; {% if settings.slideshow_shadow %}text-shadow: 0 0 1px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.3);{% endif %}}
@@ -4433,7 +4433,7 @@ you can use the generic selector below, but it's slower:
   box-shadow: 0 0px 10px 0 #CCC;
   background-color: #fff;
 }
-.promotion-list{
+.promotion-list,.feature-list{
   border-radius: 0px 0px 10px 10px;
   box-shadow: 0 0px 10px 0 #CCC;
   padding:5px 0px 0px 0px;
@@ -4447,35 +4447,34 @@ you can use the generic selector below, but it's slower:
 .news ul{
   margin-left:10px;
   }
-.news,.promotion-list{background-color:#fff;}
-.news h4,.promotion-list h2{
+.news,.promotion-list,.feature-list{background-color:#fff;}
+.news h4{
   background-color: #E50112;
   padding: 0px 5px 0px 10px;
   margin:0px;
 }
-.promotion-list-header{
-  padding:0px;
-}
-.news h4 a, .promotion-list h2{
+
+.news h4 a{
   color: #fff;
 }
 
 /* Promotion List Starts*/
-.promotion-list-header-item{
+.promotion-list-header-item,.feature-list-header-item{
   padding:5px 10px;
   font-weight:bold;
   cursor:pointer;
 }
-.promotion-list-header-item:hover{
+.promotion-list-header-item:hover,.feature-list-header-item:hover{
   color:#604A3F;
 }
-.promotion-list-header{
+.promotion-list-header,.feature-list-header{
+  padding:0px;
   margin-bottom: 0px;
   background-color: #E50112;
   color: #fff;
   border-radius: 10px 10px 0px 0px;
 }
-.promotion-list .thumbnail .price{
+.promotion-list .thumbnail .price,.feature-list .thumbnail .price{
   color:#E50112;
 }
 /* Promotion List Ends*/
@@ -4510,13 +4509,13 @@ you can use the generic selector below, but it's slower:
 }
 /*Slide Height Setting*/
 .home-header-slide img{
-  height: {{settings.home_header_slide_height}}px; 
+  height: 300px; 
 }
 .home-footer-slide img{
-  height: {{settings.home_footer_slide_height}}px; 
+  height: 300px; 
 }
 .collection-header-slide img{
-  height: {{settings.collection_header_slide_height}}px; 
+  height: 150px; 
 }
 
 .filter_margin_bottom {
