@@ -3301,6 +3301,12 @@ html[xmlns] .slides {display: block;}
   display: block;
   max-width: 100%; margin: 0 auto;
 }
+
+.flexslider .slides img:hover { 
+  transform:scale(1.05) rotate(0);
+  transition: all 1.3s 0.05s;
+}
+
 {% if settings.slideshow_stretch %}
   .homepage_slider .slides img {
     width: 100%;
