@@ -1,0 +1,39 @@
+<div class="sixteen columns page">
+  <div class="four columns" style="margin-right:0;">
+    <h4 class="toggle">{{ linklists.company.title }}</h4>
+    <ul style="list-style-type:none;margin:0 0 0 0;" class="toggle_list">
+    {% for link in linklists.company.links %}
+        <li>
+          <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title }}</a>
+          
+          {% if linklists[link.handle] != empty %}
+            {% assign display_sublinks = false %}
+          
+            {% for link in linklists[link.handle].links %}
+              {% if link.active %}
+                {% assign display_sublinks = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% if display_sublinks or link.active %}
+              <ul>
+              {% for link in linklists[link.handle].links %}
+                <li>
+                  <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endif %}
+        </li>     
+    {% endfor%}   
+    </ul>
+   </div> 
+    
+    
+  <div class="twelve columns" style="margin-right:0;"> 
+    <h5 style="font-weight:bold;text-align:center">{{ page.title }}</h5>
+    {{ page.content }}
+  </div>
+  
+</div>
