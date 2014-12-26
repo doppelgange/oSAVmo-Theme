@@ -1,3 +1,5 @@
+
+
 {% paginate collection.products by settings.pagination_limit %}
 
 
@@ -25,10 +27,16 @@
    
       {% if current_tags %}
         {% for tag in current_tags %}
-        {% unless tag == "Christmas"%}
-          &nbsp; / &nbsp;
-          <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}" itemprop="url"><span itemprop="title">{{ tag }}</span></a></span>       
-       {% endunless %}  
+        {% assign nofilter = false %}
+        {% assign nofiltertags = settings.no_filter_tag | spilt: ','%}
+        {% for nofiltertag in nofiltertags %}
+          {% if tag == nofiltertag %}
+             {% assign nofilter = true %}
+          {% endif%}
+        {% endfor %}
+      {% unless nofilter %}
+           <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
+      {%endunless%}
       {% endfor %}
       {% endif %}
       
@@ -148,7 +156,7 @@
   {% endif%}
      <!--collection Page Slide Ends-->
      
-     {% include 'pagination_top' with settings.collection_sidebar %}
+     {% include 'pagination_top' %}
   
      <div class="four columns breadcrumb_text alpha">
         <!-- do not put anything here -->
@@ -225,5 +233,6 @@
     {% include 'pagination' with settings.collection_sidebar %}
   </div>
  </div>
+
 
 {% endpaginate %}

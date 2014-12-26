@@ -1,3 +1,4 @@
+
 <script>
 $(function(){
 $(window).scroll(function(){
@@ -8,11 +9,12 @@ $(window).scroll(function(){
         $(".sidebar").css({"position":"absolute","top":$(".content").height()-$(".sidebar").height()+"px"});
     }
     if($(window).scrollTop()<($(".header").height()+$(".content").height()-$(".sidebar").height())&&$(window).scrollTop()>=40&&$(".sidebar").css("position")=="absolute"){    
-        $(".sidebar").css({"position":"fixed","top":"100px"});
+        $(".sidebar").css({"position":"fixed","top":"140px"});
     }
 });
 });
 </script>
+
 
 
 <div class="sidebar four columns">
@@ -21,30 +23,40 @@ $(window).scroll(function(){
     <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
     
    <!-- new siderbar method read from types not complete yet-->   
-     {% comment %}    
+       {% comment %}  
      {% if collection.all_types %}
-      {% for product_type in collection.all_types %}
-        {% if collection.title == product_type %}
-          <li>Sorry</li>
-          <li>{{ collection.current_type}}</li>   
-        {% else%}
+          {% if product_type == collection.title %}
+        {% for product_type in shop.collection.all_types %}
         <li>{{ product_type | link_to_type}}</li>
-         
-         {% endif %}
-      {% endfor %}
-     {% endif %}
-        {% endcomment %}  
+            {% endfor %}
       
+      {% else %}
+      {% for product_type in collection.all_types %}
+        <li>{{ product_type | link_to_type}}</li>
+            {% endfor %}
+       {% endif %}
+
+     {% endif %}
+         {% endcomment %}  
   
 
-  <!-- new siderbar method read from tags-->            
+  <!-- new siderbar method read from tags-->  
+      
       {% for tag in collection.all_tags %}
-      {% unless tag == "Christmas" %}
+        {% assign nofilter = false %}
+        {% assign nofiltertags = settings.no_filter_tag | spilt: ','%}
+        {% for nofiltertag in nofiltertags %}
+          {% if tag == nofiltertag %}
+             {% assign nofilter = true %}
+          {% endif%}
+        {% endfor %}
+      {% unless nofilter %}
            <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
       {%endunless%}
       {% endfor %}
+      
 
-  <!-- old siderbar -->    
+  <!-- old siderbar -- use fixed sidebar list-->    
 
   {% comment %} 
   {% assign handle = collection.title %}
