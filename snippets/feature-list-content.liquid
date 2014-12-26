@@ -6,9 +6,6 @@
     {% capture new_row %}
         <br class="clear product_clear" />
     {% endcapture %}
-    <script type="text/javascript">
-        console.log("feature_group_enable is {{settings[feature_group_enable]}}");
-    </script>
     {% for product in collections['all'].products %}
       {% if product.id == skip_product.id or skip == true %}
         {% assign product_found = true %}
