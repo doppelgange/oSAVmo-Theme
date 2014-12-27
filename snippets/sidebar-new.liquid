@@ -11,10 +11,15 @@ $(window).scroll(function(){
 });
 </script>
 
-
+<!-- If No collection can be find, use all collection-->
+{% if collection == Emptydorp %}
+{% assign collection=collections['all']%}
+{% endif%}
 <div class="four columns sidebar sidebar_col_border">
-
     <h4 class="toggle">{{ collection.title }}</h4>
+    <script type="text/javascript">
+    console.log("collection.title is {{collection.title}}");
+    </script>
     <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
     
    <!-- new siderbar method read from types not complete yet-->   
