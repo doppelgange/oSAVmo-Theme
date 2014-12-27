@@ -1,5 +1,5 @@
-{% layout settings.customer_layout %}
-
+{% layout 'customer' %}
+{% capture customer_page_title%}{{ 'customer.account.details' | t }}{% endcapture %}
 <div class="sixteen columns clearfix collection_nav">
   <h1 class="collection_title"><a href="/account">{{ 'customer.account.details' | t }}</a></h1>
 </div>
