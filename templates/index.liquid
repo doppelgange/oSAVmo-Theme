@@ -44,6 +44,7 @@
   {% endif %}
 <!-- News Ends -->
 {% endcomment%}
+
 <!-- Category Starts-->
   {% if settings.category_widget %}
     <div class="three columns news">
@@ -54,7 +55,7 @@
       {% for link in linklists[settings.home_category_linklist].links %}
         {% if linklists[link.handle] != empty %}
         <li class="product-has-sub-category"> 
-          <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>
+         <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>
           <ul class="product-sub-category columns">
             {% for link in linklists[link.handle].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -62,9 +63,29 @@
           </ul>
         </li>
         {%else%}
-        <li> 
-          <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>
-        </li>
+         {% if collections[link.handle].all_tags != empty %}
+          <li class="product-has-sub-category"> 
+            <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>
+              <ul class="product-sub-category columns">
+             {% for tag in collections[link.handle].all_tags %}
+            {% assign nofilter = false %}
+            {% assign nofiltertags = settings.no_filter_tag | split:','%}
+             {% for nofiltertag in nofiltertags %}
+            {% if tag == nofiltertag %}
+               {% assign nofilter = true %}
+              {% endif%}        
+             {% endfor %}
+           {% unless nofilter == true %}
+               <li><a href="/collections/{% if collections[link.handle].handle != blank %}{{ collections[link.handle].handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
+            {%endunless%}
+             {% endfor %}
+              </ul>
+           </li>
+           {%else%}
+          <li> 
+           <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a>
+          </li>
+        {% endif%}
         {% endif%}
       {% endfor %}
       </ul>
