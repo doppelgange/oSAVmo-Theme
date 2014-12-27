@@ -1,23 +1,18 @@
-
 <script>
 $(function(){
 $(window).scroll(function(){
-    if($(window).scrollTop()<100 && $(".sidebar").css("position")=="fixed"){
-        $(".sidebar").css({"position":"absolute","top":"100px"});
+    if($(window).scrollTop()>=($(".content").height()-$(".header").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="fixed"){    
+        $(".sidebar").css({"position":"absolute","top":$(".header").height()+10+"px"});
     }
-    if($(window).scrollTop()>=($(".header").height()+$(".content").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="fixed"){     
-        $(".sidebar").css({"position":"absolute","top":$(".content").height()-$(".sidebar").height()+"px"});
-    }
-    if($(window).scrollTop()<($(".header").height()+$(".content").height()-$(".sidebar").height())&&$(window).scrollTop()>=40&&$(".sidebar").css("position")=="absolute"){    
-        $(".sidebar").css({"position":"fixed","top":"140px"});
+    if($(window).scrollTop()<($(".content").height()-$(".header").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="absolute"){    
+        $(".sidebar").css({"position":"fixed","top":$(".header").height()+10+"px"});
     }
 });
 });
 </script>
 
 
-
-<div class="sidebar four columns">
+<div class="four columns sidebar sidebar_col_border">
 
     <h4 class="toggle">{{ collection.title }}</h4>
     <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
@@ -44,15 +39,15 @@ $(window).scroll(function(){
       
       {% for tag in collection.all_tags %}
         {% assign nofilter = false %}
-        {% assign nofiltertags = settings.no_filter_tag | spilt: ','%}
+        {% assign nofiltertags = settings.no_filter_tag | split:','%}
         {% for nofiltertag in nofiltertags %}
           {% if tag == nofiltertag %}
              {% assign nofilter = true %}
-          {% endif%}
+          {% endif%}        
         {% endfor %}
-      {% unless nofilter %}
+         {% unless nofilter == true %}
            <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
-      {%endunless%}
+         {%endunless%}
       {% endfor %}
       
 

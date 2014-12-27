@@ -4519,8 +4519,10 @@ you can use the generic selector below, but it's slower:
 .home-footer-slide img{
   height: 300px; 
 }
-.collection-header-slide img{
-  height: 150px; 
+
+.collection-header-slide{
+  margin-left:0px;
+  margin-right:0px;
 }
 
 .filter_margin_bottom {
@@ -4674,13 +4676,32 @@ ul.product-category{
 
 
 /*Page Border Except index page*/
-.col_border{ 
-  margin-top;100px;
+.sidebar_col_border{
+  background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0 0px 10px 0 #CCC;
+  padding: 0 0 0 5px;
+}
+
+.content_col_border{
+  background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0 0px 10px 0 #CCC;
+  padding: 10px 10px 10px 5px;
+}
+
+.pro_page_border {
+  background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0 0px 10px 0 #CCC;
+  padding:10px;
+}
+
+.page_border {
   background-color: #fff;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0 0px 10px 0 #CCC;
 }
-
 /*Sub Footer for shipping*/
 .sub-footer-shipping .container{
   padding:10px 0;
