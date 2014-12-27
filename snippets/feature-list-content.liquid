@@ -23,9 +23,6 @@
           {%if product.tags contains settings[feature_group_tag]  %}
             <div class="hidden">{% increment current_product_show %}</div>
             {%if current_product_show <= products_per_row_num %}
-              <script type="text/javascript">
-                console.log("{{feature_group_tag}} -- {{current_product_show}} products_per_row_num {{products_per_row_num}}");
-              </script>
               {% include 'product-thumbnail' %}
               {% if products_per_row_cycle_group == "2" %}
                 {% cycle cycle_group: '', new_row %}
