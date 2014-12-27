@@ -1,13 +1,8 @@
 {% layout 'customer' %}
 {% capture customer_page_title%}{{ 'customer.activate_account.title' | t }}{% endcapture %}
-<div class="sixteen columns clearfix collection_nav">
-  <h1 class="collection_title">{{ 'customer.activate_account.title' | t }}</h1>
-</div>
-
 <div class="section clearfix">  
   <div class="eight columns offset-by-four">
     <p><em>{{ 'customer.activate_account.subtext' | t }}</em></p>
-
     
     {% form 'activate_customer_password' %}
       {{ form.errors | default_errors }}

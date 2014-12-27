@@ -1,19 +1,5 @@
 {% layout 'customer' %}
 {% capture customer_page_title%}{{ 'customer.account.details' | t }}{% endcapture %}
-<div class="sixteen columns clearfix collection_nav">
-  <h1 class="collection_title">{{ 'customer.account.details' | t }}</h1>
-</div>
- <!--
-<div class="sixteen columns breadcrumb">
-  <div class="clearfix breadcrumb_text">
-    <div class="right">
-      <a href="/account" title="{{ 'layout.customer.my_account' | t }}">{{ customer.name }}</a> 
-      &nbsp; / &nbsp;
-      {{ 'layout.customer.log_out' | t | customer_logout_link }}
-    </div>
-  </div>
-</div>
--->
 <div class="section clearfix">  
   <div class="four columns">
     <div id="customer_detail" class="group">
