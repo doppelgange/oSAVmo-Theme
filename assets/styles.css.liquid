@@ -267,7 +267,7 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
 }
 #header {
   display: none;
-  background: {{ settings.mobile_header_bg_color }};
+  background: #e50112;
   border-bottom: 1px solid {{ settings.border_color }};
   color: {{ settings.nav_color }};
   font-size: 16px;
@@ -286,7 +286,7 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
 
 #header a
 {
-  color: {{ settings.logo_color }};
+  color:#fff;
   font-size: 32px;
   display: block;
   height: 40px;
@@ -386,8 +386,11 @@ div#header a span {
   border-bottom: none;
   color: {{ settings.nav_color }};
 }
-
-.nav a, .nav a:visited, .nav a:active, #header a span, .nav a.icon-cart span, .search-close  {
+#header a span{
+  color:#fff;
+  font-size: 1em;
+}
+.nav a, .nav a:visited, .nav a:active, .nav a.icon-cart span, .search-close  {
     {% if settings.nav_typeface_method == "google_webfonts" %}
       font-family: "{{ settings.nav_google_webfont_font | replace: '+', ' ' }}";
     {% else %}
