@@ -282,6 +282,10 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  background-image: url("//cdn.shopify.com/s/files/1/0720/6729/t/18/assets/logo.png?6067");
+  background-size: 120px auto;
+  background-position: center -40px;
+  background-repeat: no-repeat;
 }
 
 #header a
@@ -431,8 +435,20 @@ div#header a span {
 
 .logo {
   /* padding: 10px 0;*/
-  width:{{ settings.content_top_padding|minus:40|times:4}}px;
+
+  width:180px;
+  height:60px;
+  background-image: url({{ 'logo.png' | asset_url }});
+  background-size: 180px auto;
+  background-position: 0 0;
 }  
+.logo a {
+  line-height: 60px;
+  text-indent: -9999px;
+}
+
+
+
 .nav ul.menu li {
   padding: 5px 4px 0px 4px;
 }
@@ -4278,6 +4294,25 @@ div.cloudzoom-ajax-loader {
     h1, h1.home, h1.blog_title, .title a, h2 {
         padding:0;
       }
+
+
+    /* Mobile Slider*/
+    .homepage_slider .slides img{
+      height: auto;
+    }
+    div.mobile-search{
+      display: block;
+      position: relative;
+    }
+    div.mobile-search .search-submit{
+      top:5px;
+      right: 5px;
+    }
+    div.mobile-search input{
+      margin: 0px;
+    }
+
+
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
