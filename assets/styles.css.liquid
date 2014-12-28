@@ -261,61 +261,6 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
   height:60px;
 }
 
-
-.header div.container {
-  padding-bottom: 0px;
-  padding-top: 0px;
-}
-#header {
-  display: none;
-  background: #e50112;
-  border-bottom: 1px solid {{ settings.border_color }};
-  color: {{ settings.nav_color }};
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 40px;
-  height: 40px;
-  padding: 0 50px;
-  z-index: 1001;
-  width: 100%;
-  opacity: 0.95;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background-image: url({{ 'logo.png' | asset_url }});
-  background-size: 120px auto;
-  background-position: center -40px;
-  background-repeat: no-repeat;
-}
-
-#header a
-{
-  color:#fff;
-  display: block;
-  height: 40px;
-  position: absolute;
-  top: 0;
-  left: 15px;
-  font-size: 25px;
-  padding-top: 5px;
-}
-
-div#header a span {
-  display: inline;
-  padding-left: 4px;
-  position: relative;
-  top: -2px;
-}
-
-#header a.right
-{
-  left: auto;
-  right: 15px;
-  font-size: 20px;
-  padding-top: 8px;
-  top: 2px;
-}
 .nav {
   text-align:right;
 }
@@ -4419,6 +4364,68 @@ div.customer-container{
 
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
+  /* Mobile Header top bar*/
+  #header {
+  display: none;
+  background: #e50112;
+  border-bottom: 1px solid {{ settings.border_color }};
+  color: {{ settings.nav_color }};
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 50px;
+  z-index: 1001;
+  width: 100%;
+  opacity: 0.95;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-image: url({{ 'logo.png' | asset_url }});
+  background-size: 120px auto;
+  background-position: 45px -40px;
+  background-repeat: no-repeat;
+}
+
+#header a
+{
+  color:#fff;
+  display: block;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 25px;
+  padding-top: 5px;
+}
+
+div#header a span {
+  display: inline;
+  padding-left: 4px;
+  position: relative;
+  top: -2px;
+}
+
+#header a.right
+{
+  left: auto;
+  right: 15px;
+  font-size: 20px;
+  padding-top: 8px;
+  top: 2px;
+}
+  .mobile-logo{
+      text-indent: -9999px;
+      margin: 0 0 0 35px;
+      padding: 0px;
+      width: 120px;
+    }
+  #header {
+    display: block;
+  }
+
+
   #tag_filter, #sort-by, .breadcrumb_text {
     margin-bottom: 1em !important;
   }
@@ -4462,14 +4469,7 @@ div.customer-container{
     padding-top:0px;
     margin-top:40px;
   }
-  #header {
-    display: block;
-  }
-  .header {
-    position: relative;
-    margin-top: 40px;
-    text-align: center;
-  }
+  
   .toggle span {
     display: block;
   }
