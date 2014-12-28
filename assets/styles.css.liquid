@@ -3902,7 +3902,7 @@ div.cloudzoom-ajax-loader {
     /* Note: Design for a width of 320px */
 
     @media only screen and (max-width: 767px) {
-        .container { width: 300px; }
+        .container { width: 100%; }
         .container .columns,
         .container .column { margin: 0; }
 
@@ -3924,7 +3924,7 @@ div.cloudzoom-ajax-loader {
         .container .fifteen.columns,
         .container .sixteen.columns,
         .container .one-third.column,
-        .container .two-thirds.column { width: 300px; }
+        .container .two-thirds.column { width: 100%; }
         .container .one-fifth.column  { width: 140px; }
         .container .one-fifth.column:nth-child(2n)  { margin-left: 20px }
 
@@ -4117,7 +4117,8 @@ div.cloudzoom-ajax-loader {
       text-align: center;
     }
     div.content {
-      padding-top: 30px;
+      padding-top:0px;
+      margin-top:30px;
     }
     #header {
       display: block;
@@ -4228,6 +4229,13 @@ div.cloudzoom-ajax-loader {
   .container .blog_content {
     padding-left: 0;
     border: 0;
+  }
+ .columns.content_col_border{   
+    margin: 20px 0px 0px 0px;
+    padding: 0px; 
+  }
+  .breadcrumb_text{   
+    margin-bottom: 0px !important;
   }
 }
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
