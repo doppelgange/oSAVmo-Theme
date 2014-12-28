@@ -9,9 +9,6 @@
     {% capture new_row %}
         <br class="clear product_clear" />
     {% endcapture %}
-    <script type="text/javascript">
-    console.log("{{limit}}");
-    </script>
   {% paginate collections['all'].products by limit %}  
     {% for product in collections['all'].products %}
       {% if product.id == skip_product.id or skip == true %}

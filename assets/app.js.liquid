@@ -17,26 +17,16 @@ function switchPanel(name){
     listHover(i)();
   }
 }
+
 switchPanel("promotion");
 switchPanel("feature");
 //End: Promotion List - mouse over header to show the content in main page
 
-/*
-  for (var i=1; i < 7; i++){
-    var promotionListHover = function(num){
-        return function(){
-          $(".promotion-list-header-"+num).hover(function(){
-            if($(".promotion-list-"+num).is(':hidden')){
-              $(".promotion-list:not('.promotion-list-"+i+"'):visible").hide();
-              $(".promotion-list-"+num).show();
-            }
-          });
-        };
-    };
-    promotionListHover(i)();
-  }
-
-*/
+//Start: Set content height no less than side bar
+if($(".sidebar").length && $(".content_col_border").length && ($(".sidebar").outerHeight() > $(".content_col_border").outerHeight())){
+  $(".content_col_border").css("height",$(".sidebar").outerHeight());
+}
+//End: Set content height no less than side bar
 
 //Start: Home page category list 
   $('.product-category .top-link').hover(function(){
