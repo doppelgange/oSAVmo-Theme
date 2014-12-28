@@ -64,7 +64,8 @@
   <body class="{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
     <div>
       <div id="header" class="mm-fixed-top">
-        <a href="#nav" class="icon-menu"> <span>{{ 'layout.general.menu' | t }}</span></a>
+        <a href="#nav" class="icon-menu">{{ 'layout.general.menu' | t }}</a>
+        <a href="{{ shop.url }}" title="{{ shop.name }}">{{ shop.name }}</a>
         <a href="#cart" class="icon-cart right">{% if cart.item_count > 0 %}<div class="cart_count">{{ cart.item_count }}</div>{% endif %} <span>{{ 'layout.general.cart' | t }}</span></a>
       </div>
 

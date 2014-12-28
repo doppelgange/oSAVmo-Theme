@@ -28,7 +28,7 @@ Description: Shopify Theme (http://www.shopify.com/?ref=out-of-the-sandbox)
   
 /* #Reset & Basics
 ================================================== */
-  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -97,6 +97,8 @@ table {
 abbr {
   border-bottom: 1px dotted {{ settings.border_color }};
 } 
+
+
 /* #Typography
 ================================================== */
   .logo {   
@@ -196,8 +198,7 @@ div.section.collection_description {
 ================================================== */
   a, a:visited { color: {{ settings.link_color }}; text-decoration: none; outline: 0; -webkit-transition: color .1s linear; -moz-transition: color .1s linear; -o-transition: color .1s linear; -ms-transition: color .1s linear; transition: color .1s linear; }
 a:hover, a:focus { color: {{ settings.link_hover_color }}; }
-/* #Lists
-================================================== */
+
   ul, ol { margin-bottom: 20px; }
   ul { list-style: circle outside; }
   ol { list-style: decimal; }
@@ -314,9 +315,6 @@ div#header a span {
   font-size: 20px;
   padding-top: 8px;
   top: 2px;
-}
-#header a.icon-menu span {
-  top: -4px;
 }
 .nav {
   text-align:right;
@@ -1120,6 +1118,8 @@ div.hidden { display: none; }
     background: #bbb;
     color: #333; }
 #grid .example-grid { overflow: hidden; }
+
+
 /* #Site Styles
 ================================================== */
 
@@ -1869,6 +1869,7 @@ div.hidden { display: none; }
     list-style: none outside none;
     margin-bottom: 0;
   }
+
 
 /*
   jQuery.mmenu CSS
@@ -3974,7 +3975,7 @@ div.cloudzoom-ajax-loader {
     /* Note: Design for a width of 480px */
 
     @media only screen and (min-width: 480px) and (max-width: 767px) {
-        .container { width: 420px; }
+        .container { width: 100%; }
         .container .columns,
         .container .column { margin: 0; }
 
@@ -3996,7 +3997,7 @@ div.cloudzoom-ajax-loader {
         .container .fifteen.columns,
         .container .sixteen.columns,
         .container .one-third.column,
-        .container .two-thirds.column { width: 420px; }
+        .container .two-thirds.column { width: 100%; }
         .container .one-fifth.column  { width: 200px;}
         .container .one-fifth.column:nth-child(2n)  { margin-left: 20px }
 
@@ -4043,427 +4044,9 @@ div.cloudzoom-ajax-loader {
       width: 0;
       height: 0;
     }
-/* #Media Queries
-================================================== */
-  /* Smaller than standard 960 (devices and browsers) */
-  @media only screen and (max-width: 959px) { 
-    .collection_menu {
-      display: none;
-    }
-    h1.collection_title_tags, div.collection_title_tags {
-      border-right: 0;
-      margin-right: 0;
-      padding-right: 0;
-    }
-    .cloudzoom-lens {
-      width:140px;
-      height:120px;
-    }
-  }
 
-/* Standard 960 to widescreen 1200(desktop browsers) */
-@media only screen and (min-width: 960px) and (max-width: 1199px) {
-   .nav ul li { padding: 0 7px 0 7px; }
-}
-
-/* Tablet Portrait size to standard 960 (devices and browsers) */
-  @media only screen and (min-width: 768px) and (max-width: 959px) {
-    .featured_links a span {
-      font-size: {{ settings.nav_font_size | minus: 2 }}px; 
-    }
-    .nav ul.menu li { padding: 10px 3px 10px 3px; }
-    .dropdown { left: 3px; }
-    .nav ul li .cart-button {
-      background-color: transparent;
-      padding: 0;
-      color: {{ settings.nav_color_home }} !important;
-    }
-    .header_bar .nav ul li .cart-button {
-      color: {{ settings.nav_color }} !important;
-    }
-    .nav ul li .cart-button span { display: none }
-
-    .cart_count {
-      top: -6px;
-      left: 10px;
-    }
-  }
-/* All Mobile Sizes (devices and browser) */
-  @media only screen and (max-width: 767px) {
-    #tag_filter, #sort-by, .breadcrumb_text {
-      margin-bottom: 1em !important;
-    }
-    .blog_filter { margin-top: 1em; width: 100% !important; }
-    .section_select { text-align: center; }
-    .flex-control-nav { bottom: 10px }
-    .featured_links a span {
-      font-size: {{ settings.nav_font_size | minus: 2 }}px; 
-    }
-    {% if settings.slideshow_menu == false %}
-      .homepage_slider {
-        padding-top: 0px;
-      }
-    {% endif %}
-    .or {
-      text-align: center;
-      width: 100%;
-      display: inline-block;
-      padding-left: 0;
-      padding-bottom: 5px;
-    }
-    .header{ background-color: {{ settings.header_bg_color }}; }
-    .mobile_hidden { display: none !important }
-    table tr.order_summary td.label { text-align: left }
-    .index .logo a, .index .logo a:hover, .index .logo a:visited, .index .logo a:active {
-      color: {{ settings.logo_color }};
-    } 
-    .cart_count {
-      left: 8px;
-    }
-    .breadcrumb {
-      text-align: center;
-      margin-bottom: 1.5em;
-    }
-    .featured_text {
-      font-size: {{ settings.regular_font_size }}px;
-      line-height: 1.7em;
-      text-align: center;
-    }
-    div.content {
-      padding-top:0px;
-      margin-top:30px;
-    }
-    #header {
-      display: block;
-    }
-    .header {
-      position: relative;
-      margin-top: 40px;
-      text-align: center;
-    }
-    .toggle span {
-      display: block;
-    }
-    .toggle_list {
-      display: none;
-    }
-    select { 
-      width:100%; 
-    }
-    .flexslider a.action_button {
-      width: initial;
-    }
-
-    input[type="submit"],
-    input[type="reset"],
-    input[type="button"],
-    input.action_button[type="submit"], 
-    input.action_button[type="button"],
-    .sign_up {
-      margin-left: 0;
-      width: 100%;
-    }
-
-    .credits_right {
-      text-align: left;
-    }
-    .container .column.thumbnail, .container .columns.thumbnail {
-      margin-top: 1em;
-    }
-  table[style] {
-      width:auto !important;
-      max-width:100% !important;
-      overflow: hidden;
-    }
-  tr, td {
-      display:block;
-      width:99% !important;
-      max-width:99% !important;
-      padding:0px !important;
-      border-left: 0 !important;
-      border-right: 0 !important;
-    }
-  tr {
-    padding-bottom: 6px !important;
-  }
-  td {
-    padding: 4px !important;
-  }
-  .title_column {
-      float:left;
-    }
-  .container div.mobile_only {
-      display:block;
-    }
-  span.mobile_only {
-    display: inline; 
-  }
-  .price_total {
-    text-align: right;
-  }
-  .price_total_text {
-    display:block;
-  }
-  .update_subtotal, .price_total, .remove_column, .checkout_table_header {
-      display: none;
-    }
-  .mobile_right {
-      text-align: right;
-    }
-  .quick_shop {
-      display: none !important;
-    }
-  .cart_price {
-    display: block;
-    margin-bottom: 0;
-  }
-  table tr th, table tr td {
-      padding: 2px;
-    }
-  input.action_button {
-      margin-bottom: 1em !important;
-    }
-  .multiple_product_images {
-      display: none;
-    }
-  .flex-caption {
-    top: 0;
-  }
-  .flex-caption .headline {
-    font-size: 1.5em;
-    line-height: 1.5em;
-    position: relative;
-  }
-  .flex-caption p.subtitle {
-    font-size: 1.1em;
-    line-height: 1.5em;
-    position: relative;
-  }
-  .container .blog_content {
-    padding-left: 0;
-    border: 0;
-  }
-  .columns.content_col_border{   
-    margin: 20px 0px 0px 0px;
-    padding: 0px; 
-  }
-  .breadcrumb_text{   
-    margin-bottom: 0px !important;
-  }
-}
-/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-  @media only screen and (min-width: 480px) and (max-width: 767px) {
-    .mobile_hidden { display: none !important }
-    #cart a.action_button.edit_cart, #cart .action_button {
-      width: 80%;
-      margin: 1em auto;
-      float: none;
-    }
-  }
-
-
-/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-  @media only screen and (max-width: 479px) {
-    #cart a.action_button.edit_cart, #cart .action_button {
-      width: 120px
-    }
-    .mobile_hidden { display: none !important }
-    .cart_image { width: 50px; padding-right: 10px }
-    #cart a.edit_cart, #cart a.action_button {
-      width: 80%;
-      float: none;
-      /* padding: 12px; */
-      margin: 1em auto;
-    }
-    .flex-caption .headline, .flex-caption p.subtitle{
-        font-size: 1.1em;
-        line-height: 1.1em;
-      }
-    .flex-caption p.subtitle {
-      font-size: 0.8em;
-      line-height: 1.5em;
-      margin-bottom: 1em;
-    }  
-    .flex-caption .action_button {
-      padding: 4px 15px;
-      font-size: 12px;
-    }
-    .flex-direction-nav .flex-prev {display: none;}
-    .flex-direction-nav .flex-next {display: none;}
-
-    h1, h2, h1.home, h1.blog_title, h3, h4, h5, h6, .title a { 
-        font-size: 150%;
-      }
-    h1, h1.home, h1.blog_title, .title a, h2 {
-        padding:0;
-      }
-
-    /* Mobile Slider*/
-    .homepage_slider .slides img{
-      height: auto;
-    }
-    div.mobile-search{
-      display: block;
-      position: relative;
-    }
-    div.mobile-search .search-submit{
-      top:5px;
-      right: 5px;
-    }
-    div.mobile-search input{
-      margin: 0px;
-    }
-
-}
-
-@media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
-     html {
-        -webkit-text-size-adjust: 100%;
-     }
-}
-
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  select#currencies {
-    position: relative;
-    top: 21px;
-  }
-}
-
-.social_buttons, .social_buttons a {
-  color: {{ settings.was_price_color }} !important;
-}
-.social_buttons a {
-  padding-left: 5px;
-}
-.social_buttons a:hover {
-  color: {{ settings.link_color }} !important;
-}
-
-@font-face {
-  font-family: 'OutOfTheSandbox';
-  src:url('{{ 'OutOfTheSandbox.eot' | asset_url }}');
-  src:url('{{ 'OutOfTheSandbox.eot?#iefix' | asset_url }}') format('embedded-opentype'),
-    url('{{ 'OutOfTheSandbox.woff' | asset_url }}') format('woff'),
-    url('{{ 'OutOfTheSandbox.ttf' | asset_url }}') format('truetype'),
-    url('{{ 'OutOfTheSandbox.svg#OutOfTheSandbox' | asset_url }}') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* Use the following CSS code if you want to use data attributes for inserting your icons */
-[data-icon]:before {
-  font-family: 'OutOfTheSandbox';
-  content: attr(data-icon);
-  speak: none;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Use the following CSS code if you want to have a class per icon */
-/*
-Instead of a list of all class selectors,
-you can use the generic selector below, but it's slower:
-[class*="icon-"] {
-*/
-.icon-menu, .nav a.icon-cart, #header a.icon-cart, .header-top-nav a.icon-user, .nav a.icon-search, .icon-search, .nav a.icon-pinterest, a.icon-pinterest, .nav a.icon-vimeo, .nav a.icon-tumblr, .nav a.icon-google-plus, a.icon-google-plus, .nav a.icon-facebook, a.icon-facebook, .nav a.icon-instagram, .nav a.icon-twitter, .icon-twitter, .icon-feed, .nav a.icon-linkedin, .icon-linkedin, .nav a.icon-vimeo-2, a.icon-vimeo-2, .nav a.icon-flickr, a.icon-flickr, .icon-phone, .nav a.icon-mail, a.icon-mail, .icon-mail, .icon-plus, .icon-checkmark, .nav a.icon-youtube, .icon-youtube, .icon-facebook, .icon-google-plus, .icon-pinterest, .icon-tumblr, .icon-instagram {
-  font-family: 'OutOfTheSandbox';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  font-size: 16px;
-}
-.icon-menu:before {
-  content: "\e000";
-}
-.icon-cart:before {
-  content: "\e001";
-}
-.icon-user:before {
-  content: "\e002";
-}
-.icon-search:before {
-  content: "\e003";
-}
-.icon-pinterest:before {
-  content: "\e004";
-}
-.icon-vimeo:before {
-  content: "\e008";
-}
-.icon-tumblr:before {
-  content: "\e009";
-}
-.icon-google-plus:before {
-  content: "\e00b";
-  color:#ffffff;
-  background-color:#DD503E;
-}
-.icon-facebook:before {
-  content: "\e007";
-  color:#ffffff;
-  background-color:#4862A3;
-}
-.icon-instagram:before {
-  content: "\e006";
-}
-.icon-twitter:before {
-  content: "\e00c";
-  color:#7CACEE;
-}
-.icon-feed:before {
-  content: "\e005";
-}
-.icon-linkedin:before {
-  content: "\e00d";
-}
-.icon-vimeo-2:before {
-  content: "\e00e";
-}
-.icon-flickr:before {
-  content: "\e00f";
-}
-.icon-phone:before {
-  content: "\e00a";
-}
-.icon-mail:before {
-  content: "\e010";
-}
-.icon-plus:before {
-  content: "\e011";
-}
-.icon-checkmark:before {
-  content: "\e012";
-}
-.icon-youtube:before {
-  content: "\e013";
-}
-
-
-
-/* #Font-Face
-================================================== */
-/*  This is the proper syntax for an @font-face file.
-    Upload your font files to Assets and then
-    copy your FontName into code below and remove
-    comment brackets */
-    
-/*  @font-face {
-      font-family: 'FontName';
-      src: url('FontName.eot');
-      src: url('FontName.eot?iefix') format('eot'),
-           url('FontName.woff') format('woff'),
-           url('FontName.ttf') format('truetype'),
-           url('FontName.svg#webfontZam02nTh') format('svg');
-      font-weight: normal;
-      font-style: normal; }
-*/
+/* Customized by osavmo.com 
+===================================================*/
 /* Add by Bob */
 .header .nav-container{ 
   background-color: #fff;
@@ -4785,3 +4368,416 @@ div.customer-container{
   border-radius: 10px;
   box-shadow: 0 0px 10px 0 #CCC;
 }
+
+
+/* #Media Queries
+================================================== */
+
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) { 
+  .collection_menu {
+    display: none;
+  }
+  h1.collection_title_tags, div.collection_title_tags {
+    border-right: 0;
+    margin-right: 0;
+    padding-right: 0;
+  }
+  .cloudzoom-lens {
+    width:140px;
+    height:120px;
+  }
+}
+
+/* Standard 960 to widescreen 1200(desktop browsers) */
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+   .nav ul li { padding: 0 7px 0 7px; }
+}
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .featured_links a span {
+    font-size: {{ settings.nav_font_size | minus: 2 }}px; 
+  }
+  .nav ul.menu li { padding: 10px 3px 10px 3px; }
+  .dropdown { left: 3px; }
+  .nav ul li .cart-button {
+    background-color: transparent;
+    padding: 0;
+    color: {{ settings.nav_color_home }} !important;
+  }
+  .header_bar .nav ul li .cart-button {
+    color: {{ settings.nav_color }} !important;
+  }
+  .nav ul li .cart-button span { display: none }
+
+  .cart_count {
+    top: -6px;
+    left: 10px;
+  }
+}
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+  #tag_filter, #sort-by, .breadcrumb_text {
+    margin-bottom: 1em !important;
+  }
+  .blog_filter { margin-top: 1em; width: 100% !important; }
+  .section_select { text-align: center; }
+  .flex-control-nav { bottom: 10px }
+  .featured_links a span {
+    font-size: {{ settings.nav_font_size | minus: 2 }}px; 
+  }
+  {% if settings.slideshow_menu == false %}
+    .homepage_slider {
+      padding-top: 0px;
+    }
+  {% endif %}
+  .or {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    padding-left: 0;
+    padding-bottom: 5px;
+  }
+  .header{ background-color: {{ settings.header_bg_color }}; }
+  .mobile_hidden { display: none !important }
+  table tr.order_summary td.label { text-align: left }
+  .index .logo a, .index .logo a:hover, .index .logo a:visited, .index .logo a:active {
+    color: {{ settings.logo_color }};
+  } 
+  .cart_count {
+    left: 8px;
+  }
+  .breadcrumb {
+    text-align: center;
+    margin-bottom: 1.5em;
+  }
+  .featured_text {
+    font-size: {{ settings.regular_font_size }}px;
+    line-height: 1.7em;
+    text-align: center;
+  }
+  div.content {
+    padding-top:0px;
+    margin-top:40px;
+  }
+  #header {
+    display: block;
+  }
+  .header {
+    position: relative;
+    margin-top: 40px;
+    text-align: center;
+  }
+  .toggle span {
+    display: block;
+  }
+  .toggle_list {
+    display: none;
+  }
+  select { 
+    width:100%; 
+  }
+  .flexslider a.action_button {
+    width: initial;
+  }
+
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"],
+  input.action_button[type="submit"], 
+  input.action_button[type="button"],
+  .sign_up {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .credits_right {
+    text-align: left;
+  }
+  .container .column.thumbnail, .container .columns.thumbnail {
+    margin-top: 1em;
+  }
+  table[style] {
+      width:auto !important;
+      max-width:100% !important;
+      overflow: hidden;
+    }
+  tr, td {
+      display:block;
+      width:99% !important;
+      max-width:99% !important;
+      padding:0px !important;
+      border-left: 0 !important;
+      border-right: 0 !important;
+    }
+  tr {
+    padding-bottom: 6px !important;
+  }
+  td {
+    padding: 4px !important;
+  }
+  .title_column {
+      float:left;
+    }
+  .container div.mobile_only {
+      display:block;
+    }
+  span.mobile_only {
+    display: inline; 
+  }
+  .price_total {
+    text-align: right;
+  }
+  .price_total_text {
+    display:block;
+  }
+  .update_subtotal, .price_total, .remove_column, .checkout_table_header {
+      display: none;
+    }
+  .mobile_right {
+      text-align: right;
+    }
+  .quick_shop {
+      display: none !important;
+    }
+  .cart_price {
+    display: block;
+    margin-bottom: 0;
+  }
+  table tr th, table tr td {
+      padding: 2px;
+    }
+  input.action_button {
+      margin-bottom: 1em !important;
+    }
+  .multiple_product_images {
+      display: none;
+    }
+  .flex-caption {
+    top: 0;
+  }
+  .flex-caption .headline {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    position: relative;
+  }
+  .flex-caption p.subtitle {
+    font-size: 1.1em;
+    line-height: 1.5em;
+    position: relative;
+  }
+  .container .blog_content {
+    padding-left: 0;
+    border: 0;
+  }
+  .columns.content_col_border{   
+    margin: 20px 0px 0px 0px;
+    padding: 0px; 
+  }
+  .breadcrumb_text{   
+    margin-bottom: 0px !important;
+  }
+
+    #cart a.action_button.edit_cart, #cart .action_button {
+      width: 80%;
+      margin: 1em auto;
+      float: none;
+    }
+    .mobile_hidden { display: none !important }
+    .cart_image { width: 50px; padding-right: 10px }
+    #cart a.edit_cart, #cart a.action_button {
+      width: 80%;
+      float: none;
+      margin: 1em auto;
+    }
+    .flex-caption .headline, .flex-caption p.subtitle{
+        font-size: 1.1em;
+        line-height: 1.1em;
+      }
+    .flex-caption p.subtitle {
+      font-size: 0.8em;
+      line-height: 1.5em;
+      margin-bottom: 1em;
+    }  
+    .flex-caption .action_button {
+      padding: 4px 15px;
+      font-size: 12px;
+    }
+    .flex-direction-nav .flex-prev {display: none;}
+    .flex-direction-nav .flex-next {display: none;}
+
+    h1, h2, h1.home, h1.blog_title, h3, h4, h5, h6, .title a { 
+        font-size: 150%;
+      }
+    h1, h1.home, h1.blog_title, .title a, h2 {
+        padding:0;
+      }
+
+    /* Mobile Slider*/
+    .homepage_slider .slides img{
+      height: auto;
+    }
+    div.mobile-search{
+      display: block;
+      position: relative;
+    }
+    div.mobile-search .search-submit{
+      top:5px;
+      right: 5px;
+    }
+    /*Search Bar*/
+    .header-search-bar input{width: 100%;}
+    html *{border-radius: none;}
+
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+     html {
+        -webkit-text-size-adjust: 100%;
+     }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  select#currencies {
+    position: relative;
+    top: 21px;
+  }
+}
+
+.social_buttons, .social_buttons a {
+  color: {{ settings.was_price_color }} !important;
+}
+.social_buttons a {
+  padding-left: 5px;
+}
+.social_buttons a:hover {
+  color: {{ settings.link_color }} !important;
+}
+
+@font-face {
+  font-family: 'OutOfTheSandbox';
+  src:url('{{ 'OutOfTheSandbox.eot' | asset_url }}');
+  src:url('{{ 'OutOfTheSandbox.eot?#iefix' | asset_url }}') format('embedded-opentype'),
+    url('{{ 'OutOfTheSandbox.woff' | asset_url }}') format('woff'),
+    url('{{ 'OutOfTheSandbox.ttf' | asset_url }}') format('truetype'),
+    url('{{ 'OutOfTheSandbox.svg#OutOfTheSandbox' | asset_url }}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+  font-family: 'OutOfTheSandbox';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-menu, .nav a.icon-cart, #header a.icon-cart, .header-top-nav a.icon-user, .nav a.icon-search, .icon-search, .nav a.icon-pinterest, a.icon-pinterest, .nav a.icon-vimeo, .nav a.icon-tumblr, .nav a.icon-google-plus, a.icon-google-plus, .nav a.icon-facebook, a.icon-facebook, .nav a.icon-instagram, .nav a.icon-twitter, .icon-twitter, .icon-feed, .nav a.icon-linkedin, .icon-linkedin, .nav a.icon-vimeo-2, a.icon-vimeo-2, .nav a.icon-flickr, a.icon-flickr, .icon-phone, .nav a.icon-mail, a.icon-mail, .icon-mail, .icon-plus, .icon-checkmark, .nav a.icon-youtube, .icon-youtube, .icon-facebook, .icon-google-plus, .icon-pinterest, .icon-tumblr, .icon-instagram {
+  font-family: 'OutOfTheSandbox';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+.icon-menu:before {
+  content: "\e000";
+}
+.icon-cart:before {
+  content: "\e001";
+}
+.icon-user:before {
+  content: "\e002";
+}
+.icon-search:before {
+  content: "\e003";
+}
+.icon-pinterest:before {
+  content: "\e004";
+}
+.icon-vimeo:before {
+  content: "\e008";
+}
+.icon-tumblr:before {
+  content: "\e009";
+}
+.icon-google-plus:before {
+  content: "\e00b";
+  color:#ffffff;
+  background-color:#DD503E;
+}
+.icon-facebook:before {
+  content: "\e007";
+  color:#ffffff;
+  background-color:#4862A3;
+}
+.icon-instagram:before {
+  content: "\e006";
+}
+.icon-twitter:before {
+  content: "\e00c";
+  color:#7CACEE;
+}
+.icon-feed:before {
+  content: "\e005";
+}
+.icon-linkedin:before {
+  content: "\e00d";
+}
+.icon-vimeo-2:before {
+  content: "\e00e";
+}
+.icon-flickr:before {
+  content: "\e00f";
+}
+.icon-phone:before {
+  content: "\e00a";
+}
+.icon-mail:before {
+  content: "\e010";
+}
+.icon-plus:before {
+  content: "\e011";
+}
+.icon-checkmark:before {
+  content: "\e012";
+}
+.icon-youtube:before {
+  content: "\e013";
+}
+
+
+
+/* #Font-Face
+================================================== */
+/*  This is the proper syntax for an @font-face file.
+    Upload your font files to Assets and then
+    copy your FontName into code below and remove
+    comment brackets */
+    
+/*  @font-face {
+      font-family: 'FontName';
+      src: url('FontName.eot');
+      src: url('FontName.eot?iefix') format('eot'),
+           url('FontName.woff') format('woff'),
+           url('FontName.ttf') format('truetype'),
+           url('FontName.svg#webfontZam02nTh') format('svg');
+      font-weight: normal;
+      font-style: normal; }
+*/
