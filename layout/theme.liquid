@@ -194,13 +194,7 @@
         </div>
         <div class="container nav-container"> 
           <div class="column logo">
-            <a href="{{ shop.url }}" title="{{ shop.name }}">
-              {% if settings.use_logo %}
-                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" data-src="{{ 'logo.png' | asset_url }}" {% if settings.use_logo_home %}data-src-home="{{ 'logo_home.png' | asset_url }}"{% endif %} />
-              {% else %}
-                {{ shop.name }}
-              {% endif %}
-            </a>
+            <a href="{{ shop.url }}" title="{{ shop.name }}">{{ shop.name }}</a>
           </div>
 <!-- Wide browser menu Starts-->
           <div class="columns nav mobile_hidden">
