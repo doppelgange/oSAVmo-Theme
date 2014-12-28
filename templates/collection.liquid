@@ -9,7 +9,7 @@
 
 {% paginate collection.products by settings.pagination_limit %}
 
-    <div class="eight columns breadcrumb_text alpha">
+    <div class="eight columns breadcrumb_text alpha mobile_hidden">
       <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
       &nbsp; / &nbsp;
       <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url"><span itemprop="title">{{ collection.title }}</span></a></span>       
@@ -156,7 +156,7 @@
      
      {% include 'pagination_top' %}
   
-     <div class="four columns breadcrumb_text alpha">
+     <div class="four columns breadcrumb_text alpha mobile_hidden">
         <!-- do not put anything here -->
      </div> 
     

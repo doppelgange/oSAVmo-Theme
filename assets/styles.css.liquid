@@ -266,7 +266,56 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
   padding-bottom: 0px;
   padding-top: 0px;
 }
+#header {
+  display: none;
+  background: #e50112;
+  border-bottom: 1px solid {{ settings.border_color }};
+  color: {{ settings.nav_color }};
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 50px;
+  z-index: 1001;
+  width: 100%;
+  opacity: 0.95;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-image: url({{ 'logo.png' | asset_url }});
+  background-size: 120px auto;
+  background-position: center -40px;
+  background-repeat: no-repeat;
+}
 
+#header a
+{
+  color:#fff;
+  display: block;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 15px;
+  font-size: 25px;
+  padding-top: 5px;
+}
+
+div#header a span {
+  display: inline;
+  padding-left: 4px;
+  position: relative;
+  top: -2px;
+}
+
+#header a.right
+{
+  left: auto;
+  right: 15px;
+  font-size: 20px;
+  padding-top: 8px;
+  top: 2px;
+}
 .nav {
   text-align:right;
 }
@@ -338,7 +387,10 @@ a:hover, a:focus { color: {{ settings.link_hover_color }}; }
   border-bottom: none;
   color: {{ settings.nav_color }};
 }
-
+#header a span{
+  color:#fff;
+  font-size: 16px;
+}
 .nav a, .nav a:visited, .nav a:active, .nav a.icon-cart span, .search-close  {
     {% if settings.nav_typeface_method == "google_webfonts" %}
       font-family: "{{ settings.nav_google_webfont_font | replace: '+', ' ' }}";
@@ -3866,7 +3918,7 @@ div.cloudzoom-ajax-loader {
     @media only screen and (max-width: 767px) {
         .container { width: 100%; }
         .container .columns,
-        .container .column { margin: 2px 0; }
+        .container .column { margin: 0; }
 
         .container .one.column,
         .container .one.columns,
@@ -4252,11 +4304,16 @@ ul.product-category{
 }
 
 
-/*Collection and product Page - Right part */
+/*Collection and product Page */
 .fix-margin {
   margin-left:300px;
   margin-right:0px;
 }
+#prev, #next{
+    display:none;
+  }
+
+
 
 /*Page Border Except index page*/
 .sidebar_col_border,.content_col_border,.pro_page_border,.page_border {
@@ -4367,54 +4424,15 @@ div.customer-container{
 
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
-  .mobile_hidden { display: none !important }
-  /* Mobile Header top bar*/
-  #header {
-    display: block;
-    background: #e50112;
-    color:#FFF;
-    width: 100%;
-    opacity: 0.95;
-    z-index: 1001;
-  }
-  #header .mobile-logo{
-    text-indent: -9999px;
-    margin: 0 0 0 10px;
-    padding: 0px;
-    width: 120px;
-    background-image: url({{ 'logo.png' | asset_url }});
-    background-size: 120px auto;
-    background-position: 0 -40px;
-    background-repeat: no-repeat;
-    display:inline-block;
-  }
-
-  #header a
-  {
-    color:#fff;
-    height: 39px;
-    font-size: 16px;
-    line-height:40px;
-  }
-
-  #header .icon-cart{
-    padding: 15px 10px 0px 10px;
-    height: auto;
-  }
-  #header .cart_count {
-    left: 24px;
-    top: 4px;
-  }
-  #header .login{
-    float: right;
-    text-decoration: underline;
-  }
-  
   #tag_filter, #sort-by, .breadcrumb_text {
-    margin-bottom: 1em !important;
+    margin-right: 5px !important;
+    width:80%;
   }
   .blog_filter { margin-top: 1em; width: 100% !important; }
-  .section_select { text-align: center; }
+  .section_select { 
+   text-align: center;
+   margin-bottom: 5px !important;
+   margin-left: 5px !important;}
   .flex-control-nav { bottom: 10px }
   .featured_links a span {
     font-size: {{ settings.nav_font_size | minus: 2 }}px; 
@@ -4432,11 +4450,14 @@ div.customer-container{
     padding-bottom: 5px;
   }
   .header{ background-color: {{ settings.header_bg_color }}; }
+  .mobile_hidden { display: none !important }
   table tr.order_summary td.label { text-align: left }
   .index .logo a, .index .logo a:hover, .index .logo a:visited, .index .logo a:active {
     color: {{ settings.logo_color }};
   } 
-
+  .cart_count {
+    left: 8px;
+  }
   .breadcrumb {
     text-align: center;
     margin-bottom: 1.5em;
@@ -4448,9 +4469,11 @@ div.customer-container{
   }
   div.content {
     padding-top:0px;
-    margin-top:42px;
+    margin-top:40px;
   }
-  
+  #header {
+    display: block;
+  }
   .header {
     position: relative;
     margin-top: 40px;
@@ -4465,12 +4488,8 @@ div.customer-container{
   select { 
     width:100%; 
   }
-
   .flexslider a.action_button {
     width: initial;
-  }
-  .flexslider img{
-    border-radius: 0px;
   }
 
   input[type="submit"],
@@ -4487,7 +4506,7 @@ div.customer-container{
     text-align: left;
   }
   .container .column.thumbnail, .container .columns.thumbnail {
-    margin-top:2px;
+    margin-top: 1em;
   }
   table[style] {
       width:auto !important;
@@ -4562,20 +4581,36 @@ div.customer-container{
     padding-left: 0;
     border: 0;
   }
+  /* Mobile collection page*/
   .columns.content_col_border{   
-    margin: 20px 0px 0px 0px;
     padding: 0px; 
+    border-radius: 0px;
   }
-  .breadcrumb_text{   
-    margin-bottom: 0px !important;
+  .paginate {
+   text-align: center;
+   margin:5px 0px;
+  }
+  
+  #prev, #next{
+    display:inline-block;
+    width:48%;
+    border-radius: 0px;
+  }
+  
+  .paginate_top span{
+   padding:0px;
+   margin:0px;
   }
 
+
+   /* Mobile collection page end*/
+  
     #cart a.action_button.edit_cart, #cart .action_button {
       width: 80%;
       margin: 1em auto;
       float: none;
     }
-    
+    .mobile_hidden { display: none !important }
     .cart_image { width: 50px; padding-right: 10px }
     #cart a.edit_cart, #cart a.action_button {
       width: 80%;
@@ -4597,7 +4632,7 @@ div.customer-container{
     }
     .flex-direction-nav .flex-prev {display: none;}
     .flex-direction-nav .flex-next {display: none;}
-    .
+
     h1, h2, h1.home, h1.blog_title, h3, h4, h5, h6, .title a { 
         font-size: 150%;
       }
@@ -4609,6 +4644,10 @@ div.customer-container{
     .homepage_slider .slides img{
       height: auto;
     }
+    .collection-header-slide .slides img{
+      height:100px;
+      border-radius:0px;
+    }
     div.mobile-search{
       display: block;
       position: relative;
@@ -4617,13 +4656,10 @@ div.customer-container{
       top:5px;
       right: 5px;
     }
+  
     /*Search Bar*/
     .header-search-bar input{width: 100%;}
-    /*sction*/
-    .panel-header{
-      font-size:1em;
-      border-radius: 0px;
-    }
+    html *{border-radius: none;}
 
 }
 

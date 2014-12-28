@@ -3,30 +3,34 @@
   <div class="paginate paginate_top">
   
     {% if paginate.previous %}
-    <span class="prev">{{ '<' | link_to: paginate.previous.url }}</span>
+    <span class="prev mobile_hidden">{{ '<' | link_to: paginate.previous.url }}</span>
+    <span id="prev">{{ '< Previous Page' | link_to: paginate.previous.url }}</span> 
     {% else %}
-      <span class="prev disabled"><a href="#" onclick="return false;">{{ '<'}}</a></span>
+      <span class="prev disabled mobile_hidden"><a href="#" onclick="return false;">{{ '<'}}</a></span>
+      <span class="disabled" id="prev"><a href="#" onclick="return false;">{{ '< Previous Page'}}</a></span>
     {% endif %}
     
     {% for part in paginate.parts %}
       {% if part.is_link %}
-        <span>{{ part.title | link_to: part.url }}</span>
+        <span class="mobile_hidden">{{ part.title | link_to: part.url }}</span>
       {% else %}
         {% if part.title == '&hellip;' %}
-        <span class="ellipsis"><a href="#" onclick="return false;">{{ part.title }}</a></span>
+        <span class="ellipsis mobile_hidden"><a href="#" onclick="return false;">{{ part.title }}</a></span>
         {% else %}
-        <span class="current">{{ part.title | link_to: part.url }}</span>
+        <span class="current mobile_hidden">{{ part.title | link_to: part.url }}</span>
         {% endif %}
       {% endif %}
     {% endfor %}     
 
     {% if paginate.next %}
-      <span class="next">{{ '>' | link_to: paginate.next.url }}</span>
+      <span class="next mobile_hidden">{{ '>' | link_to: paginate.next.url }}</span>
+      <span id="next">{{ 'Next Page >' | link_to: paginate.next.url }}</span>
     {% else %}
-      <span class="next disabled"><a href="#" onclick="return false;">{{ '>'}}</a></span>
+      <span class="next disabled mobile_hidden"><a href="#" onclick="return false;">{{ '>'}}</a></span>
+      <span class="disabled" id="next"><a href="#" onclick="return false;">{{ 'Next Page >'}}</a></span>
     {% endif %}    
   
-  <p class="paginate_num_showing paginate_num_showing_top">
+  <p class="paginate_num_showing paginate_num_showing_top mobile_hidden">
   {{ 'layout.pagination.numbering' | t }} {{ paginate.current_offset | plus: 1 }} - {% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} {{ 'layout.pagination.numbering_of' | t }} {{ paginate.items }}
   </p>
   </div>
