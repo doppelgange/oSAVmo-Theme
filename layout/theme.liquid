@@ -64,16 +64,28 @@
   <body class="{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
     <div>
       <div id="header" class="mm-fixed-top hidden">
-        <a href="#nav" class="icon-menu"></a>
-        <a href="{{ shop.url }}" class="mobile-logo">{{ shop.name }}</a>
-        <a href="#cart" class="icon-cart right">{% if cart.item_count > 0 %}<div class="cart_count">{{ cart.item_count }}</div>{% endif %} <span>{{ 'layout.general.cart' | t }}</span></a>
+        <a href="#nav" class="icon-menu"> <!--{{ 'layout.general.menu' | t }}--> </a>
+        <a href="{{ shop.url }}" class="mobile-logo"> <!--{{ shop.name }} --></a>
+        <a href="#" class="icon-search"> </a>
         {% if shop.customer_accounts_enabled %}
           {% if customer %}
-              <a href="/account" class="login">{{ customer.name }}</a>
+              <a href="/account" class="icon-user"><!--{{ customer.name }} --></a>
           {% else %}
-              <a href="/account/login" class="login">Login</a>
+              <a href="/account/login" class="icon-user"><!--Login--></a>
           {% endif %}
         {% endif %}
+        <a href="#cart" class="icon-cart">{% if cart.item_count > 0 %}<div class="cart_count">{{ cart.item_count }}</div>{% endif %} 
+        <!--<span>{{ 'layout.general.cart' | t }}</span>-->
+        </a>
+        <div class="mobile-search hidden">
+        <form action="/search" class="header-search-bar">
+          {% if settings.search_option != 'everything' %}
+            <input type="hidden" name="type" value="product" />
+          {% endif %}
+          <span class="icon-search search-submit"></span>
+          <input type="text" name="q" placeholder="What are you looking for?" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
+        </form>
+      </div>
       </div>
 
       <div class="hidden">

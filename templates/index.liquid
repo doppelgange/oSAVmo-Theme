@@ -1,15 +1,6 @@
 {% if settings.slideshow_enabled %}
   {% if settings.slideshow_width_narrow %}
     <div class="container main content">
-      <div class="mobile-search hidden">
-        <form action="/search" class="header-search-bar">
-          {% if settings.search_option != 'everything' %}
-            <input type="hidden" name="type" value="product" />
-          {% endif %}
-          <span class="icon-search search-submit"></span>
-          <input type="text" name="q" placeholder="What are you looking for?" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
-        </form>
-      </div>
   {% else %}
     </div>
   {% endif %}

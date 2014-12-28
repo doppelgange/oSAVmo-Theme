@@ -43,7 +43,7 @@ if($(".sidebar").length && $(".content_col_border").length && ($(".sidebar").out
 $('.product-category .product-sub-category').hover(function(){},function(){
     $(this).parent().removeClass('hover');
   });
-//Ends: Home page category list 
+//End: Home page category list 
 
 //Start: Menu list 
   $('.menu .top-link').hover(function(){
@@ -57,7 +57,11 @@ $('.product-category .product-sub-category').hover(function(){},function(){
   });
 //Ends: Home page category list 
 
-
+//Start:Mobile toggle search bar
+$("#header .icon-search").click(function(){
+  $("#header .mobile-search").toggleClass('hidden');
+});
+//End:Mobile toggle search bar
 
 
   $(".thumbnail img, .product_slider img, .cart_page_image img").unveil(200);
