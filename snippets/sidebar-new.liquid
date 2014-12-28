@@ -16,14 +16,11 @@ $(window).scroll(function(){
 {% assign collection=collections['all']%}
 {% endif%}
 <div class="four columns sidebar sidebar_col_border">
-    <h4 class="toggle">{{ collection.title }}</h4>
-    <script type="text/javascript">
-    console.log("collection.title is {{collection.title}}");
-    </script>
+    <h4 class="toggle">{{ collection.title | upcase }}</h4>
     <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
     
    <!-- new siderbar method read from types not complete yet-->   
-       {% comment %}  
+     {% comment %}  
      {% if collection.all_types %}
           {% if product_type == collection.title %}
         {% for product_type in shop.collection.all_types %}
@@ -37,7 +34,7 @@ $(window).scroll(function(){
        {% endif %}
 
      {% endif %}
-         {% endcomment %}  
+    {% endcomment %}  
   
 
   <!-- new siderbar method read from tags-->  
@@ -51,7 +48,7 @@ $(window).scroll(function(){
           {% endif%}        
         {% endfor %}
          {% unless nofilter == true %}
-           <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
+           <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag | upcase }}</a></li>
          {%endunless%}
       {% endfor %}
       
