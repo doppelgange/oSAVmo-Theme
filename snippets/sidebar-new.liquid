@@ -15,11 +15,8 @@ $(window).scroll(function(){
 {% if collection == Emptydorp %}
 {% assign collection=collections['all']%}
 {% endif%}
-<div class="four columns sidebar sidebar_col_border">
-
+<div class="four columns sidebar sidebar_col_border mobile_hidden">
     <h4 class="toggle">{{ collection.title | upcase }}</h4>
-
-
     <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
     
    <!-- new siderbar method read from types not complete yet-->   
