@@ -67,6 +67,13 @@
         <a href="#nav" class="icon-menu"></a>
         <a href="{{ shop.url }}" class="mobile-logo">{{ shop.name }}</a>
         <a href="#cart" class="icon-cart right">{% if cart.item_count > 0 %}<div class="cart_count">{{ cart.item_count }}</div>{% endif %} <span>{{ 'layout.general.cart' | t }}</span></a>
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+              <a href="/account" class="login">{{ customer.name }}</a>
+          {% else %}
+              <a href="/account/login" class="login">Login</a>
+          {% endif %}
+        {% endif %}
       </div>
 
       <div class="hidden">
@@ -287,7 +294,7 @@
       {% endif %}
 
       </div>
-      <div class="sub-footer-shipping">
+      <div class="sub-footer-shipping mobile_hidden">
       <div class="container">
         <div class="one-third column sub-footer-shipping-item">
           <img src="{{'footer-express.png'| asset_url }}" />
