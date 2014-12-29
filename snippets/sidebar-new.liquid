@@ -1,23 +1,10 @@
-<script>
-$(function(){
-$(window).scroll(function(){
-    if($(window).scrollTop()>=($(".content").height()-$(".header").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="fixed"){    
-        $(".sidebar").css({"position":"absolute","top":$(".header").height()+10+"px"});
-    }
-    if($(window).scrollTop()<($(".content").height()-$(".header").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="absolute"){    
-        $(".sidebar").css({"position":"fixed","top":$(".header").height()+10+"px"});
-    }
-});
-});
-</script>
-
 <!-- If No collection can be find, use all collection-->
 {% if collection == Emptydorp %}
 {% assign collection=collections['all']%}
 {% endif%}
 <div class="four columns sidebar sidebar_col_border mobile_hidden">
-    <h4 class="toggle">{{ collection.title | upcase }}</h4>
-    <ul style="list-style-type:none; margin-left:0;" class="toggle_list">
+    <h4>{{ collection.title }}</h4>
+    <ul>
     
    <!-- new siderbar method read from types not complete yet-->   
      {% comment %}  
@@ -48,7 +35,7 @@ $(window).scroll(function(){
           {% endif%}        
         {% endfor %}
          {% unless nofilter == true %}
-           <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag | upcase }}</a></li>
+           <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
          {%endunless%}
       {% endfor %}
       

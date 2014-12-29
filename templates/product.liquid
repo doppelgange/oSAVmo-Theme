@@ -2,7 +2,7 @@
 {% if settings.product_sidebar %}
 {% include 'sidebar-new' %}
   
-<div class="twelve columns pro_page_border fix-margin" itemscope itemtype="http://data-vocabulary.org/Product">
+<div class="twelve columns content_col_border fix-margin" itemscope itemtype="http://data-vocabulary.org/Product">
    <div class="clearfix breadcrumb mobile_hidden">
     <div class="right">
       {% if collection.previous_product %}
@@ -36,8 +36,18 @@
       {{ product.title }}
     </div>
   </div>
-  
-  
+   
+  {% comment %}
+  <div> {% if collection %}            
+      {% if collection.previous_product %}
+         {{ '« Previous Product' | link_to: collection.previous_product }}
+      {% endif %}
+      {% if collection.next_product %}
+        {% if collection.previous_product %} | {% endif %}
+        {{ 'Next Product »' | link_to: collection.next_product }}
+      {% endif %}
+   {% endif %}</div>
+   {% endcomment %}
     <div id="product-{{ product.id }}">
 {% else %}
   <div class="sixteen columns" itemscope itemtype="http://data-vocabulary.org/Product">

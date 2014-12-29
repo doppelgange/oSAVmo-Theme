@@ -1,0 +1,66 @@
+
+  <div class="four columns sidebar sidebar_col_border mobile_hidden">
+    
+    <h4>Help Center</h4>
+    <ul>
+    {% for link in linklists.footer.links %}
+        <li>
+          <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title }}</a>
+          
+          {% if linklists[link.handle] != empty %}
+            {% assign display_sublinks = false %}
+          
+            {% for link in linklists[link.handle].links %}
+              {% if link.active %}
+                {% assign display_sublinks = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% if display_sublinks or link.active %}
+              <ul class="toggle_list">
+              {% for link in linklists[link.handle].links %}
+                <li>
+                  <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endif %}
+        </li>     
+    {% endfor%}   
+    
+
+    {% for link in linklists.company.links %}
+        <li>
+          <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title }}</a>
+          
+          {% if linklists[link.handle] != empty %}
+            {% assign display_sublinks = false %}
+          
+            {% for link in linklists[link.handle].links %}
+              {% if link.active %}
+                {% assign display_sublinks = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% if display_sublinks or link.active %}
+              <ul class="toggle_list">
+              {% for link in linklists[link.handle].links %}
+                <li>
+                  <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endif %}
+        </li>     
+    {% endfor%}   
+    </ul>
+   </div> 
+    
+    
+  <div class="twelve columns content_col_border fix-margin"> 
+    <h5 style="font-weight:bold;text-align:center">{{ page.title }}</h5>
+    {{ page.content }}
+  </div>
+  
