@@ -4,10 +4,10 @@
   
     {% if paginate.previous %}
     <span class="prev mobile_hidden">{{ '<' | link_to: paginate.previous.url }}</span>
-    <span id="prev">{{ '< Previous Page' | link_to: paginate.previous.url }}</span> 
+    <span id="prev">{{'< Previous Page' | link_to: paginate.previous.url }}</span> 
     {% else %}
       <span class="prev disabled mobile_hidden"><a href="#" onclick="return false;">{{ '<'}}</a></span>
-      <span class="disabled" id="prev"><a href="#" onclick="return false;">{{ '< Previous Page'}}</a></span>
+      <span class="disabled" id="prev"><a href="#" onclick="return false;">{{'< Previous Page'}}</a></span>
     {% endif %}
     
     {% for part in paginate.parts %}
@@ -24,10 +24,10 @@
 
     {% if paginate.next %}
       <span class="next mobile_hidden">{{ '>' | link_to: paginate.next.url }}</span>
-      <span id="next">{{ 'Next Page >' | link_to: paginate.next.url }}</span>
+      <span id="next">{{'Next Page >' | link_to: paginate.next.url }}</span>
     {% else %}
       <span class="next disabled mobile_hidden"><a href="#" onclick="return false;">{{ '>'}}</a></span>
-      <span class="disabled" id="next"><a href="#" onclick="return false;">{{ 'Next Page >'}}</a></span>
+      <span class="disabled" id="next"><a href="#" onclick="return false;">{{'Next Page >'}}</a></span>
     {% endif %}    
   
   <p class="paginate_num_showing paginate_num_showing_top mobile_hidden">
