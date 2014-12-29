@@ -20,8 +20,7 @@
           <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ collection.current_type | handleize }}" title="{{ collection.current_type | escape }}" itemprop="url"><span itemprop="title">{{ collection.current_type }}</span></a></span>
       {% endif %}
       {% endcomment %}
-      
-      
+       
       {% if current_tags %}
         &nbsp; / &nbsp;
         {% for tag in current_tags %}
@@ -33,12 +32,11 @@
           {% endif%}        
         {% endfor %}
          {% unless nofilter == true %}
-      <span><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></span>
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}"><span itemprop="title">{{ tag }}</span></a></span>
          {%endunless%}
       {% endfor %}
       {% endif %}
       
-    
       {% if paginate.pages != 0 %}      
         &nbsp; / &nbsp; {{ 'general.breadcrumbs.page' | t: current_page: paginate.current_page, pages: paginate.pages }}
       {% endif %}
@@ -163,20 +161,32 @@
      {% if collection.handle != blank and collection.products_count > 0 %}
       {% if settings.collection_tags %}        
         <div class="four columns section_select filter_margin_bottom {% if paginate.pages < 2 %}filter_margin_top {% endif %}{% unless settings.collection_sort %}offset-by-four omega{% endunless %}">
-          {% for tag in collection.all_tags %}
+          {% for tag in collection.all_tags %}        
             {% if forloop.first %}
               <label for="tag_filter" class="inline">{{ 'collections.sorting.filter' | t }}: </label> 
               <select name="tag_filter" id="tag_filter">
                 <option {% unless current_tags %}selected="selected"{% endunless %} value="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}">{{ 'collections.general.all_collection_title' | t: title: collection.title }}</option>
             {% endif %}          
               
+            {% assign nofilter = false %}
+          {% assign nofiltertags = settings.no_filter_tag | split:','%}
+            {% for nofiltertag in nofiltertags %}
+              {% if tag == nofiltertag %}
+                 {% assign nofilter = true %}
+              {% endif%}        
+            {% endfor %}
+            {% unless nofilter == true %} 
+                
             {% unless tag contains 'meta-related-collection-' %}
               <option {% if current_tags contains tag %}selected="selected"{% endif %} value="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}">{{ tag }}</option>
             {% endunless %}
             
+            {% endunless %}
+                
             {% if forloop.last %}
               </select>
             {% endif %}
+          
           {% endfor %}
         </div>
       {% endif %}
