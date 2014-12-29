@@ -3,8 +3,8 @@
 {% include 'sidebar-new' %}
   
 <div class="twelve columns pro_page_border fix-margin" itemscope itemtype="http://data-vocabulary.org/Product">
-   <div class="clearfix breadcrumb">
-    <div class="right mobile_hidden">
+   <div class="clearfix breadcrumb mobile_hidden">
+    <div class="right">
       {% if collection.previous_product %}
         {% capture prev_url %}{{ collection.previous_product }}{% endcapture %}
         {{ 'products.general.previous_product_html' | t | link_to: prev_url }}
@@ -86,17 +86,22 @@
 
        {% if settings.product_description_position == "top" %}
          {% if product.description != blank %}
+         <hr />
           <div class="description" itemprop="description">
+            <span class="label">{{ 'products.product.description' | t }}:</span>
             {{ product.description | split: '<!-- split -->' | first }}
           </div>
-        {% endif %}
+       {% endif %}
        {% endif %}
 
        {% include 'product-form' with 'product' %}
-
+       
+       
        {% if settings.product_description_position == "bottom" %}
          {% if product.description != blank %}
+          <hr />
           <div class="description" itemprop="description">
+           <span class="label">{{ 'products.product.description' | t }}:</span>
            {{ product.description | split: '<!-- split -->' | first }}
           </div>
          {% endif %}
