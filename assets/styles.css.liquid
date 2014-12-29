@@ -4317,7 +4317,7 @@ color:#d1bca1;
 
 
 /*Style for customer template*/
-.customer-welcome{
+.customer-page-title{
   font-size: 25px;
   line-height: 60px;
 }
@@ -4424,6 +4424,50 @@ div.customer-container{
     left: 3.5em;
   top: -0.5em;
   }
+
+  /* For customer account*/
+  select#currencies{
+    border-radius: 0px;
+    height: 40px;
+  }
+  .header{ background-color: {{ settings.header_bg_color }}; }
+  .header {
+    position: relative;
+    /* margin-top: 40px;*/
+    text-align: center;
+  }
+  .header-top-nav{
+    height: 40px;
+    overflow: hidden;
+  }
+  .header-top-nav li a, .header-top-nav li{
+    line-height: 40px;
+  }
+  .logo{
+    width: 40%;max-width:180px;
+    background-size: 100% auto;
+  }
+  .customer-page-title{
+    font-size: 1.5em;
+    line-height: 1em;
+    vertical-align: middle;
+    width: 50%;
+  }
+  .header .nav-container{
+    border-radius: 0px;
+  }
+  .logo a {line-height: normal;}
+
+
+  /* Mobile Header top bar */
+
+  /* Mobile content*/
+  div.customer-container{
+    width: 100%;
+    border-radius:0px;
+  }
+
+  #customer .columns,.customer-container .columns{width:90%;}
    /*Footer*/
   .backpanel-inner{
     display: none;
@@ -4465,7 +4509,6 @@ div.customer-container{
     padding-left: 0;
     padding-bottom: 5px;
   }
-  .header{ background-color: {{ settings.header_bg_color }}; }
   table tr.order_summary td.label { text-align: left }
   .index .logo a, .index .logo a:hover, .index .logo a:visited, .index .logo a:active {
     color: {{ settings.logo_color }};
@@ -4484,11 +4527,7 @@ div.customer-container{
     padding-top:0px;
     margin-top:40px;
   }
-  .header {
-    position: relative;
-    margin-top: 40px;
-    text-align: center;
-  }
+
   .toggle span {
     display: block;
   }
@@ -4515,10 +4554,12 @@ div.customer-container{
     width: 100%;
     border-radius: 0px;
   }
+  /*
   input[type="email"]{ 
     width:90%;
     border-radius: 0px;
   }
+  */
 
   .credits_right {
     text-align: left;
