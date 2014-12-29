@@ -1,5 +1,5 @@
+{% if product.featured_image.size > 0 %}
 {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
-
 <div class="flexslider product_gallery {% if product-images == blank %}product_slider{% endif %}" id="product-{{ product.id }}-gallery">
   <ul class="slides">
     {% for image in product.images %}
@@ -30,3 +30,13 @@
     {% endfor %}
   </ul>
 </div>
+{% else%}
+{% assign featured_image = 'no-image.png'|asset_url %}
+<ul class="slides">
+  <li data-thumb="{{ 'no-image.png'|asset_url }}">
+      <a href="#" class="fancybox" data-fancybox-group="{{ product.id }}">
+        <img src="{{ 'no-image.png'|asset_url}}" data-src="{{ 'no-image.png'|asset_url }}" data-src-retina="{{ 'no-image.png'|asset_url }}"  data-index="1" data-image-id="0" data-cloudzoom="zoomImage: '{{ 'no-image.png'|asset_url }}', tintColor: '{{ settings.shop_bg_color }}', zoomPosition: 'inside', zoomOffsetX: 0, hoverIntentDelay: 100, touchStartDelay: 250" class="cloudzoom {% if featured_image.id == image.id %}featured_image{% endif %}" />
+      </a>
+  </li>
+  </ul>
+{% endif%}
