@@ -1,5 +1,6 @@
+$(function() {
+
 // Sidebar Scroll
-$(function(){
 $(window).scroll(function(){
     if($(window).scrollTop()>=($(".content").height()-$(".header").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="fixed"){    
         $(".sidebar").css({"position":"absolute","top":$(".header").height()+10+"px"});
@@ -8,10 +9,8 @@ $(window).scroll(function(){
         $(".sidebar").css({"position":"fixed","top":$(".header").height()+10+"px"});
     }
 });
-});
 // Sidebar Scroll End
 
-$(function() {
 
 //Apply same height for mobile customer page
 function setCustomerLogoHeight(){
