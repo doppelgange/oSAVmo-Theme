@@ -352,14 +352,13 @@
               <ul class="footer_menu">
                 {% for link in linklists[settings.support_linklist].links %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
-                {% endfor %}          
+                {% endfor %}
+             </ul>
             {% endif %}
              {% if settings.social_icons_footer %}
-               <li></li>
-               <li>FOLLOW US ON</li>
-          
+
                <ul class="social_icons">
-                  
+                <li>FOLLOW US ON</li> 
               {% if settings.twitter_link != '' %}
                 <li><a href="{{ settings.twitter_link }}" title="{{ shop.name }} on Twitter" rel="me" target="_blank" class="icon-twitter"></a></li>
               {% endif %}
@@ -405,7 +404,7 @@
               {% endif %}
             </ul>
             {% endif %}
-           </ul>     
+   
                
           </div>
 
@@ -425,8 +424,8 @@
              <p>Phone (04) 5892501<br />
              Monday - Friday: 9:00 am - 5:00 pm</p>
              <h5 class="title">Address</h5>
-             <p>5 Sydney Street, Petone<br />
-               Wellington<br />New Zealand
+             <p>5 Sydney Street, Petone<br class="mobile_hidden">
+               Wellington<br class="mobile_hidden"> New Zealand
              </p>
              
           </div>
