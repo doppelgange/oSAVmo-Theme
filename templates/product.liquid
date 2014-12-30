@@ -106,16 +106,6 @@
 
        {% include 'product-form' with 'product' %}
        
-       
-       {% if settings.product_description_position == "bottom" %}
-         {% if product.description != blank %}
-          <hr />
-          <div class="description" itemprop="description">
-           <span class="label">{{ 'products.product.description' | t }}:</span>
-           {{ product.description | split: '<!-- split -->' | first }}
-          </div>
-         {% endif %}
-       {% endif %}
 
       {% if settings.display_collections or settings.display_tags or settings.display_type %}
        <hr />
@@ -168,20 +158,22 @@
     {% endif %}
   </div>
 
-  {% if product.description contains "<!-- split -->"  %}
-    <br class="clear" />
-    <div class="section clearfix">
-      <div class="description">
-        {{ product.description | split: '<!-- split -->' | last }}
-      </div>
-    </div>
-  {% endif %}
+
       
       <!-- Product Reviews Starts -->
       <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
       <!-- Product Reviews Ends -->
       
-      
+       {% if settings.product_description_position == "bottom" %}
+       {% unless product.description == '<p></p>' or product.description == blank %}
+          <div class="description" itemprop="description">
+           <h4 class="title">{{ 'products.product.description' | t }}</h4>
+            <div class="section clearfix">
+              {{ product.description }}
+            </div>  
+          </div>    
+         {% endunless %}
+       {% endif %}   
       
   </div>
 
