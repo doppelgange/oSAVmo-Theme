@@ -1,6 +1,6 @@
 $(function() {
 
-// Sidebar Scroll
+// Start: Sidebar Scroll
 $(window).scroll(function(){
     if($(window).scrollTop()>=($(".content").height()-$(".header").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="fixed"){    
         $(".sidebar").css({"position":"absolute","top":$(".header").height()+10+"px"});
@@ -9,7 +9,7 @@ $(window).scroll(function(){
         $(".sidebar").css({"position":"fixed","top":$(".header").height()+10+"px"});
     }
 });
-// Sidebar Scroll End
+// End: Sidebar Scroll
 
 
 //Apply same height for mobile customer page
@@ -38,7 +38,6 @@ function switchPanel(name){
     listHover(i)();
   }
 }
-
 switchPanel("promotion");
 switchPanel("feature");
 //End: Promotion List - mouse over header to show the content in main page
@@ -66,17 +65,17 @@ $('.product-category .product-sub-category').hover(function(){},function(){
   });
 //End: Home page category list 
 
-//Start: Menu list 
+//Start: Menu list Set top
   $('.menu .top-link').hover(function(){
     var menuItem = $(this);
     var submenu = $(this).siblings('.dropdown');
     var menuItemPos = menuItem.position();
     submenu.css({
-      top: menuItem.innerHeight(),
+      top: menuItem.parents('li').outerHeight(),
       left: menuItemPos.left
     });
   });
-//Ends: Home page category list 
+//End: Menu list Set top
 
 //Start:Mobile toggle search bar
 $("#header .icon-search").click(function(){

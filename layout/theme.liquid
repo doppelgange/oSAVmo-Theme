@@ -177,9 +177,6 @@
                   <a href="{{ item.url }}">
                     <div class="cart_image">
                       <img src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
-                      <script type="text/javascript">
-                      console.log("{{ item | img_url: 'medium' }}");
-                      </script>
                     </div>
                     <div><strong>{{ item.quantity }} x</strong> {{ item.title }}</div>
                     <strong class="price">{{ item.price | money }}</strong>
