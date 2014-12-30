@@ -99,9 +99,28 @@
                   <ul>
                     {% for link in linklists[link.handle].links %}
                       {% if linklists[link.handle] == empty %}
-                        <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
-                      {% else %}
-                      <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a> 
+                        <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                          {% if collections[link.handle].all_tags != empty %}
+                           <ul>
+                              {% for tag in collections[link.handle].all_tags %}
+                              {% assign nofilter = false %}
+                              {% assign nofiltertags = settings.no_filter_tag | split:','%}
+                              {% for nofiltertag in nofiltertags %}
+                              {% if tag == nofiltertag %}
+                              {% assign nofilter = true %}
+                              {% endif%}        
+                              {% endfor %}
+                       
+                              {% unless nofilter == true %}
+                              <li{% if link.active %}class="Selected"{% endif %}><a href="/collections/{% if collections[link.handle].handle != blank %}{{ collections[link.handle].handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
+                              {%endunless%}
+                             {% endfor %}
+                            </ul>
+                          {% endif %}
+                          
+                         </li>                     
+                        {% else %}
+                        <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a> 
                         <ul>
                           {% for link in linklists[link.handle].links %}                        
                             <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
@@ -402,9 +421,13 @@
           </div>
           
            <div class="four columns">
-             <h5 class="title"><a href="/pages/contact-us">Contact Us</a></h5>
-             <p>Customer Service hours:<br />
-             MON - FRI : 9:00 AM - 5:00 AM</p>
+             <h5 class="title">Customer Service</h5>
+             <p>Phone (04) 5892501<br />
+             Monday - Friday: 9:00 am - 5:00 pm</p>
+             <h5 class="title">Address</h5>
+             <p>5 Sydney Street, Petone<br />
+               Wellington<br />New Zealand
+             </p>
              
           </div>
 
