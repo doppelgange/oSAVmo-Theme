@@ -2,7 +2,6 @@
 {% capture customer_page_title%}{{ 'customer.login.title' | t }}{% endcapture %}
 <div class="clearfix" id="customer">  
   <div class="six offset-by-five columns" id="login_form">
-    <br class="clear" />
     {% form 'customer_login' %}
       {{ form.errors | default_errors }}
 
