@@ -346,7 +346,7 @@
       </div>
       <div class="sub-footer">
         <div class="container">
-          <div class="four columns">
+          <div class="four columns mobile_hidden">
             {% if settings.support_linklist != blank %}
               <h5 class="title">{{ linklists[settings.support_linklist].title }}</h5>
               <ul class="footer_menu">
@@ -408,7 +408,7 @@
                
           </div>
 
-          <div class="four columns">
+          <div class="four columns mobile_hidden">
             {% if settings.company_linklist != blank %}
               <h5 class="title">{{ linklists[settings.company_linklist].title }}</h5>
               <ul class="footer_menu">
@@ -419,7 +419,7 @@
             {% endif %}
           </div>
           
-           <div class="four columns">
+           <div class="four columns mobile_hidden">
              <h5 class="title">Customer Service</h5>
              <p>Phone (04) 5892501<br />
              Monday - Friday: 9:00 am - 5:00 pm</p>
@@ -429,8 +429,12 @@
              </p>
              
           </div>
-
-          <div class="four columns">
+          
+           <div class="four columns hidden" id="mobile_helpcenter">
+             <a href="/pages/contact-us"><h5 class="title">Help Center</h5></a>   
+           </div>
+          
+          <div class="four columns mobile_hidden">
             {% if settings.newsletter_enabled %}
               <h5 class="title">{{ 'general.newsletter_form.title' | t }}</h5>
               <p>{{ 'general.newsletter_form.description' | t }}</p>
@@ -445,7 +449,7 @@
                 {% include 'currencies-switcher' %}
               {% endif %}
             </p>
-          </div>
+           </div>
         </div>
       </div> 
     

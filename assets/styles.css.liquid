@@ -1806,7 +1806,7 @@ div.hidden { display: none; }
     padding-right: 10px;
     color: {{ settings.sub_footer_text_color }};
   }
-  .sub-footer .social_icons li:first-child {
+  .social_icons li:first-child {
     display: block;
   }
 
@@ -4461,7 +4461,8 @@ div.customer-container{
   /* For customer account*/
   select#currencies{
     border-radius: 0px;
-    height: 40px;
+    width: 30%;
+    display: inline-block;
   }
   .header{ background-color: {{ settings.header_bg_color }}; }
   .header {
@@ -4501,7 +4502,9 @@ div.customer-container{
   }
 
   #login_form,#customer_detail,#customer_orders h4,#create-customer{width:90%; padding: 0px 5%; padding-top: 0px;}
-   /*Footer*/
+  
+  
+  /*Footer*/
   .backpanel-inner{
     display: none;
   }
@@ -4514,8 +4517,12 @@ div.customer-container{
   }
   
   .sub-footer li:last-child::after{
-    content: ":";
+    content: " ";
   }
+ .social_icons li:first-child {
+    display: inline;
+  }
+
   .social_icons li::after{
     content: " ";
   }
@@ -4534,7 +4541,18 @@ div.customer-container{
     padding:0px;
 
   }
-  /*Footer*/
+  
+  #mobile_helpcenter{
+  display: inline;
+  margin: 5px 0px 5px 0px;
+  padding-bottom: 5px;
+  border-bottom: solid 1px;
+  }
+  
+
+  
+  /*Footer end*/
+  
   #tag_filter, #sort-by, .breadcrumb_text {
     margin-right: 5px !important;
     width:80%;
@@ -4615,13 +4633,26 @@ div.customer-container{
     width: 100%;
     border-radius: 0px;
   }
-  /*
-  input[type="email"]{ 
-    width:90%;
+  
+  .notify_form .contact-form input[type="email"]{ 
+    width:80%;
     border-radius: 0px;
   }
-  */
+  .notify_form .contact-form input[type="submit"]{ 
+    width:50%;
+  }
+  .contact-form input[type="email"] {
+     width: 50%;
+     display: inline-block;
+   border-radius: 0;
+     margin: 2px 10% 2px 2px;
+  }
+  input.action_button.sign_up{ 
+    width:30%;
+    margin-bottom:2px !important;
+  }
 
+ 
   .credits_right {
     text-align: left;
   }
@@ -4773,7 +4804,6 @@ div.customer-container{
   }
 
   label{display:inline-block;}
-  .notify_form .submit{width:50%;}
   .description p {width:97%;}
   
  /* Mobile product page end*/
