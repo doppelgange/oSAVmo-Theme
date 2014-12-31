@@ -55,7 +55,7 @@
             {% endif %}
 
             <p class="price_total">
-              {{ item.price | money_with_currency }}
+              {{ item.price | times:settings.discount | money_with_currency }}
             </p>
 
             <p id="quantity_{{ forloop.index }}">
@@ -78,7 +78,7 @@
         </h4>
 
         <p class="subtotal_amount">
-          <strong>{{ cart.total_price | money_with_currency }}</strong> 
+          <strong>{{ cart.total_price | times:settings.discount | money_with_currency }}</strong> 
           <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }} {{ 'cart.shipping_calculator.estimated_shipping' | t }}</em></small>
 
           {% unless settings.tax_included %}

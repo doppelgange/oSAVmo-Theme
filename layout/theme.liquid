@@ -159,7 +159,7 @@
             {% else %}
               {% if settings.side_cart_button_position == "top" %}
                 <li class="mm-selected">
-                  <em class="mm-counter">{{ cart.total_price | money_with_currency }}</em>
+                  <em class="mm-counter">{{ cart.total_price |times:settings.discount | money_with_currency }}</em>
                   <a href="/cart">
                     <strong>{{ 'layout.general.subtotal' | t }}</strong>
                   </a>
@@ -179,13 +179,13 @@
                       <img src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
                     </div>
                     <div><strong>{{ item.quantity }} x</strong> {{ item.title }}</div>
-                    <strong class="price">{{ item.price | money }}</strong>
+                    <strong class="price">{{ item.price |times:settings.discount | money }}</strong>
                   </a>
                 </li>
               {% endfor %}
               {% if settings.side_cart_button_position == "bottom" %}
                 <li class="mm-selected">
-                  <em class="mm-counter">{{ cart.total_price | money_with_currency }}</em>
+                  <em class="mm-counter">{{ cart.total_price |times:settings.discount | money_with_currency }}</em>
                   <a href="/cart">
                     <strong>{{ 'layout.general.subtotal' | t }}</strong>
                   </a>
@@ -424,16 +424,15 @@
              <p>Phone (04) 5892501<br />
              Monday - Friday: 9:00 am - 5:00 pm</p>
              <h5 class="title">Address</h5>
-             <p>5 Sydney Street, Petone<br class="mobile_hidden">
+             <p>5 Sydney Street, Petone<br>
                Wellington<br class="mobile_hidden"> New Zealand
-             </p>
-             
+             </p>         
           </div>
-          
+
            <div class="four columns hidden" id="mobile_helpcenter">
              <a href="/pages/contact-us"><h5 class="title">Help Center</h5></a>   
            </div>
-          
+
           <div class="four columns mobile_hidden">
             {% if settings.newsletter_enabled %}
               <h5 class="title">{{ 'general.newsletter_form.title' | t }}</h5>
@@ -449,7 +448,7 @@
                 {% include 'currencies-switcher' %}
               {% endif %}
             </p>
-           </div>
+          </div>
         </div>
       </div> 
     
