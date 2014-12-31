@@ -50,8 +50,6 @@ if($(".sidebar").length && $(".content_col_border").length && ($(".sidebar").out
 
 //Start: Home page category list 
   $('.product-category .top-link').hover(function(){
-    $(this).parent().addClass('hover');
-    $(this).parent().siblings('li').removeClass('hover');
     var menuItem = $(this);
     var submenu = $(this).next('ul');
     var menuItemPos = menuItem.position();
@@ -60,10 +58,6 @@ if($(".sidebar").length && $(".content_col_border").length && ($(".sidebar").out
       left: menuItem.innerWidth()
     });
   });
-$('.product-category .product-sub-category').hover(function(){},function(){
-    $(this).parent().removeClass('hover');
-  });
-  $('.product-category').mouseout(function(){$('.product-has-sub-category').removeClass('hover');});
 //End: Home page category list 
 
 //Start: Menu list Set top
