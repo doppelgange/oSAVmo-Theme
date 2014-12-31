@@ -78,6 +78,22 @@
          <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
          
          <span class="sold_out">{% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+        
+        <!--no compare price for product --> 
+          <span itemprop="price" content="{{ variant.price |times: settings.discount  | money_without_currency }}" class="sale">
+            <span class="current_price">
+              {% if variant.available %}
+                {{ variant.price |times: settings.discount  | money }} 
+              {% endif %}
+            </span>
+         </span>
+         <span class="was_price">
+            {{ variant.price | money }}
+         </span>
+        <!--no compare price for product end--> 
+        
+        
+        {% comment %}
          <span itemprop="price" content="{{ variant.price | money_without_currency }}" class="{% if variant.compare_at_price > variant.price %}sale{% endif %}">
             <span class="current_price">
               {% if variant.available %}
@@ -90,6 +106,7 @@
             {{ variant.compare_at_price | money }}
           {% endif %}
          </span>
+         {% endcomment %}
       </p>
      
       {% include 'product-notify-me' %}
@@ -169,9 +186,9 @@
           <div class="description" itemprop="description">
            <h4 class="title">{{ 'products.product.description' | t }}</h4>
             <div class="section clearfix">
-              {{ product.description }}
+            	{{ product.description }}
             </div>  
-          </div>    
+      	  </div>    
          {% endunless %}
        {% endif %}   
       
