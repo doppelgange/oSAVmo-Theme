@@ -1,5 +1,17 @@
 {% layout 'customer' %}
 {% capture customer_page_title%}{{ 'customer.register.title' | t }}{% endcapture %}
+
+<script>
+$(function() {
+  $('#term').click( function(){
+    if( $(this).is(':checked') ){
+    	$('#customer_register_submit').prop('disabled', false).removeClass('disable');
+    }else{
+    	$('#customer_register_submit').prop('disabled', true).addClass('disable');
+    }
+});
+});
+</script>
 <div class="section clearfix">  
   <div class="six columns offset-by-five">
     <div id="customer">
@@ -28,9 +40,11 @@
             <label for="password" class="login">{{ 'customer.register.password' | t }}</label>
             <input type="password" value="" name="customer[password]" id="password" class="large password" size="30" />
           </div>
-
+        <div>
+        <input type="checkbox" id="term"/> I agree the <a href="/pages/terms-and-conditions"> terms and Conditions </a>
+        </div>
           <div class="action_bottom">
-            <input class="btn action_button" type="submit" value="{{ 'customer.register.sign_up' | t }}" />
+            <input class="btn action_button disable" type="submit" disabled value="{{ 'customer.register.sign_up' | t }}"  id="customer_register_submit"/>
             <p class="right" style="padding-top: 8px;">
               {{ 'customer.register.returning_customer_label' | t }} {{ 'customer.register.sign_in_html' | t | customer_login_link }}
             </p>

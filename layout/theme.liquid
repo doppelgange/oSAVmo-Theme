@@ -112,15 +112,14 @@
                               {% endfor %}
                        
                               {% unless nofilter == true %}
-                              <li{% if link.active %}class="Selected"{% endif %}><a href="/collections/{% if collections[link.handle].handle != blank %}{{ collections[link.handle].handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
+                              <li{% if link.active %} class="Selected"{% endif %}><a href="/collections/{% if collections[link.handle].handle != blank %}{{ collections[link.handle].handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
                               {%endunless%}
                              {% endfor %}
                             </ul>
                           {% endif %}
-                          
                          </li>                     
                         {% else %}
-                        <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a> 
+                        <li {% if link.active %} class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a> 
                         <ul>
                           {% for link in linklists[link.handle].links %}                        
                             <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
@@ -219,7 +218,9 @@
               <li> <a href="/account/login">Log In</a> </li>
               {% else%}
               <li>
-              {{settings.customer_welcoming_text}}<a href="/account">{{customer.name}}!</a>
+              {{settings.customer_welcoming_text}}<a href="/account">{{customer.name}}</a> 
+               | 
+              {{ 'layout.customer.log_out' | t | customer_logout_link }}
               </li>
               {% endif%}
               

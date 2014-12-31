@@ -77,7 +77,7 @@
          <meta itemprop="seller" content="{{ shop.name | escape }}" />
          <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
          
-         <span class="sold_out">{% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+         <span class="sold_out">{% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}<br /></span>
         
         <!--no compare price for product --> 
           <span itemprop="price" content="{{ variant.price |times: settings.discount  | money_without_currency }}" class="sale">

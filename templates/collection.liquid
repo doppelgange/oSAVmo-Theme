@@ -46,9 +46,9 @@
       <div class="flexslider twelve columns homepage_slider collection-header-slide">
         <ul class="slides">
  
-          {% assign handle = collection.title %}
+          {% assign handle = collection.handle %}
           {% case handle %}
-            {% when 'Chinese Products' %}
+            {% when 'chinese-style-products' %}
             {% for i in (1..6)%}
           {%capture sld_enabled%}ch_collection_slide_{{i}}_enabled{%endcapture%}
           {%capture sld_img%}ch_collection_slide_{{i}}.jpg {%endcapture%}
@@ -60,7 +60,7 @@
                 </li>
               {% endif %}
           {% endfor%}
-          {% when 'Taiwan Products' %}
+          {% when 'taiwan-style-products' %}
         {% for i in (1..6)%}
           {%capture sld_enabled%}tw_collection_slide_{{i}}_enabled{%endcapture%}
           {%capture sld_img%}tw_collection_slide_{{i}}.jpg {%endcapture%}
@@ -72,7 +72,7 @@
                 </li>
               {% endif %}
           {% endfor%}
-        {% when 'Korea Products' %}
+        {% when 'korean-style-products' %}
             {% for i in (1..6)%}
           {%capture sld_enabled%}kr_collection_slide_{{i}}_enabled{%endcapture%}
           {%capture sld_img%}kr_collection_slide_{{i}}.jpg {%endcapture%}
@@ -84,7 +84,7 @@
                 </li>
               {% endif %}
           {% endfor%}
-        {% when 'Japanese Products' %}
+        {% when 'japanese-style-roducts' %}
           {% for i in (1..6)%}
           {%capture sld_enabled%}jp_collection_slide_{{i}}_enabled{%endcapture%}
           {%capture sld_img%}jp_collection_slide_{{i}}.jpg {%endcapture%}
@@ -96,7 +96,7 @@
                 </li>
               {% endif %}
           {% endfor%}
-        {% when 'European Products' %}
+        {% when 'european-style-products' %}
           {% for i in (1..6)%}
           {%capture sld_enabled%}eu_collection_slide_{{i}}_enabled{%endcapture%}
           {%capture sld_img%}eu_collection_slide_{{i}}.jpg {%endcapture%}
@@ -109,7 +109,7 @@
               {% endif %}
           {% endfor%}
       
-        {% when 'Southeast Asian Products' %}
+        {% when 'southeast-asian-products' %}
             {% for i in (1..6)%}
           {%capture sld_enabled%}as_collection_slide_{{i}}_enabled{%endcapture%}
           {%capture sld_img%}as_collection_slide_{{i}}.jpg {%endcapture%}
@@ -121,7 +121,7 @@
                 </li>
               {% endif %}
           {% endfor%}
-             {% when 'Others' %}
+             {% when 'others' %}
             {% for i in (1..6)%}
           {%capture sld_enabled%}ot_collection_slide_{{i}}_enabled{%endcapture%}
           {%capture sld_img%}ot_collection_slide_{{i}}.jpg {%endcapture%}
