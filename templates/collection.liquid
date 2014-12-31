@@ -133,6 +133,7 @@
                 </li>
               {% endif %}
           {% endfor%}
+        {% comment %}
         {% else %}
           {% for i in (1..6)%}
           {%capture sld_enabled%}ch_collection_slide_{{i}}_enabled{%endcapture%}
@@ -145,8 +146,8 @@
                 </li>
               {% endif %}
           {% endfor%}
+          {% endcomment %}
         {% endcase %}
-
         </ul>      
       </div>
   {% endif%}
@@ -230,7 +231,7 @@
         
     {% if collection.products.size == 0 %}
       <div class="section clearfix">     
-        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+        <p class="quote" style="float:left;">{{ 'collections.general.no_matches' | t }}</p>
       </div>
     {% else %}
       {% assign products = collection.products %}

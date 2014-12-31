@@ -25,7 +25,7 @@
   
 
   <!-- new siderbar method read from tags-->  
-      
+     {% if collection.all_tags != empty %} 
       {% for tag in collection.all_tags %}
         {% assign nofilter = false %}
         {% assign nofiltertags = settings.no_filter_tag | split:','%}
@@ -38,6 +38,9 @@
            <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
          {%endunless%}
       {% endfor %}
+      {% else %}
+           <li>{{ 'collections.general.no_matches' | t }}</li>
+      {% endif %}
       
 
   <!-- old siderbar -- use fixed sidebar list-->    
