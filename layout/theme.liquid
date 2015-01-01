@@ -428,12 +428,24 @@
              <p>5 Sydney Street, Petone<br>
                Wellington<br class="mobile_hidden"> New Zealand
              </p>         
-          </div>
-
+          </div>     
+                 
            <div class="four columns hidden" id="mobile_helpcenter">
-             <a href="/pages/contact-us"><h5 class="title">Help Center</h5></a>   
+             <a href="#hplink" id="hptitle"><h5 class="title">Help Center</h5></a>   
+            <ul id="hplink">          
+        {% for link in linklists.footer.links %}
+           <li>
+              <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title }}</a>          
+          </li>     
+        {% endfor%}   
+        {% for link in linklists.company.links %}
+          <li>
+             <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title }}</a>            
+          </li>     
+        {% endfor%}   
+        </ul>
            </div>
-
+      
           <div class="four columns mobile_hidden">
             {% if settings.newsletter_enabled %}
               <h5 class="title">{{ 'general.newsletter_form.title' | t }}</h5>

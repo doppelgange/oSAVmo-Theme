@@ -11,6 +11,11 @@ $(window).scroll(function(){
 });
 // End: Sidebar Scroll
 
+//Start: Footer link hidden
+$("#hptitle").click(function(){
+  $("#mobile_helpcenter ul").toggleClass('mobile_hidden');
+});
+//End: Footer link hidden
 
 //Apply same height for mobile customer page
 function setCustomerLogoHeight(){
@@ -77,8 +82,7 @@ $("#header .icon-search").click(function(){
   $("#header .mobile-search").toggleClass('hidden');
 });
 //End:Mobile toggle search bar
-
-
+ 
   $(".thumbnail img, .product_slider img, .cart_page_image img").unveil(200);
 
   $('.homepage_slider').flexslider({
