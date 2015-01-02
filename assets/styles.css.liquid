@@ -524,6 +524,7 @@ select#currencies {
 
 .container div.collection_nav {
   margin-bottom: 1.5em;
+  margin-top:1em;
 }
 .collection_menu, .collection_menu li {
   display: inline;
@@ -1006,10 +1007,7 @@ textarea {
     text-align: center;
     float: left;
   }
-  .continue_shopping {
-    float: right;
-    padding-top: 5px;
-  }
+
   #get-rates-submit {
     margin-top: -1px;
   }
@@ -1353,8 +1351,25 @@ div.hidden { display: none; }
   }
   .continue_shopping {
     float: right;
-    font-size: {{ settings.regular_font_size | minus: 1 }}px;
+    font-size: 16px;
   }
+  
+  .continue_shopping a{
+    color: #fff;
+  background-color: #e50112;
+  padding: 5px;
+  border-radius: 5px;
+  }
+  .continue_shopping a:hover{ 
+    color:#604a3f;
+  background-color: #ffe791;
+  }
+  .quote a {
+    color:#e50112;
+    border-bottom:solid 1px;
+   }
+
+
   .vendor {
     margin-top: -15px;
   }
