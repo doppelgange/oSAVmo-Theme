@@ -31,7 +31,7 @@
         {% for item in cart.items %}
           <div class="five columns alpha">
             <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
-              <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
+              <img src="{{ 'loader.gif' | asset_url }}" data-src="{{ item | img_url: 'medium' }}" data-src-retina="{{ item | img_url: 'grande' }}" alt="{{ item.title | escape }}" />
             </a>
           </div>
 
