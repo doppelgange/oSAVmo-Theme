@@ -1,5 +1,25 @@
 $(function() {
 
+
+//Ajax add to cart
+    $('.quick_buy_cart').click(function(event){
+    event.preventDefault();
+    var result = jQuery.post(
+      '/cart/add.js', 
+      {quantity: 1, id: $(this).attr('product-id')},
+      function(){console.log('success')}).done(function() {
+        console.log( "second success" );
+      }).fail(function() {
+        var errorMessage=$.parseJSON(result['responseText']).description;
+        if(errorMessage)
+        console.log(errorMessage);
+      }).always(function() {
+        console.log(result);
+        console.log("finised");
+      }); 
+  });
+
+
 // Start: Sidebar Scroll
 $(window).scroll(function(){
     if($(window).scrollTop()>=($(".content").height()-$(".header").height()-$(".sidebar").height())&&$(".sidebar").css("position")=="fixed"){    

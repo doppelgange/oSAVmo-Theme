@@ -85,7 +85,8 @@
   <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
   <input type="hidden" name="return_to" value="back" />
   <input type="hidden" name="quantity"  value="1" />
-  <input type="submit" name="add" value="Add to Cart" class="quick_buy_cart" /> 
+  <input type="submit" name="add" value="Add to Cart" class="hidden" /> 
+  <span product-id="{{ product.variants.first.id }}" class="quick_buy_cart" >Add to Cart</span>
 </form>
 <!--Quick Add to Cart Ends -->
       </span>
