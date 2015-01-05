@@ -21,6 +21,7 @@ $(".top-message").hide();
             //Update Cart
             $('.cart_count').html(cart.item_count);
             showMessage(".top-message","Item is added into cart successfully!","success");
+            $( "#cart " ).load( "/# #cart>ul" );
             /*
             console.log($( "#cart " ).load( "/# #cart>ul" ));
             console.log(result);
