@@ -184,6 +184,9 @@
                   </a>
                 </li>
               {% endfor %}
+              <!-- Get more for freeshipping -->
+
+              
               {% if settings.side_cart_button_position == "bottom" %}
                 <li class="mm-selected">
                   <em class="mm-counter">{{ cart.total_price |times:settings.discount | money_with_currency }}</em>
