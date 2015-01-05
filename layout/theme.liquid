@@ -74,7 +74,10 @@
               <a href="/account/login" class="icon-user"><!--Login--></a>
           {% endif %}
         {% endif %}
+        <!--
         <a href="#cart" class="icon-cart">{% if cart.item_count > 0 %}<div class="cart_count">{{ cart.item_count }}</div>{% endif %} 
+        -->
+        <a href="#cart" class="icon-cart"><div class="cart_count"></div>
         <!--<span>{{ 'layout.general.cart' | t }}</span>-->
         </a>
         <div class="mobile-search hidden">
@@ -148,9 +151,8 @@
             {% endif %}
           </ul>
         </div> 
-          
         <div id="cart">
-          <ul>
+          <ul class="mm-list mm-panel mm-opened mm-current">
             <li class="mm-subtitle"><a class="mm-subclose continue" href="#cart">{{ 'layout.general.continue_shopping' | t }}</a></li>
 
             {% if cart.item_count == 0 %}
@@ -299,7 +301,7 @@
                 {% endif %}
               {% endfor %}
               <li>
-                <a href="#cart" class="icon-cart cart-button">{% if cart.item_count > 0 %}<div class="cart_count">{{ cart.item_count }}</div>{% endif %} <span>{{ 'layout.general.cart' | t }}</span></a>
+                <a href="#cart" class="icon-cart cart-button"><div class="cart_count">{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</div> <span>{{ 'layout.general.cart' | t }}</span></a>
               </li>
             </ul>
           </div>
@@ -498,6 +500,7 @@
           <a href="#" class="backtop" target="_self">Top</a>
         </div>
       </div>
+      <div class="top-message success"> <span class="top-message-content">Message</span><span class="close-button">x</span> </div>
 <!--
       <div id="search">
         <div class="container">
