@@ -3,7 +3,7 @@ $(function() {
 
 
 //Start: Set up the alert message in the page
-$(".top-message").hide();
+//$(".top-message").hide();
 $(".top-message").find(".close-button").click(function(){
   $(this).parent(".top-message").hide();
 });
@@ -37,14 +37,14 @@ $(".top-message").find(".close-button").click(function(){
       },
       error:function(request, errorType, errorMessage){
         showMessage($.parseJSON(result['responseText']).description,"failed");
-        
+        /*
         console.log($(this).data('productid'))
         console.log(request);
         console.log("errorType is"+errorType);
         console.log("errorMessage is"+errorMessage);
         console.log("Resutl responseText: is ↓");
         console.log($.parseJSON(result['responseText']).description);
-        /**/
+        */
       }
     });
 
