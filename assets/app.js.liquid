@@ -1,6 +1,13 @@
 $(function() {
 
+
+
+//Start: Set up the alert message in the page
 $(".top-message").hide();
+$(".top-message").find(".close-button").click(function(){
+  $(this).parent(".top-message").hide();
+});
+//End: Set up the alert message in the page
 //Start: Ajax Add into Cart
   $('.quick_buy_cart').click(function(event){
     event.preventDefault();
@@ -15,12 +22,12 @@ $(".top-message").hide();
         console.log(response);
         var cart = $.ajax({
           type:"GET",
-          url:"cart.js",
+          url:"/cart.js",
           dataType: 'json',
           success: function(cart) { 
             //Update Cart
             $('.cart_count').html(cart.item_count);
-            showMessage(".top-message","Item is added into cart successfully!","success");
+            showMessage("Item is added into cart successfully!","success");
             $( "#cart " ).load( "/# #cart>ul" );
             /*
             console.log($( "#cart " ).load( "/# #cart>ul" ));
@@ -29,20 +36,21 @@ $(".top-message").hide();
         }});
       },
       error:function(request, errorType, errorMessage){
-        showMessage(".top-message",$.parseJSON(result['responseText']).description,"failed");
-        /*
+        showMessage($.parseJSON(result['responseText']).description,"failed");
+        
         console.log($(this).data('productid'))
         console.log(request);
         console.log("errorType is"+errorType);
         console.log("errorMessage is"+errorMessage);
         console.log("Resutl responseText: is ↓");
         console.log($.parseJSON(result['responseText']).description);
-        */
+        /**/
       }
     });
 
-function showMessage(target,message,style){
-  $(target).text(message).removeClass("failed success").addClass(style).fadeIn(800).delay( 3000 ).fadeOut(800);
+function showMessage(message,style){
+  $(".top-message").find(".top-message-content").text(message);
+  $(".top-message").hide().removeClass("failed success").addClass(style).fadeIn(800).delay( 3000 ).fadeOut(800);
 }
    
     /*
