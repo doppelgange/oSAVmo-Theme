@@ -121,6 +121,18 @@
                 </li>
               {% endif %}
           {% endfor%}
+         {% when 'seafood-market' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}sea_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}sea_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}sea_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}sea_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
              {% when 'others' %}
             {% for i in (1..6)%}
           {%capture sld_enabled%}ot_collection_slide_{{i}}_enabled{%endcapture%}
