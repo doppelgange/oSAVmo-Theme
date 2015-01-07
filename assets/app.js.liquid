@@ -443,8 +443,8 @@ $("#header .icon-search").click(function(){
     }
 
     if (variant && variant.available == true) {
-      if(variant.price < variant.compare_at_price){
-        $('.was_price', $product).html(Shopify.formatMoney(variant.compare_at_price, $('form.product_form', $product).data('money-format')))        
+      if((variant.price * {{settings.discount}})  < variant.price ){
+        $('.was_price', $product).html(Shopify.formatMoney(variant.price, $('form.product_form', $product).data('money-format')))        
       } else {
         $('.was_price', $product).text('');
       } 
@@ -465,7 +465,7 @@ $("#header .icon-search").click(function(){
       {% endif %}
 
       $('.sold_out', $product).text('');
-      $('.current_price', $product).html(Shopify.formatMoney(variant.price, $('form.product_form', $product).data('money-format')));
+      $('.current_price', $product).html(Shopify.formatMoney((variant.price * {{settings.discount}}), $('form.product_form', $product).data('money-format')));
       $('.add_to_cart', $product).removeClass('disabled').removeAttr('disabled').val('{{ 'products.product.add_to_cart' | t }}');
       $notify_form.hide();
     } else {
