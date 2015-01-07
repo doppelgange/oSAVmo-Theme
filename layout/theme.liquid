@@ -242,6 +242,13 @@
           <div class="column logo">
             <a href="{{ shop.url }}" title="{{ shop.name }}">{{ shop.name }}</a>
           </div>
+          <!-- Display title next to logo for customer related page-->
+          {% if template contains 'customer' %}
+          <div class="columns customer-page-title">
+		    | {{customer_page_title}}
+		  </div>
+          {% endif %}
+          <!-- Display title end-->
 <!-- Wide browser menu Starts-->
           <div class="columns nav mobile_hidden">
             <ul class="menu">
@@ -325,8 +332,10 @@
         </div>
       {% endunless %}
 
-      {% if template contains 'list-collections' %}
-        {% include 'collection-listing' %}
+      {% if template contains 'customer' %}
+          <div class="customer-container container">
+        {{ content_for_layout }}
+          </div>
       {% else %}
         {{ content_for_layout }}
       {% endif %}
