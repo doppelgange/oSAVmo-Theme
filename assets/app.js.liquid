@@ -153,7 +153,7 @@ switchPanel("feature");
 
 //Start: Set content height no less than side bar
 if($(".sidebar").length && $(".content_col_border").length && ($(".sidebar").outerHeight() > $(".content_col_border").outerHeight())){
-  $(".content_col_border").css("height",$(".sidebar").outerHeight());
+  $(".content_col_border").css("height",$(".sidebar").outerHeight()+50+"px");
 }
 //End: Set content height no less than side bar
 
