@@ -185,6 +185,7 @@
 {% if settings['feature_group_section_enable']%}
 <h4 class="feature-list-header sixteen columns panel-header">
     {% for i in (1..6) %}
+  {% capture feature_group_tag%}feature_group_{{i}}_tag{%endcapture%}
   {% capture feature_group_name%}feature_group_{{i}}_name{%endcapture%}
   {% capture feature_group_enable%}feature_group_{{i}}_enable{%endcapture%}
   {% include 'feature-list-header' with settings[feature_group_name] %}
