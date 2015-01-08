@@ -185,7 +185,6 @@
 {% if settings['feature_group_section_enable']%}
 <h4 class="feature-list-header sixteen columns panel-header">
     {% for i in (1..6) %}
-  {% capture feature_group_tag%}feature_group_{{i}}_tag{%endcapture%}
   {% capture feature_group_name%}feature_group_{{i}}_name{%endcapture%}
   {% capture feature_group_enable%}feature_group_{{i}}_enable{%endcapture%}
   {% include 'feature-list-header' with settings[feature_group_name] %}
@@ -193,6 +192,7 @@
 </h4>
   
 {% for i in (1..6) %}
+  {% capture feature_group%}feature_group_{{i}}{%endcapture%}
   {% capture feature_group_tag%}feature_group_{{i}}_tag{%endcapture%}
   {% capture products_per_row_cycle_group %}products_per_row_cycle_group_{{i}}{%endcapture%}
   {% capture feature_group_enable%}feature_group_{{i}}_enable{%endcapture%}
@@ -207,7 +207,7 @@
 <!-- Production Promotion Highlight Starts-->
 {% if settings['promotion_group_section_enable']%}
 <h4 class="promotion-list-header sixteen columns panel-header">
-    {% for i in (1..6) %}
+{% for i in (1..6) %}
   {% capture promotion_group%}promotion_group_{{i}}{%endcapture%}
   {% include 'promotion-list-header' with settings[promotion_group] %}
   {% endfor%}

@@ -1,23 +1,13 @@
 {% if settings[feature_group_enable] %}
   <div class="sixteen columns feature-list {% cycle 'feature-list-class':'feature-list-1','feature-list-2 hidden','feature-list-3 hidden','feature-list-4 hidden','feature-list-5 hidden','feature-list-6 hidden' %}">
+    {% assign collection=settings[feature_group]%}
     {% assign products_per_row = settings[feature_group_col] %}
     <!--settings.feature_group_per_row -->
-    {% assign product_found = false %}
-    {% assign skip = false %}
-    {% assign limit=collections['all'].products_count %}
     {% assign products_per_row_num = products_per_row | plus:0 %}
     {% capture new_row %}
         <br class="clear product_clear" />
     {% endcapture %}
-  {% paginate collections['all'].products by limit %}  
-    {% for product in collections['all'].products %}
-      {% if product.id == skip_product.id or skip == true %}
-        {% assign product_found = true %}
-      {% else %}
-        {% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
-          {% assign skip = true %}
-        {% else%}
-          {%if product.tags contains settings[feature_group_tag]  %}
+    {% for product in collections[collection].products %}
             <div class="hidden">{% increment current_product_show %}</div>
             {%if current_product_show <= products_per_row_num %}
               {% include 'product-thumbnail' %}
@@ -31,14 +21,9 @@
                 {% cycle cycle_group:'', '', '','', new_row %}
               {% endif %}
             {% endif%}
-          {%endif%}
-        {% endif %} 
-      {% endif %} 
     {% endfor %}
-  {% endpaginate %}
   {% assign current_product_show=0%}
     <br class="clear" />
   </div>  
 {% endif %}
-
 
