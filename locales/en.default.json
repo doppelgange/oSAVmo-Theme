@@ -132,6 +132,7 @@
       "from": "from"
     },
     "product": {
+      "coming_soon":"Coming Soon",
       "sold_out": "Sold Out",
       "unavailable": "Unavailable",
       "quantity": "Qty",
@@ -142,7 +143,7 @@
       "product_types": "Type",
       "tags": "Category",
       "products_tagged": "Products tagged {{ tag }}",
-      "description":"Description",
+      "description": "Description",
       "items_left_count": {
         "one": "item left",
         "other": "items left"
