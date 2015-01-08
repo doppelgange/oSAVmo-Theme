@@ -1,21 +1,23 @@
 {% if promotion-list-content != blank %}
   <div class="sixteen columns promotion-list {% cycle 'promotion-list-class':'promotion-list-1','promotion-list-2 hidden','promotion-list-3 hidden','promotion-list-4 hidden','promotion-list-5 hidden','promotion-list-6 hidden' %}">
-    {% assign collection = '' %}
-    {% assign products = collections[promotion-list-content].products %}
+    {% assign collection_display = settings['display_collection'] %}
+
     {% assign products_per_row = settings[promotion_group_col] %} <!--settings.promotion_group_per_row -->
     {% assign product_found = false %}
     {% assign skip = false %}
     {% capture new_row %}
         <br class="clear product_clear" />
     {% endcapture %}
-    {% for product in products limit: limit %}
+    {% for product in collections[collection_display].products %}
+    
       {% if product.id == skip_product.id or skip == true %}
         {% assign product_found = true %}
       {% else %}
         {% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
           {% assign skip = true %}
         {% else%}
-          {%if product.tags contains settings['promotion_events_1_tag'] or product.tags contains settings['promotion_events_2_tag'] or product.tags contains settings['promotion_events_3_tag'] %}
+           {% for collection in product.collections %}        
+            {%if collection.title == collections[promotion-list-content].title %}  
             {% include 'product-thumbnail' %}
             {% if products_per_row_cycle_group == "2" %}
               {% cycle cycle_group: '', new_row %}
@@ -26,7 +28,9 @@
             {% elsif products_per_row_cycle_group == "5" %}  
               {% cycle cycle_group:'', '', '','', new_row %}
             {% endif %}
-          {%endif%}
+            {%endif%}
+    
+            {% endfor %}   
         {% endif %}  
       {% endif %} 
     {% endfor %}
