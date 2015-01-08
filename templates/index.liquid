@@ -187,6 +187,7 @@
     {% for i in (1..6) %}
   {% capture feature_group_name%}feature_group_{{i}}_name{%endcapture%}
   {% capture feature_group_enable%}feature_group_{{i}}_enable{%endcapture%}
+  {% capture feature_group_tag%}feature_group_{{i}}_tag{%endcapture%}
   {% include 'feature-list-header' with settings[feature_group_name] %}
   {% endfor%}
 </h4>
