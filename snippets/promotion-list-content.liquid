@@ -9,13 +9,7 @@
         <br class="clear product_clear" />
     {% endcapture %}
     {% for product in collections[collection_display].products %}
-    
-      {% if product.id == skip_product.id or skip == true %}
-        {% assign product_found = true %}
-      {% else %}
-        {% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
-          {% assign skip = true %}
-        {% else%}
+
            {% for collection in product.collections %}        
             {%if collection.title == collections[promotion-list-content].title %}  
             {% include 'product-thumbnail' %}
@@ -29,10 +23,8 @@
               {% cycle cycle_group:'', '', '','', new_row %}
             {% endif %}
             {%endif%}
-    
-            {% endfor %}   
-        {% endif %}  
-      {% endif %} 
+         {% endfor %}
+
     {% endfor %}
     <br class="clear" />
   </div>  
