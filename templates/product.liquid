@@ -30,7 +30,7 @@
       &nbsp; / &nbsp;
       {% if product.type %}
           <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-            <a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product.type| handleize }}" title="{{ product.type | escape }}" itemprop="url"><span itemprop="title">{{ product.type }}</span></a></span>       
+            <a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product.type| handleize }}" title="{{ product.type | escape }}" itemprop="url"><span itemprop="title">{{ product.type | replace:',',' '}}</span></a></span>       
       {% endif %}
        &nbsp; / &nbsp;
       {{ product.title }}
@@ -186,9 +186,9 @@
           <div class="description" itemprop="description">
            <h4 class="title">{{ 'products.product.description' | t }}</h4>
             <div class="section clearfix">
-            	{{ product.description }}
+              {{ product.description }}
             </div>  
-      	  </div>    
+          </div>    
          {% endunless %}
        {% endif %}   
       

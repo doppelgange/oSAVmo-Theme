@@ -24,16 +24,8 @@
       {% if current_tags %}
         &nbsp; / &nbsp;
         {% for tag in current_tags %}
-        {% assign nofilter = false %}
-        {% assign nofiltertags = settings.no_filter_tag | split:','%}
-        {% for nofiltertag in nofiltertags %}
-          {% if tag == nofiltertag %}
-             {% assign nofilter = true %}
-          {% endif%}        
-        {% endfor %}
-         {% unless nofilter == true %}
-      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}"><span itemprop="title">{{ tag }}</span></a></span>
-         {%endunless%}
+         <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}"><span itemprop="title">{{ tag }}</span></a></span>
+
       {% endfor %}
       {% endif %}
       
@@ -234,13 +226,15 @@
     {% if settings.display_collection_title %}
       <h1>{{ collection.title }}</h1>
     {% endif %}      
-                
+     
+    {% comment %}
     {% if collection.description != blank %}
       <div class="section clearfix collection_description">    
         {{ collection.description }}
       </div>
     {% endif %}
-        
+    {% endcomment %}
+      
     {% if collection.products.size == 0 %}
       <div class="section clearfix">     
         <p class="quote" style="float:left;">{{ 'collections.general.no_matches' | t }}</p>
