@@ -10,17 +10,16 @@
         <br class="clear product_clear" />
     {% endcapture %}
     {% for product in collections[collection].products limit:limit%}
-              {% include 'product-thumbnail'%}
-              {% if products_per_row_cycle_group == "2" %}
-                {% cycle cycle_group: '', new_row %}
-              {% elsif products_per_row_cycle_group == "3" %}
-                {% cycle cycle_group:'', '', new_row %}    
-              {% elsif products_per_row_cycle_group == "4" %}  
-                {% cycle cycle_group:'', '', '', new_row %}
-              {% elsif products_per_row_cycle_group == "5" %}  
-                {% cycle cycle_group:'', '', '','', new_row %}
-              {% endif %}
-            {% endif%}
+      {% include 'product-thumbnail'%}
+      {% if products_per_row_cycle_group == "2" %}
+        {% cycle cycle_group: '', new_row %}
+      {% elsif products_per_row_cycle_group == "3" %}
+        {% cycle cycle_group:'', '', new_row %}    
+      {% elsif products_per_row_cycle_group == "4" %}  
+        {% cycle cycle_group:'', '', '', new_row %}
+      {% elsif products_per_row_cycle_group == "5" %}  
+        {% cycle cycle_group:'', '', '','', new_row %}
+      {% endif %}
     {% endfor %}
     <br class="clear" />
   </div>  
