@@ -4113,8 +4113,8 @@ div.cloudzoom-ajax-loader {
   font-weight:bold;
   cursor:pointer;
 }
-.promotion-list-header-item:hover,.feature-list-header-item:hover{
-  color:#604A3F;
+.promotion-list-header-item:hover,.feature-list-header-item:hover, .promotion-list-header .active,.feature-list-header .active{
+  color:#D1BCA1;
 }
 .promotion-list-header-item a:hover,.feature-list-header-item a:hover{
   color:#604A3F;
@@ -5013,8 +5013,11 @@ div.customer-container{
       position: relative;
     }
     div.mobile-search .search-submit{
-      top:5px;
+      color: #e50112;
+      position: absolute;
+      top: 5px;
       right: 5px;
+      font-size: 30px;
     }
   
     /*Search Bar*/
@@ -5023,6 +5026,19 @@ div.customer-container{
     .panel-header{
       font-size:1em;
       border-radius: 0px;
+    }
+    /*Feature List*/
+    .promotion-list-header-item, .feature-list-header-item{
+      padding:0px;
+    }
+    h4.panel-header {
+      line-height: 20px;
+    }
+    .search-results .title{
+      color:#aaa;
+    }
+    .search-results{
+      top:40px!important;
     }
 
 }
