@@ -1,7 +1,7 @@
 {% if promotion-list-content != blank %}
   <div class="sixteen columns promotion-list {% cycle 'promotion-list-class':'promotion-list-1','promotion-list-2 hidden','promotion-list-3 hidden','promotion-list-4 hidden','promotion-list-5 hidden','promotion-list-6 hidden' %}">
     {% assign collection_display = settings['display_collection'] %}
-
+    {% assign p_c_handle = collections[collection_display].handle %}
     {% assign products_per_row = settings[promotion_group_col] %} <!--settings.promotion_group_per_row -->
     {% assign product_found = false %}
     {% assign skip = false %}

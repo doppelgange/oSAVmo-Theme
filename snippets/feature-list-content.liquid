@@ -1,6 +1,7 @@
 {% if settings[feature_group_enable] %}
   <div class="sixteen columns feature-list {% cycle 'feature-list-class':'feature-list-1','feature-list-2 hidden','feature-list-3 hidden','feature-list-4 hidden','feature-list-5 hidden','feature-list-6 hidden' %}">
     {% assign collection=settings[feature_group]%}
+    {% assign p_c_handle = collections[collection].handle %}
     {% assign products_per_row = settings[feature_group_col] %}
     <!--settings.feature_group_per_row -->
     {% assign products_per_row_num = products_per_row | plus:0 %}
@@ -11,7 +12,7 @@
     {% for product in collections[collection].products limit:limit%}
             <div class="hidden">{% increment current_product_show %}</div>
             {%if current_product_show <= products_per_row_num %}
-              {% include 'product-thumbnail' %}
+              {% include 'product-thumbnail'%}
               {% if products_per_row_cycle_group == "2" %}
                 {% cycle cycle_group: '', new_row %}
               {% elsif products_per_row_cycle_group == "3" %}
