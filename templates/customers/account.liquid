@@ -2,7 +2,8 @@
 <div class="section clearfix">  
   <div class="four columns">
     <div id="customer_detail" class="group">
-      <h4 class="name">{{ customer.name }} ({{ 'layout.customer.log_out' | t | customer_logout_link }})</h4>
+      <h4 class="name">{{ customer.name }}
+      {% if customer %} ({{ 'layout.customer.log_out' | t | customer_logout_link }}){% endif %}</h4>
       <p class="email note">{{ customer.email }}</p>
       <div class="address note">
         {% if customer.default_address != nil %}
