@@ -77,7 +77,19 @@
          <meta itemprop="seller" content="{{ shop.name | escape }}" />
          <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
          
-         <span class="sold_out">{% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}<br /></span>
+         <span class="sold_out">{% if variant.available == false %} 
+           {% assign collection_filter = false %}
+            {% for collection in product.collections %}
+            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" %}
+            {% assign collection_filter = true %}           
+            {% endif%}
+            {% endfor %}
+            
+            {% if collection_filter == true %}
+            {{ 'products.product.coming_soon' | t }}
+            {% else%}         
+            {{ 'products.product.sold_out' | t }}
+            {% endif %}{% endif %}<br /></span>
         
         <!--no compare price for product --> 
           <span itemprop="price" content="{{ variant.price |times: settings.discount  | money_without_currency }}" class="sale">

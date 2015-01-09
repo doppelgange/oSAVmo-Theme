@@ -1,3 +1,6 @@
 {% if promotion-list-header != blank %}
-{% cycle 'promotion-list-header-separator': '','|','|','|','|','|','|'%} <span class="promotion-list-header-item {% cycle 'promotion-list-header-class':'promotion-list-header-1','promotion-list-header-2','promotion-list-header-3','promotion-list-header-4','promotion-list-header-5','promotion-list-header-6' %}">{{ collections[promotion-list-header].title }}</span>
+{% cycle 'promotion-list-header-separator': '','|','|','|','|','|','|'%} 
+<span class="promotion-list-header-item {% cycle 'promotion-list-header-class':'promotion-list-header-1','promotion-list-header-2','promotion-list-header-3','promotion-list-header-4','promotion-list-header-5','promotion-list-header-6' %}">
+{{ collections[promotion-list-header].title | downcase }}
+</span>
 {% endif%}

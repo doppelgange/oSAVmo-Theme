@@ -1,3 +1,9 @@
 {% if settings[feature_group_enable] %}
-{% cycle 'feature-list-header-separator': '','|','|','|','|','|','|'%} <a href="/collections/all/{{ settings[feature_group_tag]| handleize }}" title="{{ settings[feature_group_tag] | escape }}"><span class="feature-list-header-item {% cycle 'feature-list-header-class':'feature-list-header-1','feature-list-header-2','feature-list-header-3','feature-list-header-4','feature-list-header-5','feature-list-header-6' %}">{{ settings[feature_group_name]}}</span></a>
+{% assign collection=settings[feature_group] %}
+{% assign p_c_handle = collections[collection].handle %}
+{% cycle 'feature-list-header-separator': '','|','|','|','|','|','|'%} 
+<a href="/collections/{{ p_c_handle}}" title="{{ settings[feature_group] | escape }}">
+  <span class="feature-list-header-item {% cycle 'feature-list-header-class':'feature-list-header-1','feature-list-header-2','feature-list-header-3','feature-list-header-4','feature-list-header-5','feature-list-header-6' %}">
+   {{ collections[collection].title | downcase }}
+  </span></a>
 {% endif%}

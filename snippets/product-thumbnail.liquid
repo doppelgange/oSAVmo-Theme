@@ -43,9 +43,11 @@
       <!-- Add Watermark for image Ends-->
       
       {% if settings.quick_shop_enabled %}
+      {% unless product.available == false %}
         <span data-fancybox-href="#product-{{ product.id }}" class="quick_shop action_button" data-gallery="product-{{ product.id }}-gallery">
           {{ 'collections.general.quick_shop' | t }}
         </span>
+      {% endunless %}
       {% endif %}
     </div>
 
@@ -62,7 +64,7 @@
           <span class="sold_out">
             {% assign collection_filter = false %}
             {% for collection in product.collections %}
-            {% if collection.handle == "seafood-market"%}
+            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" %}
             {% assign collection_filter = true %}           
             {% endif%}
             {% endfor %}
@@ -96,12 +98,14 @@
      <!-- use compare price  end-->   
         
 <!--Quick Add to Cart Starts -->
+{% unless product.available == false %}
 <form action="/cart/add" method="post" class="clearfix product_form quick_buy" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
   <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
   <input type="hidden" name="return_to" value="back" />
   <input type="hidden" name="quantity"  value="1" />
   <input type="submit" name="add" value="Add to Cart" class="quick_buy_cart" data-productid="{{ product.variants.first.id  }}"/> 
 </form>
+{% endunless %}
 <!--Quick Add to Cart Ends -->
       </span>
     </div>
@@ -128,7 +132,19 @@
         <h3>{{ product.title }}</h3>
 
         <p class="modal_price">
-          <span class="sold_out">{% if product.available == false %}{{ 'products.product.sold_out' | t }} - {% endif %}</span>
+          <span class="sold_out">{% if product.available == false %}
+            {% assign collection_filter = false %}
+            {% for collection in product.collections %}
+            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" %}
+            {% assign collection_filter = true %}           
+            {% endif%}
+            {% endfor %}
+            
+            {% if collection_filter == true %}
+            {{ 'products.product.coming_soon' | t }}
+            {% else%}         
+            {{ 'products.product.sold_out' | t }}
+            {% endif %} - {% endif %}</span>
           
           <span class="current_price sale">
             {{ product.price | times: settings.discount  |  money }}
