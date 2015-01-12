@@ -262,14 +262,13 @@
   <div class="container content" style="padding-top: 20px">
 {% endif %}
 
-{% comment %}
+
 <div class="section clearfix">
   {% if settings.blog_widget %}
-    <div class="{% if settings.twitter_widget != blank %}eight{% else %}sixteen{% endif %} columns">
+    <div class="sixteen columns  footer-blog">
       <h4 class="title">
         <a href="{{ blogs[settings.blog_widget_select].url }}">{{ blogs[settings.blog_widget_select].title }}</a>
       </h4>
-
       {% for article in blogs[settings.blog_widget_select].articles limit: settings.home_page_articles %}
         <div class="section clearfix article">
           <h5 class="sub_title">
@@ -291,7 +290,7 @@
       {% endfor %}
       </div>
   {% endif %}
-
+{% comment %}
   {% if settings.twitter_widget != blank %}
     <div class="{% if settings.blog_widget %}eight{% else %}sixteen{% endif %} columns">
        <h4 class="title"><a href="https://twitter.com/{{ settings.twitter_username }}" target="_blank">{{ 'home_page.tweets' | t }}</a></h4>
