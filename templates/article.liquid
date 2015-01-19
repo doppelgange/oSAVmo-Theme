@@ -39,7 +39,24 @@
         <p class="meta">
           {% capture tags %}
             {% for tag in article.tags %}
-              <a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" title="{{ blog.title }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}" class="tag">{{ tag }} &rsaquo;</a> &nbsp;
+              <a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" title="{{ blog.title }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}" class="tag">
+          
+                {% if blog.handle == "chinese-blog" %}
+                
+                {% case tag %}
+                {% when "News" %}
+                    {% assign tag_display = "公告栏" %}
+                    {% when "Every day dish" %}
+                    {% assign tag_display = "年夜饭每日一菜" %}
+                {% endcase %}
+                
+              {% else %}
+                  {% assign tag_display = tag %}
+                {% endif %}
+                
+            {{ tag_display }} &rsaquo;
+       
+             </a> &nbsp;
             {% endfor %}
           {% endcapture %}
           {{ 'blogs.article.posted_in_html' | t: tags: tags }}

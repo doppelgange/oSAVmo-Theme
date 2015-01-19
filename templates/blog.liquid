@@ -10,7 +10,25 @@
         <select name="tag_filter" id="tag_filter" class="blog_filter">
           <option {% unless current_tags %}selected="selected"{% endunless %} value="{{ blog.url }}">{{ 'blogs.general.view_all' | t }}</option>
           {% for tag in blog.all_tags %}
-            <option {% if current_tags contains tag %}selected="selected"{% endif %} value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}">{{ tag }}</option>
+            <option {% if current_tags contains tag %}selected="selected"{% endif %} value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}">
+              
+              
+               {% if blog.handle == "chinese-blog" %}
+                
+                {% case tag %}
+                {% when "News" %}
+                    {% assign tag_display = "公告栏" %}
+                    {% when "Every day dish" %}
+                    {% assign tag_display = "年夜饭每日一菜" %}
+                {% endcase %}
+                
+              {% else %}
+                  {% assign tag_display = tag %}
+                {% endif %}
+                
+              {{ tag_display }}
+          
+          </option>
           {% endfor %}
         </select>
       </div>
@@ -34,7 +52,8 @@
           <p class="meta">
             {% capture tags %}
               {% for tag in article.tags %}
-                <a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" title="{{ blog.title }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}" class="tag">{{ tag }} &rsaquo;</a>  &nbsp;
+                <a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" title="{{ blog.title }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}" class="tag">{{ tag_display }} &rsaquo;
+          </a>  &nbsp;
               {% endfor %}
             {% endcapture %}
           {{ 'blogs.article.posted_in_html' | t: tags: tags }}
