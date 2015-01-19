@@ -263,10 +263,29 @@
 {% endif %}
 
 
+    
+<!-- Category Starts-->
+  {% if settings.category_widget %}
+    <div class="four columns news mobile_only">
+      <h4 class="panel-header">
+        <a class="title" href="#">Find More Products</a>
+      </h4>
+      <ul class="product-category">
+      {% for link in linklists[settings.home_category_linklist].links %}
+        <li class="product-has-sub-category"> 
+         <a href="{{ link.url }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title | upcase }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+      </div>
+  {% endif %}
+<!-- Category Ends -->
+    
+    
 <div class="section clearfix">
   {% if settings.blog_widget %}
     <div class="sixteen columns  footer-blog">
-      <h4 class="title">
+      <h4>
         <a href="{{ blogs[settings.blog_widget_select].url }}">{{ blogs[settings.blog_widget_select].title }}</a>
       </h4>
       {% for article in blogs[settings.blog_widget_select].articles limit: settings.home_page_articles %}
@@ -279,7 +298,7 @@
           {% if article.excerpt != blank %}
             {{ article.excerpt }}
           {% else %}
-            <p>
+            <p class="abstract">
               {{ article.content | strip_html | truncatewords: 120 }} 
             </p>
             <p class="continue_reading">

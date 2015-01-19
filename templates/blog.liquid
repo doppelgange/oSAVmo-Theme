@@ -1,5 +1,5 @@
 {% paginate blog.articles by 10 %}
-
+<div class="page_border">
   <div class="sixteen columns clearfix collection_nav">
     <div class="twelve columns alpha">
       <h1 class="collection_title"><a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a></h1>
@@ -63,5 +63,5 @@
   <div class="sixteen columns">
     {% include 'pagination' %} 
   </div>   
-  
+</div>
 {% endpaginate %}

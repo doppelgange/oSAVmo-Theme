@@ -27,7 +27,7 @@
 {% if paginate.pages > 1 %}
   <div class="{% if pagination %}twelve{% else %}sixteen{% endif %} columns">
   <div class="section clearfix">
-  <div class="paginate">
+  <div class="paginate bottom">
     {% if paginate.previous %}
     <span class="prev mobile_hidden">{{ paginate.previous.title | link_to: paginate.previous.url }}</span>
     <span id="prev" class="paginate_bottom">{{ paginate.previous.title | link_to: paginate.previous.url }}</span> 

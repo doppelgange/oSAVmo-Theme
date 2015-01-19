@@ -1,0 +1,14 @@
+<div class="four columns sidebar sidebar_col_border mobile_hidden">
+    <h4>{{ blog.title }}</h4>
+    <ul>
+    
+     {% if blog.all_tags != empty %} 
+      {% for tag in blog.all_tags %}
+           <li><a href="/collections/{% if blog.handle != blank %}{{ blog.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
+      {% endfor %}
+      {% else %}
+           <li>{{ 'collections.general.no_matches' | t }}</li>
+      {% endif %}
+      
+    </ul>  
+</div>

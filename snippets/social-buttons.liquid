@@ -12,7 +12,9 @@
 
     <a href="https://www.facebook.com/sharer/sharer.php?u={{ current_url }}" target="_blank" class="icon-facebook" title="{{ 'layout.social_sharing.facebook_title' | t }}"></a>
 
-    {% if social-buttons != 'article' %}
+    {% comment %}<a href="http://service.weibo.com/share/share.php?url={{ current_url }}" target="_blank" class="icon-facebook" title="{{ 'layout.social_sharing.sina_title' | t }}"></a>{% endcomment %}
+    
+  {% if social-buttons != 'article' %}
       <a href="//pinterest.com/pin/create/button/?url={{ current_url }}&amp;media={{ product.featured_image | product_img_url: 'master' | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:' }}&amp;description={{ 'layout.social_sharing.pinterest_share' | t: title: title, name: shop.name }}" target="_blank" class="icon-pinterest" title="{{ 'layout.social_sharing.pinterest_title' | t }}"></a>&nbsp;
     {% endif %}
 
