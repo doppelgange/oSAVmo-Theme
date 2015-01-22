@@ -1,11 +1,4 @@
-<div class="sixteen columns" style="margin-left:0px;">
-{% if collection.handle == 'food-court' or  collection.handle contains 'fc'%}
-  {% include 'sidebar-foodcourt'%}
-  {% include 'foodcourt-product'%}
-{% else %}
-{% if settings.product_sidebar %}
-{% include 'sidebar-new' %}
-<div class="twelve columns content_col_border fix-margin" itemscope itemtype="http://data-vocabulary.org/Product">
+<div class="sixteen columns page_border" itemscope itemtype="http://data-vocabulary.org/Product">
    <div class="clearfix breadcrumb mobile_hidden">
     <div class="right">
       {% if collection.previous_product %}
@@ -40,39 +33,16 @@
     </div>
   </div>
    
-  {% comment %}
-  <div> {% if collection %}            
-      {% if collection.previous_product %}
-         {{ '« Previous Product' | link_to: collection.previous_product }}
-      {% endif %}
-      {% if collection.next_product %}
-        {% if collection.previous_product %} | {% endif %}
-        {{ 'Next Product »' | link_to: collection.next_product }}
-      {% endif %}
-   {% endif %}</div>
-   {% endcomment %}
-    <div id="product-{{ product.id }}">
-{% else %}
-  <div class="sixteen columns" itemscope itemtype="http://data-vocabulary.org/Product">
-    <div id="product-{{ product.id }}">
-{% endif %}
+  <div id="product-{{ product.id }}">
 
-
-  <div class="section product_section clearfix">
-    
-     {% if settings.product_images_position == 'left' %}             
-       <div class="{% if settings.product_sidebar %}seven{% else %}nine{% endif %} columns {% if product-images == blank %}{% if settings.product_images_position == 'left' %}alpha{% else %}omega{% endif %}{% endif %}">
+  <div class="section product_section clearfix">        
+       <div class="seven columns {% if product-images == blank %}alpha{% endif %}">
          {% include 'product-images' %}
-        </div>
-     {% endif %}
+       </div>
 
-     <div class="{% if settings.product_sidebar %}five{% else %}seven{% endif %} columns {%if settings.product_images_position == 'left' %}omega{% else %}alpha{% endif %}">
+      <div class="five columns omega">
        <h1 class="product_name" itemprop="name">{{ product.title }}</h1>
-       {% if settings.display_vendor %}
-          <p class="vendor">
-            <span itemprop="brand">{{ product.vendor | link_to_vendor }}</span>
-          </p>
-       {% endif %}
+
 
       {% assign variant = product.selected_or_first_available_variant %}
       <p class="modal_price" itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
@@ -80,19 +50,9 @@
          <meta itemprop="seller" content="{{ shop.name | escape }}" />
          <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
          
-         <span class="sold_out">{% if variant.available == false %} 
-           {% assign collection_filter = false %}
-            {% for collection in product.collections %}
-            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" %}
-            {% assign collection_filter = true %}           
-            {% endif%}
-            {% endfor %}
-            
-            {% if collection_filter == true %}
-            {{ 'products.product.coming_soon' | t }}
-            {% else%}         
-            {{ 'products.product.sold_out' | t }}
-            {% endif %}{% endif %}<br /></span>
+         <span class="sold_out">
+           {% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}<br />
+         </span>
         
         <!--no compare price for product --> 
           <span itemprop="price" content="{{ variant.price |times: settings.discount  | money_without_currency }}" class="sale">
@@ -106,37 +66,11 @@
             {{ variant.price | money }}
          </span>
         <!--no compare price for product end--> 
-        
-        
-        {% comment %}
-         <span itemprop="price" content="{{ variant.price | money_without_currency }}" class="{% if variant.compare_at_price > variant.price %}sale{% endif %}">
-            <span class="current_price">
-              {% if variant.available %}
-                {{ variant.price | money }} 
-              {% endif %}
-            </span>
-         </span>
-         <span class="was_price">
-          {% if variant.price < variant.compare_at_price %}
-            {{ variant.compare_at_price | money }}
-          {% endif %}
-         </span>
-         {% endcomment %}
+      
       </p>
      
       {% include 'product-notify-me' %}
-
-       {% if settings.product_description_position == "top" %}
-         {% if product.description != blank %}
-         <hr />
-          <div class="description" itemprop="description">
-            <span class="label">{{ 'products.product.description' | t }}:</span>
-            {{ product.description | split: '<!-- split -->' | first }}
-          </div>
-       {% endif %}
-       {% endif %}
-
-       {% include 'product-form' with 'product' %}
+      {% include 'product-form' with 'product' %}
        
 
       {% if settings.display_collections or settings.display_tags or settings.display_type %}
@@ -182,30 +116,23 @@
       {% include "social-buttons" with "product" %}     
     </div>
     
-    {% if settings.product_images_position == 'right' %}   
-      <div class="{% if settings.product_sidebar %}six{% else %}eight{% endif %} columns {% if product-images == blank %}{% if settings.product_images_position == 'left' %}alpha{% else %}omega{% endif %}{% endif %}">          
-        {% include 'product-images' %}
-        {% include "social-buttons" with "product" %}
-      </div>
-    {% endif %}
+    <div class="four columns omega">      
+       <div class="description" itemprop="description">
+          <h4 class="title">{{ 'products.product.description' | t }}</h4>
+           <div class="section clearfix">
+              {% if product.description == '<p></p>' or product.description == blank %}
+              {% else%}
+              {{ product.description }}
+              {% endif %}
+           </div>  
+       </div>       
+    </div>
   </div>
-
-
-      
+    
       <!-- Product Reviews Starts -->
       <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
       <!-- Product Reviews Ends -->
-      
-       {% if settings.product_description_position == "bottom" %}
-       {% unless product.description == '<p></p>' or product.description == blank %}
-          <div class="description" itemprop="description">
-           <h4 class="title">{{ 'products.product.description' | t }}</h4>
-            <div class="section clearfix">
-              {{ product.description }}
-            </div>  
-          </div>    
-         {% endunless %}
-       {% endif %}   
+   
       
   </div>
 
@@ -236,9 +163,5 @@
       {% assign products_per_row = settings.products_per_row %}
       {% include 'product-loop' with settings.product_sidebar %}
     {% endif %}
-  {% endif %}
-</div>
-</div>
-</div>
   {% endif %}
 </div>
