@@ -243,11 +243,13 @@
             <a href="{{ shop.url }}" title="{{ shop.name }}">{{ shop.name }}</a>
           </div>
           <!-- Display title next to logo for customer related page-->
+          {% comment %}
           {% if template contains 'customer' %}
           <div class="columns customer-page-title">
 		    | {{customer_page_title}}
 		  </div>
           {% endif %}
+          {% endcomment %}
           <!-- Display title end-->
 <!-- Wide browser menu Starts-->
           <div class="columns nav mobile_hidden">
