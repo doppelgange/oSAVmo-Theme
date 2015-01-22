@@ -1,14 +1,14 @@
 <div  class="sixteen columns fc_sidebar">
 <div class="four columns fc_sidebar_content">
   <h4>{{ collection.title }}</h4>
-  <span><img src='{{ collection.title | replace: ' ', ''| downcase | append: '.jpg' | asset_url }}'></span>
+  <span><img src='{% if collection.image %}{{ collection.image | img_url: 'medium' }}{% else %}{{ collections['food-court'].image | img_url: 'medium' }}{% endif %}'></span>
 </div>
 
 <div class="twelve columns fc_sidebar_content">
     
 <div class="four columns filter_margin_bottom omega filter_margin_top">
    <label class="inline">{{ 'collections.sidebar.restaurant' | t }}: </label> 
-  	<select class="coll-picker">
+    <select class="coll-picker">
     <option value="food-court">All</option>
     {% for link in linklists['food-court-fc'].links %}
     {% assign c = link.object %}
@@ -18,7 +18,7 @@
     <option value="{{ c.handle }}">{{ c.title }}</option>
     {% endif %}
     {% endfor %}
-  	</select>
+    </select>
 </div>
     
 <div class="four columns filter_margin_bottom omega filter_margin_top">
