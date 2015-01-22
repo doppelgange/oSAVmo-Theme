@@ -5,12 +5,12 @@
 </div>
 
 <div class="twelve columns fc_sidebar_content">
-    
+
 <div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.restaurant' | t }}: </label> 
+   <label class="inline">{{ 'collections.sidebar.style' | t }}: </label> 
     <select class="coll-picker">
     <option value="food-court">All</option>
-    {% for link in linklists['food-court-fc'].links %}
+    {% for link in linklists['food-court'].links %}
     {% assign c = link.object %}
     {% if collection.handle == c.handle %}
     <option value="{{ c.handle }}" selected>{{ c.title }}</option>
@@ -22,15 +22,15 @@
 </div>
     
 <div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.type' | t }}: </label> 
-    {% assign tags = 'Rice, Beef, Chicken, Noodle' | split: ',' %}
+   <label class="inline">{{ 'collections.sidebar.restaurant' | t }}: </label> 
+    {% assign tags = settings.filter_restaurant | split: ',' %}
     <select class="coll-filter">
       <option value="">All</option>
       {% for t in tags %}
       {% assign tag = t | strip %}
       {% if current_tags contains tag %}
       <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.all_tags contains tag %}
+      {% elsif collection.tags contains tag %}
       <option value="{{ tag | handle }}">{{ tag }}</option>
       {% endif %}
       {% endfor %}
@@ -39,14 +39,14 @@
     
 <div class="four columns filter_margin_bottom omega filter_margin_top">
    <label class="inline">{{ 'collections.sidebar.location' | t }}: </label> 
-   {% assign tags = 'CBD,Te Aro' | split: ',' %}
+   {% assign tags = settings.filter_location | split: ',' %}
     <select class="coll-filter">
       <option value="">All</option>
       {% for t in tags %}
       {% assign tag = t | strip %}
       {% if current_tags contains tag %}
       <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.all_tags contains tag %}
+      {% elsif collection.tags contains tag %}
       <option value="{{ tag | handle }}">{{ tag }}</option>
       {% endif %}
       {% endfor %}
@@ -54,15 +54,15 @@
   </div>
   
 <div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">Country: </label> 
-   {% assign tags = 'Chinese Food ,Te Aro' | split: ',' %}
+   <label class="inline">{{ 'collections.sidebar.type' | t }}: </label> 
+   {% assign tags = settings.filter_type | split: ',' %}
     <select class="coll-filter">
       <option value="">All</option>
       {% for t in tags %}
       {% assign tag = t | strip %}
       {% if current_tags contains tag %}
       <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.all_tags contains tag %}
+      {% elsif collection.tags contains tag %}
       <option value="{{ tag | handle }}">{{ tag }}</option>
       {% endif %}
       {% endfor %}
