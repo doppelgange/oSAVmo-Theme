@@ -10,7 +10,7 @@
    <label class="inline">{{ 'collections.sidebar.restaurant' | t }}: </label> 
   	<select class="coll-picker">
     <option value="food-court">All</option>
-    {% for link in linklists['food-court-f'].links %}
+    {% for link in linklists['food-court-fc'].links %}
     {% assign c = link.object %}
     {% if collection.handle == c.handle %}
     <option value="{{ c.handle }}" selected>{{ c.title }}</option>
