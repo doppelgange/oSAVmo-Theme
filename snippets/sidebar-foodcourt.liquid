@@ -1,7 +1,21 @@
 <div  class="sixteen columns fc_sidebar">
-<div class="four columns fc_sidebar_content">
-  <h4>{{ collection.title }}</h4>
-  <span><img src='{% if collection.image %}{{ collection.image | img_url: 'medium' }}{% else %}{{ collections['food-court'].image | img_url: 'medium' }}{% endif %}'></span>
+<div class="four columns fc_sidebar_content"> 
+  
+  
+  {% for vendor in collection.all_vendors %}
+    {% if current_tags contains vendor %}
+      {% assign title = vendor %}
+        {% assign logo = vendor | handleize | append:'.jpg' | asset_url %}
+      {% break %}
+    {% else %}
+      {% assign title =  collection.title %}
+      {% assign logo = collection.image | img_url: 'medium' %}
+    {% endif %}
+  {% endfor %}
+  
+  <h4>{{ title }}</h4>
+  
+  <span><img src='{{ logo }}'></span>
 </div>
 
 <div class="twelve columns fc_sidebar_content">
