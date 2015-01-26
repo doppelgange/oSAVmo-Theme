@@ -1,13 +1,13 @@
 $(function() {
   
-/*
+
 $(document).ready(function() {
 $('.seafood ').ripples({
 resolution:256,
 perturbance: 0.04,
 });
 });
-*/
+
 //Start: Set up the alert message in the page
 //$(".top-message").hide();
 $(".top-message").find(".close-button").click(function(){
@@ -448,8 +448,8 @@ $("#header .icon-search").click(function(){
     }
 
     if (variant && variant.available == true) {
-      if((variant.price * {{settings.discount}})  < variant.price ){
-        $('.was_price', $product).html(Shopify.formatMoney(variant.price, $('form.product_form', $product).data('money-format')))        
+      if(variant.price   < ( variant.price / {{settings.discount}})){
+        $('.was_price', $product).html(Shopify.formatMoney((variant.price / {{settings.discount}}), $('form.product_form', $product).data('money-format')))        
       } else {
         $('.was_price', $product).text('');
       } 
@@ -470,7 +470,7 @@ $("#header .icon-search").click(function(){
       {% endif %}
 
       $('.sold_out', $product).text('');
-      $('.current_price', $product).html(Shopify.formatMoney((variant.price * {{settings.discount}}), $('form.product_form', $product).data('money-format')));
+      $('.current_price', $product).html(Shopify.formatMoney(variant.price, $('form.product_form', $product).data('money-format')));
       $('.add_to_cart', $product).removeClass('disabled').removeAttr('disabled').val('{{ 'products.product.add_to_cart' | t }}');
       $notify_form.hide();
     } else {

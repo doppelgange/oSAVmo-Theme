@@ -55,7 +55,7 @@
             {% endif %}
 
             <p class="price_total">
-              {{ item.price | times:settings.discount | money_with_currency }}
+              {{ item.price | money_with_currency }}
             </p>
 
             <p id="quantity_{{ forloop.index }}">
@@ -78,7 +78,7 @@
         </h4>
 
         <p class="subtotal_amount">
-          <strong>{{ cart.total_price | times:settings.discount | money_with_currency }}</strong> 
+          <strong>{{ cart.total_price | money_with_currency }}</strong> 
           <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }} {{ 'cart.shipping_calculator.estimated_shipping' | t }}</em></small>
 
           {% unless settings.tax_included %}
@@ -93,82 +93,14 @@
             </small>
           </p>
         {% endif %}
-        
-        
-        <!-- If find any food court products, display notice to Customer -->
-         {% assign foodcourtnotice = false %}
-         {% for item in cart.items %}
-            {% if foodcourtnotice == false %}
-          {% for collection in item.product.collections %}
-            {% if collection.handle == "food-court" %} 
-              {% assign foodcourtnotice = true %}
-                    {% break %}
-            {% endif %}
-          {% endfor%}
-            {% else %}
-            {% break %}
-         {% endif %}
-        {% endfor%}
-           
-        {% if foodcourtnotice %}
-          <label for="note">Important Notice:</label>
-          <ul>
-          <li>As the requirement of our Food Court Suppliers, all the products from food court must be paid in advance.</li>
-          <li>Your order will only be processed after payment received.</li>
-          <li>Only the order made before 10am can be pick up on the same day.</li>
-          <li>Pick up time: 10am to 4pm </li>
-          </ul>
-          <label>Please Choose your pick up time</label> 
-        
-          {% capture hour %}{{ 'now' | date: "%k" }}{% endcapture %} 
-          {% assign hour=hour | plus:0 %}
-           
-          {% if hour  >= 10 %}
-           <select required class='coll-picker'>
-             <option value="">Please Choose a date</option>
-          {% for i in (1..7) %}
-          {% assign rate = 86400 | times: i %}
-             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%a"}}{% endcapture %}
-           {% unless day == 'Sat' or day == 'Sun'%}   
-             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%F"}}{% endcapture %}
-              <option value="{{ day }}">{{ day }}</option>
-           {% endunless %}         
-          {% endfor %}
-           </select>    
-           {% else %}
-          <select required class='coll-picker'>
-            <option value="">Please Choose a date</option>
-            {% for i in (0..6) %}
-           {% assign rate = 86400 | times: i %}
-             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%a"}}{% endcapture %}
-           {% unless day == 'Sat' or day == 'Sun'%}   
-             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%F"}}{% endcapture %}
-              <option value="{{ day }}">{{ day }}</option>
-           {% endunless %}         
-          {% endfor %}
-           </select> 
-          {% endif %}
-        
-          <input type="text" name="attributes[day]" required  value="" style="display:none "/>
 
-          <script>
-              jQuery('.coll-picker').change(function() {
-               var day=jQuery(this).val();
-               jQuery('input[name="attributes[day]"]').val(day);
-              });
-          </script>
-        {% endif %}
-
-        
-        
         {% if settings.display_special_instructions %} 
           <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>
-          <p>Please Enter your special requirement below.</p>
           <textarea id="note" name="note" rows="2">{{ cart.note }}</textarea>        
         {% endif %}
 
         <p>
-          <input type="submit" class="action_button add_to _cart" id="checkout" name="checkout" value="{{ 'cart.general.paynow' | t }}" />
+          <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
         </p>
         
         {% if settings.display_additional_checkout and additional_checkout_buttons %}
@@ -180,11 +112,8 @@
     </div>
   </form>
   
-  {% comment %}
   {% include 'cart-shipping-calculator' %}
-  {% endcomment %}
   <br class="clear" />
   <br class="clear" />
 {% endif %}
 </div>
-

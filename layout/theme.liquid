@@ -161,7 +161,7 @@
             {% else %}
               {% if settings.side_cart_button_position == "top" %}
                 <li class="mm-selected">
-                  <em class="mm-counter">{{ cart.total_price |times:settings.discount | money_with_currency }}</em>
+                  <em class="mm-counter">{{ cart.total_price | money_with_currency }}</em>
                   <a href="/cart">
                     <strong>{{ 'layout.general.subtotal' | t }}</strong>
                   </a>
@@ -181,7 +181,7 @@
                       <img src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
                     </div>
                     <div><strong>{{ item.quantity }} x</strong> {{ item.title }}</div>
-                    <strong class="price">{{ item.price |times:settings.discount | money }}</strong>
+                    <strong class="price">{{ item.price  | money }}</strong>
                   </a>
                 </li>
               {% endfor %}
@@ -190,7 +190,7 @@
               
               {% if settings.side_cart_button_position == "bottom" %}
                 <li class="mm-selected">
-                  <em class="mm-counter">{{ cart.total_price |times:settings.discount | money_with_currency }}</em>
+                  <em class="mm-counter">{{ cart.total_price | money_with_currency }}</em>
                   <a href="/cart">
                     <strong>{{ 'layout.general.subtotal' | t }}</strong>
                   </a>
@@ -246,8 +246,8 @@
           {% comment %}
           {% if template contains 'customer' %}
           <div class="columns customer-page-title">
-		    | {{customer_page_title}}
-		  </div>
+        | {{customer_page_title}}
+      </div>
           {% endif %}
           {% endcomment %}
           <!-- Display title end-->
@@ -552,5 +552,7 @@
 <!-- Google Analytics Ends -->
 
 {% include 'search-autocomplete' %}
-  </body>
+  
+<input type="hidden" name="_pc_params" value="{{ shop.permanent_domain }}:{{ customer.id }}" />
+</body>
 </html>
