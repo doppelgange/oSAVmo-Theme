@@ -59,7 +59,7 @@
           {% if product.price_varies %}
             <small><em>{{ 'products.general.from' | t }}</em></small>
           {% endif %}
-          {{ product.price | times: settings.discount | money }}
+          {{ product.price | money }}
         {% else %}
           <span class="sold_out">
             {% assign collection_filter = false %}
@@ -75,9 +75,9 @@
             {{ 'products.product.sold_out' | t }}
             {% endif %}
             
-            - </span>{{ product.price | times: settings.discount  | money }}
+            - </span>{{ product.price | money }}
         {% endif %}
-          <span class="was_price">{{ product.price | money }}</span>
+          <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
           <!--no compare price for product end-->        
               
   <!-- use compare price  -->    
@@ -95,7 +95,7 @@
           <span class="was_price">{{ product.compare_at_price_max | money }}</span>
         {% endif %}
         {% endcomment %}
-     <!-- use compare price  end-->   
+     <!-- use compare price end-->   
         
 <!--Quick Add to Cart Starts -->
 {% unless product.available == false %}
@@ -147,10 +147,10 @@
             {% endif %} - {% endif %}</span>
           
           <span class="current_price sale">
-            {{ product.price | times: settings.discount  |  money }}
+            {{ product.price |  money }}
           </span>
           <span class="was_price">
-              {{ product.price | money }} 
+              {{ product.price |divided_by:settings.discount | money }} 
           </span>
                  
           {% comment %}

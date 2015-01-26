@@ -55,15 +55,15 @@
          </span>
         
         <!--no compare price for product --> 
-          <span itemprop="price" content="{{ variant.price |times: settings.discount  | money_without_currency }}" class="sale">
+          <span itemprop="price" content="{{ variant.price | money_without_currency }}" class="sale">
             <span class="current_price">
               {% if variant.available %}
-                {{ variant.price |times: settings.discount  | money }} 
+                {{ variant.price | money }} 
               {% endif %}
             </span>
          </span>
          <span class="was_price">
-            {{ variant.price | money }}
+            {{ variant.price |divided_by:settings.discount | money }}
          </span>
         <!--no compare price for product end--> 
       
