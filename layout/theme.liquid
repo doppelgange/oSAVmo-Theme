@@ -181,7 +181,7 @@
                       <img src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
                     </div>
                     <div><strong>{{ item.quantity }} x</strong> {{ item.title }}</div>
-                    <strong class="price">{{ item.price  | money }}</strong>
+                    <strong class="price">{{ item.price | money }}</strong>
                   </a>
                 </li>
               {% endfor %}
@@ -197,8 +197,8 @@
                 </li>
 
                 <li class="mm-subtitle clearfix">
-                  <a href="/checkout" class="action_button right">{{ 'layout.general.checkout' | t }}</a>
-                  <a href="/cart" class="action_button edit_cart left">{{ 'layout.general.edit_cart' | t }}</a>
+                  <a href="/cart" class="action_button right">{{ 'layout.general.checkout' | t }}</a>
+                  {% comment %} <a href="/cart" class="action_button edit_cart left">{{ 'layout.general.edit_cart' | t }}</a> {% endcomment %}
                 </li>
               {% endif %}
             {% endif %}
@@ -536,7 +536,7 @@
 -->
     </div>
     {% include 'newsletter-popup' %}
-    {% include 'currencies' %}
+    {% include 'currencies' %}    
 
 <!-- Google Analytics Starts -->
 <script>
