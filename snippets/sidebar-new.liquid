@@ -7,23 +7,19 @@
     <ul>
     
    <!-- new siderbar method read from types not complete yet-->   
-     {% comment %}  
-     {% if collection.all_types %}
-          {% if product_type == collection.title %}
-        {% for product_type in shop.collection.all_types %}
-        <li>{{ product_type | link_to_type}}</li>
-            {% endfor %}
-      
+      {% if collection.current_type %}
+          {% for product_type in collections['all'].all_types %}
+            <li><a href="/collections/all/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
+            {% endfor %}    
       {% else %}
-      {% for product_type in collection.all_types %}
-        <li>{{ product_type | link_to_type}}</li>
+          {% for product_type in collection.all_types %}
+            <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
             {% endfor %}
-       {% endif %}
-
-     {% endif %}
-    {% endcomment %}  
+        {% endif %}
+      
   
-
+  
+{% comment %} 
   <!-- new siderbar method read from tags-->  
      {% if collection.all_tags != empty %} 
       {% for tag in collection.all_tags %}
@@ -41,7 +37,7 @@
       {% else %}
            <li>{{ 'collections.general.no_matches' | t }}</li>
       {% endif %}
-      
+     {% endcomment %}     
 
   <!-- old siderbar -- use fixed sidebar list-->    
 
