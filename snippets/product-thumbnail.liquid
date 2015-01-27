@@ -77,7 +77,13 @@
             
             - </span>{{ product.price | money }}
         {% endif %}
-          <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
+          <span class="was_price">   
+          {% if product.compare_at_price_max > product.price %}
+              <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+            {% else %}
+              <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
+          {% endif %}
+          </span>
           <!--no compare price for product end-->        
               
   <!-- use compare price  -->    
@@ -94,6 +100,7 @@
         {% if product.compare_at_price_max > product.price %}
           <span class="was_price">{{ product.compare_at_price_max | money }}</span>
         {% endif %}
+       </span>
         {% endcomment %}
      <!-- use compare price end-->   
         
@@ -150,8 +157,21 @@
             {{ product.price |  money }}
           </span>
           <span class="was_price">
-              {{ product.price |divided_by:settings.discount | money }} 
+          {% if product.compare_at_price_max > product.price %}
+              <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+            {% else %}
+              <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
+          {% endif %}
           </span>
+          <span class="sale">
+            You Save 
+            {% if product.compare_at_price %}
+              {{ product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price }}
+            {% else %}
+                {{ 1 | minus: settings.discount |times:100 | remove: '.0'}}
+            {% endif %}
+            %
+         </span>
                  
           {% comment %}
           <span class="current_price {% if product.compare_at_price_max > product.price %}sale{% endif %}">

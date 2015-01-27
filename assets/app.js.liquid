@@ -448,10 +448,10 @@ $("#header .icon-search").click(function(){
     }
 
     if (variant && variant.available == true) {
-      if(variant.price   < ( variant.price / {{settings.discount}})){
-        $('.was_price', $product).html(Shopify.formatMoney((variant.price / {{settings.discount}}), $('form.product_form', $product).data('money-format')))        
+      if(variant.price   < variant.compare_at_price ){
+        $('.was_price', $product).html(Shopify.formatMoney( variant.compare_at_price , $('form.product_form', $product).data('money-format')));        
       } else {
-        $('.was_price', $product).text('');
+        $('.was_price', $product).html(Shopify.formatMoney((variant.price / {{settings.discount}}), $('form.product_form', $product).data('money-format')));
       } 
 
       {% if settings.display_inventory_left %}
