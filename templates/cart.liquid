@@ -25,54 +25,120 @@
 
   <form action="/cart" method="post" id="cart_form">        
     <div class="section clearfix">  
-      <div class="ten columns cart_items">
-        <h4 class="title">{{ 'cart.general.products' | t }}</h4>
-
+      <div class="eight columns cart_items">
         {% for item in cart.items %}
-          <div class="five columns alpha">
-            <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
-              <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
-            </a>
-          </div>
-
-          <div class="five columns omega">
-            <p>
-              <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
-            </p> 
-            
-            {% if item.properties %}
-              <p>
-              {% for p in item.properties %}
-                {% unless p.last == blank %}
-                  {% if p.last contains '/uploads/' %}
-                    {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
-                  {% else %}
-                    {{ p.first }}: {{ p.last }}<br />
-                  {% endif %}
-                {% endunless %}
-              {% endfor %}
-              </p>
-            {% endif %}
-
-            <p class="price_total">
-              {{ item.price | money_with_currency }}
-            </p>
-
-            <p id="quantity_{{ forloop.index }}">
-              <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
-              <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
-            </p>
-
-            <p class="remove_item">
-              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
-            </p>
-          </div>
-          <br class="clear" />
-          <br class="clear" />
+          {% for collection in item.product.collections %}
+            {% assign group = group | append: collection.handle | append: ' ' %}
+            {% endfor %}      
         {% endfor %}
-      </div>
+        
+        {% assign groupnumber = 0 %}
+        {% if group contains 'food-court' %}
+        {% assign title=title | append: "FOOD COURT" | append:"," %}
+        {% assign groupnumber = groupnumber | plus: 1 %}
+        {% endif %}
+        {% if group contains 'seafood-market' %}
+        {% assign title=title | append: "SEAFOOD MARKET" | append:"," %}
+        {% assign groupnumber = groupnumber | plus: 1 %}
+        {% endif %}
+        {% if group contains 'style-products' %}
+        {% assign title=title | append:  "SUPERMARKET" | append:"," %}
+        {% assign groupnumber = groupnumber | plus: 1 %}
+        {% endif %}
+        
+        {% assign title = title | split: ","%}
+        {% assign groupnumber = groupnumber | minus: 1 %}
+        
+        {% for i in (0..groupnumber) %}
+          <h4 class="title">{{ title[i] }}</h4>        
+            {% if title[i] =="SUPERMARKET" %}
+              {% for item in cart.items %}
+              {% for collection in item.product.collections %}
+                {% if collection.handle contains "style-products" %} 
+                  <div class="three columns alpha">
+                      <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
+                         <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
+                      </a>
+                    </div>        
+                      <div class="five columns omega">
+                              <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>      
+                      {% if item.properties %}
+                         <p>
+                              {% for p in item.properties %}
+                        {% unless p.last == blank %}
+                            {% if p.last contains '/uploads/' %}
+                              {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
+                            {% else %}
+                              {{ p.first }}: {{ p.last }}<br />
+                            {% endif %}
+                        {% endunless %}
+                        {% endfor %}
+                         </p>
+                     {% endif %}
 
-      <div class="five columns offset-by-one">
+                     <p class="price_total">{{ item.price | money_with_currency }}</p>
+
+                     <p id="quantity_{{ forloop.index }}">
+                        <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
+                        <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+                     </p>
+
+                       <p class="remove_item">
+                                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
+                             </p>
+                    </div>
+                    {% break%}        
+                {% endif %}
+              {% endfor%}
+                    <br class="clear" />
+            {% endfor %}   
+            {% else %}
+              {% assign handle = title[i] | handleize %}  
+                {% for item in cart.items %}
+              {% for collection in item.product.collections %}
+                {% if collection.handle ==  handle %} 
+                  <div class="three columns alpha">
+                      <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
+                          <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
+                      </a>
+                       </div>        
+                      <div class="five columns omega">
+                       <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>  
+                    {% if item.properties %}
+                        <p>
+                               {% for p in item.properties %}
+                          {% unless p.last == blank %}
+                              {% if p.last contains '/uploads/' %}
+                                {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
+                              {% else %}
+                                {{ p.first }}: {{ p.last }}<br />
+                              {% endif %}
+                          {% endunless %}
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+              <p class="price_total">
+                        {{ item.price | times:settings.discount | money_with_currency }}
+                            </p>
+                    <p id="quantity_{{ forloop.index }}">
+                        <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
+                        <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+                    </p>
+
+                    <p class="remove_item">
+                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
+                    </p>
+                    </div>
+                          {% break%}        
+                      {% endif %}
+                    {% endfor%}
+                      <br class="clear" />
+                {% endfor %}
+            {% endif %}
+          {% endfor %}       
+      </div>
+    
+     <div class="seven columns offset-by-one">
         <h4 class="subtotal">
           {{ 'cart.general.subtotal' | t }}
         </h4>
@@ -93,14 +159,124 @@
             </small>
           </p>
         {% endif %}
+        
+        
+        <!-- If find any food court products, display notice to Customer -->
+         {% assign foodcourtnotice = false %}
+         {% assign vendors = "" %}
+         {% for item in cart.items %}
+          {% for collection in item.product.collections %}
+            {% if collection.handle == "food-court" %} 
+              {% assign foodcourtnotice = true %}
+                    {% assign vendor = item.vendor %}
+            {% unless vendors contains vendor %}
+            {% assign vendors=vendors | append: vendor |append: ","%}
+            {% endunless %}
+            {% endif %}
+          {% endfor%}
+         {% endfor%}
+           
+       {% if foodcourtnotice %}
+       {% comment %}
+          <label for="note">Important Notice:</label>
+          <ul>
+          <li>As the requirement of our Food Court Suppliers, all the products from food court must be paid in advance.</li>
+          <li>Your order will only be processed after payment received.</li>
+          <li>Only the order made before 10am can be pick up on the same day.</li>
+          <li>Pick up time: 10am to 4pm </li>
+          </ul>
+       {% endcomment %} 
+          <label>Please Choose your pick up time</label> 
+        
+           <!-- Display Date picker -->
+          {% capture hour %}{{ 'now' | date: "%k" }}{% endcapture %} 
+          {% assign hour=hour | plus:0 %}
+          {% if hour  >= 10 %}
+             {% assign b = 1 | plus:0 %}
+             {% assign e = 7 | plus:0 %}
+          {% else %}
+              {% assign b = 0 | plus:0 %}
+              {% assign e = 6 | plus:0 %}
+          {% endif %}
+       
+          {% assign vendors = vendors |split :"," %}
+          {% for vendor in vendors %}
+          {{ vendor }}:
+          <select class='{{ vendor | handleize }}coll-picker fc_select' id='{{ vendor | handleize }}day'>
+           <option value="">Please Choose a date</option>
+          {% for i in (b..e)  %}
+          {% assign rate = 86400 | times: i %}
+             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%a"}}{% endcapture %}
+           {% unless day == 'Sat' or day == 'Sun'%}   
+             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%F"}}{% endcapture %}
+              <option value="{{ day }}">{{ day }}</option>
+           {% endunless %}         
+          {% endfor %}  
+          </select> 
+       
+          <select class='{{ vendor | handleize }}coll-picker fc_select' id='{{ vendor | handleize }}hour'>
+           <option value="">Hour</option> 
+          </select>
+          :
+          <select class='{{ vendor | handleize }}coll-picker fc_select' id='{{ vendor | handleize }}min'>
+            <option value="">Mins</option>      
+          </select> 
+       
+          <input type="text" name="attributes[{{ vendor | handleize }}-Pick-Up-Date]" required style="display:none" />
+          <br />
+          
 
+          <script>
+              jQuery('#{{ vendor | handleize }}day').change(function() {           
+        var hourObj=document.getElementById('{{ vendor | handleize }}hour');
+                var minObj=document.getElementById('{{ vendor | handleize }}min');
+                hourObj.options.length=1;
+                minObj.options.length=1;
+                if($('#{{ vendor | handleize }}day').val()!=""){
+                  for(var i=10;i<=15;i++){
+                  hourObj.options.add(new Option(i,i));    
+                  }
+                 }
+                })
+              jQuery('#{{ vendor | handleize }}hour').change(function() {           
+        var minObj=document.getElementById('{{ vendor | handleize }}min'); 
+                minObj.options.length=1;
+                if($('#{{ vendor | handleize }}hour').val()!=""){
+                  var min = 5;
+                  for(var i=0;i<=11;i++){
+                    var text=min*i;
+                    var value=min*i;
+                    if(text == 0){text="00";value="00"}
+                    else if(text==5){text='05';value="05"}
+                    else{text=text;};
+                  minObj.options.add(new Option(text,value));  
+                  } 
+                }
+               })  
+              jQuery('.{{ vendor | handleize }}coll-picker').change(function() {  
+                var day=jQuery('#{{ vendor | handleize }}day').val();
+            var hour=jQuery('#{{ vendor | handleize }}hour').val();
+                var min=jQuery('#{{ vendor | handleize }}min').val();
+                     
+                if(hour==""){hour = '11'};
+                if(min==""){min="00"};
+              if (day != ""){
+                  var date = day+" "+ hour+":"+ min;
+                }
+                jQuery('input[name="attributes[{{ vendor | handleize }}-Pick-Up-Date]"]').val(date);           
+              })
+          </script>
+       {% endfor %}
+        {% endif %}
+          
         {% if settings.display_special_instructions %} 
           <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>
+          <p>Please Enter your special requirement below.</p>
           <textarea id="note" name="note" rows="2">{{ cart.note }}</textarea>        
         {% endif %}
 
         <p>
-          <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
+          <input type="submit" class="action_button add_to _cart" id="checkout" name="checkout" value="{{ 'cart.general.paynow' | t }}" />
         </p>
         
         {% if settings.display_additional_checkout and additional_checkout_buttons %}
@@ -112,8 +288,11 @@
     </div>
   </form>
   
+  {% comment %}
   {% include 'cart-shipping-calculator' %}
+  {% endcomment %}
   <br class="clear" />
   <br class="clear" />
 {% endif %}
 </div>
+

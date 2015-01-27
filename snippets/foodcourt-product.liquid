@@ -113,10 +113,24 @@
         {% endif %}
        </div>
 
-      {% include "social-buttons" with "product" %}     
-    </div>
-    
-    <div class="four columns omega">      
+      {% include "social-buttons" with "product" %}  
+      
+       <div class="fc_notice">
+          <h4 class="title">Important Notice</h4>
+           <div class="section clearfix">
+      <ul>
+          <li>As the requirement of our Food Court Suppliers, all the products from food court must be paid in advance.</li>
+          <li>Your order will only be processed after payment received.</li>
+          <li>Only the order made before 10am can be pick up on the same day.</li>
+          <li>Pick up time: 10am to 4pm </li>
+          </ul>
+           </div>  
+       </div>       
+    </div>  
+        
+        
+       
+    <div class="four columns">    
        <div class="description" itemprop="description">
           <h4 class="title">{{ 'products.product.description' | t }}</h4>
            <div class="section clearfix">

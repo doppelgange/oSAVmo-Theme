@@ -323,7 +323,7 @@
       "subtotal": "Subtotal",
       "update": "Update Subtotal",
       "checkout": "Checkout",
-      "paynow":"Pay Now"
+      "paynow": "Pay Now"
     },
     "shipping_calculator": {
       "estimated_shipping": "estimated shipping",
