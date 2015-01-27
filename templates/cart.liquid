@@ -118,7 +118,7 @@
                         </p>
                     {% endif %}
               <p class="price_total">
-                        {{ item.price | times:settings.discount | money_with_currency }}
+                        {{ item.price | money_with_currency }}
                             </p>
                     <p id="quantity_{{ forloop.index }}">
                         <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
