@@ -1,6 +1,9 @@
 {% paginate collection.products by settings.pagination_limit %}
 
-    {% include 'pagination_top' %}    
+  <div class= "sixteen columns">
+    {% include 'pagination_top' %}
+    </div>
+
     {% if collection.products.size == 0 %}
       <div class="section clearfix">     
         <p class="quote" style="float:left;">{{ 'collections.general.no_matches' | t }}</p>
@@ -10,22 +13,22 @@
       {% assign product_found = false %}
        {% assign skip = false %}
 
-		{% capture new_row %}
-   		 	<br class="clear product_clear" />
-		{% endcapture %}
+    {% capture new_row %}
+        <br class="clear product_clear" />
+    {% endcapture %}
 
  {% for product in products limit: limit %}
 
-  	{% if product.id == skip_product.id or skip == true %}
-    	{% assign product_found = true %}
- 	{% else %}
-    	{% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
-      		{% assign skip = true %}
-    	{% else %}
-      		{% include 'product-thumbnail' with product-loop %}
-        	{% cycle '', '', '','', new_row %}
-    	{% endif %}    
-  	{% endif %}
+    {% if product.id == skip_product.id or skip == true %}
+      {% assign product_found = true %}
+  {% else %}
+      {% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
+          {% assign skip = true %}
+      {% else %}
+          {% include 'product-thumbnail' with product-loop %}
+          {% cycle '', '', '','', new_row %}
+      {% endif %}    
+    {% endif %}
   
 {% endfor %}
 

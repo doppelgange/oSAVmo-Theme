@@ -26,119 +26,53 @@
   <form action="/cart" method="post" id="cart_form">        
     <div class="section clearfix">  
       <div class="eight columns cart_items">
+        <h4 class="title">{{ 'cart.general.products' | t }}</h4>
+
         {% for item in cart.items %}
-          {% for collection in item.product.collections %}
-            {% assign group = group | append: collection.handle | append: ' ' %}
-            {% endfor %}      
-        {% endfor %}
-        
-        {% assign groupnumber = 0 %}
-        {% if group contains 'food-court' %}
-        {% assign title=title | append: "FOOD COURT" | append:"," %}
-        {% assign groupnumber = groupnumber | plus: 1 %}
-        {% endif %}
-        {% if group contains 'seafood-market' %}
-        {% assign title=title | append: "SEAFOOD MARKET" | append:"," %}
-        {% assign groupnumber = groupnumber | plus: 1 %}
-        {% endif %}
-        {% if group contains 'style-products' %}
-        {% assign title=title | append:  "SUPERMARKET" | append:"," %}
-        {% assign groupnumber = groupnumber | plus: 1 %}
-        {% endif %}
-        
-        {% assign title = title | split: ","%}
-        {% assign groupnumber = groupnumber | minus: 1 %}
-        
-        {% for i in (0..groupnumber) %}
-          <h4 class="title">{{ title[i] }}</h4>        
-            {% if title[i] =="SUPERMARKET" %}
-              {% for item in cart.items %}
-              {% for collection in item.product.collections %}
-                {% if collection.handle contains "style-products" %} 
-                  <div class="three columns alpha">
-                      <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
-                         <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
-                      </a>
-                    </div>        
-                      <div class="five columns omega">
-                              <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>      
-                      {% if item.properties %}
-                         <p>
-                              {% for p in item.properties %}
-                        {% unless p.last == blank %}
-                            {% if p.last contains '/uploads/' %}
-                              {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
-                            {% else %}
-                              {{ p.first }}: {{ p.last }}<br />
-                            {% endif %}
-                        {% endunless %}
-                        {% endfor %}
-                         </p>
-                     {% endif %}
+          <div class="three columns alpha">
+            <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
+              <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
+            </a>
+          </div>
 
-                     <p class="price_total">{{ item.price | money_with_currency }}</p>
-
-                     <p id="quantity_{{ forloop.index }}">
-                        <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
-                        <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
-                     </p>
-
-                       <p class="remove_item">
-                                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
-                             </p>
-                    </div>
-                    {% break%}        
-                {% endif %}
-              {% endfor%}
-                    <br class="clear" />
-            {% endfor %}   
-            {% else %}
-              {% assign handle = title[i] | handleize %}  
-                {% for item in cart.items %}
-              {% for collection in item.product.collections %}
-                {% if collection.handle ==  handle %} 
-                  <div class="three columns alpha">
-                      <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
-                          <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
-                      </a>
-                       </div>        
-                      <div class="five columns omega">
-                       <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>  
-                    {% if item.properties %}
-                        <p>
-                               {% for p in item.properties %}
-                          {% unless p.last == blank %}
-                              {% if p.last contains '/uploads/' %}
-                                {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
-                              {% else %}
-                                {{ p.first }}: {{ p.last }}<br />
-                              {% endif %}
-                          {% endunless %}
-                            {% endfor %}
-                        </p>
-                    {% endif %}
-              <p class="price_total">
-                        {{ item.price | money_with_currency }}
-                            </p>
-                    <p id="quantity_{{ forloop.index }}">
-                        <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
-                        <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
-                    </p>
-
-                    <p class="remove_item">
-                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
-                    </p>
-                    </div>
-                          {% break%}        
-                      {% endif %}
-                    {% endfor%}
-                      <br class="clear" />
-                {% endfor %}
+          <div class="five columns omega">
+            <p>
+              <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+            </p> 
+            
+            {% if item.properties %}
+              <p>
+              {% for p in item.properties %}
+                {% unless p.last == blank %}
+                  {% if p.last contains '/uploads/' %}
+                    {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
+                  {% else %}
+                    {{ p.first }}: {{ p.last }}<br />
+                  {% endif %}
+                {% endunless %}
+              {% endfor %}
+              </p>
             {% endif %}
-          {% endfor %}       
+
+            <p class="price_total">
+              {{ item.price | money_with_currency }}
+            </p>
+
+            <p id="quantity_{{ forloop.index }}">
+              <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
+              <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+            </p>
+
+            <p class="remove_item">
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
+            </p>
+          </div>
+          <br class="clear" />
+          <br class="clear" />
+        {% endfor %}
       </div>
-    
-     <div class="seven columns offset-by-one">
+
+      <div class="seven columns offset-by-one">
         <h4 class="subtotal">
           {{ 'cart.general.subtotal' | t }}
         </h4>
@@ -159,7 +93,6 @@
             </small>
           </p>
         {% endif %}
-        
         
         <!-- If find any food court products, display notice to Customer -->
          {% assign foodcourtnotice = false %}
@@ -268,15 +201,14 @@
           </script>
        {% endfor %}
         {% endif %}
-          
+
         {% if settings.display_special_instructions %} 
           <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>
-          <p>Please Enter your special requirement below.</p>
           <textarea id="note" name="note" rows="2">{{ cart.note }}</textarea>        
         {% endif %}
 
         <p>
-          <input type="submit" class="action_button add_to _cart" id="checkout" name="checkout" value="{{ 'cart.general.paynow' | t }}" />
+          <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.paynow' | t }}" />
         </p>
         
         {% if settings.display_additional_checkout and additional_checkout_buttons %}
@@ -291,8 +223,8 @@
   {% comment %}
   {% include 'cart-shipping-calculator' %}
   {% endcomment %}
+  
   <br class="clear" />
   <br class="clear" />
 {% endif %}
 </div>
-
