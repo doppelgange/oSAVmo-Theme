@@ -64,7 +64,7 @@
           <span class="sold_out">
             {% assign collection_filter = false %}
             {% for collection in product.collections %}
-            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" %}
+            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" or collection.handle =="food-court" %}
             {% assign collection_filter = true %}           
             {% endif%}
             {% endfor %}
@@ -165,7 +165,7 @@
           </span>
           <span class="sale">
             You Save 
-            {% if product.compare_at_price %}
+            {% if product.compare_at_price > product.price %}
               {{ product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price }}
             {% else %}
                 {{ 1 | minus: settings.discount |times:100 | remove: '.0'}}

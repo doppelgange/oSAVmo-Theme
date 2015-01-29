@@ -51,7 +51,7 @@
          <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
          
          <span class="sold_out">
-           {% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}<br />
+           {% if variant.available == false %}{{ 'products.product.coming_soon' | t }}{% endif %}<br />
          </span>
         
         <!--no compare price for product -->
@@ -70,7 +70,7 @@
          </span>
          <span class="sale">
             You Save 
-            {% if variant.compare_at_price %}
+            {% if variant.compare_at_price > variant.price %}
               {{ variant.compare_at_price | minus: variant.price | times:100 | divided_by:variant.compare_at_price }}
             {% else %}
                 {{ 1 | minus: settings.discount |times:100 | remove: '.0'}}
@@ -131,9 +131,9 @@
        <div class="fc_notice">
           <h4 class="title">Important Notice</h4>
            <div class="section clearfix">
-      <ul>
+         <ul>
           <li>As the requirement of our Food Court Suppliers, all the products from food court must be paid in advance.</li>
-          <li>Your order will only be processed after payment received.</li>
+          <li>Your order will only be processed after payment has cleared.</li>
           <li>Only the order made before 10am can be pick up on the same day.</li>
           <li>Pick up time: 10am to 4pm </li>
           </ul>
