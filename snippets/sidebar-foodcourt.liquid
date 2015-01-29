@@ -36,16 +36,16 @@
 </div>
     
 <div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.restaurant' | t }}: </label> 
-    {% assign tags = settings.filter_restaurant | split: ',' %}
+   <label class="inline">{{ 'collections.sidebar.restaurant' | t }}: </label>
     <select class="coll-filter">
-      <option value="">All</option>
-      {% for t in tags %}
-      {% assign tag = t | strip %}
-      {% if current_tags contains tag %}
-      <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.tags contains tag %}
-      <option value="{{ tag | handle }}">{{ tag }}</option>
+      <option value="">All</option>          
+      {% for tag in collection.all_tags %}
+        {% if collection.all_vendors contains tag %}
+        {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+        {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+        {% endif %}
       {% endif %}
       {% endfor %}
     </select>
@@ -60,7 +60,7 @@
       {% assign tag = t | strip %}
       {% if current_tags contains tag %}
       <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.tags contains tag %}
+      {% elsif collection.all_tags contains tag %}
       <option value="{{ tag | handle }}">{{ tag }}</option>
       {% endif %}
       {% endfor %}
@@ -68,16 +68,20 @@
   </div>
   
 <div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.type' | t }}: </label> 
-   {% assign tags = settings.filter_type | split: ',' %}
+   <label class="inline">{{ 'collections.sidebar.type' | t }}: </label>
+   {% for type in collection.all_types %}
+        {% assign types = types | append:type |append: ',' %}       
+   {% endfor %} 
+   {% assign tags = types | split: ',' %}
     <select class="coll-filter">
       <option value="">All</option>
-      {% for t in tags %}
-      {% assign tag = t | strip %}
-      {% if current_tags contains tag %}
-      <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.tags contains tag %}
-      <option value="{{ tag | handle }}">{{ tag }}</option>
+      {% for tag in collection.all_tags %}
+        {% if collection.all_types contains tag %}
+        {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+        {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+        {% endif %}
       {% endif %}
       {% endfor %}
     </select>
