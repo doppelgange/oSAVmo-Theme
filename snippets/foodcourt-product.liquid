@@ -64,10 +64,13 @@
          <span class="was_price">
             {% if variant.compare_at_price and variant.price < variant.compare_at_price %}
               {{ variant.compare_at_price | money }}
+           {% comment %}
             {% else %}
               {{ variant.price |divided_by:settings.discount | money }}
+           {% endcomment %}
             {% endif %}
          </span>
+        {% comment %}
          <span class="sale">
             You Save 
             {% if variant.compare_at_price > variant.price %}
@@ -77,6 +80,7 @@
             {% endif %}
             %
          </span>
+        {% endcomment %}
         {% endif %}
         <!--no compare price for product end--> 
       

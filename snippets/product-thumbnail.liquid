@@ -81,7 +81,9 @@
           {% if product.compare_at_price_max > product.price %}
               <span class="was_price">{{ product.compare_at_price_max | money }}</span>
             {% else %}
+            {% unless collection_filter == true %}
               <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
+            {% endunless %}
           {% endif %}
           </span>
           <!--no compare price for product end-->        
@@ -142,7 +144,7 @@
           <span class="sold_out">{% if product.available == false %}
             {% assign collection_filter = false %}
             {% for collection in product.collections %}
-            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" %}
+            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" or collection.handle =="food-court" %}
             {% assign collection_filter = true %}           
             {% endif%}
             {% endfor %}
@@ -160,17 +162,20 @@
           {% if product.compare_at_price_max > product.price %}
               <span class="was_price">{{ product.compare_at_price_max | money }}</span>
             {% else %}
+              {% unless collection_filter == true %}
               <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
+              {% endunless %}
           {% endif %}
           </span>
           <span class="sale">
-            You Save 
             {% if product.compare_at_price > product.price %}
-              {{ product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price }}
+              You Save {{ product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price }} %
             {% else %}
-                {{ 1 | minus: settings.discount |times:100 | remove: '.0'}}
+            {% unless collection_filter == true %}
+              You Save {{ 1 | minus: settings.discount |times:100 | remove: '.0'}} %
+            {% endunless %}
             {% endif %}
-            %
+          
          </span>
                  
           {% comment %}
