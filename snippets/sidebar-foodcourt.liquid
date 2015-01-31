@@ -1,20 +1,16 @@
 <div  class="sixteen columns fc_sidebar">
 <div class="four columns fc_sidebar_content"> 
-  
-  
+  {% assign title =  collection.title %}
+  {% assign logo = collection.image | img_url: 'medium' %}
   {% for vendor in collection.all_vendors %}
     {% if current_tags contains vendor %}
       {% assign title = vendor %}
         {% assign logo = vendor | handleize | append:'.jpg' | asset_url %}
-      {% break %}
-    {% else %}
-      {% assign title =  collection.title %}
-      {% assign logo = collection.image | img_url: 'medium' %}
+      {% break %}      
     {% endif %}
   {% endfor %}
   
-  <h4>{{ title }}</h4>
-  
+  <h4>{{ title }}</h4> 
   <span><img src='{{ logo }}'></span>
 </div>
 
@@ -60,7 +56,7 @@
       {% assign tag = t | strip %}
       {% if current_tags contains tag %}
       <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.all_tags contains tag %}
+      {% elsif collection.tags contains tag %}
       <option value="{{ tag | handle }}">{{ tag }}</option>
       {% endif %}
       {% endfor %}
@@ -69,17 +65,13 @@
   
 <div class="four columns filter_margin_bottom omega filter_margin_top">
    <label class="inline">{{ 'collections.sidebar.type' | t }}: </label>
-   {% for type in collection.all_types %}
-        {% assign types = types | append:type |append: ',' %}       
-   {% endfor %} 
-   {% assign tags = types | split: ',' %}
     <select class="coll-filter">
       <option value="">All</option>
       {% for tag in collection.all_tags %}
         {% if collection.all_types contains tag %}
         {% if current_tags contains tag %}
           <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-        {% else %}
+        {% elsif collection.tags contains tag %}
           <option value="{{ tag | handle }}">{{ tag }}</option>
         {% endif %}
       {% endif %}
