@@ -5239,20 +5239,15 @@ you can use the generic selector below, but it's slower:
 }
 .icon-google-plus:before {
   content: "\e00b";
-  color:#ffffff;
-  background-color:#DD503E;
 }
 .icon-facebook:before {
   content: "\e007";
-  color:#ffffff;
-  background-color:#4862A3;
 }
 .icon-instagram:before {
   content: "\e006";
 }
 .icon-twitter:before {
   content: "\e00c";
-  color:#7CACEE;
 }
 .icon-feed:before {
   content: "\e005";
@@ -5294,7 +5289,22 @@ you can use the generic selector below, but it's slower:
   content: "\e017";
 }
 
-
+li .icon-facebook:before {
+  color:#ffffff;
+  background-color:#4862A3;
+}
+li .icon-twitter:before {
+  color:#7CACEE;
+}
+li .icon-google-plus:before {
+  color:#ffffff;
+  background-color:#DD503E;
+}
+a#weibo.icon-weibo:hover { color:#E6162D !important;}
+a#facebook.icon-facebook:hover { color:#ffffff !important; background-color:#4862A3; }
+a#twitter.icon-twitter:hover { color:#7CACEE !important;}
+a#pinterest.icon-pinterest:hover { color:#CB2027 !important;}
+a#mail.icon-mail:hover { color:#176CED !important; }
 
 /* #Font-Face
 ================================================== */

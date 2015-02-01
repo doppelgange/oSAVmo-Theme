@@ -8,17 +8,17 @@
 
   {% capture twitter_name %}{% if settings.twitter_username != '' %}@{{ settings.twitter_username }}{% else %}{{ shop.name }}{% endif %}{% endcapture %}
 
-    <a href="https://twitter.com/intent/tweet?text={{ 'layout.social_sharing.twitter_share' | t: current_url: current_url, title: title, name: twitter_name }}" target="_blank" class="icon-twitter" title="{{ 'layout.social_sharing.twitter_title' | t }}"></a>
+    <a href="https://twitter.com/intent/tweet?text={{ 'layout.social_sharing.twitter_share' | t: current_url: current_url, title: title, name: twitter_name }}" target="_blank" class="icon-twitter"  id="twitter"  title="{{ 'layout.social_sharing.twitter_title' | t }}"></a>
 
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ current_url }}" target="_blank" class="icon-facebook" title="{{ 'layout.social_sharing.facebook_title' | t }}"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ current_url }}" target="_blank" class="icon-facebook" id="facebook" title="{{ 'layout.social_sharing.facebook_title' | t }}"></a>
 
-    <a href="http://service.weibo.com/share/share.php?url={{ current_url }}" target="_blank" class="icon-weibo" title="{{ 'layout.social_sharing.sina_title' | t }}"></a>
+    <a href="http://service.weibo.com/share/share.php?url={{ current_url }}" target="_blank" class="icon-weibo" id="weibo" title="{{ 'layout.social_sharing.sina_title' | t }}"></a>
     
   {% if social-buttons != 'article' %}
-      <a href="//pinterest.com/pin/create/button/?url={{ current_url }}&amp;media={{ product.featured_image | product_img_url: 'master' | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:' }}&amp;description={{ 'layout.social_sharing.pinterest_share' | t: title: title, name: shop.name }}" target="_blank" class="icon-pinterest" title="{{ 'layout.social_sharing.pinterest_title' | t }}"></a>&nbsp;
+      <a href="//pinterest.com/pin/create/button/?url={{ current_url }}&amp;media={{ product.featured_image | product_img_url: 'master' | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:' }}&amp;description={{ 'layout.social_sharing.pinterest_share' | t: title: title, name: shop.name }}" target="_blank" class="icon-pinterest" id="pinterest" title="{{ 'layout.social_sharing.pinterest_title' | t }}"></a>&nbsp;
     {% endif %}
 
-    <a href="mailto:?subject={{ 'layout.social_sharing.email_subject' | t: title: title }}&amp;body={{ 'layout.social_sharing.email_message' | t: title: title, name: shop.name }}%0D%0A%0D%0A{{ current_url }}" target="_blank" class="icon-mail" title="{{ 'layout.social_sharing.email_title' | t }}"></a>
+    <a href="mailto:?subject={{ 'layout.social_sharing.email_subject' | t: title: title }}&amp;body={{ 'layout.social_sharing.email_message' | t: title: title, name: shop.name }}%0D%0A%0D%0A{{ current_url }}" target="_blank" class="icon-mail" id="mail" title="{{ 'layout.social_sharing.email_title' | t }}"></a>
 </span>
 
 {% endcapture %}
