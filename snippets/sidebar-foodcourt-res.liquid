@@ -1,0 +1,15 @@
+<div class="four columns mobile_hidden fc_main omega alpha">
+    <h4>{{ collection.title }}</h4>
+    <ul>   
+   <!-- new siderbar method read from types not complete yet-->   
+      {% if collection.current_type %}
+          {% for product_type in collections['all'].all_types %}
+            <li><a href="/collections/all/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
+            {% endfor %}    
+      {% else %}
+          {% for product_type in collection.all_types %}
+            <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
+            {% endfor %}
+        {% endif %}
+  </ul>
+  </div>

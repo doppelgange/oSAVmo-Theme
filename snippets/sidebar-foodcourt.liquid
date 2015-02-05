@@ -1,146 +1,84 @@
-<div  class="sixteen columns fc_sidebar">
-<div class="four columns fc_sidebar_content"> 
-  {% assign title =  collection.title %}
-  {% assign logo = collection.image | img_url: 'medium' %}
-  {% for vendor in collection.all_vendors %}
-    {% if current_tags contains vendor %}
-      {% assign title = vendor %}
-        {% assign logo = vendor | handleize | append:'.jpg' | asset_url %}
-      {% break %}      
-    {% endif %}
-  {% endfor %}
-  
-  <h4>{{ title }}</h4> 
-  <span><img src='{{ logo }}'></span>
-</div>
-
-<div class="twelve columns fc_sidebar_content">
-
-<div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.style' | t }}: </label> 
-    <select class="coll-picker">
-    <option value="food-court">All</option>
-    {% for link in linklists['food-court'].links %}
-    {% assign c = link.object %}
-    {% if collection.handle == c.handle %}
-    <option value="{{ c.handle }}" selected>{{ c.title }}</option>
-    {% else %}
-    <option value="{{ c.handle }}">{{ c.title }}</option>
-    {% endif %}
-    {% endfor %}
-    </select>
-</div>
-    
-<div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.restaurant' | t }}: </label>
-    <select class="coll-filter">
-      <option value="">All</option>          
-      {% for tag in collection.all_tags %}
-        {% if collection.all_vendors contains tag %}
-        {% if current_tags contains tag %}
-          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-        {% else %}
-          <option value="{{ tag | handle }}">{{ tag }}</option>
-        {% endif %}
+<div class="four columns mobile_hidden fc_main omega alpha">  
+	<div class="fc_tab_nav">
+    <h4>I'm hungry for... </h4>
+    <ul>
+	<li class="nav_current" id="nav1" onMouseOver="javascript:doClick(this)">Asian Style Food</li> | 
+	<li class="nav_link" id="nav2" onMouseOver="javascript:doClick(this)">Western Style Food</li>
+	</ul>
+    <ul class=" fc_nav_dis coll-filter" id="sub1">
+      <li><input type='radio' value="asian" name="type" {%if current_tags contains 'asian' %} checked="checked" {% endif %}/>All Asian</li>   
+      {% for tag in collections['food-court'].all_tags %}
+        {% if collections['asian-style-food-court'].all_types contains tag %}
+        	{% if current_tags contains tag %}
+        	<li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="type"  />{{ tag }} </li> 
+        	{% else %}
+        	<li><input type='radio' value="{{ tag | handle }}" name="type" />{{ tag }}</li>
+        	{% endif %}
       {% endif %}
       {% endfor %}
-    </select>
-  </div>
-    
-<div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.location' | t }}: </label> 
-   {% assign tags = settings.filter_location | split: ',' %}
-    <select class="coll-filter">
-      <option value="">All</option>
-      {% for t in tags %}
-      {% assign tag = t | strip %}
-      {% if current_tags contains tag %}
-      <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-      {% elsif collection.tags contains tag %}
-      <option value="{{ tag | handle }}">{{ tag }}</option>
+ 	</ul>
+     <ul class="fc_nav_undis coll-filter"  id="sub2">
+      <li><input type='radio' value="western" name="type" {%if current_tags contains 'western' %} checked="checked" {% endif %}/>All Western</li>   
+      {% for tag in collections['food-court'].all_tags %}
+        {% if collections['european-style-food-court'].all_types contains tag %}
+        	{% if current_tags contains tag %}
+        	<li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="type"  />{{ tag }} </li> 
+        	{% else %}
+        	<li><input type='radio' value="{{ tag | handle }}" name="type" />{{ tag }}</li>
+        	{% endif %}
       {% endif %}
       {% endfor %}
-    </select>
+   </ul>
   </div>
-  
-<div class="four columns filter_margin_bottom omega filter_margin_top">
-   <label class="inline">{{ 'collections.sidebar.type' | t }}: </label>
-    <select class="coll-filter">
-      <option value="">All</option>
-      {% for tag in collection.all_tags %}
-        {% if collection.all_types contains tag %}
-        {% if current_tags contains tag %}
-          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-        {% elsif collection.tags contains tag %}
-          <option value="{{ tag | handle }}">{{ tag }}</option>
-        {% endif %}
-      {% endif %}
-      {% endfor %}
-    </select>
-  </div>
-  
-    <div class="four columns filter_margin_bottom omega filter_margin_top">
-          <label for="sort" class="inline">{{ 'collections.sorting.title' | t }}: </label> 
-          <select id="sort">
-            <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
-            <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
-            <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
-            <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
-            <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
-            <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
-            <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
-            <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
-          </select>
-          <script type="text/javascript">
-            // <![CDATA[  
-              $('#sort')
-                .val('{{ collection.sort_by | default: collection.default_sort_by  }}')
-                .bind('change', function() {
-                  Shopify.queryParams.sort_by = $(this).val();
-                  location.search = $.param(Shopify.queryParams);
-              });
-            // ]]>
-          </script>
-        </div>
-  </div>
+  <div class="fc_tab_nav">
+  <h4>Promotion Only</h4>
+   <ul>
+     <li><input type='checkbox' value="promotion" {% if current_tags contains "promotion" %} checked {% endif %}   name="promotion"  />Show Promotion Items Only</li>
+  </ul>
+  <h4>Change View</h4>
+   <ul>
+     <li><input type='radio' value="food-court" {% if collection.handle == "food-court" %} checked ="checked" {% endif %}  name="view"  />Cuisine View</li>
+     <li><input type='radio' value="food-court-res" {% if collection.handle ==  "food-court-res" %} checked ="checked" {% endif %}  name="view"  />Restaurant View</li>
+  </ul>
+</div>
 </div>
 
+
+  
 <script>
-  /* Product Tag Filters - Good for any number of filters on any type of collection page.
-     Give you product tag filter select element a class of coll-filter.
-     Give your collection select a class of coll-picker.
-     Brought to you by Caroline Schnapp. */
-  Shopify.queryParams = {};
-  if (location.search.length) {
-    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
-      aKeyValue = aCouples[i].split('=');
-      if (aKeyValue.length > 1) {
-        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
-      }
-    }
-  }
-  jQuery('.coll-picker').change(function() {
-    if (jQuery(this).val()) {
-      location.href = '/collections/' + jQuery(this).val();
-    }
-    else {
-      location.href = '/collections/all';
-    }
-  });
+
+  $(document).ready(function(){
+ 	var disid = jQuery('input[name=type]:checked').closest('ul').attr('id');
+    var linkid = disid.replace('sub','nav');
+    document.getElementById(disid).style.display = "block";
+    document.getElementById(linkid).className = "nav_current";
+    $('.coll-filter').not($('#'+disid)).each(function(){
+        var undisid = $(this).attr('id');
+  		document.getElementById(undisid).style.display = "none";
+        var undislinkid = undisid.replace('sub','nav');
+        document.getElementById(undislinkid).className = "nav_link";
+    });
+
+  }); 
+  
   var collFilters = jQuery('.coll-filter');
   collFilters.change(function() {
     delete Shopify.queryParams.page;
     var newTags = [];
-    collFilters.each(function() { 
-      if (jQuery(this).val()) {
-        newTags.push(jQuery(this).val());
-      }
-    });
+   
+    newTags.push(jQuery('#location').val());
+    if(jQuery('input[name=type]:checked').val() != ''){
+    	newTags.push(jQuery('input[name=type]:checked').val());
+    }
+    if($("input[name='promotion']").is(':checked')){
+    	newTags.push($.trim($("input[name='promotion']").val()));
+    } 
+
     {% if collection.handle %}
     var newURL = '/collections/{{ collection.handle }}';
     if (newTags.length) {
       newURL += '/' + newTags.join('+');
-    }
+    }    
     var search = jQuery.param(Shopify.queryParams);
     if (search.length) {
       newURL += '?' + search;
@@ -156,4 +94,67 @@
     location.search = jQuery.param(Shopify.queryParams);
     {% endif %}      
   });
+  
+  $("input[name='promotion']").click(function(){
+    var link = window.location.href;
+    if(link.indexOf('?')){
+      var linkArray = link.split('?');
+    }
+    if(linkArray){link=linkArray[0];var sort=linkArray[1];}
+        
+    if($("input[name='promotion']").is(':checked')){    
+      if (link.indexOf('promotion') == -1 ){
+         link += "+promotion";
+        if (sort){
+        link =link+"?"+sort;     
+        }
+      	 location.href = link;
+      }        
+    }
+    else
+    {
+     if (link.indexOf('promotion')){
+         link=link.replace("+promotion","");  
+           if (sort){
+        link =link+"?"+sort;     
+        }
+         location.href = link;
+      }   
+    }
+  });
+  
+   $("input[name='view']").change(function(){
+  	var link = window.location.href;
+     if(link.indexOf('?')){
+        link=link.split('?');
+        link=link[0];         
+     }
+    var handle = $('input[name="view"]:checked').val();
+    var original=$('input[name="view"]:not(:checked)').val();
+    if(link){
+   		link=link.replace(original,handle);
+   		location.href = link;
+    }
+
+  });
+  
+   function doClick(o){
+	 o.className="nav_current";
+	 var j;
+	 var id;
+	 var e;
+	 for(var i=1;i<=2;i++){
+	   id ="nav"+i;
+	   j = document.getElementById(id);
+	   e = document.getElementById("sub"+i);
+	   if(id != o.id){
+	   	 j.className="nav_link";
+	   	 e.style.display = "none";
+	   }else{
+			e.style.display = "block";
+	   }
+	 }
+	};
+
+
 </script>

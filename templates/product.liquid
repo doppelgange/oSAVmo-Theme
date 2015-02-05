@@ -1,6 +1,5 @@
 <div class="sixteen columns" style="margin-left:0px;">
-{% if collection.handle == 'food-court' or  collection.handle contains 'style-food'%}
-  {% include 'sidebar-foodcourt'%}
+{% if collection.title == product.vendor %}
   {% include 'foodcourt-product'%}
 {% else %}
 {% if settings.product_sidebar %}

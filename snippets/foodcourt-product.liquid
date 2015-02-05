@@ -1,4 +1,6 @@
-<div class="sixteen columns page_border fc_content" itemscope itemtype="http://data-vocabulary.org/Product">
+<div class="sixteen columns page_border fc_main" style="padding:0; margin-top:0;">
+{% include 'sidebar-foodcourt-res' %}
+<div class="twelve columns fc_main alpha omega" itemscope itemtype="http://data-vocabulary.org/Product">
    <div class="clearfix breadcrumb mobile_hidden">
     <div class="right">
       {% if collection.previous_product %}
@@ -147,7 +149,10 @@
         
         
        
-    <div class="four columns">    
+
+  </div>
+    
+  
        <div class="description" itemprop="description">
           <h4 class="title">{{ 'products.product.description' | t }}</h4>
            <div class="section clearfix">
@@ -157,8 +162,7 @@
               {% endif %}
            </div>  
        </div>       
-    </div>
-  </div>
+
     
       <!-- Product Reviews Starts -->
       <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
@@ -196,3 +200,4 @@
     {% endif %}
   {% endif %}
 </div>
+  </div>

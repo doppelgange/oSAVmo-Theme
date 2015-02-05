@@ -1,0 +1,52 @@
+{% assign count = 0 %}
+  {% for collection in collections %}
+      {% unless collection.handle contains 'food-court' %}
+      {% assign find=true %}
+      {% for tag in current_tags %}
+         {% unless collection.all_tags contains tag %} 
+           {% assign find = false %}
+      	 {% endunless %}
+      {% endfor %}
+      {% unless find == false %}
+      {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+  
+    <div class="twelve columns restaurant">
+    <a href="{{ collection.url }}" title="{{ collection_title }}">
+    <div class="three columns omega thumbnail">
+       {% if collection.image %}
+        <img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}" style="margin-bottom:0px"/>
+      {% else %}
+        <img src="{{ collection.products.first.featured_image | product_img_url: 'grande' }}" alt="{{ collection.title | escape }}" style="margin-bottom:0px"/>
+      {% endif %}    
+    </div>
+      
+      {% assign restaurant_info = collection.description | split:"--" %}
+      {% assign restaurant_address = restaurant_info[0] | strip  %}
+      {% assign restaurant_map = restaurant_info[1] | strip "%}
+    <div class="six columns thumbnail">
+      {{ restaurant_address }}
+    </div>
+      <div class="three columns alpha thumbnail">
+       <iframe src="{{ restaurant_map }}" width="100%" height="100%" frameborder="0" style="border:0"></iframe> 
+    </div></a>
+    <br />
+    </div>
+  
+    {% if collections_per_row == "2" %}
+      {% cycle '', new_row %}
+    {% elsif collections_per_row == "3" %}
+      {% cycle '', '', new_row %}    
+    {% elsif collections_per_row == "4" %}  
+      {% cycle '', '', '', new_row %}
+    {% endif %}  
+      
+      {% assign count = count | plus:1 %}
+      {% endunless%} 
+      
+  	 {% endunless %}  
+  {% endfor %}
+    
+      {% if count == 0 %}
+       It seems the well of options has run dry.
+	   If you want to dial back your search criteria, we'll find you some food.
+      {% endif %}

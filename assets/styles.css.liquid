@@ -4401,29 +4401,74 @@ opacity: 1;
 
 /*Food court CSS*/
 .fc_sidebar{
-  background-color: #fff; 
   border-radius:10px; 
   box-shadow: 0 0px 10px 0 #CCC;
-  margin-bottom: 10px;
-  margin-right: 0px;
-  margin-left: 0px;
-  padding:10px;
+  margin: 0px 0px 10px 0px;
+  padding:40px 10px 40px 10px;
+  background:url({{"fcbg.jpg" | asset_url }}) no-repeat;
 }
-
-.fc_content{
-  margin-right: 0px;
-  margin-left: 0px;
-  padding:10px;
+.fc_sidebar h1 {
+  color:#FFF;
+  font-size:40px;
+  text-align:center;
+}
+.fc_sidebar label{
+  color: #fff;
+  font-size: 18px;
+  text-align:left;
+  display:inline-block;
 }
 
 .fc_sidebar_content{
   margin-right:0px;
+  margin-left:0px;
+  text-align:center;
 }
 
-.fc_sidebar_content img{
-  height:100px;
-    width:100%;
+a.disabled{
+  background-color:#ccc; 
+  opacity:1;
 }
+.fc_main {
+ margin-bottom:10px;
+ margin-top:10px;
+ padding:0 0 0 10px;
+} 
+
+.fc_main_label {
+ 	padding: 0px 10px;
+	display: inline;
+	font-size: 20px;
+	color: red;
+}
+
+.change_location {
+ 	display: inline;
+	font-size: 10px;
+	text-decoration: underline;
+}
+.change_location a:hover{
+	text-decoration:none;
+}
+
+.fc_main ul{
+	list-style: none;
+    margin:10px 0 0 0;
+}
+
+.fc_main h4{
+    margin-bottom:0;
+}
+
+.fc_sortby{
+	text-align:right;
+    padding:10px 10px 10px 0;
+}
+
+.fc_sortby #sort-by{
+	width:auto;
+}
+
 .fc_select{
 display:inline-block;  
 width:auto;
@@ -4433,10 +4478,33 @@ width:auto;
 border: solid 1px #ECECEC;
 margin-top:5px;
 }
+.restaurant{
+border-bottom: solid 1px red;
+margin:5px 0px;
+}
+.fc_underline{
+border-bottom: 1px solid #ececec;
+
+}
+
+.fc_nav_dis{ display:block }
+.fc_nav_undis{ display:none }
 
 
+.nav_current{color: #FF6600;}
+.nav_current,.nav_link {
+cursor: pointer;
+display:inline;
+}
+.nav_current:hover, .nav_link:hover {
+	color: #FF6600;
+}
 
-
+.fc_tab_nav{
+	border: 1px #dcdcdc solid;
+    padding:10px;
+    margin-bottom:10px;
+}
 /*Food court CSS End*/
 
 /*search result page*/
@@ -5277,16 +5345,16 @@ you can use the generic selector below, but it's slower:
   content: "\e013";
 }
 .icon-qq:before {
-  content: "\e014";
+	content: "\e014";
 }
 .icon-wechat:before {
-  content: "\e015";
+	content: "\e015";
 }
 .icon-tencent-weibo:before {
-  content: "\e016";
+	content: "\e016";
 }
 .icon-weibo:before {
-  content: "\e017";
+	content: "\e017";
 }
 
 li .icon-facebook:before {
@@ -5300,11 +5368,15 @@ li .icon-google-plus:before {
   color:#ffffff;
   background-color:#DD503E;
 }
+li .icon-weibo:before {
+  color:#E6162D
+}
 a#weibo.icon-weibo:hover { color:#E6162D !important;}
 a#facebook.icon-facebook:hover { color:#ffffff !important; background-color:#4862A3; }
 a#twitter.icon-twitter:hover { color:#7CACEE !important;}
 a#pinterest.icon-pinterest:hover { color:#CB2027 !important;}
 a#mail.icon-mail:hover { color:#176CED !important; }
+a#google-plus.icon-google-plus:hover { color:#ffffff !important;background-color:#DD503E; }
 
 /* #Font-Face
 ================================================== */

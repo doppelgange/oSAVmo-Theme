@@ -1,0 +1,216 @@
+{% if foodcourt-product-thumbnail %}
+  <div class="{% if products_per_row == "2" %}six columns {% cycle 'alpha', 'omega' %}{% elsif products_per_row == "3" %}four columns {% cycle 'alpha', '', 'omega' %}{% else %}three columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+{% else %}
+  {% if thumbnail_display_cycle_group != blank %}
+  <div class="{% if products_per_row == "2" %}eight columns {% cycle thumbnail_display_cycle_group: 'alpha', 'omega' %}{% elsif products_per_row == "3" %}one-third column {% cycle thumbnail_display_cycle_group:'alpha', '', 'omega' %}{% elsif products_per_row == "4" %}four columns {% cycle thumbnail_display_cycle_group: 'alpha', '', '', 'omega' %}{% else %}one-fifth column {% cycle thumbnail_display_cycle_group:'alpha', '', '','', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+  {% else %}
+  <div class="{% if products_per_row == "2" %}eight columns {% cycle 'alpha', 'omega' %}{% elsif products_per_row == "3" %}one-third column {% cycle 'alpha', '', 'omega' %}{% elsif products_per_row == "4" %}four columns {% cycle 'alpha', '', '', 'omega' %}{% else %}one-fifth column {% cycle 'alpha', '', '','', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+  {% endif %}
+{% endif %}
+
+  {% if product.featured_image.alt contains 'youtube' or image.alt contains 'vimeo' %}
+    {% assign alt_text = product.title %}
+  {% else %}
+    {% assign alt_text = product.featured_image.alt %}
+  {% endif %}
+   
+    {% assign p_col = product.vendor | handleize %}
+    <a href="/collections/{{p_col}}/products/{{ product.handle}}" title="{{ product.title | escape }}">   
+    <div class="relative product_image">
+      <img {% if settings.align_height %}style="max-height:{{ settings.collection_height }}px"{% endif %} src="{{ 'loader.gif' | asset_url }}" data-src="{% if product.featured_image.size > 0 %}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if product.featured_image.size > 0 %}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ alt_text | escape }}" />
+     
+      <!-- Add Watermark for image Starts-->
+      {% for i in (1..6)%}
+      {% capture events_enable %}events_{{i}}_enable{% endcapture%}
+      {% capture events_collection %}events_{{i}}_collection{% endcapture%}
+      {% capture events_image %}events_{{i}}_img.png{% endcapture%}
+      {% assign eventscollection = settings[events_collection] %}
+      {% if settings[events_enable] and p_c_handle == collections[eventscollection].handle %}
+      <img class = "badge" src="{{ events_image | asset_url }}" alt="{{ alt_text | escape }}" />
+      {% endif %}
+      {% endfor %}            
+      <!-- Add Watermark for image Ends-->
+      
+      {% if settings.quick_shop_enabled %}
+      {% unless product.available == false %}
+        <span data-fancybox-href="#product-{{ product.id }}" class="quick_shop action_button" data-gallery="product-{{ product.id }}-gallery">
+          {{ 'collections.general.quick_shop' | t }}
+        </span>
+      {% endunless %}
+      {% endif %}
+    </div>
+
+    <div class="info">            
+      <span class="title">{{ product.title }}</span>
+        <!--no compare price for product --> 
+        <span class="price sale">
+        {% if product.available %}
+          {% if product.price_varies %}
+            <small><em>{{ 'products.general.from' | t }}</em></small>
+          {% endif %}
+          {{ product.price | money }}
+        {% else %}
+          <span class="sold_out">
+            {% assign collection_filter = false %}
+            {% for collection in product.collections %}
+            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" or collection.handle =="food-court" %}
+            {% assign collection_filter = true %}           
+            {% endif%}
+            {% endfor %}
+            
+            {% if collection_filter == true %}
+            {{ 'products.product.coming_soon' | t }}
+            {% else%}         
+            {{ 'products.product.sold_out' | t }}
+            {% endif %}
+            
+            - </span>{{ product.price | money }}
+        {% endif %}
+          <span class="was_price">   
+          {% if product.compare_at_price_max > product.price %}
+              <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+            {% else %}
+            {% unless collection_filter == true %}
+              <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
+            {% endunless %}
+          {% endif %}
+          </span>
+          <!--no compare price for product end-->        
+              
+  <!-- use compare price  -->    
+      {% comment %}
+      <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
+        {% if product.available %}
+          {% if product.price_varies %}
+            <small><em>{{ 'products.general.from' | t }}</em></small>
+          {% endif %}
+          {{ product.price_min | money }}
+        {% else %}
+          <span class="sold_out">{{ 'products.product.sold_out' | t }} - </span>{{ product.price_min | money }}
+        {% endif %}
+        {% if product.compare_at_price_max > product.price %}
+          <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+        {% endif %}
+       </span>
+        {% endcomment %}
+     <!-- use compare price end-->   
+        
+<!--Quick Add to Cart Starts -->
+{% unless product.available == false %}
+<form action="/cart/add" method="post" class="clearfix product_form quick_buy" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
+  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+  <input type="hidden" name="return_to" value="back" />
+  <input type="hidden" name="quantity"  value="1" />
+  <input type="submit" name="add" value="Add to Cart" class="quick_buy_cart" data-productid="{{ product.variants.first.id  }}"/> 
+</form>
+{% endunless %}
+<!--Quick Add to Cart Ends -->
+      </span>
+    </div>
+    {% if settings.sale_banner_enabled and product.compare_at_price_max > product.price %}
+      <div class="sale_banner">{{ 'collections.general.sale' | t }}</div>
+    {% endif %}
+    {% for col in product.collections %}
+      {% if col.handle == 'new' %}
+        <div class="new_banner">{{ 'collections.general.new' | t }}</div>
+      {% endif %}
+    {% endfor %}
+  </a>
+</div>
+
+{% if settings.quick_shop_enabled %}
+  <div id="product-{{ product.id }}" class="modal">
+    <div class="container section" style="width: inherit">
+      
+      <div class="eight columns" style="padding-left: 15px">
+        {% include 'product-images' with 'modal' %}
+      </div>
+      
+      <div class="six columns">
+        <h3>{{ product.title }}</h3>
+
+        <p class="modal_price">
+          <span class="sold_out">{% if product.available == false %}
+            {% assign collection_filter = false %}
+            {% for collection in product.collections %}
+            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" or collection.handle =="food-court" %}
+            {% assign collection_filter = true %}           
+            {% endif%}
+            {% endfor %}
+            
+            {% if collection_filter == true %}
+            {{ 'products.product.coming_soon' | t }}
+            {% else%}         
+            {{ 'products.product.sold_out' | t }}
+            {% endif %} - {% endif %}</span>
+          
+          <span class="current_price sale">
+            {{ product.price |  money }}
+          </span>
+          <span class="was_price">
+          {% if product.compare_at_price_max > product.price %}
+              <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+            {% else %}
+              {% unless collection_filter == true %}
+              <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
+              {% endunless %}
+          {% endif %}
+          </span>
+          <span class="sale">
+            {% if product.compare_at_price > product.price %}
+              You Save {{ product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price }} %
+            {% else %}
+            {% unless collection_filter == true %}
+              You Save {{ 1 | minus: settings.discount |times:100 | remove: '.0'}} %
+            {% endunless %}
+            {% endif %}
+          
+         </span>
+                 
+          {% comment %}
+          <span class="current_price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
+            {{ product.price | money }}
+          </span>
+          <span class="was_price">
+            {% if product.price < product.compare_at_price_max %}
+              {{ product.compare_at_price | money }} 
+            {% endif %}
+          </span>
+          {% endcomment %}
+        </p>
+
+        {% include 'product-notify-me' %}
+
+        {% if settings.product_description_position == "top" %}
+          {% if settings.quick_shop_full_description %}
+            {{ product.description | split: '<!-- split -->' | first }}
+          {% else %}
+            <p>
+              {{ product.description | strip_html | truncatewords: settings.description_words | replace: 'Description', '' | replace: 'Dimensions', '' | replace: 'Details', '' | replace: 'Specs', '' | replace: 'Shipping', ''  }}
+            </p>
+          {% endif %}
+          <p>
+            <a href="{{ product.url | within: collection }}" class="view_product_info" title="{{ product.title | escape }}">{{ 'collections.general.view_product_details_html' | t }}</a>
+          </p>
+          <hr />
+        {% endif %}
+        
+        {% include 'product-form' %}
+
+        {% if settings.product_description_position == "bottom" %}
+          <hr />
+          {% if settings.quick_shop_full_description %}
+            {{ product.description | split: '<!-- split -->' | first }}
+          {% else %}
+            <p>
+              {{ product.description | strip_html | truncatewords: settings.description_words | replace: 'Description', '' | replace: 'Dimensions', '' | replace: 'Details', '' | replace: 'Specs', '' | replace: 'Shipping', ''  }}
+            </p>
+          {% endif %}
+          <p>
+            <a href="{{ product.url | within: collection }}" class="view_product_info" title="{{ product.title | escape }}">{{ 'collections.general.view_product_details_html' | t }}</a>
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

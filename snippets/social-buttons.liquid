@@ -14,6 +14,8 @@
 
     <a href="http://service.weibo.com/share/share.php?url={{ current_url }}" target="_blank" class="icon-weibo" id="weibo" title="{{ 'layout.social_sharing.sina_title' | t }}"></a>
     
+  	<a href="https://plus.google.com/share?url={{ current_url }}" target="_blank" class="icon-google-plus" id="google-plus" title="{{ 'layout.social_sharing.google_title' | t }}"></a>
+
   {% if social-buttons != 'article' %}
       <a href="//pinterest.com/pin/create/button/?url={{ current_url }}&amp;media={{ product.featured_image | product_img_url: 'master' | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:' }}&amp;description={{ 'layout.social_sharing.pinterest_share' | t: title: title, name: shop.name }}" target="_blank" class="icon-pinterest" id="pinterest" title="{{ 'layout.social_sharing.pinterest_title' | t }}"></a>&nbsp;
     {% endif %}

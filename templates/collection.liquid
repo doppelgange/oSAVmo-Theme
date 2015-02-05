@@ -1,34 +1,4 @@
-{% comment %}
-{% if collection.handle == 'food-court' %}
-    {% include 'sidebar-foodcourt' %}
-     <div class="sixteen columns content_col_border">
-    {% assign linklist = linklists["food-court-f"] %}
-    {% assign collections_per_row = settings.frontpage_collections_per_row %}
-    {% include 'collection-loop'%}
-  <br class="clear" />
-  </div>
-{% elsif collection.handle == 'food-court' and current_tags != " " %}
-    {% include 'sidebar-foodcourt'%}
-  <div class="sixteen columns content_col_border">
-     {% include 'foodcourt-product-list' %}
-    </div>
-{% elsif collection.handle contains 'fc' %}
-    {% include 'sidebar-foodcourt'%}
-  <div class="sixteen columns content_col_border">
-     {% include 'foodcourt-product-list' %}
-    </div>
-{% endif %}
-{% endcomment %}
-
-
-{% if collection.handle == 'food-court' or  collection.handle contains 'style-food'%}
-    {% include 'sidebar-foodcourt'%}
-  <div class="sixteen columns page_border fc_content">
-     {% include 'foodcourt-product-list' %}
-    </div>
-{% else %}
-<!--side bar navigation-->
-  {% if settings.collection_sidebar %}
+{% if settings.collection_sidebar %}
       {% include 'sidebar-new' %}
   <div class="twelve columns content_col_border fix-margin ">   
   {% else %}
@@ -279,5 +249,3 @@
 
 
 {% endpaginate %}
-
-{% endif %}

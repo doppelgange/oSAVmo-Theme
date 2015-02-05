@@ -1,0 +1,45 @@
+{% paginate collection.products by settings.pagination_limit %}
+   {% include 'pagination_top' %}
+
+    {% if collection.products.size == 0 %}
+      <div class="section clearfix">     
+        <p class="quote" style="float:left;">It seems the well of options has run dry. If you want to dial back your search criteria, we'll find you some food.</p>
+      </div>
+    {% else %}
+      {% assign products = collection.products %}
+      {% assign products_per_row = settings.products_per_row %}
+      {% assign product_found = false %}
+{% assign skip = false %}
+
+{% capture new_row %}
+    <br class="clear product_clear" />
+{% endcapture %}
+
+{% for product in products limit: limit %}
+
+  {% if product.id == skip_product.id or skip == true %}
+    {% assign product_found = true %}
+  {% else %}
+    {% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
+      {% assign skip = true %}
+    {% else %}
+
+      {% include 'foodcourt-product-thumbnail' with settings.collection_sidebar %}
+
+      {% if products_per_row == "2" %}
+        {% cycle '', new_row %}
+      {% elsif products_per_row == "3" %}
+        {% cycle '', '', new_row %}    
+      {% elsif products_per_row == "4" %}  
+        {% cycle '', '', '', new_row %}
+      {% endif %}
+    {% endif %}    
+  {% endif %} 
+{% endfor %}
+    {% endif %}
+
+    {% include 'pagination' with settings.collection_sidebar %}
+
+
+
+{% endpaginate %}
