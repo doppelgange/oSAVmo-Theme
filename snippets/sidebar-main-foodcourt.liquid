@@ -1,32 +1,32 @@
 <div class="sixteen columns fc_sidebar">
   <h1>Order Food Online From Local Restaurants</h1>
   <div class="sixteen columns fc_sidebar_content">
-     <div class="four columns offset-by-two">
-     	<label>City: </label>
+     <div class="four columns offset-by-four">
+      <label>City: </label>
             {% for tag in collection.all_tags %}      
-      			{% if tag contains "-" %}
-       				{% assign locations = locations | append: tag | append: "," %}
-      				{% assign city = tag | split:"-" %}
+            {% if tag contains "-" %}
+              {% assign locations = locations | append: tag | append: "," %}
+              {% assign city = tag | split:"-" %}
                     {% assign cities = cities | append:city.first | append:"," %}
-     			{% endif %}
-    		{% endfor %}
+          {% endif %}
+        {% endfor %}
             {% assign cities = cities | split: "," | uniq %}   
-    	<select class="city-picker">
-      	  <option value="">All</option>
+      <select class="city-picker">
+          <option value="">All</option>
           {% for city in cities %}
-		  <option value="{{ city }}"> {{ city  }} </option>
+      <option value="{{ city }}"> {{ city  }} </option>
           {% endfor %}
-    	</select>
+      </select>
       </div>
 
       <div class="four columns">
          <input type="hidden" value='{{locations}}' name="location">
          <label>{{ 'collections.sidebar.location' | t }}: </label>
-    	 <select class="coll-filter" id="suburb">
-      		<option value="">All</option>
+       <select class="coll-filter" id="suburb">
+          <option value="">All</option>
          </select>
       </div>  
-        
+    {% comment %}    
     <div class="four columns">
     <label>{{ 'collections.sidebar.type' | t }}: </label>
     <select class="coll-filter">
@@ -42,14 +42,15 @@
       {% endfor %}
     </select> 
     </div>
+     {% endcomment %}  
      </div>
 
     <div class="sixteen columns fc_sidebar_content">  
-        <input type='radio' value="food-court" checked="checked"  name="view"  /><label>Cuisine View</label>
-        <input type='radio' value="food-court-res"   name="view"  /><label>Restaurant View</label>
-      	<input type='checkbox' value="promotion"   name="promotion"  /><label>Show Promotion Items Only</label>
+      <div class="four column offset-by-four"><input type='radio' value="food-court" checked="checked"  name="view"  /><label>Cuisine View</label></div>
+      <div class="four column"><input type='radio' value="food-court-res"   name="view"  /><label>Restaurant View</label></div>
+      <div class="four column"><input type='checkbox' value="promotion"   name="promotion"  /><label>Show Promotion Items Only</label></div>
      </div>
-  	<div class="sixteen columns fc_sidebar_content">
+    <div class="sixteen columns fc_sidebar_content">
        <a class="action_button disabled" id="foodsearch">Search Restaurants</a>
     </div>  
   </div>
@@ -67,11 +68,11 @@
        if (value){
          var locationArray = value.split('-');       
          if (locationArray[0] ==city ){
-			suburbObj.options.add(new Option(locationArray[1],value.toLowerCase().replace(" ", "-")));
+      suburbObj.options.add(new Option(locationArray[1],value.toLowerCase().replace(" ", "-")));
          }     
        }    
      });  
-  	});
+    });
   
   var collFilters = jQuery('.coll-filter');
   collFilters.change(function() {
@@ -80,11 +81,11 @@
     collFilters.each(function() { 
       if (jQuery(this).val()) {
         newTags.push($.trim(jQuery(this).val()));   
-    	}
+      }
       }
     );   
     if($("input[name='promotion']").is(':checked')){
-    	newTags.push($.trim($("input[name='promotion']").val()));
+      newTags.push($.trim($("input[name='promotion']").val()));
     } 
     
     
@@ -96,8 +97,8 @@
 
     
     if($('#suburb').val()!=""){
-      	$("#foodsearch").removeClass("disabled");
-    	$("#foodsearch").prop("href", newURL);
+        $("#foodsearch").removeClass("disabled");
+      $("#foodsearch").prop("href", newURL);
     }
     else{
        $("#foodsearch").addClass("disabled").removeAttr("href");
@@ -106,29 +107,29 @@
   
 
   $("input[name='view']").change(function(){
-  	var link = $("#foodsearch").attr("href");
+    var link = $("#foodsearch").attr("href");
     var handle = $('input[name="view"]:checked').val();
     var original=$('input[name="view"]:not(:checked)').val();
     if(link){
-   		link=link.replace(original,handle);
-   		 $("#foodsearch").prop("href", link);
+      link=link.replace(original,handle);
+       $("#foodsearch").prop("href", link);
     }
 
   });
   
   $("input[name='promotion']").click(function(){
     if($("input[name='promotion']").is(':checked')){
-    	var link = $("#foodsearch").attr("href");
+      var link = $("#foodsearch").attr("href");
         if(link){
-   			link += "+promotion";
-   		 	$("#foodsearch").prop("href", link);
-    	}
+        link += "+promotion";
+        $("#foodsearch").prop("href", link);
+      }
     }
     else
     {
-    	var link = $("#foodsearch").attr("href");
-    		link=link.replace("+promotion","");
-   		 $("#foodsearch").prop("href", link);
+      var link = $("#foodsearch").attr("href");
+        link=link.replace("+promotion","");
+       $("#foodsearch").prop("href", link);
     
     }
   });

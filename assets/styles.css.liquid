@@ -1046,7 +1046,7 @@ table { margin-bottom: 20px;}
 .relative { position: relative; }
 .align_right { text-align:right }
 .align_left { text-align: left; }
-.container div.mobile_only, span.mobile_only { display:none; }
+.container div.mobile_only, span.mobile_only,label.mobile_only,select#type_picker.mobile_only { display:none; }
 .no_border { border: none !important; }
 .extra_padding { padding-top: 4px; }
 div.hidden { display: none; }
@@ -4100,7 +4100,7 @@ div.cloudzoom-ajax-loader {
 .news ul{
   margin-left:10px;
   }
-.news,.promotion-list,.feature-list{background-color:#fff;}
+.news,.promotion-list,.feature-list,.restaurant-list{background-color:#fff;}
 .news h4{
   background-color: #E50112;
   padding: 0px 5px 0px 10px;
@@ -4112,7 +4112,7 @@ div.cloudzoom-ajax-loader {
 }
 
 /* Promotion List Starts*/
-.promotion-list-header-item,.feature-list-header-item{
+.promotion-list-header-item,.feature-list-header-item,.restaurant-list-header-item{
   padding:5px 10px;
   font-weight:bold;
   cursor:pointer;
@@ -4123,7 +4123,7 @@ div.cloudzoom-ajax-loader {
 .promotion-list-header-item a:hover,.feature-list-header-item a:hover{
   color:#604A3F;
 }
-.promotion-list-header,.feature-list-header{
+.promotion-list-header,.feature-list-header,.restaurant-list-header{
   padding:0px;
   margin-bottom: 0px;
   background-color: #E50112;
@@ -4432,27 +4432,27 @@ a.disabled{
 .fc_main {
  margin-bottom:10px;
  margin-top:10px;
- padding:0 0 0 10px;
+ padding:0 0 0 5px;
 } 
 
 .fc_main_label {
- 	padding: 0px 10px;
-	display: inline;
-	font-size: 20px;
-	color: red;
+  padding: 0px 10px;
+  display: inline;
+  font-size: 20px;
+  color: red;
 }
 
 .change_location {
- 	display: inline;
-	font-size: 10px;
-	text-decoration: underline;
+  display: inline;
+  font-size: 10px;
+  text-decoration: underline;
 }
 .change_location a:hover{
-	text-decoration:none;
+  text-decoration:none;
 }
 
 .fc_main ul{
-	list-style: none;
+  list-style: none;
     margin:10px 0 0 0;
 }
 
@@ -4461,12 +4461,12 @@ a.disabled{
 }
 
 .fc_sortby{
-	text-align:right;
+  text-align:right;
     padding:10px 10px 10px 0;
 }
 
 .fc_sortby #sort-by{
-	width:auto;
+  width:auto;
 }
 
 .fc_select{
@@ -4477,6 +4477,7 @@ width:auto;
 .fc_notice{
 border: solid 1px #ECECEC;
 margin-top:5px;
+padding:5px;
 }
 .restaurant{
 border-bottom: solid 1px red;
@@ -4497,13 +4498,17 @@ cursor: pointer;
 display:inline;
 }
 .nav_current:hover, .nav_link:hover {
-	color: #FF6600;
+  color: #FF6600;
 }
 
 .fc_tab_nav{
-	border: 1px #dcdcdc solid;
+  border: 1px #dcdcdc solid;
     padding:10px;
     margin-bottom:10px;
+}
+
+.fc_p{
+text-align: center;
 }
 /*Food court CSS End*/
 
@@ -5202,7 +5207,7 @@ margin: 0 0 5px;
       border-radius: 0px;
     }
     /*Feature List*/
-    .promotion-list-header-item, .feature-list-header-item{
+    .promotion-list-header-item, .feature-list-header-item,.restaurant-list-header-item{
       padding:0px;
     }
     h4.panel-header {
@@ -5219,6 +5224,54 @@ margin: 0 0 5px;
       border-radius: 0px;
   }
   
+  
+  /*Mobile Food Court*/
+.fc_sidebar{
+  padding:10px 0px;
+  border-radius: 0px; 
+}
+.fc_sidebar h1 {
+  font-size: 25px;
+}
+.fc_sortby {
+  text-align:left;
+  padding:10px 5px;
+  margin-left:0px !important;
+}
+.fc_main {
+  padding:0px;  
+  margin-left:0px !important;
+  margin-top:5px !important;
+}
+.fc_main_label {
+  padding: 5px;
+  font-size: 18px;
+}
+.page_border {
+  border-radius:0px;
+}
+.change_location {
+  padding: 5px;
+}
+.fc_tab_nav,.fc_tab_nav li{
+ margin-bottom: 0px;
+ padding:0px;
+}
+.fc_tab_nav ul{
+margin-top: 0px;
+}
+label.mobile_only{
+  display:inline-block;
+  }
+  
+select#type_picker.mobile_only {
+  width:auto;
+  display:inline-block;
+  margin:0;
+}
+
+
+/*Mobile Food Court End*/
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
@@ -5345,16 +5398,16 @@ you can use the generic selector below, but it's slower:
   content: "\e013";
 }
 .icon-qq:before {
-	content: "\e014";
+  content: "\e014";
 }
 .icon-wechat:before {
-	content: "\e015";
+  content: "\e015";
 }
 .icon-tencent-weibo:before {
-	content: "\e016";
+  content: "\e016";
 }
 .icon-weibo:before {
-	content: "\e017";
+  content: "\e017";
 }
 
 li .icon-facebook:before {
@@ -5369,7 +5422,8 @@ li .icon-google-plus:before {
   background-color:#DD503E;
 }
 li .icon-weibo:before {
-  color:#E6162D
+  color:#E6162D;
+  background-color: #fff;
 }
 a#weibo.icon-weibo:hover { color:#E6162D !important;}
 a#facebook.icon-facebook:hover { color:#ffffff !important; background-color:#4862A3; }

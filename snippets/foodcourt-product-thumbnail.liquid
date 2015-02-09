@@ -42,43 +42,6 @@
 
     <div class="info">            
       <span class="title">{{ product.title }}</span>
-        <!--no compare price for product --> 
-        <span class="price sale">
-        {% if product.available %}
-          {% if product.price_varies %}
-            <small><em>{{ 'products.general.from' | t }}</em></small>
-          {% endif %}
-          {{ product.price | money }}
-        {% else %}
-          <span class="sold_out">
-            {% assign collection_filter = false %}
-            {% for collection in product.collections %}
-            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" or collection.handle =="food-court" %}
-            {% assign collection_filter = true %}           
-            {% endif%}
-            {% endfor %}
-            
-            {% if collection_filter == true %}
-            {{ 'products.product.coming_soon' | t }}
-            {% else%}         
-            {{ 'products.product.sold_out' | t }}
-            {% endif %}
-            
-            - </span>{{ product.price | money }}
-        {% endif %}
-          <span class="was_price">   
-          {% if product.compare_at_price_max > product.price %}
-              <span class="was_price">{{ product.compare_at_price_max | money }}</span>
-            {% else %}
-            {% unless collection_filter == true %}
-              <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
-            {% endunless %}
-          {% endif %}
-          </span>
-          <!--no compare price for product end-->        
-              
-  <!-- use compare price  -->    
-      {% comment %}
       <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
         {% if product.available %}
           {% if product.price_varies %}
@@ -86,15 +49,13 @@
           {% endif %}
           {{ product.price_min | money }}
         {% else %}
-          <span class="sold_out">{{ 'products.product.sold_out' | t }} - </span>{{ product.price_min | money }}
+          <span class="sold_out">{{ 'products.product.coming_soon' | t }} - </span>{{ product.price_min | money }}
         {% endif %}
         {% if product.compare_at_price_max > product.price %}
           <span class="was_price">{{ product.compare_at_price_max | money }}</span>
         {% endif %}
-       </span>
-        {% endcomment %}
-     <!-- use compare price end-->   
-        
+      
+      
 <!--Quick Add to Cart Starts -->
 {% unless product.available == false %}
 <form action="/cart/add" method="post" class="clearfix product_form quick_buy" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
@@ -130,44 +91,11 @@
         <h3>{{ product.title }}</h3>
 
         <p class="modal_price">
-          <span class="sold_out">{% if product.available == false %}
-            {% assign collection_filter = false %}
-            {% for collection in product.collections %}
-            {% if collection.handle == "seafood-market" or collection.handle =="incoming-new" or collection.handle =="food-court" %}
-            {% assign collection_filter = true %}           
-            {% endif%}
-            {% endfor %}
-            
-            {% if collection_filter == true %}
-            {{ 'products.product.coming_soon' | t }}
-            {% else%}         
-            {{ 'products.product.sold_out' | t }}
-            {% endif %} - {% endif %}</span>
+          <span class="sold_out">
+            {% if product.available == false %}
+            {{ 'products.product.coming_soon' | t }}         
+            {% endif %} - </span>
           
-          <span class="current_price sale">
-            {{ product.price |  money }}
-          </span>
-          <span class="was_price">
-          {% if product.compare_at_price_max > product.price %}
-              <span class="was_price">{{ product.compare_at_price_max | money }}</span>
-            {% else %}
-              {% unless collection_filter == true %}
-              <span class="was_price">{{ product.price |divided_by:settings.discount | money }}</span>
-              {% endunless %}
-          {% endif %}
-          </span>
-          <span class="sale">
-            {% if product.compare_at_price > product.price %}
-              You Save {{ product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price }} %
-            {% else %}
-            {% unless collection_filter == true %}
-              You Save {{ 1 | minus: settings.discount |times:100 | remove: '.0'}} %
-            {% endunless %}
-            {% endif %}
-          
-         </span>
-                 
-          {% comment %}
           <span class="current_price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
             {{ product.price | money }}
           </span>
@@ -176,7 +104,11 @@
               {{ product.compare_at_price | money }} 
             {% endif %}
           </span>
-          {% endcomment %}
+          <span class="sale">
+            {% if product.compare_at_price > product.price %}
+              You Save {{ product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price }} %
+            {% endif %}        
+         </span>                 
         </p>
 
         {% include 'product-notify-me' %}

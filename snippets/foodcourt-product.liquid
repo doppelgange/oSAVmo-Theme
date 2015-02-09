@@ -16,7 +16,7 @@
     </div>
 
     <div class="breadcrumb_text">
-      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ collections['food-court'].url }}" title="{{ collections['food-court'].name | escape }}" itemprop="url"><span itemprop="title">Food Court</span></a></span> 
       &nbsp; / &nbsp;
       <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
         {% if collection %}
@@ -56,7 +56,6 @@
            {% if variant.available == false %}{{ 'products.product.coming_soon' | t }}{% endif %}<br />
          </span>
         
-        <!--no compare price for product -->
         {% if variant.available %}
           <span itemprop="price" content="{{ variant.price | money_without_currency }}" class="sale">
             <span class="current_price">             
@@ -84,7 +83,6 @@
          </span>
         {% endcomment %}
         {% endif %}
-        <!--no compare price for product end--> 
       
       </p>
      

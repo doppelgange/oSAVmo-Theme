@@ -1,6 +1,19 @@
-<div class="four columns mobile_hidden fc_main omega alpha">
-    <h4>{{ collection.title }}</h4>
-    <ul>   
+<div class="four columns fc_main omega alpha">
+  <div class="mobile_only">    
+  Menu:
+   <select class="type" style="width:auto;display:inline-block;">  
+    {% for product_type in collection.all_types %}
+        {% if current_tags contains product_type %}
+          <option value="/collections/{{ collection.handle }}/{{ product_type | handleize }}" selected>{{ product_type }}</option> 
+        {% else %}
+        <option value="/collections/{{ collection.handle }}/{{ product_type | handleize }}">{{ product_type }}</option> 
+        {% endif %}
+    {% endfor %}    
+   </select>
+  </div>
+  <div class="mobile_hidden">   
+   <h4>Menu</h4>
+   <ul>   
    <!-- new siderbar method read from types not complete yet-->   
       {% if collection.current_type %}
           {% for product_type in collections['all'].all_types %}
@@ -12,4 +25,35 @@
             {% endfor %}
         {% endif %}
   </ul>
-  </div>
+  {% comment %}
+  <ul>
+    <li>
+      <input type="text" id="res"/>
+      <input type="hidden" id="col" value="{{ collection.title }}">
+      <a class="action_button" id="ressearch">Search Restaurants</a>
+    </li>
+  </ul>
+  {% endcomment %}
+</div>
+</div>
+<script>
+  $("#ressearch").click(function(){
+   if ($('#res').val()){
+      var words = $('#res').val().split(' ');
+      var link="/search?type=product&q=";
+     $.each(words,function(index,value){
+      link=link+ value + "+";         
+     });
+     var vendor = $('#col').val();
+     link=link+"vendor%3A"+ vendor;
+     $("#ressearch").prop("href", link);
+   }
+  });
+  
+  
+  
+  $(".type").change(function(){
+    location.href=$(this).val();
+  })
+      
+</script>

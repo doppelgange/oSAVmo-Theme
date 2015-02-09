@@ -5,14 +5,14 @@
       {% for tag in current_tags %}
          {% unless collection.all_tags contains tag %} 
            {% assign find = false %}
-      	 {% endunless %}
+         {% endunless %}
       {% endfor %}
       {% unless find == false %}
       {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
   
     <div class="twelve columns restaurant">
     <a href="{{ collection.url }}" title="{{ collection_title }}">
-    <div class="three columns omega thumbnail">
+    <div class="three columns omega thumbnail mobile_hidden">
        {% if collection.image %}
         <img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}" style="margin-bottom:0px"/>
       {% else %}
@@ -23,10 +23,11 @@
       {% assign restaurant_info = collection.description | split:"--" %}
       {% assign restaurant_address = restaurant_info[0] | strip  %}
       {% assign restaurant_map = restaurant_info[1] | strip "%}
-    <div class="six columns thumbnail">
-      {{ restaurant_address }}
+    <div class="six columns">
+      <label>{{collection.title}}</label>
+      <p>{{ restaurant_address }}</p>
     </div>
-      <div class="three columns alpha thumbnail">
+      <div class="three columns alpha thumbnail mobile_hidden">
        <iframe src="{{ restaurant_map }}" width="100%" height="100%" frameborder="0" style="border:0"></iframe> 
     </div></a>
     <br />
@@ -43,10 +44,10 @@
       {% assign count = count | plus:1 %}
       {% endunless%} 
       
-  	 {% endunless %}  
+     {% endunless %}  
   {% endfor %}
     
       {% if count == 0 %}
-       It seems the well of options has run dry.
-	   If you want to dial back your search criteria, we'll find you some food.
+       <p class="fc_p">It seems the well of options has run dry.</p>
+       <p class="fc_p">If you want to dial back your search criteria, we'll find you some food.</p>
       {% endif %}

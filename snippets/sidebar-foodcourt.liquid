@@ -1,41 +1,69 @@
-<div class="four columns mobile_hidden fc_main omega alpha">  
-	<div class="fc_tab_nav">
+<div class="four columns fc_main omega alpha">  
+  <div class="fc_tab_nav mobile_hidden">
     <h4>I'm hungry for... </h4>
     <ul>
-	<li class="nav_current" id="nav1" onMouseOver="javascript:doClick(this)">Asian Style Food</li> | 
-	<li class="nav_link" id="nav2" onMouseOver="javascript:doClick(this)">Western Style Food</li>
-	</ul>
+  <li class="nav_current" id="nav1" onMouseOver="javascript:doClick(this)">Asian Style Food</li> | 
+  <li class="nav_link" id="nav2" onMouseOver="javascript:doClick(this)">Western Style Food</li>
+  </ul>
     <ul class=" fc_nav_dis coll-filter" id="sub1">
-      <li><input type='radio' value="asian" name="type" {%if current_tags contains 'asian' %} checked="checked" {% endif %}/>All Asian</li>   
-      {% for tag in collections['food-court'].all_tags %}
+      <li><input type='radio' value="asian" name="type" {%if current_tags contains 'Asian' %} checked="checked" {% endif %}/>All Asian</li>   
+      {% for tag in collection.all_tags %}
         {% if collections['asian-style-food-court'].all_types contains tag %}
-        	{% if current_tags contains tag %}
-        	<li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="type"  />{{ tag }} </li> 
-        	{% else %}
-        	<li><input type='radio' value="{{ tag | handle }}" name="type" />{{ tag }}</li>
-        	{% endif %}
+          {% if current_tags contains tag %}
+          <li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="type"  />{{ tag }} </li> 
+          {% else %}
+          <li><input type='radio' value="{{ tag | handle }}" name="type" />{{ tag }}</li>
+          {% endif %}
       {% endif %}
       {% endfor %}
- 	</ul>
+  </ul>
      <ul class="fc_nav_undis coll-filter"  id="sub2">
-      <li><input type='radio' value="western" name="type" {%if current_tags contains 'western' %} checked="checked" {% endif %}/>All Western</li>   
-      {% for tag in collections['food-court'].all_tags %}
+      <li><input type='radio' value="western" name="type" {%if current_tags contains 'Western' %} checked="checked" {% endif %}/>All Western</li>   
+      {% for tag in collection.all_tags %}
         {% if collections['european-style-food-court'].all_types contains tag %}
-        	{% if current_tags contains tag %}
-        	<li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="type"  />{{ tag }} </li> 
-        	{% else %}
-        	<li><input type='radio' value="{{ tag | handle }}" name="type" />{{ tag }}</li>
-        	{% endif %}
+          {% if current_tags contains tag %}
+          <li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="type"  />{{ tag }} </li> 
+          {% else %}
+          <li><input type='radio' value="{{ tag | handle }}" name="type" />{{ tag }}</li>
+          {% endif %}
       {% endif %}
       {% endfor %}
    </ul>
   </div>
+
   <div class="fc_tab_nav">
-  <h4>Promotion Only</h4>
+   <label class="mobile_only">I'm hurry for:</label>
+  <select id="type_picker" class="mobile_only">
+  <optgroup label="Asian Style Food">
+  <option value="asian" {%if current_tags contains 'Asian' %} selected {% endif %}>All Asian Style Food</option>
+   {% for tag in collection.all_tags %}
+     {% if collections['asian-style-food-court'].all_types contains tag %}
+          {% if current_tags contains tag %}
+          <option value="{{tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{tag | handle }}">{{ tag }}</option>
+          {% endif %}
+      {% endif %}
+      {% endfor %}
+  </optgroup>
+  <optgroup label="Western Style Food">
+  <option value="western" {%if current_tags contains 'Western' %} selected {% endif %}>All Western Style Food</option>
+   {% for tag in collection.all_tags %}
+     {% if collections['european-style-food-court'].all_types contains tag %}
+          {% if current_tags contains tag %}
+          <option value="{{tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{tag | handle }}">{{ tag }}</option>
+          {% endif %}
+      {% endif %}
+      {% endfor %} 
+   </optgroup>
+  </select>
+  <h4 class="mobile_hidden">Promotion Only</h4>
    <ul>
      <li><input type='checkbox' value="promotion" {% if current_tags contains "promotion" %} checked {% endif %}   name="promotion"  />Show Promotion Items Only</li>
   </ul>
-  <h4>Change View</h4>
+  <h4 class="mobile_hidden">Change View</h4>
    <ul>
      <li><input type='radio' value="food-court" {% if collection.handle == "food-court" %} checked ="checked" {% endif %}  name="view"  />Cuisine View</li>
      <li><input type='radio' value="food-court-res" {% if collection.handle ==  "food-court-res" %} checked ="checked" {% endif %}  name="view"  />Restaurant View</li>
@@ -48,17 +76,18 @@
 <script>
 
   $(document).ready(function(){
- 	var disid = jQuery('input[name=type]:checked').closest('ul').attr('id');
+  var disid = jQuery('input[name=type]:checked').closest('ul').attr('id');
+    if(disid){
     var linkid = disid.replace('sub','nav');
     document.getElementById(disid).style.display = "block";
     document.getElementById(linkid).className = "nav_current";
     $('.coll-filter').not($('#'+disid)).each(function(){
         var undisid = $(this).attr('id');
-  		document.getElementById(undisid).style.display = "none";
+      document.getElementById(undisid).style.display = "none";
         var undislinkid = undisid.replace('sub','nav');
         document.getElementById(undislinkid).className = "nav_link";
     });
-
+   }
   }); 
   
   var collFilters = jQuery('.coll-filter');
@@ -68,10 +97,10 @@
    
     newTags.push(jQuery('#location').val());
     if(jQuery('input[name=type]:checked').val() != ''){
-    	newTags.push(jQuery('input[name=type]:checked').val());
+      newTags.push(jQuery('input[name=type]:checked').val());
     }
     if($("input[name='promotion']").is(':checked')){
-    	newTags.push($.trim($("input[name='promotion']").val()));
+      newTags.push($.trim($("input[name='promotion']").val()));
     } 
 
     {% if collection.handle %}
@@ -108,7 +137,7 @@
         if (sort){
         link =link+"?"+sort;     
         }
-      	 location.href = link;
+         location.href = link;
       }        
     }
     else
@@ -124,7 +153,7 @@
   });
   
    $("input[name='view']").change(function(){
-  	var link = window.location.href;
+    var link = window.location.href;
      if(link.indexOf('?')){
         link=link.split('?');
         link=link[0];         
@@ -132,29 +161,63 @@
     var handle = $('input[name="view"]:checked').val();
     var original=$('input[name="view"]:not(:checked)').val();
     if(link){
-   		link=link.replace(original,handle);
-   		location.href = link;
+      link=link.replace(original,handle);
+      location.href = link;
     }
 
   });
   
+  $("#type_picker").change(function(){
+      delete Shopify.queryParams.page;
+      var newTags = [];
+      newTags.push(jQuery('#location').val());
+    if(jQuery('#type_picker').val() != ''){
+      newTags.push(jQuery('#type_picker').val());
+    }
+    if($("input[name='promotion']").is(':checked')){
+      newTags.push($.trim($("input[name='promotion']").val()));
+    } 
+
+    {% if collection.handle %}
+    var newURL = '/collections/{{ collection.handle }}';
+    if (newTags.length) {
+      newURL += '/' + newTags.join('+');
+    }    
+    var search = jQuery.param(Shopify.queryParams);
+    if (search.length) {
+      newURL += '?' + search;
+    }
+    location.href = newURL;
+    {% else %}
+    if (newTags.length) {
+      Shopify.queryParams.constraint = newTags.join('+');
+    }
+    else {
+      delete Shopify.queryParams.constraint;
+    }
+    location.search = jQuery.param(Shopify.queryParams);
+    {% endif %} 
+  
+  
+  });
+    
    function doClick(o){
-	 o.className="nav_current";
-	 var j;
-	 var id;
-	 var e;
-	 for(var i=1;i<=2;i++){
-	   id ="nav"+i;
-	   j = document.getElementById(id);
-	   e = document.getElementById("sub"+i);
-	   if(id != o.id){
-	   	 j.className="nav_link";
-	   	 e.style.display = "none";
-	   }else{
-			e.style.display = "block";
-	   }
-	 }
-	};
+   o.className="nav_current";
+   var j;
+   var id;
+   var e;
+   for(var i=1;i<=2;i++){
+     id ="nav"+i;
+     j = document.getElementById(id);
+     e = document.getElementById("sub"+i);
+     if(id != o.id){
+       j.className="nav_link";
+       e.style.display = "none";
+     }else{
+      e.style.display = "block";
+     }
+   }
+  };
 
 
 </script>
