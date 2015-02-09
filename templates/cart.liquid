@@ -50,23 +50,23 @@
         
         {% for i in (0..groupnumber) %}
           <h4 class="title">{{ title[i] }}</h4>        
-            {% if title[i] =="SUPERMARKET" %}
+           {% if title[i] =="SUPERMARKET" %}
            {% assign itemIndex = 0 %}
               {% for item in cart.items %}
             {% assign itemIndex = itemIndex | plus: 1 %}
               {% for collection in item.product.collections %}
                 {% if collection.handle contains "products" or  collection.handle contains 'meal' or  collection.handle contains 'frozen' or  collection.handle contains 'fresh' or  collection.handle contains 'care'%} 
                   {% assign itemIndexP = itemIndex %}
-              <div class="three columns alpha">
+                  <div class="three columns alpha">
                       <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
                          <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
                       </a>
                     </div>        
                       <div class="five columns omega">
-                              <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>      
+                         <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>      
                       {% if item.properties %}
                          <p>
-                              {% for p in item.properties %}
+                        {% for p in item.properties %}
                         {% unless p.last == blank %}
                             {% if p.last contains '/uploads/' %}
                               {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
@@ -89,14 +89,15 @@
                          <a href="/cart/change?line={{ itemIndexP }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
                         </p>
                     </div>
+                 <br class="clear" />
                     {% break%}        
                 {% endif %}
               {% endfor%}
-                    <br class="clear" />
-            {% endfor %}   
+            {% endfor %}
+             <br class="clear" />
             {% else %}
               {% assign handle = title[i] | handleize %}
-            {% assign itemIndex = 0 %}
+              {% assign itemIndex = 0 %}
                 {% for item in cart.items %}
                {% assign itemIndex = itemIndex | plus: 1 %}               
               {% for collection in item.product.collections %}
@@ -107,7 +108,7 @@
                           <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
                       </a>
                        </div>        
-                      <div class="five columns omega">
+                   <div class="five columns omega">
                        <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>  
                     {% if item.properties %}
                         <p>
@@ -134,11 +135,11 @@
                         <a href="/cart/change?line={{ itemIndexP }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
                     </p>
                     </div>
-                          {% break%}        
-                      {% endif %}
-                    {% endfor%}
-                      <br class="clear" />
-                {% endfor %}
+                    <br class="clear" />
+                 {% break%}        
+               {% endif %}
+              {% endfor%}
+              {% endfor %}
             {% endif %}
           {% endfor %}       
       </div>
