@@ -5,7 +5,7 @@
       {% for tag in current_tags %}
          {% unless collection.all_tags contains tag %} 
            {% assign find = false %}
-         {% endunless %}
+      	 {% endunless %}
       {% endfor %}
       {% unless find == false %}
       {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
@@ -44,7 +44,7 @@
       {% assign count = count | plus:1 %}
       {% endunless%} 
       
-     {% endunless %}  
+  	 {% endunless %}  
   {% endfor %}
     
       {% if count == 0 %}

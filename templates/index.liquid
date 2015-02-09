@@ -192,9 +192,9 @@
   {% for i in (1..5) %}
     {% capture restaurant_group %}restaurant_group_{{i}}{%endcapture%}
     {%assign collection = settings[restaurant_group] %}
-    {% capture restaurant_group_enable%}restaurant_group_{{i}}_enable{%endcapture%}
+  	{% capture restaurant_group_enable%}restaurant_group_{{i}}_enable{%endcapture%}
     {% if settings[restaurant_group_enable] %}
-   <div class="one-fifth column {% if i == 1 %}alpha{% elsif i == 5 %} omega {% endif %} thumbnail">
+	 <div class="one-fifth column {% if i == 1 %}alpha{% elsif i == 5 %} omega {% endif %} thumbnail">
       <a href="{{ collections[collection].url }}" title="{{ ccollections[collection].title }}">
       {% if collections[collection].image %}
         <img {% if settings.align_height %}style="max-height:{{ settings.collection_height }}px"{% endif %} src="{{ collections[collection].image.src | collection_img_url: 'grande' }}" alt="{{ collections[collection].image.alt }}" />
@@ -206,7 +206,7 @@
           <span class="title">{{ collections[collection].title }}</span>
         </div>
       </a>
-   </div>
+	 </div>
   {% endif %}
   {% endfor %}
 </div>

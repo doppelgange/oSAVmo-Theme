@@ -2,28 +2,28 @@
   <h1>Order Food Online From Local Restaurants</h1>
   <div class="sixteen columns fc_sidebar_content">
      <div class="four columns offset-by-four">
-      <label>City: </label>
+     	<label>City: </label>
             {% for tag in collection.all_tags %}      
-            {% if tag contains "-" %}
-              {% assign locations = locations | append: tag | append: "," %}
-              {% assign city = tag | split:"-" %}
+      			{% if tag contains "-" %}
+       				{% assign locations = locations | append: tag | append: "," %}
+      				{% assign city = tag | split:"-" %}
                     {% assign cities = cities | append:city.first | append:"," %}
-          {% endif %}
-        {% endfor %}
+     			{% endif %}
+    		{% endfor %}
             {% assign cities = cities | split: "," | uniq %}   
-      <select class="city-picker">
-          <option value="">All</option>
+    	<select class="city-picker">
+      	  <option value="">All</option>
           {% for city in cities %}
-      <option value="{{ city }}"> {{ city  }} </option>
+		  <option value="{{ city }}"> {{ city  }} </option>
           {% endfor %}
-      </select>
+    	</select>
       </div>
 
       <div class="four columns">
          <input type="hidden" value='{{locations}}' name="location">
          <label>{{ 'collections.sidebar.location' | t }}: </label>
-       <select class="coll-filter" id="suburb">
-          <option value="">All</option>
+    	 <select class="coll-filter" id="suburb">
+      		<option value="">All</option>
          </select>
       </div>  
     {% comment %}    
@@ -50,88 +50,7 @@
       <div class="four column"><input type='radio' value="food-court-res"   name="view"  /><label>Restaurant View</label></div>
       <div class="four column"><input type='checkbox' value="promotion"   name="promotion"  /><label>Show Promotion Items Only</label></div>
      </div>
-    <div class="sixteen columns fc_sidebar_content">
+  	<div class="sixteen columns fc_sidebar_content">
        <a class="action_button disabled" id="foodsearch">Search Restaurants</a>
     </div>  
   </div>
-
-<script>
- 
-   var cityPicker = jQuery('.city-picker');
-   cityPicker.change(function(){
-      $("#foodsearch").addClass("disabled").removeAttr("href");
-      var city = cityPicker.val();
-      var location = jQuery('input[name="location"]').val().split(',');
-      var suburbObj = document.getElementById('suburb');
-      suburbObj.options.length= 1;
-     $.each (location, function (key,value ){
-       if (value){
-         var locationArray = value.split('-');       
-         if (locationArray[0] ==city ){
-      suburbObj.options.add(new Option(locationArray[1],value.toLowerCase().replace(" ", "-")));
-         }     
-       }    
-     });  
-    });
-  
-  var collFilters = jQuery('.coll-filter');
-  collFilters.change(function() {
-        
-    var newTags = [];
-    collFilters.each(function() { 
-      if (jQuery(this).val()) {
-        newTags.push($.trim(jQuery(this).val()));   
-      }
-      }
-    );   
-    if($("input[name='promotion']").is(':checked')){
-      newTags.push($.trim($("input[name='promotion']").val()));
-    } 
-    
-    
-    var handle = $('input[name="view"]:checked').val();
-    var newURL = '/collections/'+ handle;
-    if (newTags.length) {
-      newURL += '/' + newTags.join('+');
-    }
-
-    
-    if($('#suburb').val()!=""){
-        $("#foodsearch").removeClass("disabled");
-      $("#foodsearch").prop("href", newURL);
-    }
-    else{
-       $("#foodsearch").addClass("disabled").removeAttr("href");
-    }
-  });
-  
-
-  $("input[name='view']").change(function(){
-    var link = $("#foodsearch").attr("href");
-    var handle = $('input[name="view"]:checked').val();
-    var original=$('input[name="view"]:not(:checked)').val();
-    if(link){
-      link=link.replace(original,handle);
-       $("#foodsearch").prop("href", link);
-    }
-
-  });
-  
-  $("input[name='promotion']").click(function(){
-    if($("input[name='promotion']").is(':checked')){
-      var link = $("#foodsearch").attr("href");
-        if(link){
-        link += "+promotion";
-        $("#foodsearch").prop("href", link);
-      }
-    }
-    else
-    {
-      var link = $("#foodsearch").attr("href");
-        link=link.replace("+promotion","");
-       $("#foodsearch").prop("href", link);
-    
-    }
-  });
-    
-</script>

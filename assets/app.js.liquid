@@ -1,11 +1,192 @@
 $(function() {
   
+// Food Court related jQuery
+// Sidebar Main Page  
+  var cityPicker = jQuery('.city-picker');
+   cityPicker.change(function(){
+      $("#foodsearch").addClass("disabled").removeAttr("href");
+      var city = cityPicker.val();
+      var location = jQuery('input[name="location"]').val().split(',');
+      var suburbObj = document.getElementById('suburb');
+      suburbObj.options.length= 1;
+     $.each (location, function (key,value ){
+       if (value){
+         var locationArray = value.split('-');       
+         if (locationArray[0] ==city ){
+			suburbObj.options.add(new Option(locationArray[1],value.toLowerCase().replace(" ", "-")));
+         }     
+       }    
+     });  
+  	});
+  
+  var collFilters = jQuery('.coll-filter');
+  collFilters.change(function() {     
+    var newTags = [];
+    collFilters.each(function() { 
+      if (jQuery(this).val()) {
+        newTags.push($.trim(jQuery(this).val()));   
+    	}
+      }
+    );   
+    if($("input[name='promotion']").is(':checked')){
+    	newTags.push($.trim($("input[name='promotion']").val()));
+    }       
+    var handle = $('input[name="view"]:checked').val();
+    var newURL = '/collections/'+ handle;
+    if (newTags.length) {
+      newURL += '/' + newTags.join('+');
+    }   
+    if($('#suburb').val()!=""){
+      	$("#foodsearch").removeClass("disabled");
+    	$("#foodsearch").prop("href", newURL);
+    }
+    else{
+       $("#foodsearch").addClass("disabled").removeAttr("href");
+    }
+  });
+  
 
-$(document).ready(function() {
+  $("input[name='view']").change(function(){
+  	var link = $("#foodsearch").attr("href");
+    var handle = $('input[name="view"]:checked').val();
+    var original=$('input[name="view"]:not(:checked)').val();
+    if(link){
+   		link=link.replace(original,handle);
+   		 $("#foodsearch").prop("href", link);
+    }
+  });
+  
+  $("input[name='promotion']").click(function(){
+    if($("input[name='promotion']").is(':checked')){
+    	var link = $("#foodsearch").attr("href");
+        if(link){
+   			link += "+promotion";
+   		 	$("#foodsearch").prop("href", link);
+    	}
+    }
+    else
+    {
+    	var link = $("#foodsearch").attr("href");
+    	link=link.replace("+promotion","");
+   		$("#foodsearch").prop("href", link);    
+    }
+  });
+
+//  Sidebar Food Court Page
+$(document).ready(function(){
+ 	var disid = jQuery('input[name=s_type]:checked').closest('ul').attr('id');
+    if(disid){
+    var linkid = disid.replace('sub','nav');
+    document.getElementById(disid).style.display = "block";
+    document.getElementById(linkid).className = "nav_current";
+    $('.type_filter').not($('#'+disid)).each(function(){
+        var undisid = $(this).attr('id');
+  		document.getElementById(undisid).style.display = "none";
+        var undislinkid = undisid.replace('sub','nav');
+        document.getElementById(undislinkid).className = "nav_link";
+    });
+   }
+  }); 
+  
+  var typeFilters = jQuery('.type_filter');
+  typeFilters.change(function() {
+    var newTags = [];  
+    newTags.push(jQuery('#location').val());
+    if(jQuery('input[name=s_type]:checked').val() != ''){
+    	newTags.push(jQuery('input[name=s_type]:checked').val());
+    }
+    if($("input[name='s_promotion']").is(':checked')){
+    	newTags.push($.trim($("input[name='s_promotion']").val()));
+    }
+    var handle = $('input[name="s_view"]:checked').val();
+    var newURL = '/collections/'+ handle;
+    if (newTags.length) {
+      newURL += '/' + newTags.join('+');
+    } 
+    location.href = newURL;
+  });
+  
+  $("input[name='s_promotion']").click(function(){
+    var link = window.location.href;
+    if(link.indexOf('?')){
+      var linkArray = link.split('?');
+    }
+    if(linkArray){link=linkArray[0];var sort=linkArray[1];}
+        
+    if($("input[name='s_promotion']").is(':checked')){    
+      if (link.indexOf('promotion') == -1 ){
+         link += "+promotion";
+        if (sort){
+        link =link+"?"+sort;     
+        }
+      	 location.href = link;
+      }        
+    }
+    else
+    {
+     if (link.indexOf('promotion')){
+         link=link.replace("+promotion","");  
+           if (sort){
+        link =link+"?"+sort;     
+        }
+         location.href = link;
+      }   
+    }
+  });
+  
+   $("input[name='s_view']").change(function(){
+  	 var link = window.location.href;
+     if(link.indexOf('?')){
+        link=link.split('?');
+        link=link[0];         
+     }
+    var handle = $('input[name="s_view"]:checked').val();
+    var original=$('input[name="s_view"]:not(:checked)').val();
+    if(link){
+   		link=link.replace(original,handle);
+   		location.href = link;
+    }
+  });
+  
+  $("#type_picker").change(function(){
+     var newTags = [];
+     newTags.push(jQuery('#location').val());
+   	 if(jQuery('#type_picker').val() != ''){
+    	newTags.push(jQuery('#type_picker').val());
+    }
+    if($("input[name='s_promotion']").is(':checked')){
+    	newTags.push($.trim($("input[name='s_promotion']").val()));
+    }
+    var handle = $('input[name="s_view"]:checked').val();
+    var newURL = '/collections/'+ handle;
+    if (newTags.length) {
+      newURL += '/' + newTags.join('+');
+    } 
+    location.href = newURL;
+  });
+  
+  // Restaurant Sidebar Food Court
+   $(".type").change(function(){
+    location.href=$(this).val();
+  })
+  
+   $("#ressearch").click(function(){
+   if ($('#res').val()){
+  		var words = $('#res').val().split(' ');
+     	var link="/search?type=product&q=";
+     $.each(words,function(index,value){
+    	link=link+ value + "+";         
+     });
+     var vendor = $('#col').val();
+     link=link+"vendor%3A"+ vendor;
+     $("#ressearch").prop("href", link);
+   }
+  });
+  
+  
 $('.seafood ').ripples({
 resolution:256,
 perturbance: 0.04,
-});
 });
 
 //Start: Set up the alert message in the page

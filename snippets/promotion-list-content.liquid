@@ -10,7 +10,7 @@
     {% endcapture %}
     {% assign product_count =  0 %}
     {% for product in collections[collection_display].products %}
-    
+		
            {% for collection in product.collections %}        
             {%if collection.title == collections[promotion-list-content].title %}  
             {% include 'product-thumbnail' %}
@@ -23,13 +23,13 @@
             {% elsif products_per_row_cycle_group == "5" %}  
               {% cycle cycle_group:'', '', '','', new_row %}
             {% endif %}
-        {% assign product_count =  product_count | plus:1 %}
-        {% break %}
+    		{% assign product_count =  product_count | plus:1 %}
+    		{% break %}
             {%endif%}
             {% endfor %}
          {% if product_count == 10 %}
-      {% break %}
-      {% endif %}
+     	{% break %}
+    	{% endif %}
     {% endfor %}
     <br class="clear" />
   </div>  

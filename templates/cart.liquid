@@ -228,12 +228,10 @@
           </select> 
        
           <input type="text" name="attributes[{{ vendor | handleize }}-Pick-Up-Date]" required style="display:none" />
-          <br />
-          
-
+          <br />    
           <script>
               jQuery('#{{ vendor | handleize }}day').change(function() {           
-        var hourObj=document.getElementById('{{ vendor | handleize }}hour');
+                var hourObj=document.getElementById('{{ vendor | handleize }}hour');
                 var minObj=document.getElementById('{{ vendor | handleize }}min');
                 hourObj.options.length=1;
                 minObj.options.length=1;
@@ -244,7 +242,7 @@
                  }
                 })
               jQuery('#{{ vendor | handleize }}hour').change(function() {           
-        var minObj=document.getElementById('{{ vendor | handleize }}min'); 
+               var minObj=document.getElementById('{{ vendor | handleize }}min'); 
                 minObj.options.length=1;
                 if($('#{{ vendor | handleize }}hour').val()!=""){
                   var min = 5;
@@ -260,7 +258,7 @@
                })  
               jQuery('.{{ vendor | handleize }}coll-picker').change(function() {  
                 var day=jQuery('#{{ vendor | handleize }}day').val();
-            var hour=jQuery('#{{ vendor | handleize }}hour').val();
+                var hour=jQuery('#{{ vendor | handleize }}hour').val();
                 var min=jQuery('#{{ vendor | handleize }}min').val();
                      
                 if(hour==""){hour = '11'};
@@ -270,7 +268,7 @@
                 }
                 jQuery('input[name="attributes[{{ vendor | handleize }}-Pick-Up-Date]"]').val(date);           
               })
-          </script>
+        </script>
        {% endfor %}
         {% endif %}
           

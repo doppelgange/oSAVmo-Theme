@@ -157,13 +157,11 @@
      
      {% include 'pagination_top' %}
   
-     <div class="four columns breadcrumb_text alpha mobile_hidden">
-        <!-- do not put anything here -->
-     </div> 
+
     
      {% if collection.handle != blank and collection.products_count > 0 %}
       {% if settings.collection_tags %}        
-        <div class="four columns section_select filter_margin_bottom {% if paginate.pages < 2 %}filter_margin_top {% endif %}{% unless settings.collection_sort %}offset-by-four omega{% endunless %}">
+        <div class="four columns section_select filter_margin_bottom {% if paginate.pages < 2 %}filter_margin_top {% endif %}offset-by-four omega">
           {% for tag in collection.all_tags %}        
             {% if forloop.first %}
               <label for="tag_filter" class="inline">{{ 'collections.sorting.filter' | t }}: </label> 
