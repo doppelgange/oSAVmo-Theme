@@ -1,4 +1,64 @@
 $(function() {
+// Cart Page related jQuery
+var mydate = new Date();
+if(mydate.getHours() >= 10){ var b =1; var e = 7 }else { var b =0; var e = 6 };
+var dayObj=$('.day-picker');
+dayObj.each(function(){
+  for(var i=b;i<=e;i++){
+     var newdate = new Date(mydate -0 + i*86400000);
+     if( newdate.getDay() != 0 && newdate.getDay() != 6 ){     
+        this.options.add(new Option(newdate.toLocaleDateString(),newdate.toLocaleDateString()));    
+   }
+ }
+});
+
+dayObj.change(function() {           
+   var hourId =$(this).closest('select').next().attr('id');
+   var minId =$(this).closest('select').next().next().attr('id');
+   var hourObj=document.getElementById(hourId);
+   var minObj=document.getElementById(minId); 
+   hourObj.options.length=1;
+   minObj.options.length=1;
+   if($(this).val()!=""){
+    for(var i=10;i<=15;i++){
+        hourObj.options.add(new Option(i,i));    
+     }
+   }
+});
+  
+$('.hour-picker').change(function() {
+    var minId =$(this).closest('select').next().attr('id');
+    var minObj=document.getElementById(minId); 
+    minObj.options.length=1;
+    if($(this).val()!=""){
+      var min = 5;
+      for(var i=0;i<=11;i++){
+          var text=min*i;
+          var value=min*i;
+          if(text == 0){text="00";value="00"}
+          else if(text==5){text='05';value="05"}
+          else{text=text;};
+          minObj.options.add(new Option(text,value));  
+       } 
+     }
+ });  
+
+$('.picker').change(function() {  
+    var id = $(this).attr('id').split('_');
+    var vendor = id[0];
+    var dayId =  '#'+ vendor + "_day";
+    var hourId = '#'+ vendor + "_hour";
+    var minId =  '#'+ vendor + "_min";
+    var inputName = "attributes["+vendor+"-Pick-Up-Date]";
+    var inputObj = "input[name='"+inputName+"']";
+    var day = $(dayId).val();
+    var hour = $(hourId).val();
+    var min = $(minId).val();
+    if( hour == ""){hour = '11'};
+    if( min == ""){min = "00"};
+    if( day != ""){var date = day+" "+ hour+":"+ min;}
+    $(inputObj).val(date);           
+})  
   
 // Food Court related jQuery
 // Sidebar Main Page  
@@ -13,11 +73,11 @@ $(function() {
        if (value){
          var locationArray = value.split('-');       
          if (locationArray[0] ==city ){
-			suburbObj.options.add(new Option(locationArray[1],value.toLowerCase().replace(" ", "-")));
+      suburbObj.options.add(new Option(locationArray[1],value.toLowerCase().replace(" ", "-")));
          }     
        }    
      });  
-  	});
+    });
   
   var collFilters = jQuery('.coll-filter');
   collFilters.change(function() {     
@@ -25,11 +85,11 @@ $(function() {
     collFilters.each(function() { 
       if (jQuery(this).val()) {
         newTags.push($.trim(jQuery(this).val()));   
-    	}
+      }
       }
     );   
     if($("input[name='promotion']").is(':checked')){
-    	newTags.push($.trim($("input[name='promotion']").val()));
+      newTags.push($.trim($("input[name='promotion']").val()));
     }       
     var handle = $('input[name="view"]:checked').val();
     var newURL = '/collections/'+ handle;
@@ -37,8 +97,8 @@ $(function() {
       newURL += '/' + newTags.join('+');
     }   
     if($('#suburb').val()!=""){
-      	$("#foodsearch").removeClass("disabled");
-    	$("#foodsearch").prop("href", newURL);
+        $("#foodsearch").removeClass("disabled");
+      $("#foodsearch").prop("href", newURL);
     }
     else{
        $("#foodsearch").addClass("disabled").removeAttr("href");
@@ -47,41 +107,41 @@ $(function() {
   
 
   $("input[name='view']").change(function(){
-  	var link = $("#foodsearch").attr("href");
+    var link = $("#foodsearch").attr("href");
     var handle = $('input[name="view"]:checked').val();
     var original=$('input[name="view"]:not(:checked)').val();
     if(link){
-   		link=link.replace(original,handle);
-   		 $("#foodsearch").prop("href", link);
+      link=link.replace(original,handle);
+       $("#foodsearch").prop("href", link);
     }
   });
   
   $("input[name='promotion']").click(function(){
     if($("input[name='promotion']").is(':checked')){
-    	var link = $("#foodsearch").attr("href");
+      var link = $("#foodsearch").attr("href");
         if(link){
-   			link += "+promotion";
-   		 	$("#foodsearch").prop("href", link);
-    	}
+        link += "+promotion";
+        $("#foodsearch").prop("href", link);
+      }
     }
     else
     {
-    	var link = $("#foodsearch").attr("href");
-    	link=link.replace("+promotion","");
-   		$("#foodsearch").prop("href", link);    
+      var link = $("#foodsearch").attr("href");
+      link=link.replace("+promotion","");
+      $("#foodsearch").prop("href", link);    
     }
   });
 
 //  Sidebar Food Court Page
 $(document).ready(function(){
- 	var disid = jQuery('input[name=s_type]:checked').closest('ul').attr('id');
+  var disid = jQuery('input[name=s_type]:checked').closest('ul').attr('id');
     if(disid){
     var linkid = disid.replace('sub','nav');
     document.getElementById(disid).style.display = "block";
     document.getElementById(linkid).className = "nav_current";
     $('.type_filter').not($('#'+disid)).each(function(){
         var undisid = $(this).attr('id');
-  		document.getElementById(undisid).style.display = "none";
+      document.getElementById(undisid).style.display = "none";
         var undislinkid = undisid.replace('sub','nav');
         document.getElementById(undislinkid).className = "nav_link";
     });
@@ -93,10 +153,10 @@ $(document).ready(function(){
     var newTags = [];  
     newTags.push(jQuery('#location').val());
     if(jQuery('input[name=s_type]:checked').val() != ''){
-    	newTags.push(jQuery('input[name=s_type]:checked').val());
+      newTags.push(jQuery('input[name=s_type]:checked').val());
     }
     if($("input[name='s_promotion']").is(':checked')){
-    	newTags.push($.trim($("input[name='s_promotion']").val()));
+      newTags.push($.trim($("input[name='s_promotion']").val()));
     }
     var handle = $('input[name="s_view"]:checked').val();
     var newURL = '/collections/'+ handle;
@@ -119,7 +179,7 @@ $(document).ready(function(){
         if (sort){
         link =link+"?"+sort;     
         }
-      	 location.href = link;
+         location.href = link;
       }        
     }
     else
@@ -135,7 +195,7 @@ $(document).ready(function(){
   });
   
    $("input[name='s_view']").change(function(){
-  	 var link = window.location.href;
+     var link = window.location.href;
      if(link.indexOf('?')){
         link=link.split('?');
         link=link[0];         
@@ -143,19 +203,19 @@ $(document).ready(function(){
     var handle = $('input[name="s_view"]:checked').val();
     var original=$('input[name="s_view"]:not(:checked)').val();
     if(link){
-   		link=link.replace(original,handle);
-   		location.href = link;
+      link=link.replace(original,handle);
+      location.href = link;
     }
   });
   
   $("#type_picker").change(function(){
      var newTags = [];
      newTags.push(jQuery('#location').val());
-   	 if(jQuery('#type_picker').val() != ''){
-    	newTags.push(jQuery('#type_picker').val());
+     if(jQuery('#type_picker').val() != ''){
+      newTags.push(jQuery('#type_picker').val());
     }
     if($("input[name='s_promotion']").is(':checked')){
-    	newTags.push($.trim($("input[name='s_promotion']").val()));
+      newTags.push($.trim($("input[name='s_promotion']").val()));
     }
     var handle = $('input[name="s_view"]:checked').val();
     var newURL = '/collections/'+ handle;
@@ -172,10 +232,10 @@ $(document).ready(function(){
   
    $("#ressearch").click(function(){
    if ($('#keyword').val()){
-  		var words = $.trim($('#keyword').val()).split(' ');
-     	var link="/search?type=product&q=";
+      var words = $.trim($('#keyword').val()).split(' ');
+      var link="/search?type=product&q=";
      $.each(words,function(index,value){
-    	link=link+ value + "+";         
+      link=link+ value + "+";         
      });
      var vendor = $('#col').val();
      link=link+"vendor%3A"+ vendor;
@@ -183,7 +243,24 @@ $(document).ready(function(){
    }
   });
   
-  
+  $('#tab li').mouseover(function(){
+     this.className="nav_current";
+   var j;
+   var id;
+   var e;
+   for(var i=1;i<=2;i++){
+     id ="nav"+i;
+     j = document.getElementById(id);
+     e = document.getElementById("sub"+i);
+     if(id != this.id){
+       j.className="nav_link";
+       e.style.display = "none";
+     }else{
+      e.style.display = "block";
+     }
+   }  
+  })
+
 $('.seafood ').ripples({
 resolution:256,
 perturbance: 0.04,

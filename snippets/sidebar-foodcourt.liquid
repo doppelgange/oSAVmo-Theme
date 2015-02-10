@@ -1,31 +1,31 @@
 <div class="four columns fc_main omega alpha">  
-	<div class="fc_tab_nav mobile_hidden">
+  <div class="fc_tab_nav mobile_hidden">
     <h4>I'm hungry for... </h4>
-    <ul>
-	<li class="nav_current" id="nav1" onMouseOver="javascript:doClick(this)">Asian Style Food</li> | 
-	<li class="nav_link" id="nav2" onMouseOver="javascript:doClick(this)">Western Style Food</li>
-	</ul>
+    <ul id="tab">
+  <li class="nav_current" id="nav1">Asian Style Food</li> | 
+  <li class="nav_link" id="nav2">Western Style Food</li>
+  </ul>
     <ul class=" fc_nav_dis type_filter" id="sub1">
       <li><input type='radio' value="asian" name="s_type" {%if current_tags contains 'Asian' %} checked="checked" {% endif %}/>All Asian</li>   
       {% for tag in collection.all_tags %}
         {% if collections['asian-style-food-court'].all_types contains tag %}
-        	{% if current_tags contains tag %}
-        	<li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="s_type"  />{{ tag }} </li> 
-        	{% else %}
-        	<li><input type='radio' value="{{ tag | handle }}" name="s_type" />{{ tag }}</li>
-        	{% endif %}
+          {% if current_tags contains tag %}
+          <li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="s_type"  />{{ tag }} </li> 
+          {% else %}
+          <li><input type='radio' value="{{ tag | handle }}" name="s_type" />{{ tag }}</li>
+          {% endif %}
       {% endif %}
       {% endfor %}
- 	</ul>
+  </ul>
      <ul class="fc_nav_undis type_filter"  id="sub2">
       <li><input type='radio' value="western" name="s_type" {%if current_tags contains 'Western' %} checked="checked" {% endif %}/>All Western</li>   
       {% for tag in collection.all_tags %}
         {% if collections['european-style-food-court'].all_types contains tag %}
-        	{% if current_tags contains tag %}
-        	<li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="s_type"  />{{ tag }} </li> 
-        	{% else %}
-        	<li><input type='radio' value="{{ tag | handle }}" name="s_type" />{{ tag }}</li>
-        	{% endif %}
+          {% if current_tags contains tag %}
+          <li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="s_type"  />{{ tag }} </li> 
+          {% else %}
+          <li><input type='radio' value="{{ tag | handle }}" name="s_type" />{{ tag }}</li>
+          {% endif %}
       {% endif %}
       {% endfor %}
    </ul>
@@ -36,25 +36,25 @@
   <select id="type_picker" class="mobile_only">
   <optgroup label="Asian Style Food">
   <option value="asian" {%if current_tags contains 'Asian' %} selected {% endif %}>All Asian Style Food</option>
- 	 {% for tag in collection.all_tags %}
+   {% for tag in collection.all_tags %}
      {% if collections['asian-style-food-court'].all_types contains tag %}
-        	{% if current_tags contains tag %}
-        	<option value="{{tag | handle }}" selected>{{ tag }}</option>
-        	{% else %}
-        	<option value="{{tag | handle }}">{{ tag }}</option>
-        	{% endif %}
+          {% if current_tags contains tag %}
+          <option value="{{tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{tag | handle }}">{{ tag }}</option>
+          {% endif %}
       {% endif %}
       {% endfor %}
   </optgroup>
   <optgroup label="Western Style Food">
   <option value="western" {%if current_tags contains 'Western' %} selected {% endif %}>All Western Style Food</option>
-	 {% for tag in collection.all_tags %}
+   {% for tag in collection.all_tags %}
      {% if collections['european-style-food-court'].all_types contains tag %}
-        	{% if current_tags contains tag %}
-        	<option value="{{tag | handle }}" selected>{{ tag }}</option>
-        	{% else %}
-        	<option value="{{tag | handle }}">{{ tag }}</option>
-        	{% endif %}
+          {% if current_tags contains tag %}
+          <option value="{{tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{tag | handle }}">{{ tag }}</option>
+          {% endif %}
       {% endif %}
       {% endfor %} 
    </optgroup>
@@ -70,22 +70,3 @@
   </ul>
 </div>
 </div>
-<script>
- function doClick(o){
-	 o.className="nav_current";
-	 var j;
-	 var id;
-	 var e;
-	 for(var i=1;i<=2;i++){
-	   id ="nav"+i;
-	   j = document.getElementById(id);
-	   e = document.getElementById("sub"+i);
-	   if(id != o.id){
-	   	 j.className="nav_link";
-	   	 e.style.display = "none";
-	   }else{
-			e.style.display = "block";
-	   }
-	 }
-   };   
-</script>
