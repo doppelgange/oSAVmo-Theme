@@ -183,15 +183,13 @@
          {% endfor%}
            
        {% if foodcourtnotice %}
-       {% comment %}
           <label for="note">Important Notice:</label>
           <ul>
           <li>As the requirement of our Food Court Suppliers, all the products from food court must be paid in advance.</li>
           <li>Your order will only be processed after payment received.</li>
           <li>Only the order made before 10am can be pick up on the same day.</li>
-          <li>Pick up time: 10am to 4pm </li>
+          <li>Default Pick up time is 11:00 am</li>
           </ul>
-       {% endcomment %} 
           <label>Please Choose your pick up time</label>      
           {% assign vendors = vendors |split :"," %}
           {% for vendor in vendors %}
@@ -208,7 +206,7 @@
             <option value="">Mins</option> 
           </select> 
        
-          <input type="hidden" name="attributes[{{ vendor | handleize }}-Pick-Up-Date]" required />
+          <input type="text" name="attributes[{{ vendor | handleize }}-Pick-Up-Date]" required style="display:none;"/>
           <br />    
 
        {% endfor %}
@@ -240,4 +238,3 @@
   <br class="clear" />
 {% endif %}
 </div>
-
