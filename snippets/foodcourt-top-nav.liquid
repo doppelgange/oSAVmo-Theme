@@ -1,0 +1,82 @@
+<div class="sixteen columns page_border"> 
+   	<div class="eight columns omega alpha fc_main">
+    <!--Display Location and no. of restaurant  -->
+     {% if collection.handle contains 'food-court' %}
+     {% for tag in current_tags %}
+   		{% if tag contains "-" %}
+   			{% assign location = tag %}
+   		{% elsif collection.all_types contains tag %}
+     		{% assign type = tag %}
+        {% elsif tags contains "style" %}
+     		{% assign style = tag %}
+        {% else %}
+     		{% assign promotion = tag %}
+        {% endif %}
+     {% endfor %}
+     {% for collection in collections %}
+     {% unless collection.handle contains 'food-court' %}
+         {% if collection.all_tags contains location %} 
+           {% assign restaurant_count = restaurant_count |plus: 1 %}
+      	 {% endif %}
+    {% endunless %}
+    {% endfor %}
+    <label class="fc_main_label">
+    {% if restaurant_count %}
+   	{{ restaurant_count }}
+    {% else %}
+      No
+    {% endif %}
+    {% if collection.handle == "asian-style-food-court" %}
+    	asian style 
+    {% elsif collection.handle == "european-style-food-court" %}
+    	european style
+    {% endif %}
+    {% if restaurant_count > 1 %}
+     restaurants 
+    {% else %}
+      restaurant
+    {% endif %}
+      serving {{ location }}.
+    </label>
+    <a href="{{ collections['food-court'].url }}" class="change_location">change location</a>
+    <input type="hidden" id="location" value="{{ location | handleize }}" >
+    {% else %}
+    <label class="fc_main_label">
+    {{ collection.title }}
+    </label>
+     {% for tag in collection.all_tags %}
+      {% if tag contains "-" %}
+        {% assign t = tag | handleize %}
+      	<a href="{{ collections['food-court-res'].url | append:"/" |append:t }}" class="change_location">change restaurant</a>
+      {% break %}
+      {% endif %}
+     {% endfor %}
+    {% endif %}
+    
+  </div>
+  	{% if collection.handle != blank and collection.handle != 'food-court-res' and collection.products_count > 0 %}
+   	<div class="eight columns omega alpha fc_sortby">
+          {{ 'collections.sorting.title' | t }}:
+          <select id="sort-by">
+            <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
+            <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+            <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+            <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+            <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+            <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+            <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+            <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+          </select>
+          <script type="text/javascript">
+            // <![CDATA[  
+              $('#sort-by')
+                .val('{{ collection.sort_by | default: collection.default_sort_by  }}')
+                .bind('change', function() {
+                  Shopify.queryParams.sort_by = $(this).val();
+                  location.search = $.param(Shopify.queryParams);
+              });
+            // ]]>
+          </script>
+      </div> 
+   {% endif %}
+</div>

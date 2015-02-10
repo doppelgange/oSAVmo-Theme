@@ -171,8 +171,8 @@ $(document).ready(function(){
   })
   
    $("#ressearch").click(function(){
-   if ($('#res').val()){
-  		var words = $('#res').val().split(' ');
+   if ($('#keyword').val()){
+  		var words = $.trim($('#keyword').val()).split(' ');
      	var link="/search?type=product&q=";
      $.each(words,function(index,value){
     	link=link+ value + "+";         
@@ -333,13 +333,8 @@ switchPanel("feature");
 //End: Promotion List - mouse over header to show the content in main page
 
 //Start: Set content height no less than side bar
-if($(".sidebar").length && $(".content_col_border").length && ($(".sidebar_col_border").outerHeight() > $(".content_col_border").outerHeight())){
-  console.log($(".sidebar").outerHeight());
-  console.log($(".content_col_border").outerHeight());
-  console.log($(".content_col_border").outerHeight(true));
-  console.log($(".fix-margin").outerHeight());
+if($(".sidebar_col_border").height() > $(".content_col_border").height()){
   $(".content_col_border").css("height",$(".sidebar").outerHeight()+50+"px");
-  console.log($(".content_col_border").height());
 }
 //End: Set content height no less than side bar
 

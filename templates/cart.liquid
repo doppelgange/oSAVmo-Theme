@@ -192,32 +192,12 @@
           <li>Pick up time: 10am to 4pm </li>
           </ul>
        {% endcomment %} 
-          <label>Please Choose your pick up time</label> 
-        
-           <!-- Display Date picker -->
-          {% capture hour %}{{ 'now' | date: "%k" }}{% endcapture %} 
-          {% assign hour=hour | plus:0 %}
-          {% if hour  >= 10 %}
-             {% assign b = 1 | plus:0 %}
-             {% assign e = 7 | plus:0 %}
-          {% else %}
-              {% assign b = 0 | plus:0 %}
-              {% assign e = 6 | plus:0 %}
-          {% endif %}
-       
+          <label>Please Choose your pick up time</label>      
           {% assign vendors = vendors |split :"," %}
           {% for vendor in vendors %}
           {{ vendor }}:
           <select class='{{ vendor | handleize }}coll-picker fc_select' id='{{ vendor | handleize }}day'>
            <option value="">Please Choose a date</option>
-          {% for i in (b..e)  %}
-          {% assign rate = 86400 | times: i %}
-             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%a"}}{% endcapture %}
-           {% unless day == 'Sat' or day == 'Sun'%}   
-             {% capture day %}{{ 'now' | date: "%s" | plus : rate | date: "%F"}}{% endcapture %}
-              <option value="{{ day }}">{{ day }}</option>
-           {% endunless %}         
-          {% endfor %}  
           </select> 
        
           <select class='{{ vendor | handleize }}coll-picker fc_select' id='{{ vendor | handleize }}hour'>
@@ -231,6 +211,16 @@
           <input type="text" name="attributes[{{ vendor | handleize }}-Pick-Up-Date]" required style="display:none" />
           <br />    
           <script>
+              var mydate = new Date();
+              var dayObj=document.getElementById('{{ vendor | handleize }}day');
+              if(mydate.getHours() >= 10){ var b =1; var e = 7 }else { var b =0; var e = 6 }
+              for(var i=b;i<=e;i++){
+                 var newdate = new Date(mydate -0 + i*86400000);
+                 if( newdate.getDay() != 0 && newdate.getDay() != 6 ){     
+                 dayObj.options.add(new Option(newdate.toLocaleDateString(),i));
+                  }
+              };          
+
               jQuery('#{{ vendor | handleize }}day').change(function() {           
                 var hourObj=document.getElementById('{{ vendor | handleize }}hour');
                 var minObj=document.getElementById('{{ vendor | handleize }}min');

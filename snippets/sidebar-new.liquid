@@ -4,8 +4,7 @@
 {% endif%}
 <div class="four columns sidebar sidebar_col_border mobile_hidden">
     <h4>{{ collection.title }}</h4>
-    <ul>
-    
+    <ul>    
    <!-- new siderbar method read from types not complete yet-->   
       {% if collection.current_type %}
           {% for product_type in collections['all'].all_types %}
@@ -13,12 +12,12 @@
             {% endfor %}    
       {% else %}
           {% for product_type in collection.all_types %}
+      			{% unless collections['food-court'].all_types contains product_type%}
             <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
-            {% endfor %}
+      			{% endunless %}    
+      {% endfor %}
         {% endif %}
-      
-  
-  
+        
 {% comment %} 
   <!-- new siderbar method read from tags-->  
      {% if collection.all_tags != empty %} 
