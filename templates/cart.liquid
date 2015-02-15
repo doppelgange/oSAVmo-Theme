@@ -58,12 +58,12 @@
                 {% if collection.handle contains "products" or  collection.handle contains 'meal' or  collection.handle contains 'frozen' or  collection.handle contains 'fresh' or  collection.handle contains 'care'%} 
                   {% assign itemIndexP = itemIndex %}
                   <div class="three columns alpha">
-                      <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
+                      <a href="collections/{{ collection.handle }}/products/{{item.product.handle}}" title="{{ item.title | escape }}" class="cart_page_image">       
                          <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
                       </a>
                     </div>        
                       <div class="five columns omega">
-                         <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>      
+                         <p><a href="collections/{{ collection.handle }}/products/{{item.product.handle}}" title="{{ item.title | escape }}">{{ item.title }}</a></p>      
                       {% if item.properties %}
                          <p>
                         {% for p in item.properties %}
@@ -102,14 +102,19 @@
                {% assign itemIndex = itemIndex | plus: 1 %}               
               {% for collection in item.product.collections %}
                 {% if collection.handle ==  handle %}
+                   {% if collection.handle == 'food-court'%}
+        			{% assign col_handle = item.product.vendor | handleize %}
+        			{% else %}
+        			{% assign col_handle = collection.handle %}
+        			{% endif %}
               {% assign itemIndexP = itemIndex %}       
                   <div class="three columns alpha">
-                      <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">       
+                      <a href="collections/{{ col_handle }}/products/{{item.product.handle}}" title="{{ item.title | escape }}" class="cart_page_image">       
                           <img src="{{ 'loader.gif' | asset_url }}" data-src="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'medium' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if item.product.featured_image.size > 0 %}{{ item | img_url: 'grande' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ item.title | escape }}" />
                       </a>
                        </div>        
                    <div class="five columns omega">
-                       <p><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></p>  
+                       <p><a href="collections/{{ col_handle }}/products/{{item.product.handle}}" title="{{ item.title | escape }}">{{ item.title }}</a></p>  
                     {% if item.properties %}
                         <p>
                                {% for p in item.properties %}
@@ -238,3 +243,4 @@
   <br class="clear" />
 {% endif %}
 </div>
+

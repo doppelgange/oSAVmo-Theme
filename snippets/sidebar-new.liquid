@@ -11,12 +11,18 @@
             <li><a href="/collections/all/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
             {% endfor %}    
       {% else %}
-          {% for product_type in collection.all_types %}
-      			{% unless collections['food-court'].all_types contains product_type%}
-            <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
+      		{% if collection.handle == 'all' %}
+      			 {% for product_type in collection.all_types %}
+      			{% unless collections['food-court'].all_types contains product_type  or collections['seafood-market'].all_types contains product_type %}
+           		 <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
       			{% endunless %}    
-      {% endfor %}
-        {% endif %}
+      			{% endfor %}
+      		{% else %}
+         		 {% for product_type in collection.all_types %}	
+           		 <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>
+      			 {% endfor %}
+      		{% endif %}
+      {% endif %}
         
 {% comment %} 
   <!-- new siderbar method read from tags-->  

@@ -6,7 +6,6 @@
 {% endcapture %}
 
 {% for product in products limit: limit %}
-
   {% if product.id == skip_product.id or skip == true %}
     {% assign product_found = true %}
   {% else %}

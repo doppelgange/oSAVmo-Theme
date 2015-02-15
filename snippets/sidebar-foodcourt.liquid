@@ -1,3 +1,4 @@
+{% comment %}
 <div class="four columns fc_main omega alpha">  
   <div class="fc_tab_nav mobile_hidden">
     <h4>I'm hungry for... </h4>
@@ -55,6 +56,108 @@
           {% else %}
           <option value="{{tag | handle }}">{{ tag }}</option>
           {% endif %}
+      {% endif %}
+      {% endfor %} 
+   </optgroup>
+  </select>
+  <h4 class="mobile_hidden">Promotion Only</h4>
+   <ul>
+     <li><input type='checkbox' value="promotion" {% if current_tags contains "promotion" %} checked {% endif %}   name="s_promotion"  />Show Promotion Items Only</li>
+  </ul>
+  <h4 class="mobile_hidden">Change View</h4>
+   <ul>
+     <li><input type='radio' value="food-court" {% if collection.handle == "food-court" %} checked ="checked" {% endif %}  name="s_view"  />Cuisine View</li>
+     <li><input type='radio' value="food-court-res" {% if collection.handle ==  "food-court-res" %} checked ="checked" {% endif %}  name="s_view"  />Restaurant View</li>
+  </ul>
+</div>
+</div>
+{% endcomment %}
+
+<div class="four columns fc_main omega alpha">  
+	<div class="fc_tab_nav mobile_hidden">
+    <h4>I'm hungry for... </h4>
+    <ul id="tab">
+	<li class="nav_current" id="nav1">Asian Style Food</li> | 
+	<li class="nav_link" id="nav2">Western Style Food</li>
+	</ul>
+    <ul class=" fc_nav_dis type_filter" id="sub1">
+      <li><input type='radio' value="asian" name="s_type" {%if current_tags contains 'Asian' %} checked="checked" {% endif %}/>All Asian</li>   
+      {% for product in collections['asian-style-food-court'].products %}
+      	 {% if product.tags contains location %}
+      		{% assign type = product.type %}
+      		{% assign tag = type | handleize %}
+      		{% unless tags contains tag %}
+      		{% if current_tags contains type %}
+        	<li><input type='radio' value="{{ tag }}" checked="checked"  name="s_type"  />{{ type }} </li> 
+      		{% assign tags = tags | append: tag | append:"," %}
+        	{% else %}
+        	<li><input type='radio' value="{{ tag }}" name="s_type" />{{ type }}</li>
+      		{% assign tags = tags | append: tag | append:"," %}
+        	{% endif %}
+      		{% endunless %}
+         {% endif %}
+      {% endfor %} 
+      
+      
+      
+      {% comment %}     
+      {% for tag in collection.all_tags %}
+        {% if collections['asian-style-food-court'].all_types contains tag %}
+       	  {% if collection.tags contains tag %}
+        	{% if current_tags contains tag %}
+        	<li><input type='radio' value="{{ tag | handle }}" checked="checked"  name="s_type"  />{{ tag }} </li> 
+        	{% else %}
+        	<li><input type='radio' value="{{ tag | handle }}" name="s_type" />{{ tag }}</li>
+        	{% endif %}
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% endcomment %}
+ 	</ul>
+     <ul class="fc_nav_undis type_filter"  id="sub2">
+      <li><input type='radio' value="western" name="s_type" {%if current_tags contains 'Western' %} checked="checked" {% endif %}/>All Western</li>   
+            {% for product in collections['european-style-food-court'].products %}
+      	 {% if product.tags contains location %}
+      		{% assign type = product.type %}
+      		{% assign tag = type | handleize %}
+      		{% unless tags contains tag %}
+      		{% if current_tags contains type %}
+        	<li><input type='radio' value="{{ tag }}" checked="checked"  name="s_type"  />{{ type }} </li> 
+      		{% assign tags = tags | append: tag | append:"," %}
+        	{% else %}
+        	<li><input type='radio' value="{{ tag }}" name="s_type" />{{ type }}</li>
+      		{% assign tags = tags | append: tag | append:"," %}
+        	{% endif %}
+      		{% endunless %}
+         {% endif %}
+      {% endfor %}
+   </ul>
+  </div>
+
+  <div class="fc_tab_nav">
+   <label class="mobile_only">I'm hurry for:</label>
+  <select id="type_picker" class="mobile_only">
+  <optgroup label="Asian Style Food">
+  <option value="asian" {%if current_tags contains 'Asian' %} selected {% endif %}>All Asian Style Food</option>
+ 	 {% for tag in collection.all_tags %}
+     {% if collections['asian-style-food-court'].all_types contains tag %}
+        	{% if current_tags contains tag %}
+        	<option value="{{tag | handle }}" selected>{{ tag }}</option>
+        	{% else %}
+        	<option value="{{tag | handle }}">{{ tag }}</option>
+        	{% endif %}
+      {% endif %}
+      {% endfor %}
+  </optgroup>
+  <optgroup label="Western Style Food">
+  <option value="western" {%if current_tags contains 'Western' %} selected {% endif %}>All Western Style Food</option>
+	 {% for tag in collection.all_tags %}
+     {% if collections['european-style-food-court'].all_types contains tag %}
+        	{% if current_tags contains tag %}
+        	<option value="{{tag | handle }}" selected>{{ tag }}</option>
+        	{% else %}
+        	<option value="{{tag | handle }}">{{ tag }}</option>
+        	{% endif %}
       {% endif %}
       {% endfor %} 
    </optgroup>

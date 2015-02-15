@@ -156,21 +156,43 @@
      <!--collection Page Slide Ends-->
      
      {% include 'pagination_top' %}
-  
-
-    
      {% if collection.handle != blank and collection.products_count > 0 %}
       {% if settings.collection_tags %}        
         <div class="four columns section_select filter_margin_bottom {% if paginate.pages < 2 %}filter_margin_top {% endif %}offset-by-four omega">
-          {% for tag in collection.all_tags %}        
+              <label for="tag_filter" class="inline">{{ 'collections.sorting.filter' | t }}: </label> 
+              <select name="tag_filter" id="tag_filter">
+                <option {% unless current_tags or current_tags contains 'supermarkt' %}selected="selected"{% endunless %} value="{% if collection.handle == "all" %}/collections/all/supermarket{% else %}{{ collection.url }}{% endif %}">{{ 'collections.general.all_collection_title' | t: title: collection.title }}</option>
+		   	 {% if collection.handle == 'all' %}
+      			 {% for product_type in collection.all_types %}
+      			{% unless collections['food-court'].all_types contains product_type  or collections['seafood-market'].all_types contains product_type %}
+      			  <option {% if current_tags contains product_type %}selected="selected"{% endif %} value="/collections/all/{{ product_type  | handleize }}">{{ product_type  }}</option>
+            	{% endunless %} 
+      			{% endfor %}
+      		{% else %}
+         		 {% for product_type in collection.all_types %}	
+      		       <option {% if current_tags contains product_type %}selected="selected"{% endif %} value="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type  | handleize }}">{{ product_type  }}</option>
+               {% endfor %}
+      		{% endif %}          
+          </select>
+          
+          
+          
+          
+          {% comment %}
+          {% for tag in collection.all_tags %} 
+         	{% assign text = text | append : tag | append:"," %}
             {% if forloop.first %}
               <label for="tag_filter" class="inline">{{ 'collections.sorting.filter' | t }}: </label> 
               <select name="tag_filter" id="tag_filter">
-                <option {% unless current_tags %}selected="selected"{% endunless %} value="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}">{{ 'collections.general.all_collection_title' | t: title: collection.title }}</option>
+                <option {% unless current_tags %}selected="selected"{% endunless %} value="{% if collection.handle == "all" %}/collections/all/supermarket{% else %}{{ collection.url }}{% endif %}">{{ 'collections.general.all_collection_title' | t: title: collection.title }}</option>
             {% endif %}          
               
             {% assign nofilter = false %}
-          {% assign nofiltertags = settings.no_filter_tag | split:','%}
+            {% if collection.handle == "all" %}
+            {% assign nofiltertags = settings.no_filter_tag | split:','%}
+            {% else %}
+             {% assign nofiltertags = "Christmas,NewArrival,Recommendation,Display"| split:','%}
+            {% endif %}
             {% for nofiltertag in nofiltertags %}
               {% if tag == nofiltertag %}
                  {% assign nofilter = true %}
@@ -189,6 +211,7 @@
             {% endif %}
           
           {% endfor %}
+          {% endcomment %}
         </div>
       {% endif %}
 
@@ -244,6 +267,5 @@
     {% include 'pagination' with settings.collection_sidebar %}
   </div>
  </div>
-
 
 {% endpaginate %}
