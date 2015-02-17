@@ -1,11 +1,11 @@
 <div class="four columns fc_main omega alpha">
   <div>
-     Search:<input type="text" id="keyword" />
+    <label class="fc_main_search">Search</label>:<input type="text" id="keyword" />
 	<a class="action_button" id="ressearch">Search</a>
     <input type="hidden" id="col" value="{{ collection.title }}">
   </div>
-  <div class="mobile_only">    
-  Menu:
+  <div class="mobile_only fc_underline">    
+  <label class="fc_menu">{{ collection.title }} : </label>
    <select class="type">
            <option value="/collections/{{ collection.handle }}" selected>All</option> 
  		{% for product_type in collection.all_types %}
@@ -18,7 +18,7 @@
    </select>
   </div>
   <div class="mobile_hidden">
-   <h4>Menu</h4>
+   <h4 class="fc_menu">Menu - {{ collection.title }}</h4>
    <ul>   
       {% for product_type in collection.all_types %}
           <li><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type | handleize }}" title="{{ product_type | escape }}">{{ product_type }}</a></li>

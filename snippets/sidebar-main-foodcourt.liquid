@@ -1,6 +1,6 @@
 <div class="sixteen columns fc_sidebar">
   <h1>Order Food Online From Local Restaurants</h1>
-  <div class="sixteen columns fc_sidebar_content">
+  <div class="sixteen columns">
      <div class="four columns offset-by-four">
      	<label>City: </label>
             {% for tag in collection.all_tags %}      
@@ -45,11 +45,15 @@
      {% endcomment %}  
      </div>
 
-    <div class="sixteen columns fc_sidebar_content">  
-      <div class="four column offset-by-four"><input type='radio' value="food-court" checked="checked"  name="view"  /><label>Cuisine View</label></div>
-      <div class="four column"><input type='radio' value="food-court-res"   name="view"  /><label>Restaurant View</label></div>
-      <div class="four column"><input type='checkbox' value="promotion"   name="promotion"  /><label>Show Promotion Items Only</label></div>
-     </div>
+    <div class="sixteen columns">  
+      <div class="four columns offset-by-four fc_sidebar_content">
+        <input type='radio' id='radio_cusine' value="food-court" checked  name="view"  /><label for='radio_cusine'>Cuisine View</label>
+		<input type='radio' id='radio_res' value="food-court-res"   name="view"  /><label for='radio_res' >Restaurant View</label>
+      </div>
+      <div class="four columns fc_sidebar_content">
+        <input type='checkbox' id='radio_pro' value="promotion"   name="promotion"  checked/><label for='radio_pro'>Show Promotion Items Only</label>
+      </div>
+    </div>
   	<div class="sixteen columns fc_sidebar_content">
        <a class="action_button disabled" id="foodsearch">Search Restaurants</a>
     </div>  

@@ -17,20 +17,8 @@
     {% assign p_col = product.vendor | handleize %}
     <a href="/collections/{{p_col}}/products/{{ product.handle}}" title="{{ product.title | escape }}">   
     <div class="relative product_image">
-      <img {% if settings.align_height %}style="max-height:{{ settings.collection_height }}px"{% endif %} src="{{ 'loader.gif' | asset_url }}" data-src="{% if product.featured_image.size > 0 %}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if product.featured_image.size > 0 %}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ alt_text | escape }}" />
+      <img {% if settings.align_height %}style="max-height:{{ settings.collection_height }}px"{% endif %} src="{{ 'loader.gif' | asset_url }}" data-src="{% if product.featured_image.size > 0 %}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" data-src-retina="{% if product.featured_image.size > 0 %}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'no-image.png'|asset_url}}{% endif %}" alt="{{ alt_text | escape }}" title="{{product.description}}"/>
      
-      <!-- Add Watermark for image Starts-->
-      {% for i in (1..6)%}
-      {% capture events_enable %}events_{{i}}_enable{% endcapture%}
-      {% capture events_collection %}events_{{i}}_collection{% endcapture%}
-      {% capture events_image %}events_{{i}}_img.png{% endcapture%}
-      {% assign eventscollection = settings[events_collection] %}
-      {% if settings[events_enable] and p_c_handle == collections[eventscollection].handle %}
-      <img class = "badge" src="{{ events_image | asset_url }}" alt="{{ alt_text | escape }}" />
-      {% endif %}
-      {% endfor %}            
-      <!-- Add Watermark for image Ends-->
-      
       {% if settings.quick_shop_enabled %}
       {% unless product.available == false %}
         <span data-fancybox-href="#product-{{ product.id }}" class="quick_shop action_button" data-gallery="product-{{ product.id }}-gallery">
@@ -40,8 +28,9 @@
       {% endif %}
     </div>
 
-    <div class="info">            
-      <span class="title">{{ product.title }}</span>
+    <div class="info">
+      <span class="fc_title fc_vendor_title">{{ product.vendor }}</span>
+      <span class="fc_title">{{ product.title }}</span>
       <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
         {% if product.available %}
           {% if product.price_varies %}
@@ -54,20 +43,19 @@
         {% if product.compare_at_price_max > product.price %}
           <span class="was_price">{{ product.compare_at_price_max | money }}</span>
         {% endif %}
-      
-      
-<!--Quick Add to Cart Starts -->
-{% unless product.available == false %}
-<form action="/cart/add" method="post" class="clearfix product_form quick_buy" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
-  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-  <input type="hidden" name="return_to" value="back" />
-  <input type="hidden" name="quantity"  value="1" />
-  <input type="submit" name="add" value="Add to Cart" class="quick_buy_cart" data-productid="{{ product.variants.first.id  }}"/> 
-</form>
-{% endunless %}
-<!--Quick Add to Cart Ends -->
+      	<!--Quick Add to Cart Starts -->
+		{% unless product.available == false %}
+		<form action="/cart/add" method="post" class="clearfix product_form quick_buy" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
+  		<input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+  		<input type="hidden" name="return_to" value="back" />
+  		<input type="hidden" name="quantity"  value="1" />
+  		<input type="submit" name="add" value="Add to Cart" class="quick_buy_cart" data-productid="{{ product.variants.first.id  }}"/> 
+		</form>
+		{% endunless %}
+		<!--Quick Add to Cart Ends -->
       </span>
     </div>
+      
     {% if settings.sale_banner_enabled and product.compare_at_price_max > product.price %}
       <div class="sale_banner">{{ 'collections.general.sale' | t }}</div>
     {% endif %}

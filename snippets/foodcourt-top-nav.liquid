@@ -38,7 +38,7 @@
     {% endif %}
       serving {{ location }}.
     </label>
-    <a href="{{ collections['food-court'].url }}" class="change_location">change location</a>
+    <a href="{{ collections['food-court'].url }}" class="change_location">Change Location</a>
     <input type="hidden" id="location" value="{{ location | handleize }}" >
     {% else %}
     <label class="fc_main_label">
@@ -47,7 +47,7 @@
      {% for tag in collection.all_tags %}
       {% if tag contains "-" %}
         {% assign t = tag | handleize %}
-      	<a href="{{ collections['food-court-res'].url | append:"/" |append:t }}" class="change_location">change restaurant</a>
+      	<a href="{{ collections['food-court-res'].url | append:"/" |append:t }}" class="change_location">Change Restaurant</a>
       {% break %}
       {% endif %}
      {% endfor %}

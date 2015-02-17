@@ -3402,13 +3402,13 @@ html[xmlns] .slides {display: block;}
 .flex-control-thumbs li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
 
 .flex-control-thumbs {position: static; overflow: hidden;}
-.flex-control-thumbs li, .flex-control-thumbs li:first-child {width: 16%; vertical-align: top; margin: 15px 5% 0 0;}
-.flex-control-thumbs li:nth-child(5n) {margin: 15px 0 0; }
+.flex-control-thumbs li, .flex-control-thumbs li:first-child {width: 16%; vertical-align: top; margin: 2% 2% 2% 2%;}
+/* .flex-control-thumbs li:nth-child(5n) {margin: 15px 0 0; } */
 .flex-control-thumbs img {width: 100%; display: block; opacity: .7; cursor: pointer;}
 .flex-control-thumbs img:hover {opacity: 1;}
 .flex-control-thumbs .flex-active {opacity: 1; cursor: default;}
 .product_slider .flex-active-slide a:hover {cursor: -webkit-zoom-in; cursor: -moz-zoom-in;}
-.product_slider { margin-bottom: 2em }
+.product_slider { margin-bottom: 2em ; background: grey; }
 .product_slider .slides img {
   width: auto !important;
 }
@@ -3955,7 +3955,8 @@ div.cloudzoom-ajax-loader {
 
         {% if settings.mobile_products_per_row == "1" %}
           .container .thumbnail.even, .container .thumbnail.odd  { width: 100% !important; }
-          .container div.thumbnail.even  { clear: left }
+          .container div.thumbnail.even  { clear: left; background:#F6F6F6;}
+      .container div.thumbnail.even  input[type="submit"].quick_buy_cart { background:#F6F6F6; }
           .container div.thumbnail.odd  { margin-left: 0px }
           br.product_clear { display: none }
         {% endif %}
@@ -4420,9 +4421,9 @@ opacity: 1;
 }
 
 .fc_sidebar_content{
-  margin-right:0px;
-  margin-left:0px;
   text-align:center;
+  margin-top:5px;
+  margin-bottom:5px;
 }
 
 a.disabled{
@@ -4435,11 +4436,14 @@ a.disabled{
  padding:0 0 0 5px;
 } 
 
-.fc_main_label {
- 	padding: 0px 10px;
-	display: inline;
+.fc_main_label,.fc_main_search {
+  	display: inline;
 	font-size: 20px;
-	color: red;
+	color: #E50112;
+}
+
+.fc_main_label {
+	padding: 0px 10px;
 }
 
 .change_location {
@@ -4447,15 +4451,18 @@ a.disabled{
 	font-size: 10px;
 	text-decoration: underline;
 }
-.change_location a:hover{
-	text-decoration:none;
-}
 
 .fc_main ul{
 	list-style: none;
     margin:10px 0 0 0;
 }
 
+.fc_main p{
+ 	margin-bottom:0px;
+}
+.fc_main h1.product_name {
+ 	margin-bottom:0px;
+}
 .fc_sortby{
 	text-align:right;
     padding:10px 10px 10px 0;
@@ -4466,8 +4473,78 @@ a.disabled{
 }
 
 .fc_select{
-display:inline-block;  
-width:auto;
+	display:inline-block;  
+	width:auto;
+}
+
+.fc_title{
+	display:block;
+}
+
+.fc_vendor_title{
+	color: #4CC7EC;
+	font-weight: bold;
+}
+
+.fc_menu {
+	color: #E50112;
+	font-weight: bold;
+  	font-size: 20px;
+}
+.fc_price_bg {
+	font-size: 22px;
+	line-height: 1em;
+	-webkit-box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.39);
+	-moz-box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.39);
+	box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.39);
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	background: #52c4e2;
+	border-top: 1px solid #52c4e2;
+	margin-bottom: 0px;
+	text-align: center;
+	padding: 10px;
+}
+.fc_price {
+	display: block;
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+	color: #fff;
+  	margin-bottom:10px;  
+}
+.discount_badge{
+	-webkit-box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.39);
+  	-moz-box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.39);
+  	box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.39);
+	-webkit-border-top-left-radius: 3px;
+  	-webkit-border-top-right-radius: 3px;
+  	-moz-border-radius-topleft: 3px;
+  	-moz-border-radius-topright: 3px;
+ 	border-top-left-radius: 3px;
+  	border-top-right-radius: 3px;
+ 	background: #F6F6F6;
+ 	border-top: 1px solid #52c4e2;"
+}
+.discount_title,.discount_value {
+	width:30%;
+ 	display:inline-block; 
+  	text-align:center;
+ 	
+}
+.discount_value {
+	font-weight:bold;
+}
+.fc_itemleft{
+	background: #f6f6f6;
+  	text-align: center;
+  	font-size: 20px;
+  	font-weight: bold;
+  	border-top: solid 1px;
 }
 
 .fc_notice{
@@ -4481,26 +4558,31 @@ margin:5px 0px;
 }
 .fc_underline{
 border-bottom: 1px solid #ececec;
-
 }
-
+.fc_topline{
+border-top: 1px solid #ececec;
+}
+.fc_res_info{
+margin-top:10px;
+}
 .fc_nav_dis{ display:block }
 .fc_nav_undis{ display:none }
-
-
-.nav_current{color: #FF6600;}
+.nav_current{
+  color: #E50112;
+  font-weight:bold;
+}
 .nav_current,.nav_link {
 cursor: pointer;
 display:inline;
 }
 .nav_current:hover, .nav_link:hover {
-	color: #FF6600;
+  color: #E50112;
 }
 
 .fc_tab_nav{
-	border: 1px #dcdcdc solid;
-    padding:10px;
-    margin-bottom:10px;
+  border: 1px #dcdcdc solid;
+  padding:10px;
+  margin-bottom:10px;
 }
 
 .fc_p{
@@ -4516,6 +4598,91 @@ text-align: center;
   padding:5px;
   margin-bottom:10px;
 }
+
+/* Food Court Main Entrance */
+
+.fc_sidebar_content input[type=checkbox],.fc_sidebar_content input[type=radio] {
+    display:none; 
+}
+
+.fc_sidebar_content input[type=checkbox] + label,.fc_sidebar_content input[type=radio] + label {
+    display:inline-block;
+    margin:-2px;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+
+.fc_sidebar_content input[type=checkbox]:checked + label,.fc_sidebar_content input[type=radio]:checked + label { 
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+  background-color:#E50112;
+  color:#fff;
+}
+
+
+/* Food Court Sidebar */
+.fc_tab_nav input[type=checkbox],.fc_tab_nav input[type=radio] {
+   position:absolute; 
+   z-index:-1000; 
+   left:-1000px; 
+   overflow: hidden; 
+   clip: rect(0 0 0 0); 
+   height:1px; 
+   width:1px; 
+   margin:-1px; 
+   padding:0; 
+   border:0;
+}
+
+.fc_tab_nav input[type=checkbox] + label,.fc_tab_nav input[type=radio] + label {
+  background-image:url({{"csscheck.png" | asset_url}});
+	padding-left:21px;
+	height:16px; 
+	display:inline-block;
+	line-height:16px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:16px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+.fc_tab_nav input[type=checkbox]:checked + label,.fc_tab_nav input[type=radio]:checked + label { 
+	background-position: 0 -16px;
+  	background-image:url({{"csscheck.png" | asset_url}});
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+} 
 
 /*Food court CSS End*/
 
@@ -5240,6 +5407,10 @@ margin: 0 0 5px;
 .fc_sidebar h1 {
   font-size: 25px;
 }
+.fc_sidebar_content {
+  margin-top:5px !important;
+  margin-bottom:5px !important;
+}
 .fc_sortby {
   text-align:left;
   padding:10px 5px;
@@ -5261,20 +5432,55 @@ margin: 0 0 5px;
   padding: 5px;
 }
 .fc_tab_nav,.fc_tab_nav li{
+ border: 0px;
  margin-bottom: 0px;
- padding:0px;
+ padding:5px;
+ display:inline;
 }
-.fc_tab_nav ul{
-margin-top: 0px;
-}
-label.mobile_only{
-  display:inline-block;
-  }
-  
-select#type_picker.mobile_only {
+
+label.mobile_only,select#type_picker.mobile_only {
   width:auto;
   display:inline-block;
   margin:0;
+}
+
+.fc_tab_nav input[type=checkbox] + label,.fc_tab_nav input[type=radio] + label {
+    display:inline-block;
+    margin:-2px;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+.fc_tab_nav input[type=checkbox]:checked + label,.fc_tab_nav input[type=radio]:checked + label { 
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+  background-color:#E50112;
+  color:#fff;
 }
 
 
