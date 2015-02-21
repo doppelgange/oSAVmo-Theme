@@ -29,7 +29,13 @@
     </div>
 
     <div class="info">
-      <span class="fc_title fc_vendor_title">{{ product.vendor }}</span>
+      <span class="fc_title fc_vendor_title">
+      {% for collection in product.collections %}
+        {% unless collection.handle contains 'food-court' %}
+        	 {{ collection.title }}
+        {% endunless %}
+      {% endfor %}  
+      </span>
       <span class="fc_title">{{ product.title }}</span>
       <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
         {% if product.available %}

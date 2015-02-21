@@ -16,7 +16,7 @@
     <br class="clear product_clear" />
 {% endcapture %}
 
-{% for product in products limit: limit %}
+{% for product in products limit: 1000 %}
 
   {% if product.id == skip_product.id or skip == true %}
     {% assign product_found = true %}

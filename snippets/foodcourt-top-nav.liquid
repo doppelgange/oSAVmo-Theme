@@ -7,8 +7,6 @@
    			{% assign location = tag %}
    		{% elsif collection.all_types contains tag %}
      		{% assign type = tag %}
-        {% elsif tags contains "style" %}
-     		{% assign style = tag %}
         {% else %}
      		{% assign promotion = tag %}
         {% endif %}
@@ -22,23 +20,20 @@
     {% endfor %}
     <label class="fc_main_label">
     {% if restaurant_count %}
-   	{{ restaurant_count }}
-    {% else %}
-      No
-    {% endif %}
-    {% if collection.handle == "asian-style-food-court" %}
-    	asian style 
-    {% elsif collection.handle == "european-style-food-court" %}
-    	european style
-    {% endif %}
-    {% if restaurant_count > 1 %}
-     restaurants 
-    {% else %}
-      restaurant
-    {% endif %}
+   	{{ restaurant_count }}  
+      {% if restaurant_count > 1 %}
+     		restaurants 
+      {% else %}
+      	restaurant
+      {% endif %}
       serving {{ location }}.
+    {% else %}
+      {{ collection.products_count }} {% if current_tags contains "Asian" %}Asian {% elsif current_tags contains "Western" %} Western {% endif %}cuisines in promotion.
+    {% endif %}
+ 
     </label>
     <a href="{{ collections['food-court'].url }}" class="change_location">Change Location</a>
+     {% unless location %}{% assign location = "Promotion"%}{% endunless %}
     <input type="hidden" id="location" value="{{ location | handleize }}" >
     {% else %}
     <label class="fc_main_label">

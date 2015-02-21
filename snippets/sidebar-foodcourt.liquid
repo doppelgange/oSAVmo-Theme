@@ -27,7 +27,7 @@
  	</ul>
      <ul class="fc_nav_undis type_filter"  id="sub2">
        <li><input type='radio' id="western" value="western" name="s_type" {%if current_tags contains 'Western' %} checked {% endif %}/><label for="western">All Western</label></li>   
-            {% for product in collections['european-style-food-court'].products %}
+            {% for product in collections['western-style-food-court'].products %}
       	 {% if product.tags contains location %}
       		{% assign type = product.type %}
       		{% assign tag = type | handleize %}
@@ -75,7 +75,7 @@
   </select>
   <h4 class="fc_menu mobile_hidden">Promotion Only</h4>
    <ul>
-     <li><input type='checkbox' id='radio_pro' value="promotion" {% if current_tags contains "promotion" %} checked {% endif %}   name="s_promotion"  /><label for="radio_pro">Show Promotion Only</label></li>
+     <li><input type='checkbox' id='radio_pro' value="promotion" {% if current_tags contains "Promotion" %} checked {% endif %}   name="s_promotion"  /><label for="radio_pro">Show Promotion Only</label></li>
   </ul>
   <h4 class="fc_menu mobile_hidden">Change View</h4>
    <ul>

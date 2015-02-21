@@ -1,0 +1,36 @@
+{% if food-promotion-list-content != blank %}
+  <div class="sixteen columns food-promotion-list {% cycle 'promotion-list-class':'food-promotion-list-1','food-promotion-list-2 hidden','food-promotion-list-3 hidden','food-promotion-list-4 hidden','food-promotion-list-5 hidden','food-promotion-list-6 hidden' %}">
+    {% assign collection_display = settings['food_display_collection'] %}
+    {% assign p_c_handle = collections[food-promotion-list-content].handle %}
+    {% assign products_per_row = settings[promotion_group_col] %} <!--settings.promotion_group_per_row -->
+    {% assign product_found = false %}
+    {% assign skip = false %}
+    {% capture new_row %}
+        <br class="clear product_clear" />
+    {% endcapture %}
+    {% assign product_count =  0 %}
+    {% for product in collections[collection_display].products %}
+		
+           {% for collection in product.collections %}        
+            {%if collection.title == collections[food-promotion-list-content].title %}  
+            {% include 'foodcourt-product-thumbnail' %}
+            {% if products_per_row_cycle_group == "2" %}
+              {% cycle cycle_group: '', new_row %}
+            {% elsif products_per_row_cycle_group == "3" %}
+              {% cycle cycle_group:'', '', new_row %}    
+            {% elsif products_per_row_cycle_group == "4" %}  
+              {% cycle cycle_group:'', '', '', new_row %}
+            {% elsif products_per_row_cycle_group == "5" %}  
+              {% cycle cycle_group:'', '', '','', new_row %}
+            {% endif %}
+    		{% assign product_count =  product_count | plus:1 %}
+    		{% break %}
+            {%endif%}
+            {% endfor %}
+         {% if product_count == 10 %}
+     	{% break %}
+    	{% endif %}
+    {% endfor %}
+    <br class="clear" />
+  </div>  
+{% endif %}

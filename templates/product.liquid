@@ -1,5 +1,6 @@
 <div class="sixteen columns" style="margin-left:0px;">
-{% if collection.title == product.vendor %}
+{% assign vendor = product.vendor | handleize %}
+{% if collection.handle == vendor %}
   {% include 'foodcourt-product'%}
 {% else %}
 {% if settings.product_sidebar %}

@@ -5,7 +5,7 @@
     {% assign products_per_row = settings[feature_group_col] %}
     <!--settings.feature_group_per_row -->
     {% assign products_per_row_num = products_per_row | plus:0 %}
-    {% assign limit=products_per_row_num |times:2 %}
+    {% assign limit=products_per_row_num |times:1 %}
     {% capture new_row %}
         <br class="clear product_clear" />
     {% endcapture %}

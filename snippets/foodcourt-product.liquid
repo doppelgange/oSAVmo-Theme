@@ -40,7 +40,11 @@
   <div class="section product_section clearfix">
   <div class="twelve columns alpha omega">
     <h1 class="product_name" itemprop="name">{{ product.title }}</h1>
+    {% comment %}
     <p>{{ product.description | strip_html }}</p>
+    {% endcomment %}
+    {% assign info = product.description | strip_html |split:'--' %}
+    <p>{{ info.first }}</p>
     <br />	
   </div>
   <div class="four columns omega">
@@ -61,26 +65,24 @@
          <meta itemprop="seller" content="{{ shop.name | escape }}" />
          <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />      
         
+      {% if variant.compare_at_price and variant.price < variant.compare_at_price %}
       	<span class="discount_title">Value</span>
       	<span class="discount_title">Discount</span>
       	<span class="discount_title">Save</span>
           <span class="sale">
-           {% if variant.compare_at_price and variant.price < variant.compare_at_price %}
+          
             <span class="discount_value">
               {{ variant.compare_at_price | money }}
              </span>
-            {% endif %}   
+
          	<span class="discount_value">   
-            {% if variant.compare_at_price > variant.price %}
-              {{ variant.compare_at_price | minus: variant.price | times:100 | divided_by:variant.compare_at_price }} %
-            {% endif %}          
+              {{ variant.compare_at_price | minus: variant.price | times:100 | divided_by:variant.compare_at_price }} %    
          	</span>
        		<span class="discount_value">   
-            {% if variant.compare_at_price > variant.price %}
               {{ variant.compare_at_price | minus: variant.price | money }} 
-            {% endif %}          
          	</span>
         </span>
+      {% endif %}
     </div>
     {% endif %} 
 	{% if product.variants.first.inventory_management == "shopify" and product.variants.first.inventory_quantity > 0 %}
@@ -109,6 +111,11 @@
           <h4 class="title">Condition</h4>
            <div class="section clearfix">
          <ul>
+           {% comment %}
+           {% for list in info %}
+           {% unless forloop.first == true  %}<li>{{list}}</li>{% endunless %}
+           {% endfor %}
+           {% endcomment %}
           <li>As the requirement of our Food Court Suppliers, all the products from food court must be paid in advance.</li>
           <li>Your order will only be processed after payment has cleared.</li>
           <li>Only the order made before 10am can be pick up on the same day.</li>
@@ -168,9 +175,20 @@
        <iframe src="{{ restaurant_map }}" width="100%" height="100%" frameborder="0" style="border:0"></iframe> 
     </div>
      <div class="four columns alpha fc_res_info">
-       condition
-    </div>
-  </div>
+       <strong>Condition</strong>
+         <ul>
+           {% comment %}
+           {% for list in info %}
+           {% unless forloop.first == true  %}<li>{{list}}</li>{% endunless %}
+           {% endfor %}
+           {% endcomment %}
+          <li>As the requirement of our Food Court Suppliers, all the products from food court must be paid in advance.</li>
+          <li>Your order will only be processed after payment has cleared.</li>
+          <li>Only the order made before 10am can be pick up on the same day.</li>
+          <li>Pick up time: 10am to 4pm </li>
+          </ul>
+  	</div>
+</div>
   
   
   

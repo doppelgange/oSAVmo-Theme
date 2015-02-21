@@ -179,9 +179,29 @@
       </div>
     </div>
   {% endif %}
-
 <!-- Feature Links Ends -->
-<!-- Feature Products by collection  -->
+
+
+<!-- Food Court ProductsPromotion Highlight Starts-->
+{% if settings['food_promotion_group_section_enable']%}
+<h4 class="promotion-list-header sixteen columns panel-header">
+{% for i in (1..6) %}
+  {% capture food_promotion_group%}food_promotion_group_{{i}}{%endcapture%}
+  {% include 'food-promotion-list-header' with settings[food_promotion_group] %}
+  {% endfor%}
+</h4>
+  
+{% for i in (1..6) %}
+  {% capture food_promotion_group%}food_promotion_group_{{i}}{%endcapture%}
+  {% capture food_products_per_row_cycle_group %}}food_products_per_row_cycle_group_{{i}}{%endcapture%}
+  {% capture thumbnail_display_cycle_group %}}thumbnail_display_cycle_group_cycle_group_{{i}}{%endcapture%}
+  {% capture food_promotion_group_col %}}food_promotion_group_{{i}}_col{%endcapture%}
+  {% include 'food-promotion-list-content' with settings[food_promotion_group] %}
+{% endfor %}
+{% endif%}
+<!--Food Court Products Promotion Highlight End-->      
+
+<!-- Food Court Restaurant Show Start-->
 {% if settings['restaurant_group_section_enable']%}
 <h4 class="sixteen columns restaurant-list-header">
 <span class="restaurant-list-header-item">
@@ -211,7 +231,8 @@
   {% endfor %}
 </div>
 {% endif%}
-<!-- Featured Products by tags Ends  -->
+<!-- Food Court Restaurant Show Ends  -->
+      
 <!-- Feature Products by collection  -->
 {% if settings['feature_group_section_enable']%}
 <h4 class="feature-list-header sixteen columns panel-header">
@@ -233,7 +254,7 @@
 {% endif%}
 <!-- Featured Products by tags Ends  -->
 
-<!-- Production Promotion Highlight Starts-->
+<!-- Supermarket Products Promotion Highlight Starts-->
 {% if settings['promotion_group_section_enable']%}
 <h4 class="promotion-list-header sixteen columns panel-header">
 {% for i in (1..6) %}
@@ -250,7 +271,7 @@
   {% include 'promotion-list-content' with settings[promotion_group] %}
 {% endfor %}
 {% endif%}
-<!-- Production Promotion Highlight Starts-->
+<!-- Supermarket Products Promotion Highlight End-->
 
 
 <!--Footer Slides Starts-->

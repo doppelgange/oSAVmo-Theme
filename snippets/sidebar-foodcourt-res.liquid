@@ -2,7 +2,7 @@
   <div>
     <label class="fc_main_search">Search</label>:<input type="text" id="keyword" />
 	<a class="action_button" id="ressearch">Search</a>
-    <input type="hidden" id="col" value="{{ collection.title }}">
+    <input type="hidden" id="col" value="{{collection.products.first.vendor}}">
   </div>
   <div class="mobile_only fc_underline">    
   <label class="fc_menu">{{ collection.title }} : </label>
