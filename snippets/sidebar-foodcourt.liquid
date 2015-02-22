@@ -1,6 +1,36 @@
+<div class="four columns fc_main omega alpha">
+ 
+  <div class="fc_tab_nav">
+    <h4 class="fc_menu">Choose Your Location </h4>
+       {% for tag in collections['food-court'].all_tags %}      
+      		{% if tag contains "-" %}
+       			{% assign locations = locations | append: tag | append: "," %}
+      			{% assign city = tag | split:"-" %}
+                {% assign cities = cities | append:city.first | append:"," %}
+     		{% endif %}
+    	{% endfor %}
+        {% assign cities = cities | split: "," | uniq %}   
+    	<select class="locations-picker">
+          <option value="" selected> All </option>
+          {% for city in cities %}
+          <optgroup label="{{city}}">
+			{% for tag in collections['food-court'].all_tags %}      
+      		{% if tag contains "-" %}
+      			{% assign suburb = tag | split:"-" %}
+                {% if suburb.first == city %}
+            		{% if current_tags contains tag %}
+            		<option value="{{ tag }}" selected > {{ suburb.last  }} </option>
+            		{% else %}
+            		<option value="{{ tag }}"> {{ suburb.last  }} </option>
+            		{% endif %}
+            	{% endif %}
+     		{% endif %}
+    		{% endfor %}
+          </optgroup>
+          {% endfor %}
+    	</select>
+  </div>
 
-
-<div class="four columns fc_main omega alpha">  
  <div class="fc_tab_nav mobile_hidden">
     <h4 class="fc_menu">I'm hungry for... </h4>
     <ul id="tab">
@@ -9,8 +39,9 @@
 	</ul>
     <ul class=" fc_nav_dis type_filter" id="sub1">
       <li><input type='radio' id="asian" value="asian" name="s_type" {%if current_tags contains 'Asian' %} checked {% endif %}/><label for="asian">All Asian</label></li>   
+      {% if location == "Promotion" %}{% assign check = 'Asian' %}{% else %}{% assign check = location %}{% endif %}
       {% for product in collections['asian-style-food-court'].products %}
-      	 {% if product.tags contains location %}
+      	 {% if product.tags contains check %}
       		{% assign type = product.type %}
       		{% assign tag = type | handleize %}
       		{% unless tags contains tag %}
@@ -28,6 +59,7 @@
      <ul class="fc_nav_undis type_filter"  id="sub2">
        <li><input type='radio' id="western" value="western" name="s_type" {%if current_tags contains 'Western' %} checked {% endif %}/><label for="western">All Western</label></li>   
             {% for product in collections['western-style-food-court'].products %}
+       {% if location == "Promotion" %}{% assign check = 'Western' %}{% else %}{% assign check = location %}{% endif %}
       	 {% if product.tags contains location %}
       		{% assign type = product.type %}
       		{% assign tag = type | handleize %}

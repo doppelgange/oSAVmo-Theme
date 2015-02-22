@@ -225,6 +225,25 @@ $(document).ready(function(){
     location.href = newURL;
   });
   
+  $(".locations-picker").change(function(){
+  	var newTags = [];
+    if(jQuery('.locations-picker').val() != ""){
+     newTags.push(jQuery('.locations-picker').val());
+    }
+	if(jQuery('input[name=s_type]:checked').val()){
+      newTags.push(jQuery('input[name=s_type]:checked').val());
+    }
+    if($("input[name='s_promotion']").is(':checked')){
+      newTags.push($.trim($("input[name='s_promotion']").val()));
+    }
+    var handle = $('input[name="s_view"]:checked').val();
+    var newURL = '/collections/'+ handle;
+    if (newTags.length) {
+      newURL += '/' + newTags.join('+');
+    } 
+    location.href = newURL;
+  });
+  
   // Restaurant Sidebar Food Court
    $(".type").change(function(){
     location.href=$(this).val();

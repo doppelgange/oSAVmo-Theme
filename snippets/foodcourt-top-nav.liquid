@@ -28,7 +28,7 @@
       {% endif %}
       serving {{ location }}.
     {% else %}
-      {{ collection.products_count }} {% if current_tags contains "Asian" %}Asian {% elsif current_tags contains "Western" %} Western {% endif %}cuisines in promotion.
+      There are {{ collection.products_count }} {% if current_tags contains "Asian" %}Asian {% elsif current_tags contains "Western" %} Western {% endif %}cuisines{% if current_tags contains "Promotion" %} in promotion{% endif %}.
     {% endif %}
  
     </label>
