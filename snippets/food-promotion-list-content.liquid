@@ -2,7 +2,7 @@
   <div class="sixteen columns food-promotion-list {% cycle 'promotion-list-class':'food-promotion-list-1','food-promotion-list-2 hidden','food-promotion-list-3 hidden','food-promotion-list-4 hidden','food-promotion-list-5 hidden','food-promotion-list-6 hidden' %}">
     {% assign collection_display = settings['food_display_collection'] %}
     {% assign p_c_handle = collections[food-promotion-list-content].handle %}
-    {% assign products_per_row = settings[promotion_group_col] %} <!--settings.promotion_group_per_row -->
+    {% assign products_per_row = settings[food_promotion_group_col] %} <!--settings.promotion_group_per_row -->
     {% assign product_found = false %}
     {% assign skip = false %}
     {% capture new_row %}

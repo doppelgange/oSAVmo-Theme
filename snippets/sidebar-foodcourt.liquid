@@ -60,7 +60,7 @@
        <li><input type='radio' id="western" value="western" name="s_type" {%if current_tags contains 'Western' %} checked {% endif %}/><label for="western">All Western</label></li>   
             {% for product in collections['western-style-food-court'].products %}
        {% if location == "Promotion" %}{% assign check = 'Western' %}{% else %}{% assign check = location %}{% endif %}
-      	 {% if product.tags contains location %}
+      	 {% if product.tags contains check %}
       		{% assign type = product.type %}
       		{% assign tag = type | handleize %}
       		{% unless tags contains tag %}
@@ -107,7 +107,7 @@
   </select>
   <h4 class="fc_menu mobile_hidden">Promotion Only</h4>
    <ul>
-     <li><input type='checkbox' id='radio_pro' value="promotion" {% if current_tags contains "Promotion" %} checked {% endif %}   name="s_promotion"  /><label for="radio_pro">Show Promotion Only</label></li>
+     <li><input type='checkbox' id='radio_pro' value="promotion" {% if current_tags contains "promotion" %} checked {% endif %}   name="s_promotion"  /><label for="radio_pro">Show Promotion Only</label></li>
   </ul>
   <h4 class="fc_menu mobile_hidden">Change View</h4>
    <ul>

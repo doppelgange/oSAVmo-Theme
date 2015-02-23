@@ -24,8 +24,17 @@
       {% assign restaurant_address = restaurant_info[0] | strip  %}
       {% assign restaurant_map = restaurant_info[1] | strip "%}
     <div class="six columns">
+     <div class="mobile_only resimg" >
+      {% if collection.image %}
+        <img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}" />
+      {% else %}
+        <img src="{{ collection.products.first.featured_image | product_img_url: 'grande' }}" alt="{{ collection.title | escape }}" />
+      {% endif %}
+      </div>
+      <div class="resinfo">
       <label class="fc_vendor_title">{{collection.title}}</label>
       <p>{{ restaurant_address }}</p>
+      </div>
     </div>
       <div class="three columns alpha thumbnail mobile_hidden">
        <iframe src="{{ restaurant_map }}" width="205px" height="205px" frameborder="0" style="border:0"></iframe> 
