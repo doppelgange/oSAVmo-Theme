@@ -41,7 +41,11 @@
     {% if settings.display_product_quantity %}
       <div class="left">
         <label for="quantity">{{ 'products.product.quantity' | t }}:</label>
-        <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+          <input type="number" min="{% if product.title contains "per 100g" %}10{% else %}1{% endif %}" size="2" class="quantity" name="quantity" id="quantity" value="{% if product.title contains "per 100g" %}10{% else %}1{% endif %}" />    	 
+        	{% if product.title contains "per 100g" %} X 100g
+         <label>Total Weight:</label><label name="totalweight"></label>
+        <input type="hidden" name="weight" value="0.1">
+        {% endif %}
       </div>
     {% endif %}
     <div class="purchase clearfix {% if settings.display_product_quantity %}inline_purchase{% endif %}">

@@ -285,7 +285,13 @@ $('.seafood ').ripples({
 resolution:256,
 perturbance: 0.04,
 });
+    $("label[name='totalweight']").text($("input[name='quantity']").val() * $("input[name='weight']").val() + " Kg");
   });
+            
+$("input[name='quantity']").change(function(){
+    var weight = ($(this).val() * $("input[name='weight']").val()).toFixed(2);
+	$("label[name='totalweight']").text( weight+ " Kg");
+})
 
 //Start: Set up the alert message in the page
 //$(".top-message").hide();

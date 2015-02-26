@@ -82,7 +82,7 @@
 
                      <p id="quantity_{{ itemIndexP }}">
                         <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
-                        <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[{{item.id}}]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+                        <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[{{item.id}}]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />                    
                      </p>
 
                        <p class="remove_item">
@@ -134,7 +134,8 @@
                     <p id="quantity_{{ itemIndexP }}">
                         <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
                         <input type="number" min="0" size="3" maxlength="3" class="quantity" name="updates[{{ item.id }}]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
-                    </p>
+                         {% if item.title contains "per 100g" %} X 100g{% endif %}
+                     </p>
 
                     <p class="remove_item">
                         <a href="/cart/change?line={{ itemIndexP }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>

@@ -3803,9 +3803,18 @@ div.cloudzoom-ajax-loader {
 ================================================== */
 
   @media only screen and (min-width: 960px) and (max-width: 1199px) {
-    .container                                  { position: relative; width: 960px; margin: 0 auto; padding: 0; }
-    .container .column,
-    .container .columns                         { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
+    .container{ 
+      	position: relative; 
+     	 width: 1024px; 
+      	margin: 0 auto; 
+     	 padding: 0;
+    }
+    .container .column,.container .columns { 
+      	float: left; 
+/*       	display: inline;  */
+      	margin-left: 10px; 
+      	margin-right: 10px; 
+    }
     .row                                        { margin-bottom: 20px; }
 
     /* Nested Column Classes */
@@ -3814,43 +3823,44 @@ div.cloudzoom-ajax-loader {
 
     /* Base Grid */
     .container .one.column,
-    .container .one.columns                     { width: 40px;  }
-    .container .two.columns                     { width: 100px; }
-    .container .three.columns                   { width: 160px; }
-    .container .four.columns                    { width: 220px; }
-    .container .five.columns                    { width: 280px; }
-    .container .six.columns                     { width: 340px; }
-    .container .seven.columns                   { width: 400px; }
-    .container .eight.columns                   { width: 460px; }
-    .container .nine.columns                    { width: 520px; }
-    .container .ten.columns                     { width: 580px; }
-    .container .eleven.columns                  { width: 640px; }
-    .container .twelve.columns                  { width: 700px; }
-    .container .thirteen.columns                { width: 760px; }
-    .container .fourteen.columns                { width: 820px; }
-    .container .fifteen.columns                 { width: 880px; }
-    .container .sixteen.columns                 { width: 940px; }
-
-    .container .one-third.column                { width: 300px; }
+    .container .one.columns                     { width: 44px;  }
+    .container .two.columns                     { width: 108px; }
+    .container .three.columns                   { width: 172px; }
+    .container .four.columns                    { width: 236px; }
+    .container .five.columns                    { width: 300px; }
+    .container .six.columns                     { width: 364px; }
+    .container .seven.columns                   { width: 428px; }
+    .container .eight.columns                   { width: 492px; }
+    .container .nine.columns                    { width: 556px; }
+    .container .ten.columns                     { width: 620px; }
+    .container .eleven.columns                  { width: 684px; }
+    .container .twelve.columns                  { width: 748px; }
+    .container .thirteen.columns                { width: 812px; }
+    .container .fourteen.columns                { width: 876px; }
+    .container .fifteen.columns                 { width: 940px; }
+/*     .container .sixteen.columns                 { width: 940px; } */
+    .container .sixteen.columns                 { width: 1004px; }
+    
+    .container .one-third.column                { width: 320px; }
     .container .two-thirds.column               { width: 620px; }
-    .container .one-fifth.column                { width: 172px; }
+    .container .one-fifth.column                { width: 182px; }
 
     /* Offsets */
-    .container .offset-by-one                   { padding-left: 60px;  }
-    .container .offset-by-two                   { padding-left: 120px; }
-    .container .offset-by-three                 { padding-left: 180px; }
-    .container .offset-by-four                  { padding-left: 240px; }
+    .container .offset-by-one                   { padding-left: 44px;  }
+    .container .offset-by-two                   { padding-left: 108px; }
+    .container .offset-by-three                 { padding-left: 172px; }
+    .container .offset-by-four                  { padding-left: 236px; }
     .container .offset-by-five                  { padding-left: 300px; }
-    .container .offset-by-six                   { padding-left: 360px; }
-    .container .offset-by-seven                 { padding-left: 420px; }
-    .container .offset-by-eight                 { padding-left: 480px; }
-    .container .offset-by-nine                  { padding-left: 540px; }
-    .container .offset-by-ten                   { padding-left: 600px; }
-    .container .offset-by-eleven                { padding-left: 660px; }
-    .container .offset-by-twelve                { padding-left: 720px; }
-    .container .offset-by-thirteen              { padding-left: 780px; }
-    .container .offset-by-fourteen              { padding-left: 840px; }
-    .container .offset-by-fifteen               { padding-left: 900px; }
+    .container .offset-by-six                   { padding-left: 364px; }
+    .container .offset-by-seven                 { padding-left: 428px; }
+    .container .offset-by-eight                 { padding-left: 492px; }
+    .container .offset-by-nine                  { padding-left: 556px; }
+    .container .offset-by-ten                   { padding-left: 620px; }
+    .container .offset-by-eleven                { padding-left: 684px; }
+    .container .offset-by-twelve                { padding-left: 748px; }
+    .container .offset-by-thirteen              { padding-left: 812px; }
+    .container .offset-by-fourteen              { padding-left: 876px; }
+    .container .offset-by-fifteen               { padding-left: 940px; }
     
     
     .four.columns.sidebar.sidebar_col_border{
@@ -3859,8 +3869,29 @@ div.cloudzoom-ajax-loader {
     min-height: 400px;
     }
     .content_col_border.fix-margin {
-      margin-left:240px;
+      margin-left:256px;
     }
+    
+    /* Tablet index page */
+    .nav-container .nav{
+    	margin:0px;
+    }
+    
+    .nav ul.menu li{
+    	max-width:160px;
+    }
+    
+    .tablet_hidden{
+    	display:none !important;
+    }
+  
+    .columns.homepage_slider{
+    	width: 1024px !important;
+     	margin:0px;
+    }
+    
+    
+    
     
     
     
@@ -4479,11 +4510,13 @@ a.disabled{
 
 .fc_title{
 	display:block;
+    height:50px;
 }
 
 .fc_vendor_title{
 	color: #4CC7EC;
 	font-weight: bold;
+    height: auto;
 }
 
 .fc_menu {

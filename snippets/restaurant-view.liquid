@@ -21,8 +21,8 @@
     </div>
       
       {% assign restaurant_info = collection.description | split:"--" %}
-      {% assign restaurant_address = restaurant_info[0] | strip  %}
-      {% assign restaurant_map = restaurant_info[1] | strip "%}
+      {% assign restaurant_address = restaurant_info[0] | strip_html |strip  %}
+      {% assign restaurant_map = restaurant_info[1] | strip_html |strip %}
     <div class="six columns">
      <div class="mobile_only resimg" >
       {% if collection.image %}
