@@ -1,7 +1,7 @@
 {% if food-promotion-list-header != blank %}
-{% cycle 'promotion-list-header-separator': '','|','|','|','|','|','|'%} 
+{% cycle 'food-promotion-list-header-separator': '','|','|','|','|','|','|'%} 
 <a href="/collections/food-court/promotion{%if collections[food-promotion-list-header].handle contains "asian" %}+asian{% elsif collections[food-promotion-list-header].handle contains "western"%}+western{% endif %}" title="{{ collections[food-promotion-list-header].title}}">
-<span class="promotion-list-header-item {% cycle 'promotion-list-header-class':'food-promotion-list-header-1','food-promotion-list-header-2','food-promotion-list-header-3','food-promotion-list-header-4','food-promotion-list-header-5','food-promotion-list-header-6' %}">
+<span class="food-promotion-list-header-item {% cycle 'promotion-list-header-class':'food-promotion-list-header-1','food-promotion-list-header-2','food-promotion-list-header-3','food-promotion-list-header-4','food-promotion-list-header-5','food-promotion-list-header-6' %}">
  {{ collections[food-promotion-list-header].title | downcase }}
 </span>
 </a>
