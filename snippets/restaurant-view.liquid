@@ -9,21 +9,61 @@
       {% endfor %}
       {% unless find == false %}
       {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
-  
+
+     {% assign restaurant_info = collection.description | split:"--" %}
+     {% assign restaurant_address = restaurant_info.first | strip_html  %}
+	 {% assign image2 = restaurant_info[1] |strip %}
+     {% assign image3 = restaurant_info[2] |strip %}
+     {% assign restaurant_map = restaurant_info.last | strip_html "%}
     <div class="twelve columns restaurant">
     <a href="{{ collection.url }}" title="{{ collection_title }}">
     <div class="three columns omega thumbnail mobile_hidden">
-       {% if collection.image %}
-        <img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}" style="margin-bottom:0px"/>
-      {% else %}
-        <img src="{{ collection.products.first.featured_image | product_img_url: 'grande' }}" alt="{{ collection.title | escape }}" style="margin-bottom:0px"/>
-      {% endif %}    
+       <ul class=" fc_nav_dis" id="{{collection.handle}}_sub1">
+        	<img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}" />
+      </ul>
+       <ul class=" fc_nav_undis" id="{{collection.handle}}_sub2" >
+         {{ image2 }}
+      </ul>
+      <ul class=" fc_nav_undis" id="{{collection.handle}}_sub3">
+         {{ image3 }}
+      </ul>
     </div>
-      
-      {% assign restaurant_info = collection.description | split:"--" %}
-      {% assign restaurant_address = restaurant_info[0] | strip_html |strip  %}
-      {% assign restaurant_map = restaurant_info[1] | strip_html |strip %}
-    <div class="six columns">
+      </a>
+     <div class="one columns omega alpha mobile_hidden" style="padding:10px">
+       <ul id="{{collection.handle}}_tab" style="margin:0px">
+         <li class="img_nav_current" id="{{collection.handle}}_nav1" style="margin:0px">
+        	<img src="{{ collection.image.src | collection_img_url }}" alt="{{ collection.image.alt }}" />
+         </li>
+        <li class="img_nav_link" id="{{collection.handle}}_nav2" style="margin:0px">
+           {{ image2 }}
+         </li>
+        <li class="img_nav_link" id="{{collection.handle}}_nav3" style="margin:0px">
+            {{ image3 }}
+         </li>
+       </ul>
+     </div>
+      <script>
+    $('#{{collection.handle}}_tab li').mouseover(function(){
+     this.className="img_nav_current";
+   var j;
+   var id;
+   var e;
+   for(var i=1;i<=3;i++){
+     
+     id ="{{collection.handle}}_nav"+i;
+     j = document.getElementById(id);
+     e = document.getElementById("{{collection.handle}}_sub"+i);
+     if(id != this.id){
+       j.className="img_nav_link";
+       e.style.display = "none";
+     }else{
+      e.style.display = "block";
+     }
+   }  
+  });
+</script>
+    <a href="{{ collection.url }}" title="{{ collection_title }}">
+    <div class="five columns omega">
      <div class="mobile_only resimg" >
       {% if collection.image %}
         <img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}" />
@@ -38,14 +78,15 @@
     </div>
       <div class="three columns alpha thumbnail mobile_hidden">
        <iframe src="{{ restaurant_map }}" width="205px" height="205px" frameborder="0" style="border:0"></iframe> 
-    </div></a>
+    </div>
+      </a>
     <br />
     </div>
   
      {% assign count = count | plus:1 %}
       {% endunless%} 
       
-  	 {% endunless %}  
+  	 {% endunless %} 
   {% endfor %}
     
       {% if count == 0 %}
