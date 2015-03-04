@@ -1,0 +1,272 @@
+{% layout 'theme.service' %}
+{% if settings.collection_sidebar %}
+      {% include 'sidebar-new' %}
+  <div class="twelve columns content_col_border fix-margin ">   
+  {% else %}
+    <div class="sixteen columns">
+  {% endif %}
+
+{% paginate collection.products by settings.pagination_limit %}
+
+    <div class="eight columns breadcrumb_text alpha mobile_hidden">
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
+      &nbsp; / &nbsp;
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url"><span itemprop="title">{{ collection.title }}</span></a></span>       
+       
+      {%comment%}
+      {% if collection.current_type %}
+          &nbsp; / &nbsp;
+          <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ collection.current_type | handleize }}" title="{{ collection.current_type | escape }}" itemprop="url"><span itemprop="title">{{ collection.current_type }}</span></a></span>
+      {% endif %}
+      {% endcomment %}
+       
+      {% if current_tags %}
+        &nbsp; / &nbsp;
+        {% for tag in current_tags %}
+         <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}"><span itemprop="title">{{ tag }}</span></a></span>
+
+      {% endfor %}
+      {% endif %}
+      
+      {% if paginate.pages != 0 %}      
+        &nbsp; / &nbsp; {{ 'general.breadcrumbs.page' | t: current_page: paginate.current_page, pages: paginate.pages }}
+      {% endif %}
+     </div>
+      <!--collection Page Slides Starts-->
+  {% if settings.collection_slide_enabled %}
+      <div class="flexslider twelve columns homepage_slider collection-header-slide">
+        <ul class="slides">
+ 
+          {% assign handle = collection.handle %}
+          {% case handle %}
+            {% when 'chinese-style-products' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}ch_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}ch_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}ch_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}ch_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+          {% when 'taiwan-style-products' %}
+        {% for i in (1..6)%}
+          {%capture sld_enabled%}tw_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}tw_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}tw_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}tw_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% when 'korean-style-products' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}kr_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}kr_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}kr_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}kr_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% when 'japanese-style-roducts' %}
+          {% for i in (1..6)%}
+          {%capture sld_enabled%}jp_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}jp_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}jp_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}jp_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% when 'european-style-products' %}
+          {% for i in (1..6)%}
+          {%capture sld_enabled%}eu_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}eu_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}eu_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}eu_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+      
+        {% when 'southeast-asian-products' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}as_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}as_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}as_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}as_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+         {% when 'seafood-market' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}sea_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}sea_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}sea_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}sea_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+             {% when 'others' %}
+            {% for i in (1..6)%}
+          {%capture sld_enabled%}ot_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}ot_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}ot_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}ot_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+        {% comment %}
+        {% else %}
+          {% for i in (1..6)%}
+          {%capture sld_enabled%}ch_collection_slide_{{i}}_enabled{%endcapture%}
+          {%capture sld_img%}ch_collection_slide_{{i}}.jpg {%endcapture%}
+          {%capture sld_link%}ch_collection_slide_{{i}}_link{%endcapture%}
+          {%capture sld_alt%}ch_collection_slide_{{i}}_alt_text{%endcapture%}
+              {% if settings[sld_enabled] %}
+                <li>
+                    <a href="{{ settings[sld_link] }}"><img src="{{ sld_img|asset_url}}" alt="{{ settings[sld_alt] | escape }}" /></a>
+                </li>
+              {% endif %}
+          {% endfor%}
+          {% endcomment %}
+        {% endcase %}
+        </ul>      
+      </div>
+  {% endif%}
+     <!--collection Page Slide Ends-->
+     
+     {% include 'pagination_top' %}
+     {% if collection.handle != blank and collection.products_count > 0 %}
+      {% if settings.collection_tags %}        
+        <div class="four columns section_select filter_margin_bottom {% if paginate.pages < 2 %}filter_margin_top {% endif %}offset-by-four omega">
+              <label for="tag_filter" class="inline">{{ 'collections.sorting.filter' | t }}: </label> 
+              <select name="tag_filter" id="tag_filter">
+                <option {% unless current_tags or current_tags contains 'supermarkt' %}selected="selected"{% endunless %} value="{% if collection.handle == "all" %}/collections/all/supermarket{% else %}{{ collection.url }}{% endif %}">{{ 'collections.general.all_collection_title' | t: title: collection.title }}</option>
+		   	 {% if collection.handle == 'all' %}
+      			 {% for product_type in collection.all_types %}
+      			{% unless collections['food-court'].all_types contains product_type  or collections['seafood-market'].all_types contains product_type %}
+      			  <option {% if current_tags contains product_type %}selected="selected"{% endif %} value="/collections/all/{{ product_type  | handleize }}">{{ product_type  }}</option>
+            	{% endunless %} 
+      			{% endfor %}
+      		{% else %}
+         		 {% for product_type in collection.all_types %}	
+      		       <option {% if current_tags contains product_type %}selected="selected"{% endif %} value="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ product_type  | handleize }}">{{ product_type  }}</option>
+               {% endfor %}
+      		{% endif %}          
+          </select>
+          
+          
+          
+          
+          {% comment %}
+          {% for tag in collection.all_tags %} 
+         	{% assign text = text | append : tag | append:"," %}
+            {% if forloop.first %}
+              <label for="tag_filter" class="inline">{{ 'collections.sorting.filter' | t }}: </label> 
+              <select name="tag_filter" id="tag_filter">
+                <option {% unless current_tags %}selected="selected"{% endunless %} value="{% if collection.handle == "all" %}/collections/all/supermarket{% else %}{{ collection.url }}{% endif %}">{{ 'collections.general.all_collection_title' | t: title: collection.title }}</option>
+            {% endif %}          
+              
+            {% assign nofilter = false %}
+            {% if collection.handle == "all" %}
+            {% assign nofiltertags = settings.no_filter_tag | split:','%}
+            {% else %}
+             {% assign nofiltertags = "Christmas,NewArrival,Recommendation,Display"| split:','%}
+            {% endif %}
+            {% for nofiltertag in nofiltertags %}
+              {% if tag == nofiltertag %}
+                 {% assign nofilter = true %}
+              {% endif%}        
+            {% endfor %}
+            {% unless nofilter == true %} 
+                
+            {% unless tag contains 'meta-related-collection-' %}
+              <option {% if current_tags contains tag %}selected="selected"{% endif %} value="/collections/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handleize }}">{{ tag }}</option>
+            {% endunless %}
+            
+            {% endunless %}
+                
+            {% if forloop.last %}
+              </select>
+            {% endif %}
+          
+          {% endfor %}
+          {% endcomment %}
+        </div>
+      {% endif %}
+
+     {% if settings.collection_sort %}
+        <div class="four columns section_select filter_margin_bottom omega {% if paginate.pages < 2 %}filter_margin_top {% endif %} {% unless settings.collection_tags %}offset-by-four{% endunless %}">
+          <label for="sort-by" class="inline">{{ 'collections.sorting.title' | t }}: </label> 
+          <select id="sort-by">
+            <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
+            <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+            <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+            <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+            <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+            <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+            <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+            <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+          </select>
+          <script type="text/javascript">
+            // <![CDATA[  
+              $('#sort-by')
+                .val('{{ collection.sort_by | default: collection.default_sort_by  }}')
+                .bind('change', function() {
+                  Shopify.queryParams.sort_by = $(this).val();
+                  location.search = $.param(Shopify.queryParams);
+              });
+            // ]]>
+          </script>
+        </div>
+      {% endif %}
+    {% endif %}
+           
+    {% if settings.display_collection_title %}
+      <h1>{{ collection.title }}</h1>
+    {% endif %}      
+     
+    {% comment %}
+    {% if collection.description != blank %}
+      <div class="section clearfix collection_description">    
+        {{ collection.description }}
+      </div>
+    {% endif %}
+    {% endcomment %}
+      
+    {% if collection.products.size == 0 %}
+      <div class="section clearfix">     
+        <p class="quote" style="float:left;">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    {% else %}
+      {% assign products = collection.products %}
+      {% assign products_per_row = settings.products_per_row %}
+      {% include 'product-loop' with settings.collection_sidebar %}
+    {% endif %}
+
+    {% include 'pagination' with settings.collection_sidebar %}
+  </div>
+ </div>
+
+{% endpaginate %}

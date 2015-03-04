@@ -19,7 +19,11 @@
     <a href="{{ collection.url }}" title="{{ collection_title }}">
     <div class="three columns omega thumbnail mobile_hidden">
        <ul class=" fc_nav_dis" id="{{collection.handle}}_sub1">
-        	<img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}" />
+      {% if collection.image %}
+        <img src="{{ collection.image.src | collection_img_url: 'grande' }}" alt="{{ collection.image.alt }}"/>
+      {% else %}
+        <img src="{{ collection.products.first.featured_image | product_img_url: 'grande' }}" alt="{{ collection.title | escape }}" />
+      {% endif %}    
       </ul>
        <ul class=" fc_nav_undis" id="{{collection.handle}}_sub2" >
          {{ image2 }}
@@ -32,7 +36,11 @@
      <div class="one columns omega alpha mobile_hidden" style="padding:10px">
        <ul id="{{collection.handle}}_tab" style="margin:0px">
          <li class="img_nav_current" id="{{collection.handle}}_nav1" style="margin:0px">
-        	<img src="{{ collection.image.src | collection_img_url }}" alt="{{ collection.image.alt }}" />
+        {% if collection.image %}
+        <img src="{{ collection.image.src | collection_img_url }}" alt="{{ collection.image.alt }}"/>
+      {% else %}
+        <img src="{{ collection.products.first.featured_image | product_img_url: 'grande' }}" alt="{{ collection.title | escape }}" />
+      {% endif %}    
          </li>
         <li class="img_nav_link" id="{{collection.handle}}_nav2" style="margin:0px">
            {{ image2 }}
