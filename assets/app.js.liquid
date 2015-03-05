@@ -61,10 +61,25 @@ $('.picker').change(function() {
 })  
   
 // Food Court related jQuery
-// Sidebar Main Page  
-  var cityPicker = jQuery('.city-picker');
-   cityPicker.change(function(){
-      $("#foodsearch").addClass("disabled").removeAttr("href");
+// Sidebar Main Page 
+var cityPicker = jQuery('.city-picker');
+$(document).ready(function(){
+      var city = cityPicker.val();
+      var location = jQuery('input[name="location"]').val().split(',');
+      var suburbObj = document.getElementById('suburb');
+      $.each (location, function (key,value ){
+       if (value){
+         var locationArray = value.split('-');       
+         if (locationArray[0] ==city ){
+            suburbObj.options.add(new Option(locationArray[1],value.toLowerCase().replace(" ", "-")));
+         }     
+       }
+     })
+    var newURL = '/collections/food-court/promotion+'+$('#suburb').val();
+    $("#foodsearch").prop("href", newURL);
+});
+   
+  cityPicker.change(function(){
       var city = cityPicker.val();
       var location = jQuery('input[name="location"]').val().split(',');
       var suburbObj = document.getElementById('suburb');
@@ -97,11 +112,7 @@ $('.picker').change(function() {
       newURL += '/' + newTags.join('+');
     }   
     if($('#suburb').val()!=""){
-        $("#foodsearch").removeClass("disabled");
       $("#foodsearch").prop("href", newURL);
-    }
-    else{
-       $("#foodsearch").addClass("disabled").removeAttr("href");
     }
   });
   
@@ -226,11 +237,11 @@ $(document).ready(function(){
   });
   
   $(".locations-picker").change(function(){
-  	var newTags = [];
+    var newTags = [];
     if(jQuery('.locations-picker').val() != ""){
      newTags.push(jQuery('.locations-picker').val());
     }
-	if(jQuery('input[name=s_type]:checked').val()){
+  if(jQuery('input[name=s_type]:checked').val()){
       newTags.push(jQuery('input[name=s_type]:checked').val());
     }
     if($("input[name='s_promotion']").is(':checked')){
@@ -290,7 +301,7 @@ perturbance: 0.04,
             
 $("input[name='quantity']").change(function(){
     var weight = ($(this).val() * $("input[name='weight']").val()).toFixed(2);
-	$("label[name='totalweight']").text( weight+ " Kg");
+  $("label[name='totalweight']").text( weight+ " Kg");
 })
 
 //Start: Set up the alert message in the page
@@ -407,7 +418,6 @@ $("#hptitle").click(function(){
 //End: Footer link hidden
 
 //Apply same height for mobile customer page
-/*
 function setCustomerLogoHeight(){
   var cusotmerLogoHeight=($(".logo").outerWidth()/3+"px");
   $(".logo").css("height",cusotmerLogoHeight);
@@ -415,7 +425,7 @@ function setCustomerLogoHeight(){
 }
 $(document).ready( setCustomerLogoHeight );
 $(window).resize(setCustomerLogoHeight);
-*/
+
 //Start: Promotion List - mouse over header to show the content in main page
 
 function switchPanel(name){

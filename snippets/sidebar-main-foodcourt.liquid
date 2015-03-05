@@ -2,28 +2,26 @@
   <h1>Order Food Online From Local Restaurants</h1>
   <div class="sixteen columns">
      <div class="four columns offset-by-four">
-     	<label>City: </label>
+      <label>City: </label>
             {% for tag in collection.all_tags %}      
-      			{% if tag contains "-" %}
-       				{% assign locations = locations | append: tag | append: "," %}
-      				{% assign city = tag | split:"-" %}
+            {% if tag contains "-" %}
+              {% assign locations = locations | append: tag | append: "," %}
+              {% assign city = tag | split:"-" %}
                     {% assign cities = cities | append:city.first | append:"," %}
-     			{% endif %}
-    		{% endfor %}
+          {% endif %}
+        {% endfor %}
             {% assign cities = cities | split: "," | uniq %}   
-    	<select class="city-picker">
-      	  <option value="">All</option>
+      <select class="city-picker">
           {% for city in cities %}
-		  <option value="{{ city }}"> {{ city  }} </option>
+      <option value="{{ city }}"> {{ city  }} </option>
           {% endfor %}
-    	</select>
+      </select>
       </div>
 
       <div class="four columns">
-         <input type="hidden" value='{{locations}}' name="location">
+         <input type="hidden" value='{{locations}}' name="location"> 
          <label>{{ 'collections.sidebar.location' | t }}: </label>
-    	 <select class="coll-filter" id="suburb">
-      		<option value="">All</option>
+       <select class="coll-filter" id="suburb">
          </select>
       </div>  
     {% comment %}    
@@ -48,13 +46,13 @@
     <div class="sixteen columns">  
       <div class="four columns offset-by-four fc_sidebar_content">
         <input type='radio' id='radio_cusine' value="food-court" checked  name="view"  /><label for='radio_cusine'>Cuisine View</label>
-		<input type='radio' id='radio_res' value="food-court-res"   name="view"  /><label for='radio_res' >Restaurant View</label>
+    <input type='radio' id='radio_res' value="food-court-res"   name="view"  /><label for='radio_res' >Restaurant View</label>
       </div>
       <div class="four columns fc_sidebar_content">
         <input type='checkbox' id='radio_pro' value="promotion"   name="promotion"  checked/><label for='radio_pro'>Show Promotion Items Only</label>
       </div>
     </div>
-  	<div class="sixteen columns fc_sidebar_content">
-       <a class="action_button disabled" id="foodsearch">Search Restaurants</a>
+    <div class="sixteen columns fc_sidebar_content">
+       <a class="action_button" id="foodsearch">Search Restaurants</a>
     </div>  
   </div>
