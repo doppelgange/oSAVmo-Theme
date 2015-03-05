@@ -31,6 +31,7 @@
 
     <!-- Stylesheets -->
     {{ 'styles.css' | asset_url | stylesheet_tag }}
+    {{ 'service.css' | asset_url | stylesheet_tag }}
     <!--[if lte IE 9]>
       {{ 'ie.css' | asset_url | stylesheet_tag }}
     <![endif]-->
@@ -239,8 +240,8 @@
           </div>
         </div>
         <div class="container nav-container"> 
-          <div class="column logo">
-            <a href="{{ shop.url }}" title="{{ shop.name }}">{{ shop.name }}</a>
+          <div class="columns five logo">
+            <a href="{{ collections['service'].url }}" title="{{ shop.name }}">{{ shop.name }}</a>
           </div>
           <!-- Display title next to logo for customer related page-->
           {% comment %}
@@ -265,7 +266,7 @@
                 </form>
                 </li>
               {% endif %}
-              {% for link in linklists[settings.main_linklist].links %}
+              {% for link in linklists[settings.service_linklist].links %}
                 {% if linklists[link.handle] == empty %}
                   <li><a href="{{ link.url }}" title="{{ link.title }}" class="top-link {% if link.active %} active {% endif %}">{{ link.title }}</a></li>
                 {% else %}

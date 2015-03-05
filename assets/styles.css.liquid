@@ -1,4 +1,4 @@
-/******************************************************************
+*****************************************************************
 Theme Name: Retina v2.1
 Theme URI: http://themes.shopify.com/themes/retina/styles/austin?ref=out-of-the-sandbox
 Author: Out of the Sandbox (http://outofthesandbox.com)
@@ -569,6 +569,7 @@ select#currencies {
 .sidebar ul {
  list-style:none;
  margin:0px 0px 20px;
+ padding: 5px;
 }
 .sidebar ul li{
  margin-bottom: 5px;
@@ -4373,10 +4374,50 @@ ul.product-category{
 #prev, #next{
     display:none;
   }
-.description{
-border: solid 1px #ECECEC;
-padding: 10px 24px 24px 24px;
+
+
+/* Description*/
+
+.description h4{
+  font-size: 2em;
+  background: #e50112;
+  color: #fff;
+  padding-left: 10px;
+  margin: 5px 0;
 }
+
+.description h3{
+  margin: 0;
+  color: #e50112;
+  background: #fff0ff;
+  border-bottom: #e50112 2px dotted;
+}
+
+.description p,.description ul{
+  margin: 0;
+  padding: 0.5em 0.3em;
+  line-height:1.5em;
+  font-size: 16px;
+  color: #333;
+}
+
+.description ul{
+  padding: 0.5em 2em;
+}
+
+.description label{
+  display: inline;
+  font-weight: bold;
+}
+
+.description .even{
+  background-color: #fcfcfc;
+}
+.description a{
+  text-decoration: underline;
+}
+/*end of description*/
+
 .seafood{
  background-image: url({{ 'seafood-bg.jpg' | asset_url }});
 }
@@ -5726,4 +5767,3 @@ a#google-plus.icon-google-plus:hover { color:#ffffff !important;background-color
            url('FontName.svg#webfontZam02nTh') format('svg');
       font-weight: normal;
       font-style: normal; }
-*/
