@@ -165,7 +165,7 @@
   <div class="twelve columns alpha omega fc_topline">
       {% assign restaurant_info = collection.description | split:"--" %}
       {% assign restaurant_address = restaurant_info[0] | strip  %}
-      {% assign restaurant_map = restaurant_info[1] | strip "%}
+      {% assign restaurant_map = restaurant_info.last | strip "%}
     
     <div class="four columns omega fc_res_info">
       {{ collection.title }}
