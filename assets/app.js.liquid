@@ -1,4 +1,36 @@
 $(function() {
+// Removes cart attributes for items that have been removed from the cart 
+function removeOldAttributes() {
+     var cart = $.ajax({
+     type:"GET",
+     url:"/cart.js",
+     dataType: 'json',
+     success: function(cart) { 
+     var attrs = cart.attributes,
+         itemsToRemove = {};
+         for (attr in attrs) {
+          itemsToRemove["attributes[" + attr + "]"] = "";
+         }            
+   		var params = {
+    		type: 'POST',
+   			 url: '/cart/update.js',
+    		data: itemsToRemove,
+    		dataType: 'json',
+    		success: function(cart) {
+     
+    		},
+   			 error: function(XMLHttpRequest, textStatus) {
+      		Shopify.api.onError(XMLHttpRequest, textStatus);
+    		}
+  		}; 
+  		$.ajax(params);             
+    }
+   })
+};
+if($("input[name='checkout']").val()){
+  removeOldAttributes();
+  console.log("empty attribute");
+}
 // Cart Page related jQuery
 var mydate = new Date();
 if(mydate.getHours() >= 10){ var b =1; var e = 7 }else { var b =0; var e = 6 };
@@ -65,7 +97,8 @@ $('.picker').change(function() {
 var cityPicker = jQuery('.city-picker');
 $(document).ready(function(){
       var city = cityPicker.val();
-      var location = jQuery('input[name="location"]').val().split(',');
+  	if(jQuery('input[name="location"]').val()){
+ 	 var location = jQuery('input[name="location"]').val().split(',');
       var suburbObj = document.getElementById('suburb');
       $.each (location, function (key,value ){
        if (value){
@@ -75,6 +108,7 @@ $(document).ready(function(){
          }     
        }
      })
+    }
     var newURL = '/collections/food-court/promotion+'+$('#suburb').val();
     $("#foodsearch").prop("href", newURL);
 });
@@ -449,9 +483,11 @@ switchPanel("feature");
 //End: Promotion List - mouse over header to show the content in main page
 
 //Start: Set content height no less than side bar
-if($(".sidebar_col_border").height() > $(".content_col_border").height()){
-  $(".content_col_border").css("height",$(".sidebar").outerHeight()+50+"px");
-}
+  $(document).ready(function(){
+  	if($(".sidebar_col_border").height() > $(".content_col_border").height()){
+  		$(".content_col_border").css("height",$(".sidebar").height()+50+"px");
+	}
+  });
 //End: Set content height no less than side bar
 
 //Start: Home page category list 

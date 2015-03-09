@@ -9,7 +9,7 @@
         <br class="clear product_clear" />
     {% endcapture %}
     {% assign product_count =  0 %}
-    {% for product in collections[collection_display].products %}
+    {% for product in collections[collection_display].products limit:50 %}
 		
            {% for collection in product.collections %}        
             {%if collection.title == collections[promotion-list-content].title %}  

@@ -104,21 +104,11 @@
                     {% for link in linklists[link.handle].links %}
                       {% if linklists[link.handle] == empty %}
                         <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-                          {% if collections[link.handle].all_tags != empty %}
+                          {% if collections[link.handle].all_types != empty %}
                            <ul>
-                              {% for tag in collections[link.handle].all_tags %}
-                              {% assign nofilter = false %}
-                              {% assign nofiltertags = settings.no_filter_tag | split:','%}
-                              {% for nofiltertag in nofiltertags %}
-                              {% if tag == nofiltertag %}
-                              {% assign nofilter = true %}
-                              {% endif%}        
-                              {% endfor %}
-                       
-                              {% unless nofilter == true %}
-                              <li{% if link.active %} class="Selected"{% endif %}><a href="/collections/{% if collections[link.handle].handle != blank %}{{ collections[link.handle].handle }}{% else %}all{% endif %}/{{ tag | handleize }}" title="{{ tag | escape }}">{{ tag }}</a></li>
-                              {%endunless%}
-                             {% endfor %}
+                              {% for type in collections[link.handle].all_types %}
+               					<li><a href="/collections/{% if collections[link.handle].handle != blank %}{{ collections[link.handle].handle }}{% else %}all{% endif %}/{{ type | handleize }}" title="{{ type | escape }}">{{ type }}</a></li>
+             				  {% endfor %}
                             </ul>
                           {% endif %}
                          </li>                     

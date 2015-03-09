@@ -87,11 +87,10 @@
           {% assign products = search.results %}
           {% assign products_per_row = settings.products_per_row %}
           {% include 'product-loop' with settings.collection_sidebar %}
-      </div>
       {% endif %}
-  {% endif %}
-
-  {% include 'pagination' %}    
+    {% include 'pagination' %}  
+   </div>
+ {% endif %}
 {% endif %}
 {% else %}
   <div class="clearfix search_page">  
@@ -115,6 +114,5 @@
       </div>
       </form>
     </div>
-  </div>
 {% endif %}
 {% endpaginate %}

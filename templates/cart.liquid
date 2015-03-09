@@ -40,6 +40,10 @@
         {% assign title=title | append: "SEAFOOD MARKET" | append:"," %}
         {% assign groupnumber = groupnumber | plus: 1 %}
         {% endif %}
+        {% if group contains 'service' %}
+        {% assign title=title | append: "SERVICE" | append:"," %}
+        {% assign groupnumber = groupnumber | plus: 1 %}
+        {% endif %}
         {% if group contains 'products' or  group contains 'meal' or  group contains 'frozen' or  group contains 'fresh' or  group contains 'care' %}
         {% assign title=title | append:  "SUPERMARKET" | append:"," %}
         {% assign groupnumber = groupnumber | plus: 1 %}
