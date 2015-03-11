@@ -203,11 +203,15 @@
           <label>Please Choose your pick up time</label>      
           {% assign vendors = vendors |split :"," %}
           {% for vendor in vendors %}
+          {% assign col = vendor | handleize %}
+       	  {% assign info = collections[col].description | split:"--" %}
+          {% assign skip = info[3] | strip_html |strip %}
+          {% assign operation = info[4] | strip_html |strip %}
           {{ vendor }}:
-          <select class='picker day-picker fc_select' id='{{ vendor | handleize }}_day'>
+          <select class='picker day-picker fc_select' id='{{ vendor | handleize }}_day' data-skip="{{skip}}">
            <option value="">Please Choose a date</option>
           </select> 
-       
+          
           <select class='picker hour-picker fc_select' id='{{ vendor | handleize }}_hour'>
            <option value="">Hour</option>
           </select>
@@ -215,11 +219,14 @@
           <select class='picker min-picker fc_select' id='{{ vendor | handleize }}_min'>
             <option value="">Mins</option> 
           </select> 
-       
-          <input type="text" name="attributes[{{ vendor | handleize }}-Pick-Up-Date]" required style="display:none;"/>
+       	   <input type="hidden"  id="{{ vendor | handleize }}_duration" value="{{operation}}"/>
+            <input type="hidden"  id="{{ vendor | handleize }}_minBegin" value=""/>
+       		<input type="hidden" id="{{ vendor | handleize }}_minEnd" value=""/>
+          <input type="text" name="attributes[{{ vendor | handleize }}-Pick-Up-Date]" value="" required style="display:none;"/>
           <br />    
 
        {% endfor %}
+       
         {% endif %}
           
         {% if settings.display_special_instructions %} 

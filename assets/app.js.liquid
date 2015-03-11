@@ -36,35 +36,82 @@ var mydate = new Date();
 if(mydate.getHours() >= 10){ var b =1; var e = 7 }else { var b =0; var e = 6 };
 var dayObj=$('.day-picker');
 dayObj.each(function(){
+  var skip = $(this).data('skip').split(',');
   for(var i=b;i<=e;i++){
-     var newdate = new Date(mydate -0 + i*86400000);
-     if( newdate.getDay() != 0 && newdate.getDay() != 6 ){     
+    var newdate = new Date(mydate -0 + i*86400000);
+     if(skip.indexOf(newdate.getDay().toString()) == -1 ){     
         this.options.add(new Option(newdate.toLocaleDateString(),newdate.toLocaleDateString()));    
    }
  }
 });
 
-dayObj.change(function() {           
-   var hourId =$(this).closest('select').next().attr('id');
-   var minId =$(this).closest('select').next().next().attr('id');
+dayObj.change(function() {
+  var selectday = $(this).val();
+  var b=selectday.split('/');
+  var T=new Date(b[0],b[1]-1,b[2]);
+  var out=T.getDay().toString();
+  var hourBegin = 10;
+  var hourEnd = 16;
+  
+  var id = $(this).attr('id').split('_');
+  var vendor = id[0];
+  var hourId = vendor + "_hour";
+  var minId = vendor + "_min";  
+  var durationId = '#'+ vendor + "_duration";
+  var minBeginId =  vendor + "_minBegin";
+  var minEndId =  vendor + "_minEnd";
+  var duration = $(durationId).val().split('|');
+  
+   $.each(duration,function(index,value){
+  		var dayfilter = value.split(',');
+        var day = $.trim(dayfilter[0]).split(" ");
+        var begin = $.trim(dayfilter[1]).split(":");
+        var end = $.trim(dayfilter[2]).split(":"); 
+     	if(day.indexOf(out)!= -1){
+        	hourBegin = parseInt(begin[0]);
+          	hourEnd = parseInt(end[0]);
+            document.getElementById(minBeginId).value = begin[1];
+            document.getElementById(minEndId).value = end[1];
+            return false;
+     	}
+  }) 
+   
    var hourObj=document.getElementById(hourId);
    var minObj=document.getElementById(minId); 
    hourObj.options.length=1;
    minObj.options.length=1;
    if($(this).val()!=""){
-    for(var i=10;i<=15;i++){
+    for(var i= hourBegin;i<= hourEnd;i++){
         hourObj.options.add(new Option(i,i));    
      }
    }
 });
   
 $('.hour-picker').change(function() {
-    var minId =$(this).closest('select').next().attr('id');
+  	var hourId = $(this).attr('id');
+  	var max_op=document.getElementById(hourId).options.length -1;
+    var id = hourId.split('_');
+    var vendor = id[0];
+    var minId = vendor + "_min"; 
+    var minBeginId =  "#"+vendor + "_minBegin";
+    var minEndId =  "#"+vendor + "_minEnd";
+    var minBegin = parseInt($(minBeginId).val());
+    var minEnd = parseInt($(minEndId).val());
+    var beginRate = 0;
+    var endRate = 11;
+
+ 	if(document.getElementById(hourId).options[1].selected){
+  		beginRate = minBegin / 5;
+  	}
+  	if(document.getElementById(hourId).options[max_op].selected){
+  		endRate = minEnd / 5;
+  	}
+    
     var minObj=document.getElementById(minId); 
     minObj.options.length=1;
     if($(this).val()!=""){
       var min = 5;
-      for(var i=0;i<=11;i++){
+      for(var i=beginRate;i<=endRate;i++){
           var text=min*i;
           var value=min*i;
           if(text == 0){text="00";value="00"}
@@ -90,7 +137,7 @@ $('.picker').change(function() {
     if( min == ""){min = "00"};
     if( day != ""){var date = day+" "+ hour+":"+ min;}
     $(inputObj).val(date);           
-})  
+})   
   
 // Food Court related jQuery
 // Sidebar Main Page 
@@ -109,7 +156,14 @@ $(document).ready(function(){
        }
      })
     }
-    var newURL = '/collections/food-court/promotion+'+$('#suburb').val();
+    var newTags = [];
+    newTags.push($.trim($('#suburb').val()));
+    if($("input[name='promotion']").is(':checked')){
+      newTags.push($.trim($("input[name='promotion']").val()));
+    }
+    var handle = $('input[name="view"]:checked').val();
+    var newURL = '/collections/'+ handle;
+    var newURL =  newURL += '/' + newTags.join('+');
     $("#foodsearch").prop("href", newURL);
 });
    
@@ -165,6 +219,7 @@ $(document).ready(function(){
     if($("input[name='promotion']").is(':checked')){
       var link = $("#foodsearch").attr("href");
         if(link){
+        link=link.replace("+promotion","");
         link += "+promotion";
         $("#foodsearch").prop("href", link);
       }
@@ -172,6 +227,7 @@ $(document).ready(function(){
     else
     {
       var link = $("#foodsearch").attr("href");
+      console.log(link);
       link=link.replace("+promotion","");
       $("#foodsearch").prop("href", link);    
     }
@@ -486,6 +542,8 @@ switchPanel("feature");
   $(document).ready(function(){
   	if($(".sidebar_col_border").height() > $(".content_col_border").height()){
   		$(".content_col_border").css("height",$(".sidebar").height()+50+"px");
+      console.log($(".sidebar_col_border").height());
+      console.log( $(".content_col_border").height());
 	}
   });
 //End: Set content height no less than side bar
